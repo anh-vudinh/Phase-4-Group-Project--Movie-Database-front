@@ -5,15 +5,13 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     const [movie, setMovie]= useState([])
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const headerPageNumber = Math.floor(Math.random() * totalPagesCount)
-    
+
     useEffect(()=>{
         fetch(`${apiUrl}popular?api_key=${apiKey}&page=${headerPageNumber}`)
         .then(res => res.json())
         .then(randomMovie => setMovie(randomMovie.results[randomMovieIndex])
         )
     },[])
-
-    console.log(movie)
 
     return(
         <>

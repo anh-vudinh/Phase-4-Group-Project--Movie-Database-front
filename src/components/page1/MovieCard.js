@@ -1,8 +1,7 @@
 import React from "react";
 
-function MovieCard({movie}){
+function MovieCard({movie, poster_prefixURL}){
     const {title, poster_path, release_date} = movie
-    const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
 
     return (  
         <div className="movieCard">

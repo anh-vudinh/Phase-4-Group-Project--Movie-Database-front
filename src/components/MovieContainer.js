@@ -7,6 +7,7 @@ function MovieContainer(){
     const [totalPagesCount, setTotalPagesCount]= useState(100)
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiUrl = "https://api.themoviedb.org/3/movie/"
+    const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
     const [movieCateogry, setmovieCateogry] = useState("popular")
 
     useEffect(async () => {
@@ -25,8 +26,8 @@ function MovieContainer(){
 
     return (
         <div id="movieContainer">
-            <Header apiKey={apiKey} apiUrl={apiUrl} totalPagesCount={totalPagesCount} moviesDataLength={moviesData.length} />
-            <MovieList moviesData={moviesData} />
+            <Header apiKey={apiKey} apiUrl={apiUrl} totalPagesCount={totalPagesCount} moviesDataLength={moviesData.length} poster_prefixURL={poster_prefixURL}/>
+            <MovieList moviesData={moviesData} poster_prefixURL={poster_prefixURL}/>
         </div>
     )
 }

@@ -1,13 +1,11 @@
 import React, {useState} from "react";
 import { useEffect } from "react/cjs/react.development";
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength}){
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL}){
     const [movie, setMovie]= useState([])
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const headerPageNumber = Math.floor(Math.random() * totalPagesCount)
-
-    const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
-
+    
     useEffect(()=>{
         fetch(`${apiUrl}popular?api_key=${apiKey}&page=${headerPageNumber}`)
         .then(res => res.json())

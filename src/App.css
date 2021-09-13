@@ -1,27 +1,12 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  position:relative;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -35,6 +20,57 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#movieContainer {
+  position:relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+#headerBanner {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 450px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+  position: absolute;
+}
+
+#headerImage{
+  margin: 15px;
+  position: absolute;
+  top: 50px;
+  z-index: 1;
+}
+
+#headerImageContainer{
+  width: 100vw;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+}
+
+#cardContainer{
+  position: absolute;
+  top: 50vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#movieCard{
+  position: relative;
+}
+
+.cardText{
+  display: flex;
+  justify-content: center;
 }
 
 .cardImage{

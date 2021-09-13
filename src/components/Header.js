@@ -1,29 +1,26 @@
-import React,{useEffect} from "react";
-import { useState } from "react/cjs/react.development";
+import React, {useState} from "react";
+import { useEffect } from "react/cjs/react.development";
 
-function Header({totalPages, apiKey, apiUrl}){
-    const [randomMovieID, setRandomMovieID] = useState(0)
-    const [movie, setMovie]= useState(null)
-    const randomMovieIndex = Math.floor(Math.random()*19)
-    //const pageNumber = Math.floor(Math.random()*`${parseInt(totalPages)}`)
-    console.log(Math.floor(Math.random()*`${parseInt(totalPages)}`))
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength}){
+    const [movie, setMovie]= useState([])
+    const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
+    const headerPageNumber = Math.floor(Math.random() * totalPagesCount)
 
-    useEffect(() => {
-        fetch(`${apiUrl}popular?api_key=${apiKey}&page=${pageNumber}`)
-        .then(res=> res.json())
-        .then(randomMovie => {
-            // randomMovie.success !== false || parseInt(randomMovie.id) === randomMovieID? setMovie(randomMovie) : setRandomMovieID(Math.floor(Math.random()*`${parseInt(totalResults)}`))
-            console.log(randomMovie)
-            console.log(pageNumber)
+    const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
 
-        })
-    }
-    ,[randomMovieID])
+    useEffect(()=>{
+        fetch(`${apiUrl}popular?api_key=${apiKey}&page=${headerPageNumber}`)
+        .then(res => res.json())
+        .then(randomMovie => setMovie(randomMovie.results[randomMovieIndex])
+        )
+    },[])
 
-    
+    console.log(movie)
 
     return(
         <>
+            <div id="headerBanner" style={{backgroundImage: `url(${poster_prefixURL}${movie.backdrop_path})`}}></div>
+            <div id="headerImageContainer"><img id="headerImage" src={`${poster_prefixURL}${movie.poster_path}`}></img></div>
         </>
 
     )

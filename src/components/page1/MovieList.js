@@ -2,7 +2,8 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 function MovieList({moviesData}){
-
+    //console.log(moviesData)
+    
     const displayMovies = moviesData.map(movie =>
         //console.log(movie);
         //<p>TESTING</p>
@@ -10,7 +11,8 @@ function MovieList({moviesData}){
     )
 
     return (
-        <div>{displayMovies}</div>
+         <div>{displayMovies}</div>
+        
     )
 }
 

@@ -6,31 +6,32 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     const [genresList, setGenresList] = useState([])
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const headerPageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
-    const link = typeof movieID === "string"? `${apiUrl}${movieID}?api_key=${apiKey}${headerPageNumber}`: `${apiUrl}${movieID}?api_key=${apiKey}` 
+    const alternatingLink = typeof movieID === "string"? `${apiUrl}${movieID}?api_key=${apiKey}${headerPageNumber}`: `${apiUrl}${movieID}?api_key=${apiKey}` 
     const genreLI = genresList.map(listItem => <li key={listItem.name} className="headerGenresLI">{listItem.name}</li>)
 
     useEffect(()=>{
-        fetch(link)
+        fetch(alternatingLink)
         .then(res => res.json())
-        .then(randomMovie =>  handlePageLoad(randomMovie))
+        .then(randomMovieArray =>  handlePageLoad(randomMovieArray))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movieID])
 
-    function handlePageLoad(randomMovie){     
+    function handlePageLoad(randomMovieArray ){     
       if(movieID === "popular"){
-        setMovie(randomMovie.results[randomMovieIndex])
-        setMovieID(randomMovie.results[randomMovieIndex].id)       
+        setMovie(randomMovieArray.results[randomMovieIndex])
+        setMovieID(randomMovieArray.results[randomMovieIndex].id)       
       }else if (typeof movieID === "number"){
-        setMovie(randomMovie)
-        setGenresList([...randomMovie.genres])
-        console.log(randomMovie)
+        setMovie(randomMovieArray)
+        setGenresList([...randomMovieArray.genres])
+        console.log(randomMovieArray)
       }
     }
 
     return(
         <>
-            <div id="headerBanner" style={{backgroundImage: `url(${poster_prefixURL}${movie.backdrop_path})`}}></div>
-            
+            <div className="headerBannerContainer">
+                <img className="headerBannerBackground" src={`${poster_prefixURL}${movie.backdrop_path}`}></img>
+            </div>
             <div id="headerImageContainer">
                 <div id="movie-details">
                     <h1>{movie.title} 

@@ -24,7 +24,7 @@ function MovieContainer(){
     return (
         <div id="movieContainer">
             <Header apiKey={apiKey} apiUrl={apiUrl} totalPagesCount={totalPagesCount} moviesDataLength={moviesData.length} poster_prefixURL={poster_prefixURL}/>
-            <MovieList moviesData={moviesData} poster_prefixURL={poster_prefixURL}/>
+            <MovieList moviesData={moviesData} poster_prefixURL={poster_prefixURL} totalPagesCount={totalPagesCount}/>
         </div>
     )
 }

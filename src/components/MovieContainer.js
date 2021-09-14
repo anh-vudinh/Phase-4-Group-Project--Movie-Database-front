@@ -8,24 +8,18 @@ function MovieContainer(){
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiUrl = "https://api.themoviedb.org/3/movie/"
     const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
-    const youtubeTrailer_prefixURL = "https://www.youtube.com/watch?v="
+    //const youtubeTrailer_prefixURL = "https://www.youtube.com/watch?v="
     const [movieCateogry, setmovieCateogry] = useState("popular")
 
-    useEffect(async () => {
-        await fetch(`${apiUrl}${movieCateogry}?api_key=${apiKey}&page=1`)
+    useEffect(() => {
+        fetch(`${apiUrl}${movieCateogry}?api_key=${apiKey}&page=1`)
         .then(res=> res.json())
         .then(moviesListData => {
             setTotalPagesCount(moviesListData.total_pages)
             setMoviesData(moviesListData.results)
         })
-        
-        //eslint-disable-next-line react-hooks/exhaustive-deps
-
-    }
-    ,[])
-
-
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     return (
         <div id="movieContainer">

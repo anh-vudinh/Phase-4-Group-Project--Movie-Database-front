@@ -5,7 +5,7 @@ function MovieCard({movie, poster_prefixURL}){
 
     return (  
         <div className="movieCard">
-            <img className="cardImage" src={`${poster_prefixURL}${poster_path}`} alt={title}></img>
+            <img className="cardImage" onClick={()=> console.log(movie)} src={`${poster_prefixURL}${poster_path}`} alt={title}></img>
             <div className="cardText"><p className="cardReleaseDate">{release_date}</p></div>
         </div>
     )

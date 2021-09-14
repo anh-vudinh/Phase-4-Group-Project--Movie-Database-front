@@ -41,7 +41,9 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                 <div id="movie-details">
                     <h1>{movie.title} 
                     <span style={{fontSize:"22px"}}> ({movie.length !== 0 ? movie.release_date.slice(0,4) : null }) </span> </h1>
-                    <em>{movie.vote_average}/10⭐</em>
+                    <em>{movie.vote_average}/10⭐ 
+                    <span>{movie.runtime}</span>
+                    </em>
                     <p>{movie.overview}</p>
                 </div>
                 

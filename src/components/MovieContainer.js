@@ -18,7 +18,9 @@ function MovieContainer(){
             setTotalPagesCount(moviesListData.total_pages)
             setMoviesData(moviesListData.results)
         })
-        // eslint-disable-next-line
+        
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+
     }
     ,[])
 

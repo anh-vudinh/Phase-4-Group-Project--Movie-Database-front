@@ -55,6 +55,10 @@
   display: flex;
   justify-content: center;
 }
+#movie-details{
+  z-index: 1;
+  position: absolute;
+}
 
 #cardContainer{
   position: absolute;

@@ -27,8 +27,6 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
       }
     }
 
-
-
     return(
         <>
             <div id="headerBanner" style={{backgroundImage: `url(${poster_prefixURL}${movie.backdrop_path})`}}></div>

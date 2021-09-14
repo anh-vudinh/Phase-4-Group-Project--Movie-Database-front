@@ -47,6 +47,7 @@
   position: absolute;
   top: 50px;
   z-index: 1;
+  transform: translate(150%,0%);
 }
 
 #headerImageContainer{
@@ -59,6 +60,10 @@
   z-index: 1;
   position: absolute;
   background-color: rgba(255,255,255,0.5);
+  z-index: 1;
+  transform: translate(-20%,0%);
+  top:65px;
+  max-width: 700px;
 }
 
 .headerGenresUL{

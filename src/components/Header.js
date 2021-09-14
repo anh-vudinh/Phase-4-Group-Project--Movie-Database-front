@@ -23,7 +23,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
       }else if (typeof movieID === "number"){
         setMovie(randomMovieArray)
         setGenresList([...randomMovieArray.genres])
-        console.log(randomMovieArray)
+        // console.log(randomMovieArray)
       }
     }
 

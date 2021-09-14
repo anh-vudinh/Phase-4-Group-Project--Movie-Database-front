@@ -1,12 +1,30 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieList({moviesData, poster_prefixURL, totalPagesCount}){
+function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies}){
 
     const displayMovies = moviesData.map(movie => <MovieCard key={movie.id} movie={movie} poster_prefixURL={poster_prefixURL}/>)
-    console.log(totalPagesCount/20)
+    console.log(totalPagesCount)
+    
+    function handleLoadMoreMovies(){
+
+        setPageNumber(pageNumber => pageNumber < totalPagesCount ? pageNumber + 1 : 1)
+        setIsLoadMoreMovies(!isLoadMoreMovies)
+    }
+    function preivousPageLoad(){
+
+        setPageNumber(pageNumber => pageNumber > 1 ? pageNumber - 1 : 1)
+    }
     return (
-         <div id="cardContainer">{displayMovies}</div>
+       
+         <div id="cardContainer">{displayMovies}
+         
+         <button onClick={preivousPageLoad}> Previous page </button>
+         <button onClick={handleLoadMoreMovies}>Next Page</button>
+        
+        </div>
+         
+         
     )
 }
 

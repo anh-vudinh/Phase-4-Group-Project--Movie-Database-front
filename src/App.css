@@ -6,7 +6,7 @@
   position: absolute;
   top: 0;
   z-index: 3;
-  
+  width: 100vw;
 }
 #movieContainer {
   position: relative;
@@ -26,7 +26,7 @@
 
 .headerBannerBackground{
   position: absolute;
-  height: 900px;
+  height: 980px;
   width: 100vw;
   transform: translate(0%,-12%);
 }
@@ -46,7 +46,7 @@
   position: absolute;
   top: 50px;
   z-index: 1;
-  transform: translate(150%,0%);
+  transform: translate(-180%,0%);
 }
 
 #movie-details{
@@ -54,7 +54,7 @@
   position: absolute;
   /* background-color: rgba(0,0,0,0.02); */
   z-index: 1;
-  transform: translate(-20%,0%);
+  transform: translate(15%,0%);
   top:65px;
   max-width: 700px;
   color:white;
@@ -103,4 +103,29 @@
 }
 .cardReleaseDate {
 
+}
+
+.categoryLI{
+  list-style: none;
+  display: inline-flex;
+  flex-direction: column;
+
+}
+
+.categoryLI button{
+  min-width: 90px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  border-radius: 5px;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.categoryLI button:hover{
+  min-width: 90px;
+  background-color: rgba(255, 0, 0, 0.911);
+  color: white;
+  border-radius: 5px;
+  box-shadow: none;
+  border-color: transparent;
 }

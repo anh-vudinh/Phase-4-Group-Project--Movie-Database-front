@@ -4,7 +4,6 @@ import MovieCard from "./MovieCard";
 function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies}){
 
     const displayMovies = moviesData.map(movie => <MovieCard key={movie.id} movie={movie} poster_prefixURL={poster_prefixURL}/>)
-    console.log(totalPagesCount)
     
     function handleLoadMoreMovies(){
 

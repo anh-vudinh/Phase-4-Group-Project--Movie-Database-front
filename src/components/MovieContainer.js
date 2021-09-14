@@ -20,7 +20,6 @@ function MovieContainer(){
         .then(res=> res.json())
         .then(moviesListData => {
             setTotalPagesCount(moviesListData.total_pages)
-            console.log(moviesListData)
             setMoviesData(moviesListData.results)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps

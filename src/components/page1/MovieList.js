@@ -1,9 +1,9 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies}){
+function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path}){
 
-    const displayMovies = moviesData.map(movie => <MovieCard key={movie.id} movie={movie} poster_prefixURL={poster_prefixURL}/>)
+    const displayMovies = moviesData.map(movie => <MovieCard key={movie.id} movie={movie} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>)
     
     function handleLoadMoreMovies(){
 
@@ -16,15 +16,15 @@ function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber
         setIsLoadMoreMovies(!isLoadMoreMovies)
     }
     return (
-       
-         <div id="cardContainer">{displayMovies}
-         
-         <button onClick={preivousPageLoad}> Previous page </button>
-         <button onClick={handleLoadMoreMovies}>Next Page</button>
+    
+        <div id="cardContainer">{displayMovies}
+        
+        <button onClick={preivousPageLoad}> Previous page </button>
+        <button onClick={handleLoadMoreMovies}>Next Page</button>
         
         </div>
-         
-         
+        
+        
     )
 }
 

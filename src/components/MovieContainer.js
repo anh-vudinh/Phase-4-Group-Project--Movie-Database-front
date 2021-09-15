@@ -8,6 +8,8 @@ function MovieContainer(){
     const [totalPagesCount, setTotalPagesCount]= useState(100)
     const [isLoadMoreMovies, setIsLoadMoreMovies] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
+    const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
+
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiUrl = "https://api.themoviedb.org/3/"    // "https://api.themoviedb.org/3/movie/" original
     const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
@@ -16,7 +18,7 @@ function MovieContainer(){
     const [suffix, setSuffix]= useState("") // rename the state
     
     // api for search bar = https://api.themoviedb.org/3/search/multi?api_key=9b9db796275919f97fb742c582ab0008&query=dragon%20ball&page=1
-
+    
     const [searchSuffix, setSearchSuffix] = useState("")
 
     const searchUrl = (movieCateogry === 'Genres' || movieCateogry === 'Year Release')  ?
@@ -33,7 +35,7 @@ function MovieContainer(){
             setTotalPagesCount(moviesListData.total_pages)
            // console.log("2",moviesListData)
             setMoviesData(moviesListData.results)
-           
+        
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, movieCateogry, suffix, searchSuffix])
@@ -59,6 +61,7 @@ function MovieContainer(){
             poster_prefixURL={poster_prefixURL}
             setSuffix={setSuffix}
             setmovieCateogry={setmovieCateogry}
+            broken_path={broken_path}
             />
 
 
@@ -71,7 +74,9 @@ function MovieContainer(){
             setPageNumber = {setPageNumber}
             pageNumber={pageNumber}
             setIsLoadMoreMovies ={setIsLoadMoreMovies}
-            isLoadMoreMovies={isLoadMoreMovies}/>
+            isLoadMoreMovies={isLoadMoreMovies}
+            broken_path={broken_path}
+            />
 
             <Search 
             setmovieCateogry={setmovieCateogry} 

@@ -1,10 +1,9 @@
 import React from "react";
 
-function MovieCard({movie, poster_prefixURL}){
+function MovieCard({movie, poster_prefixURL, broken_path}){
     const {title, poster_path, release_date} = movie
    
-    const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
-
+    
     return (  
         <div className="movieCard">
             <img className="cardImage" onClick={()=> console.log(movie)} 

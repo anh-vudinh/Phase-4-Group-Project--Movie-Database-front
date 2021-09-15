@@ -54,10 +54,12 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
 
     function handleSubmit(e){
     e.preventDefault()
-    console.log(query.replaceAll(" ", "%20").toLowerCase())
+    console.log(query.length)
+    if(query.length > 0){
     setmovieCateogry("search/movie")
     setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
     setQuery("")
+    }
     }   
     
 

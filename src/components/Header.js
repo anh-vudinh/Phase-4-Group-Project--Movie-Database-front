@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry}){
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path}){
     const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")
     const [genresList, setGenresList] = useState([])
@@ -41,7 +41,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     return(
         <>
             <div className="headerBannerContainer">
-                <img className="headerBannerBackground" src={`${poster_prefixURL}${movie.backdrop_path}`} alt={movie.title}></img>
+                <img className="headerBannerBackground" src={movie.backdrop_path === null ? broken_path :`${poster_prefixURL}${movie.backdrop_path}`} alt={movie.title}></img>
             </div>
             <div id="headerImageContainer">
                 <div id="movie-details">

@@ -17,7 +17,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
 
     function handleSearchYearOrGenres(suffix){
         setSuffix(suffix)
-
+        console.log(`${searchUrl}${suffix}`)
         fetch(`${searchUrl}${suffix}`)
         .then(res => res.json())
         .then(dataMovies =>  {setMoviesData(dataMovies.results)

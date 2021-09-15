@@ -18,14 +18,14 @@ function FilterCategory({category, handleDropDownLI, genresArray, getGenresArray
                 getGenresArray()
                 setExtendedOptions(!isExtendedOptions)
                 setmovieCateogry(categoryName)
-                handleSearchYearOrGenres(`&with_genres=${extra[0]}`)
-                
+                if(typeof extra[0] === "number"){
+                    handleSearchYearOrGenres(`&with_genres=${extra[0]}`)}
                 break;
             case 'Year Release':
                 setmovieCateogry(categoryName)
                 setExtendedOptions(!isExtendedOptions)
-                handleSearchYearOrGenres(`&primary_release_year=${extra[0]}`)
-                 
+                if(typeof extra[0] === "number"){
+                    handleSearchYearOrGenres(`&primary_release_year=${extra[0]}`)}         
                 break;
             default:
                 setExtendedOptions(false)

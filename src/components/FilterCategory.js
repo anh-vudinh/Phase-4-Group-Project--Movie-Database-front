@@ -1,34 +1,46 @@
 import React, {useState} from "react";
 
-function FilterCategory({category, handleDropDownLI, genresArray, getGenresArray}){
+function FilterCategory({category, handleDropDownLI, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry}){
 
     const [isExtendedOptions, setExtendedOptions] = useState(false)
     
-    const genre = genresArray.map(genreA => 
-        <button key={genreA.id} onClick={()=> handleDropDownLI(genreA.id)}>{genreA.name}</button>
+    const genreOptionBtn = genresArray.map(genreOption => 
+        <button key={genreOption.id} onClick={()=> handleDropDownLI("Genres", genreOption.id)} >{genreOption.name}</button> 
+    ) 
+    const yearOptionBtn = yearArray.map(yearOption => 
+        <button key={yearOption} onClick={()=> handleDropDownLI("Year Release", yearOption)}>{yearOption}</button>
     )
-
-    function handleDropDownLI(categoryName){
+    function handleDropDownLI(categoryName, ...extra){
+        
         switch (categoryName){
             case 'Genres':
-                getGenresArray(categoryName)
+               // getGenresArray(categoryName )
+                getGenresArray()
                 setExtendedOptions(!isExtendedOptions)
-                console.log(categoryName)
+                setmovieCateogry(categoryName)
+                handleSearchYearOrGenres(`&with_genres=${extra[0]}`)
+                
                 break;
             case 'Year Release':
-                console.log(categoryName)
+                setmovieCateogry(categoryName)
                 setExtendedOptions(!isExtendedOptions)
+                handleSearchYearOrGenres(`&primary_release_year=${extra[0]}`)
+                 
                 break;
             default:
-                console.log(categoryName)
                 setExtendedOptions(false)
+                setmovieCateogry(categoryName.replaceAll(" ", "_").toLowerCase())
+                console.log(categoryName.replaceAll(" ", "_").toLowerCase())
         }
     }
 
     return(
         <li className="categoryLI">
             <button onClick={() => handleDropDownLI(category)}>{category}</button>
-            {isExtendedOptions === true && category === "Genres"? genre : null}
+
+            {isExtendedOptions === true && category === "Year Release"? yearOptionBtn : null}
+
+            {isExtendedOptions === true && category === "Genres"? genreOptionBtn : null}
         </li>
     );
 }

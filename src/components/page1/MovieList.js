@@ -13,6 +13,7 @@ function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber
     function preivousPageLoad(){
 
         setPageNumber(pageNumber => pageNumber > 1 ? pageNumber - 1 : 1)
+        setIsLoadMoreMovies(!isLoadMoreMovies)
     }
     return (
        

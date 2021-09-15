@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function FilterCategory({category, handleDropDownLI, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry}){
+function FilterCategory({category, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry}){
 
     const [isExtendedOptions, setExtendedOptions] = useState(false)
     
@@ -29,8 +29,8 @@ function FilterCategory({category, handleDropDownLI, genresArray, getGenresArray
                 break;
             default:
                 setExtendedOptions(false)
-                setmovieCateogry(categoryName.replaceAll(" ", "_").toLowerCase())
-                console.log(categoryName.replaceAll(" ", "_").toLowerCase())
+                setmovieCateogry(`movie/${categoryName.replaceAll(" ", "_").toLowerCase()}`)
+                //console.log(categoryName.replaceAll(" ", "_").toLowerCase())
         }
     }
 

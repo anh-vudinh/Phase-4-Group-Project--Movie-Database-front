@@ -1,14 +1,22 @@
 import React, {useState, useEffect} from "react";
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL}){
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry}){
     const [movie, setMovie]= useState([])
-    const [movieID, setMovieID] = useState("popular")
+    const [movieID, setMovieID] = useState("movie/popular")
     const [genresList, setGenresList] = useState([])
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const headerPageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
-    const alternatingLink = typeof movieID === "string"? `${apiUrl}${movieID}?api_key=${apiKey}${headerPageNumber}`: `${apiUrl}${movieID}?api_key=${apiKey}` 
-    const genreLI = genresList.map(listItem => <li key={listItem.name} className="headerGenresLI">{listItem.name}</li>)
-
+    const alternatingLink = typeof movieID === "string"? `${apiUrl}${movieID}?api_key=${apiKey}${headerPageNumber}`:
+                                                         `${apiUrl}movie/${movieID}?api_key=${apiKey}` 
+    const genreLI = genresList.map(listItem => 
+    <li key={listItem.name} 
+    className="headerGenresLI" 
+    onClick={()=> {setSuffix(`&with_genres=${listItem.id}`)
+                  setmovieCateogry("Genres")}}>
+                  {listItem.name}
+                      
+    </li>)
+    
     useEffect(()=>{
         fetch(alternatingLink)
         .then(res => res.json())
@@ -16,21 +24,24 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movieID])
 
-    function handlePageLoad(randomMovieArray ){     
-      if(movieID === "popular"){
+    function handlePageLoad(randomMovieArray ){
+        
+      if(movieID === "popular" || movieID ==="movie/popular"){
         setMovie(randomMovieArray.results[randomMovieIndex])
-        setMovieID(randomMovieArray.results[randomMovieIndex].id)       
+        
+        setMovieID(randomMovieArray.results[randomMovieIndex].id) 
+           
       }else if (typeof movieID === "number"){
         setMovie(randomMovieArray)
         setGenresList([...randomMovieArray.genres])
-        // console.log(randomMovieArray)
+         
       }
     }
 
     return(
         <>
             <div className="headerBannerContainer">
-                <img className="headerBannerBackground" src={`${poster_prefixURL}${movie.backdrop_path}`}></img>
+                <img className="headerBannerBackground" src={`${poster_prefixURL}${movie.backdrop_path}`} alt={movie.title}></img>
             </div>
             <div id="headerImageContainer">
                 <div id="movie-details">

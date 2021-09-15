@@ -1,7 +1,8 @@
-import React,{useState, useEffect} from "react";
+import React,{useState} from "react";
 import FilterCategory from './FilterCategory'
 
-function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, setSuffix}){
+function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, setSuffix, setSearchSuffix}){
+    
 
     const genresURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&page=50`
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
@@ -21,7 +22,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
         fetch(`${searchUrl}${suffix}`)
         .then(res => res.json())
         .then(dataMovies =>  {setMoviesData(dataMovies.results)
-            //console.log(dataMovies.total_pages)
+            //console.log(dataMovies.results)
         }
         )
 
@@ -49,11 +50,27 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
             setGenresArray(genresArrayData.genres)
         })
     }
+    const [query, setQuery] = useState("")
+
+    function handleSubmit(e){
+    e.preventDefault()
+    console.log(query.replaceAll(" ", "%20").toLowerCase())
+    setmovieCateogry("search/movie")
+    setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
+    setQuery("")
+    }   
+    
 
     return(
         <div className="SearchBar">
-            <ul>{categoryButtons}</ul>           
+            <ul>{categoryButtons}</ul> 
+
+            <form onSubmit={(e) => handleSubmit(e)}>  
+            <input type="text" placeholder="Search Movie Name" value={query} onChange={e => setQuery(e.target.value)} ></input>
+            <button>Search</button>   
+            </form>     
         </div>
+        
 
     )
 }

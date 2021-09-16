@@ -2,12 +2,13 @@ import React,{useState, useEffect} from "react"
 import MovieList from "./page1/MovieList"
 import Header from "./Header"
 import Search from "./Search"
-
+import WatchList from "./WatchList"
 function MovieContainer(){
     const [moviesData, setMoviesData] = useState([])
     const [totalPagesCount, setTotalPagesCount]= useState(100)
     const [isLoadMoreMovies, setIsLoadMoreMovies] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
+    const [watchListArray, setWatchListArray] = useState([])
     const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
 
     const apiKey = '9b9db796275919f97fb742c582ab0008'
@@ -43,15 +44,6 @@ function MovieContainer(){
     
 
 
-
-
-
-
-
-
-
-
-
     
     return (
         <div id="movieContainer">
@@ -76,6 +68,8 @@ function MovieContainer(){
             setIsLoadMoreMovies ={setIsLoadMoreMovies}
             isLoadMoreMovies={isLoadMoreMovies}
             broken_path={broken_path}
+            setWatchListArray={setWatchListArray}
+            watchListArray={watchListArray}
             />
 
             <Search 
@@ -85,6 +79,13 @@ function MovieContainer(){
             setTotalPagesCount={setTotalPagesCount}
             setSuffix={setSuffix}
             setSearchSuffix={setSearchSuffix}
+            />
+
+            <WatchList 
+            watchListArray={watchListArray} 
+            setWatchListArray={setWatchListArray} 
+            poster_prefixURL={poster_prefixURL}
+            
             />
         </div>
     )

@@ -4,13 +4,55 @@
 }
 .SearchBar {
   position: absolute;
-  top: 0;
-  z-index: 3;
+  top: 450px;
+  z-index: 0;
   width: 100vw;
+  display: inline-flex;
+  background-color: rgb(46, 44, 150);
+  white-space: nowrap;
+  height: 50px;
 }
+
+.searchBarCategories{
+  padding: 0px;
+  margin-top: 0;
+  background-color: rgb(38, 35, 163);
+  border-radius: 30px;
+  height: 50px;
+  margin-left: 10px;
+}
+
+.searchBarForm{
+  margin-top: 0;
+  margin-left: 70px;
+  padding: 0px 40px 0px 40px;
+  background-color: rgb(38, 35, 163);
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.searchBarForm input{
+  width: 300px;
+  height: 26px;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: transparent;
+}
+
+.searchBarForm button{
+  margin-left: 20px;
+  width: 100px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: transparent;
+}
+
+
 #movieContainer {
   position: relative;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -24,6 +66,22 @@
   overflow: hidden;
 }
 
+.headerDisplayInfoBig{
+  position: absolute;
+  z-index: 1;
+  height: 100px;
+  top: 20px;
+  left: 25px;
+}
+
+.headerDisplayInfoSmall{
+  position: absolute;
+  z-index: 1;
+  height: 35px;
+  top: 20px;
+  left: 25px;
+}
+
 .headerBannerBackground{
   position: absolute;
   height: 980px;
@@ -31,34 +89,40 @@
   transform: translate(0%,-12%);
 }
 
-#headerImageContainer{
+.headerImageContainer{
   width: 100vw;
   height: 450px;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
-  z-index: 1;
+  z-index: 0;
+}
+
+.hidden{
+  visibility: hidden;
+  z-index:-1;
 }
 
 #headerImage{
   margin: 15px;
   position: absolute;
   top: 50px;
-  z-index: 1;
+  z-index: 0;
   transform: translate(-180%,0%);
 }
 
 #movie-details{
-  z-index: 1;
+  z-index: 0;
   position: absolute;
   /* background-color: rgba(0,0,0,0.02); */
-  z-index: 1;
   transform: translate(15%,0%);
   top:65px;
   max-width: 700px;
   color:white;
 }
+
+
 
 .headerGenresUL{
   list-style:none;
@@ -76,14 +140,13 @@
   border-radius: 7px;
 }
 
-#cardContainer{
+.cardContainer{
   position: absolute;
-  top: 50vh;
+  top: 530px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  /* max-width: 1139px; */
 }
 
 .movieCard{
@@ -105,36 +168,57 @@
 
 }
 
+.leftArrow{
+  height: 140px;
+  transform: rotate(180deg);
+  position: fixed;
+  left: 0;
+  z-index: 1;
+}
+
+.rightArrow{
+  height: 140px;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+}
+
 .categoryLI{
   list-style: none;
   display: inline-flex;
   flex-direction: column;
-
+  margin-top: 15px;
 }
 
 .categoryLI button{
-  min-width: 90px;
-  background-color: rgba(0, 0, 0, 0.2);
+  min-width: 100px;
+  background-color: rgb(38, 35, 163);
   color: white;
-  border-radius: 5px;
+  border-radius: 0px;
   box-shadow: none;
   border-color: transparent;
 }
 
 .categoryLI button:hover{
-  min-width: 90px;
-  background-color: rgba(255, 0, 0, 0.911);
+  min-width: 100px;
+  margin-top: -15px;
+  height: 50px;
+  background-color: rgba(255, 0, 0, 0.9);
   color: white;
-  border-radius: 5px;
+  border-radius: 25px;
   box-shadow: none;
   border-color: transparent;
 }
 .watchListContainer{
-  z-index: 4;
+  z-index: 0;
   overflow: scroll;
   position: absolute;
   right: 0;
-
+  top: 40px;
+  background-color: grey;
+  padding: 20px;
+  border-radius: 20px;
+  max-height: 800px;
 }
 .watchListCard{
   height: 80px;
@@ -150,7 +234,7 @@
 }
 .watchListCardText{
   display: flex;
-  z-index: 5;
+  z-index: 0;
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -169,6 +253,12 @@
   border-radius: 30px;
   padding: 15px 10px 15px 10px;
 }
+
+.watchListCardRatingLess10{
+  border-radius: 30px;
+  padding: 15px 13px 15px 13px;
+}
+
 .watchListCardTitleSpan{
   position: absolute;
   left: 12px;
@@ -177,8 +267,36 @@
 }
 .eyeBallIcon{
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   background-color: transparent;
   left: 110px;
   top: 10px
+}
+
+.castContainer{
+  z-index: 0;
+  display: flex;
+  overflow: scroll;
+  width: 100vw;
+  height: 250px;
+  background-color: whitesmoke;
+  position: absolute;
+  top: 500px;
+}
+
+.castCardContainer{
+  margin: 0px 20px 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.castImage{
+  height: 165px;
+  width: 110px;
+}
+
+.castName{
+  white-space: nowrap;
 }

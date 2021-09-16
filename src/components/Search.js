@@ -8,7 +8,6 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
     const [genresArray, setGenresArray] = useState([])
     const searchUrl =`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=1`
-    //&year=2020&with_genres=28
     
     const currentYear = new Date().getFullYear()
     const yearArray =[]
@@ -22,7 +21,6 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
         fetch(`${searchUrl}${suffix}`)
         .then(res => res.json())
         .then(dataMovies =>  {setMoviesData(dataMovies.results)
-            //console.log(dataMovies.results)
         }
         )
 
@@ -65,9 +63,9 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
 
     return(
         <div className="SearchBar">
-            <ul>{categoryButtons}</ul> 
+            <ul className="searchBarCategories">{categoryButtons}</ul> 
 
-            <form onSubmit={(e) => handleSubmit(e)}>  
+            <form className="searchBarForm" onSubmit={(e) => handleSubmit(e)}>  
             <input type="text" placeholder="Search Movie Name" value={query} onChange={e => setQuery(e.target.value)} ></input>
             <button>Search</button>   
             </form>     

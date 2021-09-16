@@ -3,7 +3,7 @@ import MovieList from "./page1/MovieList"
 import Header from "./Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
-import CastCard from "./page2/Cast"
+import Cast from "./page2/Cast"
 function MovieContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
@@ -12,6 +12,7 @@ function MovieContainer(){
     const [pageNumber, setPageNumber] = useState(1)
     const [watchListArray, setWatchListArray] = useState([])
     const [togglePage2, setTogglePage2] =useState(false)
+    const [toggleHeaderInfo, setToggleHeaderInfo] = useState(false)
     const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
 
     const apiKey = '9b9db796275919f97fb742c582ab0008'
@@ -59,9 +60,11 @@ function MovieContainer(){
             broken_path={broken_path}
             setMovie={setMovie}
             movie={movie}
+            setToggleHeaderInfo={setToggleHeaderInfo}
+            toggleHeaderInfo={toggleHeaderInfo}
             />
 
-            <CastCard movie={movie} togglePage2={togglePage2} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>
+            <Cast movie={movie} togglePage2={togglePage2} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>
 
 
 
@@ -77,6 +80,7 @@ function MovieContainer(){
             setWatchListArray={setWatchListArray}
             watchListArray={watchListArray}
             setMovie={setMovie}
+            togglePage2 = {togglePage2}
             setTogglePage2={setTogglePage2}
             />
 
@@ -93,7 +97,7 @@ function MovieContainer(){
             watchListArray={watchListArray} 
             setWatchListArray={setWatchListArray} 
             poster_prefixURL={poster_prefixURL}
-            
+            broken_path={broken_path}
             />
         </div>
     )

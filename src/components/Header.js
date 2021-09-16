@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import CastCard from "./page2/Cast";
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie}){
+import CastCard from "./page2/CastCard";
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo}){
     // const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")
     const [genresList, setGenresList] = useState([])
@@ -42,9 +42,11 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     return(
         <>
             <div className="headerBannerContainer">
+                <img className={toggleHeaderInfo? "headerDisplayInfoSmall" : "headerDisplayInfoBig"} src="https://montgomeryplanning.org/wp-content/uploads/2017/08/info-icon-490x490.png" alt="headerDisplayInfoIcon" onClick={()=> setToggleHeaderInfo(toggleHeaderInfo => !toggleHeaderInfo)}/>
                 <img className="headerBannerBackground" src={movie.backdrop_path === null ? broken_path :`${poster_prefixURL}${movie.backdrop_path}`} alt={movie.title}></img>
             </div>
-            <div id="headerImageContainer">
+            
+            <div className={toggleHeaderInfo? "headerImageContainer" : "hidden"}>
                 <div id="movie-details">
                     <h1>{movie.title} 
                         <span style={{fontSize:"22px"}}> ({movie.length !== 0 ? movie.release_date.slice(0,4) : null }) </span>

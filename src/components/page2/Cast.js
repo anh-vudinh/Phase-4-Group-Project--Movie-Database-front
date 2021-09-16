@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react";
 
 
-function CastCard({movie, togglePage2, poster_prefixURL, broken_path}){
+function Cast({movie, togglePage2, poster_prefixURL, broken_path}){
     console.log("1",movie)
     const [castArray, setCastArray] = useState([])
     useEffect(()=>{
@@ -13,25 +13,20 @@ function CastCard({movie, togglePage2, poster_prefixURL, broken_path}){
     })},[movie])
 
  
-    const cast = castArray === undefined? console.log(null) : castArray.map(casts =>
-    <div key={casts.id}>
-    <img src={casts.profile_path === null ? broken_path :`${poster_prefixURL}${casts.profile_path}` } alt={casts.id}/>
-    {casts.name}
+    const cast = castArray === undefined? null : castArray.map(casts =>
+    <div className="castCardContainer" key={casts.id}>
+        <img className="castImage" src={casts.profile_path === null ? broken_path :`${poster_prefixURL}${casts.profile_path}` } alt={casts.id}/>
+        <div className="castName">{casts.name}</div>
     </div>)
 
 
- 
     return (
-        <div>
-           {cast}
-
-
-
-    
+        <div className="castContainer">
+           {togglePage2 === true? cast : false}
         </div>
     )
 }
 
 
 
-export default CastCard
+export default Cast

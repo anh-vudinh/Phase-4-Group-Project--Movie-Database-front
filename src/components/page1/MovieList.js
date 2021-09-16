@@ -1,7 +1,7 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2}){
+function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, togglePage2, setTogglePage2}){
 
     const displayMovies = moviesData.map(movie => 
     <MovieCard key={movie.id} 
@@ -26,11 +26,11 @@ function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber
     }
     return (
     
-        <div id="cardContainer">{displayMovies}
-        
-        <button onClick={preivousPageLoad}> Previous page </button>
-        <button onClick={handleLoadMoreMovies}>Next Page</button>
-        
+        <div className="cardContainer">
+            {togglePage2 === true? null : <img className="leftArrow"src="https://www.freeiconspng.com/uploads/arrow-icon--myiconfinder-23.png" alt="left arrow" onClick={preivousPageLoad}/>}
+            {togglePage2 === true? null : displayMovies}
+            {togglePage2 === true? null : <img className="rightArrow"src="https://www.freeiconspng.com/uploads/arrow-icon--myiconfinder-23.png" alt="right arrow"  onClick={handleLoadMoreMovies}></img>}
+            
         </div>
         
         

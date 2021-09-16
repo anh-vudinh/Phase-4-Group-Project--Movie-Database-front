@@ -1,7 +1,7 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray}){
+function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2}){
 
     const displayMovies = moviesData.map(movie => 
     <MovieCard key={movie.id} 
@@ -10,6 +10,8 @@ function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber
     broken_path={broken_path}
     setWatchListArray={setWatchListArray}
     watchListArray={watchListArray}
+    setMovie={setMovie}
+    setTogglePage2={setTogglePage2}
     />)
     
     function handleLoadMoreMovies(){

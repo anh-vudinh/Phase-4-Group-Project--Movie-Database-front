@@ -3,12 +3,15 @@ import MovieList from "./page1/MovieList"
 import Header from "./Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
+import CastCard from "./page2/Cast"
 function MovieContainer(){
+    const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [totalPagesCount, setTotalPagesCount]= useState(100)
     const [isLoadMoreMovies, setIsLoadMoreMovies] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
     const [watchListArray, setWatchListArray] = useState([])
+    const [togglePage2, setTogglePage2] =useState(false)
     const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
 
     const apiKey = '9b9db796275919f97fb742c582ab0008'
@@ -54,8 +57,11 @@ function MovieContainer(){
             setSuffix={setSuffix}
             setmovieCateogry={setmovieCateogry}
             broken_path={broken_path}
+            setMovie={setMovie}
+            movie={movie}
             />
 
+            <CastCard movie={movie} togglePage2={togglePage2}/>
 
 
 
@@ -70,6 +76,8 @@ function MovieContainer(){
             broken_path={broken_path}
             setWatchListArray={setWatchListArray}
             watchListArray={watchListArray}
+            setMovie={setMovie}
+            setTogglePage2={setTogglePage2}
             />
 
             <Search 

@@ -175,3 +175,10 @@
   font-size: 25px;
   color: whitesmoke;
 }
+.eyeBallIcon{
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+  left: 110px;
+  top: 10px
+}

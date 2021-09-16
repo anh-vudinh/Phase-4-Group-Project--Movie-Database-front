@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path}){
-    const [movie, setMovie]= useState([])
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie}){
+    // const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")
     const [genresList, setGenresList] = useState([])
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
@@ -27,11 +27,12 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     function handlePageLoad(randomMovieArray ){
         
       if(movieID === "popular" || movieID ==="movie/popular"){
+          console.log("header",randomMovieArray.results[randomMovieIndex] )
         setMovie(randomMovieArray.results[randomMovieIndex])
         
         setMovieID(randomMovieArray.results[randomMovieIndex].id) 
            
-      }else if (typeof movieID === "number"){
+      }else if (typeof movieID === "number" ){
         setMovie(randomMovieArray)
         setGenresList([...randomMovieArray.genres])
          

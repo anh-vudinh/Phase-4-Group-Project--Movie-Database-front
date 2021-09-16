@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-
+import CastCard from "./page2/Cast";
 function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie}){
     // const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")
@@ -27,7 +27,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     function handlePageLoad(randomMovieArray ){
         
       if(movieID === "popular" || movieID ==="movie/popular"){
-          console.log("header",randomMovieArray.results[randomMovieIndex] )
+          //console.log("header",randomMovieArray.results[randomMovieIndex] )
         setMovie(randomMovieArray.results[randomMovieIndex])
         
         setMovieID(randomMovieArray.results[randomMovieIndex].id) 
@@ -59,6 +59,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                 <img id="headerImage" src={`${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                 
             </div>
+           
         </>
 
     )

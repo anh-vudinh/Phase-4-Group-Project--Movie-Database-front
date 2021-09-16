@@ -61,7 +61,7 @@ function MovieContainer(){
             movie={movie}
             />
 
-            <CastCard movie={movie} togglePage2={togglePage2}/>
+            <CastCard movie={movie} togglePage2={togglePage2} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>
 
 
 

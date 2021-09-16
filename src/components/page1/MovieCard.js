@@ -17,7 +17,7 @@ function MovieCard({movie, poster_prefixURL, broken_path, watchListArray, setWat
     
     return (  
         <div className="movieCard">
-            <img className="cardImage" onClick={() => handleCardImageClick(movie)}
+            <img className="cardImage" onClick={() => handleCardImageClick()}
             src={poster_path === null ? broken_path   : `${poster_prefixURL}${poster_path}`  } alt={title}></img>
             <img src={eyeBallImg} className="eyeBallIcon" alt="eyeBall" onClick={()=> setWatchListArray([...watchListArray, movie])} />
             <div className="cardText"><p className="cardReleaseDate">{release_date === "" ? "No Release Date" : release_date}</p></div>

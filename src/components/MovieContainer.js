@@ -3,7 +3,7 @@ import MovieList from "./page1/MovieList"
 import Header from "./Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
-import Cast from "./page2/Cast"
+import MoviePage from "./page2/MoviePage"
 function MovieContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
@@ -64,7 +64,7 @@ function MovieContainer(){
             toggleHeaderInfo={toggleHeaderInfo}
             />
 
-            <Cast movie={movie} togglePage2={togglePage2} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>
+            <MoviePage movie={movie} togglePage2={togglePage2} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>
 
 
 
@@ -91,6 +91,7 @@ function MovieContainer(){
             setTotalPagesCount={setTotalPagesCount}
             setSuffix={setSuffix}
             setSearchSuffix={setSearchSuffix}
+            setTogglePage2={setTogglePage2}
             />
 
             <WatchList 

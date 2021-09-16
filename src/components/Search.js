@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import FilterCategory from './FilterCategory'
 
-function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, setSuffix, setSearchSuffix}){
+function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, setSuffix, setSearchSuffix, setTogglePage2}){
     
 
     const genresURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&page=50`
@@ -37,6 +37,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
         yearArray={yearArray}
         handleSearchYearOrGenres={handleSearchYearOrGenres}
         setmovieCateogry={setmovieCateogry}
+        setTogglePage2={setTogglePage2}
        
         />
     )
@@ -56,7 +57,9 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
     if(query.length > 0){
     setmovieCateogry("search/movie")
     setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
+    setTimeout(()=> {setTogglePage2(false)}, 110)
     setQuery("")
+
     }
     }   
     

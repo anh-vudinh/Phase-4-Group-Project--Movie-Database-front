@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import CastCard from "./page2/CastCard";
+import Cast from "./page2/Cast";
 function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo}){
     // const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")

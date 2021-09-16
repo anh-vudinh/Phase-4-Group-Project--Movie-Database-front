@@ -11,6 +11,7 @@
   background-color: rgb(46, 44, 150);
   white-space: nowrap;
   height: 50px;
+  overflow-x: hidden;
 }
 
 .searchBarCategories{
@@ -299,4 +300,19 @@
 
 .castName{
   white-space: nowrap;
+}
+
+.MoviePage2Container{
+  position: absolute;
+  left: 0;
+}
+
+.Review-Movie{
+  position: absolute;
+  top: 800px;
+}
+
+.CommentForm{
+  z-index: 1;
+  position: absolute;
 }

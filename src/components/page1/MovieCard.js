@@ -1,8 +1,7 @@
 import React from "react";
-
+import eyeballicon from "../../assets/eyeballicon.png"
 function MovieCard({movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2}){
     const {title, poster_path, release_date,id} = movie
-    const eyeBallImg= "https://raw.githubusercontent.com/anh-vudinh/Phase-2-Group-Project--Movie-Database/main/assets/eyeball-icon.png"
 
     function handleCardImageClick(){
         setTogglePage2(true)
@@ -19,7 +18,7 @@ function MovieCard({movie, poster_prefixURL, broken_path, watchListArray, setWat
         <div className="movieCard">
             <img className="cardImage" onClick={() => handleCardImageClick()}
             src={poster_path === null ? broken_path   : `${poster_prefixURL}${poster_path}`  } alt={title}></img>
-            <img src={eyeBallImg} className="eyeBallIcon" alt="eyeBall" onClick={()=> setWatchListArray([...watchListArray, movie])} />
+            <img src={eyeballicon} className="eyeBallIcon" alt="eyeBall" onClick={()=> setWatchListArray([...watchListArray, movie])} />
             <div className="cardText"><p className="cardReleaseDate">{release_date === "" ? "No Release Date" : release_date}</p></div>
         </div>
     )

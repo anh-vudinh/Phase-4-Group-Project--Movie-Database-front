@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-    
+
 function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
     //console.log("inside CommentForm",reviewsArray)
     const defaultName ="Default Name"
@@ -25,6 +25,8 @@ function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
         }
         //console.log("this is data",newData.results)
         setReviewsArray([...reviewsArray, newData.results])
+        setNewRating("")
+        setNewContent("")
     }
     return(
         <div className={togglePage2? "CommentForm" : "hidden"} >

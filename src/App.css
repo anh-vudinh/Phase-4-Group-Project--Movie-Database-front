@@ -2,7 +2,6 @@
   text-align: center;
   position:relative;
 }
-
 .navBar{
   width: 100%;
   background-color: rgb(38, 35, 163);
@@ -10,11 +9,9 @@
   position:absolute;
   top: 0;
 }
-
 .SearchBar {
   position: absolute;
   top: 600px;
-  z-index: 0;
   width: 100vw;
   display: inline-flex;
   background-color: rgb(46, 44, 150);
@@ -108,11 +105,9 @@
   margin: 15px;
   position: absolute;
   top: 50px;
-  z-index: 0;
   transform: translate(-180%,0%);
 }
 #movie-details{
-  z-index: 0;
   position: absolute;
   /* background-color: rgba(0,0,0,0.02); */
   transform: translate(15%,0%);
@@ -150,7 +145,6 @@
 .cardText{
   display: flex;
   justify-content: center;
-  
 }
 .cardImage{
   height: 240px;
@@ -165,12 +159,14 @@
   position: fixed;
   left: 0;
   z-index: 1;
+  top:50%;
 }
 .rightArrow{
   height: 140px;
   position: fixed;
   right: 0;
   z-index: 1;
+  top: 50%;
 }
 .categoryLI{
   list-style: none;
@@ -221,7 +217,6 @@
 }
 .watchListCardText{
   display: flex;
-  z-index: 0;
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -251,20 +246,18 @@
 }
 .eyeBallIcon{
   position: absolute;
-  z-index: 0;
   background-color: transparent;
   left: 110px;
   top: 10px
 }
-.castContainer{
-  z-index: 0;
+.castContainer{ 
   display: flex;
   overflow: scroll;
   width: 100%;
   height: 250px;
   background-color: whitesmoke;
   position: relative;
-  top: 500px;
+  top: 0;
   align-items: center;
 }
 .castCardContainer{
@@ -285,11 +278,11 @@
   position: relative;
   width: 100%;
   height: 100%;
-  top: 126px;
+  top: 650px;
 }
 .Review-Movie{
   position: relative;
-  top: 550px;
+  top: 50px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -334,8 +327,6 @@
   top: 10px;
   right: 10px;
 }
-.CommentForm{
-}
 .ReviewContentContainer{
   width: 100%;
   height: 300px;
@@ -353,7 +344,7 @@
 }
 .CommentForm{
   position: relative;
-  top: 600px;
+  top: 80px;
   height: 400;
   width: 808;
   display: flex;
@@ -381,23 +372,65 @@
   margin-top: 20px;
 }
 .TrailerVideo{
-
 }
 .trailerContainer{
   position: absolute;
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 0;
   top: 85px;
 }
-
 .watchListCardDelete{
   position: absolute;
   left: 0px;
   top: 0px;
-  z-index: 0;
   border-radius: 5px;
   border-color: transparent;
   box-shadow: none;
+}
+.watchListToggleContainerShow{
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+  border-radius: 25px;
+  width: 55px;
+  height: 53px;
+  right:25px;
+  top: 15px;
+}
+.watchListToggleContainerHide{
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+  border-radius: 25px;
+  width: 180px;
+  height: 53px;
+  right:25px;
+  top: 15px;
+}
+.watchListToggleContainerHide p{
+  margin-right: 10px;
+}
+.watchListToggleContainerHide img{
+  height: 30px;
+}
+.watchListToggleCounter{
+  position: absolute;
+  color: red;
+  font-weight: 620;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 0px 4px 0px 4px;
+  right: 5px;
+  top: 29px;
 }

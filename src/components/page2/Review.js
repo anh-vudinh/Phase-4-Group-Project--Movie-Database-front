@@ -15,7 +15,7 @@ const [reviewsArray, setReviewsArray] = useState([])
         <div className="ReviewCardContainer" key={reviews.id}>
             <div className="AuthorProfie">
                 <div className="AuthorPicture">
-                    <img src={reviews.author_details.avatar_path === null ? blankAvatar : reviews.author_details.avatar_path.includes("http") ? reviews.author_details.avatar_path.slice(1)  : `${avatarPrefix}${reviews.author_details.avatar_path}` }></img>
+                    <img alt="author" src={reviews.author_details.avatar_path === null ? blankAvatar : reviews.author_details.avatar_path.includes("http") ? reviews.author_details.avatar_path.slice(1)  : `${avatarPrefix}${reviews.author_details.avatar_path}` }></img>
                     <div className="AuthorName">
                         <p>{reviews.author}</p>
                     </div>

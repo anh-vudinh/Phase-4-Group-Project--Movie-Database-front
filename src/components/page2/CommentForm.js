@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import blankAvatar from "../../assets/blankAvatar.jpg"
+    
 function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
     //console.log("inside CommentForm",reviewsArray)
     const defaultName ="Default Name"

@@ -6,8 +6,14 @@
   width: 100%;
   background-color: rgb(38, 35, 163);
   height: 60px;
-  position:absolute;
+  position: absolute;
   top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  color: whitesmoke;
+
 }
 .SearchBar {
   position: absolute;
@@ -17,7 +23,7 @@
   background-color: rgb(46, 44, 150);
   white-space: nowrap;
   height: 50px;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 .searchBarCategories{
   padding: 0px;
@@ -433,4 +439,10 @@
   padding: 0px 4px 0px 4px;
   right: 5px;
   top: 29px;
+}
+nav {
+  background-color: aliceblue;
+  z-index: 3;
+  position: absolute;
+  left: 0;
 }

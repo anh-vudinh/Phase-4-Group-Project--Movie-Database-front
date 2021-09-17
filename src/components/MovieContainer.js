@@ -5,6 +5,7 @@ import Search from "./Search"
 import WatchList from "./WatchList"
 import MoviePage from "./page2/MoviePage"
 import NavBar from "./page2/NavBar"
+
 function MovieContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
@@ -36,7 +37,7 @@ function MovieContainer(){
     },[isLoadMoreMovies, movieCateogry, suffix, searchSuffix])
     return (
         <div id="movieContainer">
-            <NavBar/>
+            <NavBar setTogglePage2={setTogglePage2}/>
             <Header apiKey={apiKey} apiUrl={apiUrl} 
             totalPagesCount={totalPagesCount} 
             moviesDataLength={moviesData.length} 
@@ -51,22 +52,28 @@ function MovieContainer(){
             setTogglePage2={setTogglePage2}
             togglePage2={togglePage2}
             />
+            
+                
             <MoviePage movie={movie} togglePage2={togglePage2} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>
-            <MovieList 
-            moviesData={moviesData} 
-            poster_prefixURL={poster_prefixURL} 
-            totalPagesCount={totalPagesCount}
-            setPageNumber = {setPageNumber}
-            pageNumber={pageNumber}
-            setIsLoadMoreMovies ={setIsLoadMoreMovies}
-            isLoadMoreMovies={isLoadMoreMovies}
-            broken_path={broken_path}
-            setWatchListArray={setWatchListArray}
-            watchListArray={watchListArray}
-            setMovie={setMovie}
-            togglePage2 = {togglePage2}
-            setTogglePage2={setTogglePage2}
-            />
+               
+            
+                    <MovieList 
+                        moviesData={moviesData} 
+                        poster_prefixURL={poster_prefixURL} 
+                        totalPagesCount={totalPagesCount}
+                        setPageNumber = {setPageNumber}
+                        pageNumber={pageNumber}
+                        setIsLoadMoreMovies ={setIsLoadMoreMovies}
+                        isLoadMoreMovies={isLoadMoreMovies}
+                        broken_path={broken_path}
+                        setWatchListArray={setWatchListArray}
+                        watchListArray={watchListArray}
+                        setMovie={setMovie}
+                        togglePage2 = {togglePage2}
+                        setTogglePage2={setTogglePage2}
+                            />
+          
+
             <Search 
             setmovieCateogry={setmovieCateogry} 
             apiKey={apiKey} 

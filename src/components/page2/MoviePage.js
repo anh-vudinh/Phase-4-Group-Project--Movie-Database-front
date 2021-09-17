@@ -1,7 +1,7 @@
 import React from 'react'
 import Cast from "./Cast"
 import Review from "./Review";
-import Trailer from './Trailer';
+
 function MoviePage({movie,togglePage2, poster_prefixURL, broken_path}){
     return(
         <div className="MoviePage2Container">

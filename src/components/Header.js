@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Trailer from "./page2/Trailer";
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2}){
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2}){
     // const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")
     const [genresList, setGenresList] = useState([])
@@ -13,8 +13,11 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     <li key={listItem.name} 
     className="headerGenresLI" 
     onClick={()=> {
+        
         setSuffix(`&with_genres=${listItem.id}`)
-        setmovieCateogry("Genres")}}>
+        setmovieCateogry("Genres")
+        setTogglePage2(false)
+        }}>
                 {listItem.name}
                 
     </li>)

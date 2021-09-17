@@ -22,7 +22,6 @@ function MovieContainer(){
     const [movieCateogry, setmovieCateogry] = useState("movie/popular")
     const [suffix, setSuffix]= useState("") // rename the state
     
-    // api for search bar = https://api.themoviedb.org/3/search/multi?api_key=9b9db796275919f97fb742c582ab0008&query=dragon%20ball&page=1
     
     const [searchSuffix, setSearchSuffix] = useState("")
 
@@ -30,15 +29,14 @@ function MovieContainer(){
     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNumber}${suffix}` : 
     
     `${apiUrl}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
-    //console.log(`${apiUrl}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`)
-    // `${apiUrl}${movieCateogry}?api_key=${apiKey}&page=${pageNumber}` original general fetch
+  
     useEffect(() => {
         fetch(searchUrl)
         .then(res=> res.json())
         .then(moviesListData => {
-            //console.log("1",moviesListData)
+            
             setTotalPagesCount(moviesListData.total_pages)
-           // console.log("2",moviesListData)
+           
             setMoviesData(moviesListData.results)
         
         })
@@ -99,6 +97,8 @@ function MovieContainer(){
             setWatchListArray={setWatchListArray} 
             poster_prefixURL={poster_prefixURL}
             broken_path={broken_path}
+            setMovie={setMovie}
+            setTogglePage2={setTogglePage2}
             />
         </div>
     )

@@ -1,50 +1,39 @@
 import React,{useState} from "react";
 import blankAvatar from "../../assets/blankAvatar.jpg"
-
 function CommentForm({reviewsArray, setReviewsArray, movie}){
     console.log("inside CommentForm",reviewsArray)
-    
     const defaultName ="Default Name"
     const username = "DefaultUsername"
-    
-
     const [newRating, setNewRating] = useState("")
     const [newContent, setNewContent] = useState("")
     function handleSubmit(e){
-    
+        const date = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
+        console.log(date)
         e.preventDefault()
         const newData = {
             id:movie.id,
-            results:[{
+            results:{
                 author: defaultName,
-                content: "",
-                created_at:  `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
+                content: newContent,
+                updated_at: date,
                 author_details : {
-                    rating: newRating,
+                    rating: parseInt(newRating),
                     avatar_path: null,
                     username:username
                 }
-            }]
+            }
         }
         console.log("this is data",newData.results)
-      
-       
         setReviewsArray([...reviewsArray, newData.results])
     }
-    
     return(
         <div className="CommentForm">
             <form onSubmit={handleSubmit}>
-                <input type='number'name="rating" onChange={(e)=>setNewRating(e.target.value)} value={newRating}></input>
-                <input type='text' name="content" onChange={(e)=>setNewContent(e.target.value)} value={newContent}></input>
-                <input type="submit"></input>
+                <input className="ratingInput" type='number' max="10" name="rating" placeholder="Rating / ⭐" onChange={(e)=>setNewRating(e.target.value)} value={newRating}></input>
+                <textarea className="contentInput" type='text' name="content" placeholder="Tell Us Your Thoughts..." onChange={(e)=>setNewContent(e.target.value)} value={newContent}></textarea>
+                <input className="reviewFormSubmitButton" type="submit"></input>
             </form>
-            
         </div>
     )
 }
-
-
-
-
 export default CommentForm

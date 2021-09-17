@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import Cast from "./page2/Cast";
+
 function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo}){
     // const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")
@@ -11,10 +11,11 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     const genreLI = genresList.map(listItem => 
     <li key={listItem.name} 
     className="headerGenresLI" 
-    onClick={()=> {setSuffix(`&with_genres=${listItem.id}`)
-                  setmovieCateogry("Genres")}}>
-                  {listItem.name}
-                      
+    onClick={()=> {
+        setSuffix(`&with_genres=${listItem.id}`)
+        setmovieCateogry("Genres")}}>
+                {listItem.name}
+                
     </li>)
     
     useEffect(()=>{
@@ -26,17 +27,17 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
 
     function handlePageLoad(randomMovieArray ){
         
-      if(movieID === "popular" || movieID ==="movie/popular"){
+        if(movieID === "popular" || movieID ==="movie/popular"){
           //console.log("header",randomMovieArray.results[randomMovieIndex] )
         setMovie(randomMovieArray.results[randomMovieIndex])
         
         setMovieID(randomMovieArray.results[randomMovieIndex].id) 
-           
-      }else if (typeof movieID === "number" ){
+        
+        }else if (typeof movieID === "number" ){
         setMovie(randomMovieArray)
         setGenresList([...randomMovieArray.genres])
-         
-      }
+        
+        }
     }
 
     return(
@@ -61,7 +62,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                 <img id="headerImage" src={`${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                 
             </div>
-           
+        
         </>
 
     )

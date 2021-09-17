@@ -1,10 +1,13 @@
-import react from "react";
+import React from "react";
 import WatchListCard from "./WatchListCard";
 
-function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_path}){
-    
+function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2}){
+    function handleDelete(id){
+        const updateWatchList = watchListArray.filter(movieList => movieList.id !== id)
+        setWatchListArray(updateWatchList)
+    }
     const watchListItem = watchListArray.map(watchListCardObj => 
-        <WatchListCard key={watchListCardObj.id} watchListCardObj={watchListCardObj} poster_prefixURL={poster_prefixURL} broken_path={broken_path} />
+        <WatchListCard key={watchListCardObj.id} watchListCardObj={watchListCardObj} poster_prefixURL={poster_prefixURL} broken_path={broken_path} handleDelete={handleDelete} setMovie={setMovie} setTogglePage2={setTogglePage2}/>
     )
 
 

@@ -13,7 +13,6 @@
   height: 50px;
   overflow-x: hidden;
 }
-
 .searchBarCategories{
   padding: 0px;
   margin-top: 0;
@@ -22,7 +21,6 @@
   height: 50px;
   margin-left: 10px;
 }
-
 .searchBarForm{
   margin-top: 0;
   margin-left: 70px;
@@ -32,7 +30,6 @@
   align-items: center;
   border-radius: 30px;
 }
-
 .searchBarForm input{
   width: 300px;
   height: 26px;
@@ -40,7 +37,6 @@
   border-width: 1px;
   border-color: transparent;
 }
-
 .searchBarForm button{
   margin-left: 20px;
   width: 100px;
@@ -49,8 +45,6 @@
   border-width: 1px;
   border-color: transparent;
 }
-
-
 #movieContainer {
   position: relative;
   height: 100%;
@@ -58,7 +52,6 @@
   display: flex;
   justify-content: center;
 }
-
 .headerBannerContainer {
   width: 100vw;
   display: flex;
@@ -66,7 +59,6 @@
   position: absolute;
   overflow: hidden;
 }
-
 .headerDisplayInfoBig{
   position: absolute;
   z-index: 1;
@@ -74,7 +66,6 @@
   top: 20px;
   left: 25px;
 }
-
 .headerDisplayInfoSmall{
   position: absolute;
   z-index: 1;
@@ -82,14 +73,12 @@
   top: 20px;
   left: 25px;
 }
-
 .headerBannerBackground{
   position: absolute;
   height: 980px;
   width: 100vw;
   transform: translate(0%,-12%);
 }
-
 .headerImageContainer{
   width: 100vw;
   height: 450px;
@@ -99,12 +88,10 @@
   position: absolute;
   z-index: 0;
 }
-
 .hidden{
   visibility: hidden;
   z-index:-1;
 }
-
 #headerImage{
   margin: 15px;
   position: absolute;
@@ -112,7 +99,6 @@
   z-index: 0;
   transform: translate(-180%,0%);
 }
-
 #movie-details{
   z-index: 0;
   position: absolute;
@@ -122,16 +108,12 @@
   max-width: 700px;
   color:white;
 }
-
-
-
 .headerGenresUL{
   list-style:none;
   display:inline-flex;
   padding-left: 0px;
   margin-left: 10px;
 }
-
 .headerGenresLI{
   margin-right: 10px;
   color:black;
@@ -140,7 +122,6 @@
   padding: 5px;
   border-radius: 7px;
 }
-
 .cardContainer{
   position: absolute;
   top: 530px;
@@ -149,26 +130,23 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .movieCard{
   position: relative;
   margin: 0px 15px 0px 15px;
+  width: 160px;
 }
-
 .cardText{
   display: flex;
   justify-content: center;
+  
 }
-
 .cardImage{
   height: 240px;
   width: 160px;
   border-radius: 10px;
 }
 .cardReleaseDate {
-
 }
-
 .leftArrow{
   height: 140px;
   transform: rotate(180deg);
@@ -176,21 +154,18 @@
   left: 0;
   z-index: 1;
 }
-
 .rightArrow{
   height: 140px;
   position: fixed;
   right: 0;
   z-index: 1;
 }
-
 .categoryLI{
   list-style: none;
   display: inline-flex;
   flex-direction: column;
   margin-top: 15px;
 }
-
 .categoryLI button{
   min-width: 100px;
   background-color: rgb(38, 35, 163);
@@ -199,7 +174,6 @@
   box-shadow: none;
   border-color: transparent;
 }
-
 .categoryLI button:hover{
   min-width: 100px;
   margin-top: -15px;
@@ -246,7 +220,6 @@
   background-color: rgba(0, 0, 0, .175);
 }
 .watchListCardRatingSpan{
-  
   position: absolute;
   right: 12px;
 }
@@ -254,12 +227,10 @@
   border-radius: 30px;
   padding: 15px 10px 15px 10px;
 }
-
 .watchListCardRatingLess10{
   border-radius: 30px;
   padding: 15px 13px 15px 13px;
 }
-
 .watchListCardTitleSpan{
   position: absolute;
   left: 12px;
@@ -273,18 +244,16 @@
   left: 110px;
   top: 10px
 }
-
 .castContainer{
   z-index: 0;
   display: flex;
   overflow: scroll;
-  width: 100vw;
+  width: 100%;
   height: 250px;
   background-color: whitesmoke;
-  position: absolute;
+  position: relative;
   top: 500px;
 }
-
 .castCardContainer{
   margin: 0px 20px 0px 20px;
   display: flex;
@@ -292,27 +261,124 @@
   align-items: center;
   flex-wrap: nowrap;
 }
-
 .castImage{
   height: 165px;
   width: 110px;
 }
-
 .castName{
   white-space: nowrap;
 }
-
 .MoviePage2Container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.Review-Movie{
+  position: relative;
+  top: 550px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.ReviewCardContainer{
+  width: 800px;
+  max-height: 350px;
+  overflow: hidden;
+  position: relative;
+  background-color:cadetblue;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 20px;
+}
+.AuthorProfile{
+  position: relative;
+}
+.AuthorPicture{
+  width: 150px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 0;
   position: absolute;
+  left: 20px;
+  top: 70px;
+}
+.AuthorName {
+  display: flex;
+  justify-content: center;
+}
+.DateAndRating{
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.CommentForm{
+}
+.ReviewContentContainer{
+  width: 100%;
+  height: 300px;
   left: 0;
 }
-
-.Review-Movie{
+.ReviewContent{
   position: absolute;
-  top: 800px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-direction: row;
+  width: 600px;
+  left: 200px;
+  top: 30px;
+}
+.CommentForm{
+  position: relative;
+  top: 600px;
+  height: 400;
+  width: 808;
+  display: flex;
+  justify-content: center;
+}
+.CommentForm form{
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ratingInput{
+  width: 82px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+}
+.contentInput{
+  width: 800px;
+  height: 350px;
+}
+.reviewFormSubmitButton{
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+}
+.TrailerVideo{
+  z-index: 2;
+}
+.trailerContainer{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.CommentForm{
-  z-index: 1;
+.watchListCardDelete{
   position: absolute;
+  right: 12px;
+  top: 0px;
+  z-index: 3;
 }

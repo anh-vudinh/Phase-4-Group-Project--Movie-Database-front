@@ -1,18 +1,17 @@
 import React,{useState} from "react";
 
 function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
-    //console.log("inside CommentForm",reviewsArray)
     const defaultName ="Default Name"
     const username = "DefaultUsername"
     const [newRating, setNewRating] = useState("")
     const [newContent, setNewContent] = useState("")
     function handleSubmit(e){
-        const date = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
-        //console.log(date)
+        const date = `${new Date().toISOString()}`
         e.preventDefault()
         const newData = {
             id:movie.id,
             results:{
+                id:`${reviewsArray.length + 1}`,
                 author: defaultName,
                 content: newContent,
                 updated_at: date,
@@ -23,7 +22,7 @@ function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
                 }
             }
         }
-        //console.log("this is data",newData.results)
+
         setReviewsArray([...reviewsArray, newData.results])
         setNewRating("")
         setNewContent("")

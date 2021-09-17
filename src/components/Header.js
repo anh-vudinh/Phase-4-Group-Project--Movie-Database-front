@@ -7,19 +7,19 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     const [genresList, setGenresList] = useState([])
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const headerPageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
-    const alternatingLink = typeof movieID === "string"? `${apiUrl}${movieID}?api_key=${apiKey}${headerPageNumber}`:
-                                                         `${apiUrl}movie/${movieID}?api_key=${apiKey}` 
+    const alternatingLink = typeof movieID === "string"? 
+        `${apiUrl}${movieID}?api_key=${apiKey}${headerPageNumber}`:`${apiUrl}movie/${movieID}?api_key=${apiKey}` 
     const genreLI = genresList.map(listItem => 
     <li key={listItem.name} 
-    className="headerGenresLI" 
-    onClick={()=> {
-        
-        setSuffix(`&with_genres=${listItem.id}`)
-        setmovieCateogry("Genres")
-        setTogglePage2(false)
-        }}>
-                {listItem.name}
-                
+        className="headerGenresLI" 
+        onClick={()=> {
+            setSuffix(`&with_genres=${listItem.id}`)
+            setmovieCateogry("Genres")
+            setTogglePage2(false)
+            }
+        }>
+            
+        {listItem.name} 
     </li>)
     
     useEffect(()=>{
@@ -32,14 +32,13 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
     function handlePageLoad(randomMovieArray ){
         
         if(movieID === "popular" || movieID ==="movie/popular"){
-          //console.log("header",randomMovieArray.results[randomMovieIndex] )
-        setMovie(randomMovieArray.results[randomMovieIndex])
-        
-        setMovieID(randomMovieArray.results[randomMovieIndex].id) 
+            setMovie(randomMovieArray.results[randomMovieIndex])
+            
+            setMovieID(randomMovieArray.results[randomMovieIndex].id) 
         
         }else if (typeof movieID === "number" ){
-        setMovie(randomMovieArray)
-        setGenresList([...randomMovieArray.genres])
+            setMovie(randomMovieArray)
+            setGenresList([...randomMovieArray.genres])
         
         }
     }
@@ -66,6 +65,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                 <img id="headerImage" src={`${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                 
             </div>
+
             <Trailer movie={movie} togglePage2={togglePage2}/>
             
         </>

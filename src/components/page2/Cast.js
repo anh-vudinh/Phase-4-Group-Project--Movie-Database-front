@@ -13,7 +13,7 @@ function Cast({movie, togglePage2, poster_prefixURL, broken_path}){
             setCastArray(creditArray.cast) 
     })},[movie])
 
- 
+
     const cast = castArray === undefined? null : castArray.map(casts =>
     <div className="castCardContainer" key={casts.id}>
         <img className="castImage" src={casts.profile_path === null ? broken_path :`${poster_prefixURL}${casts.profile_path}` } alt={casts.id}/>
@@ -23,7 +23,7 @@ function Cast({movie, togglePage2, poster_prefixURL, broken_path}){
 
     return (
         <div className={togglePage2? "castContainer":"hidden"}>
-           {togglePage2 === true? cast : false}
+            {togglePage2 === true? cast : false}
         </div>
     )
 }

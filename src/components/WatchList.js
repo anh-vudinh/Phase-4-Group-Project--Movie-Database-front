@@ -24,5 +24,7 @@ function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_
                 {toggleShowWatchList? watchListItem : null}
             </div>
         </>
-    )}
+    )
+}
+
 export default WatchList

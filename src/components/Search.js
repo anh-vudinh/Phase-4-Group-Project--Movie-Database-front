@@ -17,11 +17,11 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
 
     function handleSearchYearOrGenres(suffix){
         setSuffix(suffix)
-        console.log(`${searchUrl}${suffix}`)
         fetch(`${searchUrl}${suffix}`)
         .then(res => res.json())
-        .then(dataMovies =>  {setMoviesData(dataMovies.results)
-        }
+        .then(dataMovies =>  {
+            setMoviesData(dataMovies.results)
+            }
         )
 
     }
@@ -45,7 +45,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
     function getGenresArray(categoryName){
         fetch(genresURL)
         .then(resp => resp.json())
-        .then(genresArrayData => { console.log(genresArrayData)
+        .then(genresArrayData => {
             setGenresArray(genresArrayData.genres)
         })
     }
@@ -53,7 +53,6 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
 
     function handleSubmit(e){
     e.preventDefault()
-    console.log(query.length)
     if(query.length > 0){
     setmovieCateogry("search/movie")
     setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react"
 import Video from "./video"
 
 
-function Trailer({movie, togglePage2}){
+function Trailer({movie}){
     //const youtubeTrailer_prefixURL = "https://www.youtube.com/watch?v="
     //console.log("intrailer",movie)
+
     const [movieArray, setMovieArray] = useState([])
  
 
@@ -16,9 +17,9 @@ function Trailer({movie, togglePage2}){
         )
     },[movie])
 
-    const movieTrailer = togglePage2 === false ? null : <Video key={movieArray[0].id} linkID={movieArray[0].key === undefined ? "JL2PB7NJ090" : movieArray[0].key}/>
-    //.map(movieKey => <Video key={movieKey.id} linkID={movieKey.key}/>)
-   //console.log("2",movieArray)
+    const movieTrailer = (movieArray === undefined || movieArray.length === 0 )? null : <Video key={movieArray[0].id} linkID={movieArray === undefined ? "JL2PB7NJ090" : movieArray[0].key}/>
+    
+   console.log("2",movieArray)
     return(
         <div className="trailerContainer">
             {movieTrailer}

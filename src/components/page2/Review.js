@@ -31,14 +31,14 @@ const [reviewsArray, setReviewsArray] = useState([])
             </div>
         </div>
             )
-            console.log("this is reviewArray Data",reviewsArray)
+           // console.log("this is reviewArray Data",reviewsArray)
             //console.log(review)
     return(
         <>
         <div className ={togglePage2? "Review-Movie" : "hidden"}>
             {togglePage2? review : null}
         </div>
-        <CommentForm reviewsArray={reviewsArray} setReviewsArray={setReviewsArray} movie={movie}/>
+        <CommentForm reviewsArray={reviewsArray} setReviewsArray={setReviewsArray} movie={movie} togglePage2={togglePage2}/>
         </>
     )
 }

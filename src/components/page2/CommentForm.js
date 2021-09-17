@@ -1,14 +1,14 @@
 import React,{useState} from "react";
 import blankAvatar from "../../assets/blankAvatar.jpg"
-function CommentForm({reviewsArray, setReviewsArray, movie}){
-    console.log("inside CommentForm",reviewsArray)
+function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
+    //console.log("inside CommentForm",reviewsArray)
     const defaultName ="Default Name"
     const username = "DefaultUsername"
     const [newRating, setNewRating] = useState("")
     const [newContent, setNewContent] = useState("")
     function handleSubmit(e){
         const date = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
-        console.log(date)
+        //console.log(date)
         e.preventDefault()
         const newData = {
             id:movie.id,
@@ -23,11 +23,11 @@ function CommentForm({reviewsArray, setReviewsArray, movie}){
                 }
             }
         }
-        console.log("this is data",newData.results)
+        //console.log("this is data",newData.results)
         setReviewsArray([...reviewsArray, newData.results])
     }
     return(
-        <div className="CommentForm">
+        <div className={togglePage2? "CommentForm" : "hidden"} >
             <form onSubmit={handleSubmit}>
                 <input className="ratingInput" type='number' max="10" name="rating" placeholder="Rating / ⭐" onChange={(e)=>setNewRating(e.target.value)} value={newRating}></input>
                 <textarea className="contentInput" type='text' name="content" placeholder="Tell Us Your Thoughts..." onChange={(e)=>setNewContent(e.target.value)} value={newContent}></textarea>

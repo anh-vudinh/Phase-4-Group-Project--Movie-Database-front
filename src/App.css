@@ -6,14 +6,14 @@
   width: 100%;
   background-color: rgb(38, 35, 163);
   height: 60px;
-  position: absolute;
+  position: fixed;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   color: whitesmoke;
-
+  z-index: 5;
 }
 .SearchBar {
   position: absolute;
@@ -163,7 +163,7 @@
 .cardReleaseDate {
 }
 .leftArrow{
-  height: 140px;
+  height: 110px;
   transform: rotate(180deg);
   position: fixed;
   left: 0;
@@ -171,7 +171,7 @@
   top:50%;
 }
 .rightArrow{
-  height: 140px;
+  height: 110px;
   position: fixed;
   right: 0;
   z-index: 1;
@@ -444,9 +444,23 @@
   top: 29px;
 }
 
-/* .nav {
-  background-color: aliceblue;
-  z-index: 3;
+.navLinks {
   position: absolute;
   left: 0;
-} */
+  margin-left: 10px;
+  font-size: large;
+}
+.navLinks a{
+  margin-right: 15px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 5px 10px 5px;
+}
+.navLinks a:hover {
+  
+  background-color:rgb(252, 156, 11);
+}
+.navLinks a.active{
+  background-color:rgb(252, 156, 11);
+}

@@ -33,7 +33,7 @@ function TVContainer(){
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, movieCateogry, suffix, searchSuffix])
-    console.log(moviesData)
+    //console.log(moviesData)
     return (
         <div id="movieContainer">
 

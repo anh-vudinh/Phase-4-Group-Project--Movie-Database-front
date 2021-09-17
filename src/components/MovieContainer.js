@@ -61,6 +61,7 @@ function MovieContainer(){
             setToggleHeaderInfo={setToggleHeaderInfo}
             toggleHeaderInfo={toggleHeaderInfo}
             setTogglePage2={setTogglePage2}
+            togglePage2={togglePage2}
             />
 
             <MoviePage movie={movie} togglePage2={togglePage2} poster_prefixURL={poster_prefixURL} broken_path={broken_path}/>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
+import Trailer from "./page2/Trailer";
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo}){
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2}){
     // const [movie, setMovie]= useState([])
     const [movieID, setMovieID] = useState("movie/popular")
     const [genresList, setGenresList] = useState([])
@@ -62,6 +63,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                 <img id="headerImage" src={`${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                 
             </div>
+            <Trailer movie={movie} togglePage2={togglePage2}/>
             
         </>
 

@@ -17,21 +17,22 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
             setmovieCateogry("Genres")
             setTogglePage2(false)
             }
-        }>
-            
+        }>  
         {listItem.name} 
     </li>)
     
     useEffect(()=>{
         fetch(alternatingLink)
         .then(res => res.json())
-        .then(randomMovieArray =>  handlePageLoad(randomMovieArray))
+        .then(randomMovieArray => {
+            handlePageLoad(randomMovieArray)
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movieID])
 
     function handlePageLoad(randomMovieArray ){
         
-        if((movieID === "popular" || movieID ==="movie/popular" && randomMovieArray.results !== undefined) ){
+        if(((movieID === "popular" || movieID ==="movie/popular") && randomMovieArray.results !== undefined)){
             setMovie(randomMovieArray.results[randomMovieIndex])
             
             setMovieID(randomMovieArray.results[randomMovieIndex].id) 

@@ -3,13 +3,13 @@ import MovieContainer from './components/MovieContainer';
 import NavBar from './components/NavBar';
 import TVContainer from './components/TVFILES/TVContainer'
 import { Switch, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 function App() {
 
-  const [page, setPage] = useState("/")
+  // const [page, setPage] = useState("/")
   return (
     <div> 
-      <NavBar onChangePage={setPage}/>
+      <NavBar onChangePage={"/"}/>
         <Switch>
           <Route exact path="/">
             <MovieContainer/>
@@ -18,9 +18,7 @@ function App() {
           <Route path="/tvShows">
             <TVContainer/>
           </Route>
-      
-
-      </Switch>
+        </Switch>
     </div>
     
   );

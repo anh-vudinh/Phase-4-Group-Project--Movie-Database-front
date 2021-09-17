@@ -399,7 +399,7 @@
 }
 .watchListToggleContainerShow{
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -414,7 +414,7 @@
 }
 .watchListToggleContainerHide{
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;

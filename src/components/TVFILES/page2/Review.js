@@ -4,11 +4,14 @@ import CommentForm from "./CommentForm";
 function Review({movie, togglePage2}){
 const [reviewsArray, setReviewsArray] = useState([])
     useEffect(()=>{
-        fetch(`https://api.themoviedb.org/3/tv/${movie.id}/reviews?api_key=9b9db796275919f97fb742c582ab0008`)
+        if(movie.id !== undefined){
+            fetch(`https://api.themoviedb.org/3/tv/${movie.id}/reviews?api_key=9b9db796275919f97fb742c582ab0008`)
             .then(res=> res.json())
             .then(reviewsArray => { 
                 setReviewsArray(reviewsArray.results) 
-    })},[movie])
+            })
+        }
+    },[movie])
 
     const avatarPrefix ="https://www.themoviedb.org/t/p/w64_and_h64_face"
     const review = reviewsArray === undefined ? null : reviewsArray.map(reviews =>

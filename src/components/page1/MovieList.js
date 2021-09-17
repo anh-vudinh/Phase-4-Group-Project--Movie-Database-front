@@ -4,13 +4,13 @@ import arrowIcon from "../../assets/arrowIcon.png"
 function MovieList({moviesData, poster_prefixURL, totalPagesCount, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, togglePage2, setTogglePage2}){
     const displayMovies = moviesData.map(movie => 
     <MovieCard key={movie.id} 
-    movie={movie} 
-    poster_prefixURL={poster_prefixURL} 
-    broken_path={broken_path}
-    setWatchListArray={setWatchListArray}
-    watchListArray={watchListArray}
-    setMovie={setMovie}
-    setTogglePage2={setTogglePage2}
+        movie={movie} 
+        poster_prefixURL={poster_prefixURL} 
+        broken_path={broken_path}
+        setWatchListArray={setWatchListArray}
+        watchListArray={watchListArray}
+        setMovie={setMovie}
+        setTogglePage2={setTogglePage2}
     />)
     function handleLoadMoreMovies(){
         setPageNumber(pageNumber => pageNumber < totalPagesCount ? pageNumber + 1 : 1)

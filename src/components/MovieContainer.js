@@ -4,6 +4,7 @@ import Header from "./Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
 import MoviePage from "./page2/MoviePage"
+import NavBar from "./page2/NavBar"
 function MovieContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
@@ -49,6 +50,7 @@ function MovieContainer(){
     
     return (
         <div id="movieContainer">
+            <NavBar/>
             <Header apiKey={apiKey} apiUrl={apiUrl} 
             totalPagesCount={totalPagesCount} 
             moviesDataLength={moviesData.length} 

@@ -5,7 +5,7 @@ import Search from "./Search"
 import WatchList from "./WatchList"
 import MoviePage from "./page2/MoviePage"
 
-function MovieContainer(){
+function TVContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [totalPagesCount, setTotalPagesCount]= useState(100)
@@ -18,11 +18,11 @@ function MovieContainer(){
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiUrl = "https://api.themoviedb.org/3/"
     const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
-    const [movieCateogry, setmovieCateogry] = useState("movie/popular")
+    const [movieCateogry, setmovieCateogry] = useState("tv/popular")
     const [suffix, setSuffix]= useState("") // rename the state
     const [searchSuffix, setSearchSuffix] = useState("")
     const searchUrl = (movieCateogry === 'Genres' || movieCateogry === 'Year Release')  ?
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNumber}${suffix}` : 
+    `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${pageNumber}${suffix}` : 
     `${apiUrl}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
     useEffect(() => {
         fetch(searchUrl)
@@ -33,10 +33,9 @@ function MovieContainer(){
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, movieCateogry, suffix, searchSuffix])
-
+    console.log(moviesData)
     return (
         <div id="movieContainer">
-            {/* <NavBar setTogglePage2={setTogglePage2}/> */}
 
             <Header 
                 apiKey={apiKey} 
@@ -101,4 +100,4 @@ function MovieContainer(){
         </div>
     )
 }
-export default MovieContainer
+export default TVContainer

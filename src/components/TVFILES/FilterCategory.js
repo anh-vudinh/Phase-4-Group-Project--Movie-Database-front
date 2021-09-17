@@ -25,12 +25,12 @@ function FilterCategory({category, genresArray, getGenresArray, yearArray, handl
                 setmovieCateogry(categoryName)
                 setExtendedOptions(!isExtendedOptions)
                 if(typeof extra[0] === "number"){
-                    handleSearchYearOrGenres(`&primary_release_year=${extra[0]}`)}
+                    handleSearchYearOrGenres(`&first_air_date_year=${extra[0]}`)}
                     setTimeout(()=> {setTogglePage2(false)}, 110)        
                 break;
             default:
                 setExtendedOptions(false)
-                setmovieCateogry(`movie/${categoryName.replaceAll(" ", "_").toLowerCase()}`)
+                setmovieCateogry(`tv/${categoryName.replaceAll(" ", "_").toLowerCase()}`)
                 setTimeout(()=> {setTogglePage2(false)}, 110)
                 //console.log(categoryName.replaceAll(" ", "_").toLowerCase())
         }

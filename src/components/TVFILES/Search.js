@@ -4,10 +4,10 @@ import FilterCategory from './FilterCategory'
 function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, setSuffix, setSearchSuffix, setTogglePage2}){
     
 
-    const genresURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&page=50`
-    const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
+    const genresURL = `https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&page=50`
+    const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release"]
     const [genresArray, setGenresArray] = useState([])
-    const searchUrl =`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=1`
+    const searchUrl =`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=1`
     
     const currentYear = new Date().getFullYear()
     const yearArray =[]
@@ -54,12 +54,12 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
     function handleSubmit(e){
     e.preventDefault()
     if(query.length > 0){
-        setmovieCateogry("search/movie")
-        setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
-        setTimeout(()=> {setTogglePage2(false)}, 110)
-        setQuery("")
+    setmovieCateogry("search/tv")
+    setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
+    setTimeout(()=> {setTogglePage2(false)}, 110)
+    setQuery("")
 
-        }
+    }
     }   
     
 

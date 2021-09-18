@@ -15,51 +15,8 @@
   color: whitesmoke;
   z-index: 5;
 }
-.SearchBar {
-  position: absolute;
-  top: 600px;
-  width: 100vw;
-  display: inline-flex;
-  background-color: rgb(46, 44, 150);
-  white-space: nowrap;
-  height: 50px;
-  /* overflow-x: hidden; */
-}
-.searchBarCategories{
-  padding: 0px;
-  margin-top: 0;
-  background-color: rgb(38, 35, 163);
-  border-radius: 30px;
-  height: 50px;
-  margin-left: 10px;
-}
-.searchBarForm{
-  margin-top: 0;
-  margin-left: 70px;
-  padding: 0px 40px 0px 40px;
-  background-color: rgb(38, 35, 163);
-  display: flex;
-  align-items: center;
-  border-radius: 30px;
-  position:absolute;
-  right:0;
-  top: 10px;
-}
-.searchBarForm input{
-  width: 300px;
-  height: 26px;
-  border-radius: 10px;
-  border-width: 1px;
-  border-color: transparent;
-}
-.searchBarForm button{
-  margin-left: 20px;
-  width: 100px;
-  padding: 5px 10px 5px 10px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: transparent;
-}
+
+
 #movieContainer {
   position: relative;
   height: 100%;
@@ -67,11 +24,12 @@
   /* display: flex;
   justify-content: center; */
 }
+
 .headerBannerContainer {
   width: 100vw;
   display: flex;
   height: 540px;
-  position: absolute;
+  position: relative;
   overflow: hidden;
   top: 60px;
 }
@@ -91,12 +49,12 @@
 }
 .headerBannerBackground{
   position: absolute;
-  height: 980px;
-  width: 100vw;
-  transform: translate(0%,-12%);
+  height: 600px;
+  width: 100%;
+  /* transform: translate(0%,-12%); */
 }
 .headerImageContainer{
-  width: 100vw;
+  width: 100%;
   height: 540px;
   display: flex;
   justify-content: center;
@@ -110,20 +68,46 @@
   visibility: hidden;
   z-index:-1;
 }
-#headerImage{
+.headerImage{
   margin: 15px;
   position: absolute;
-  top: 50px;
-  transform: translate(-180%,0%);
+  transform: translate(-130%,0%);
 }
-#movie-details{
-  position: absolute;
+
+.movie-details{
+  position: relative;
   /* background-color: rgba(0,0,0,0.02); */
   transform: translate(15%,0%);
-  top:65px;
+  top: 65px;
   max-width: 700px;
-  color:white;
+  max-height: 400px;
+  color: white;
 }
+
+.languageContainer{
+  position: relative;
+  display: inline-flex;
+  top: -22px;
+  left: 15px;
+}
+
+.languageBox{
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 28px;
+}
+
+.languageText{
+  position: absolute;
+  font-size: 14px;
+  top: 0;
+  margin: 0;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 .headerGenresUL{
   list-style:none;
   display:inline-flex;
@@ -138,13 +122,29 @@
   padding: 5px;
   border-radius: 7px;
 }
-.cardContainer{
+
+.headerStatus{
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.headerLinkIcon{
+  height: 35px;
+  width: 40px;
   position: absolute;
-  top: 700px;
+  right: 0;
+  bottom: 0;
+}
+
+.cardContainer{
+  position: relative;
+  top: 150px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 720px;
 }
 .movieCard{
   position: relative;
@@ -162,38 +162,133 @@
 }
 .cardReleaseDate {
 }
+
 .leftArrow{
   height: 110px;
   transform: rotate(180deg);
-  position: fixed;
-  left: 0;
+  position: absolute;
+  left: 10px;
   z-index: 1;
-  top:50%;
+  top: 40%;
+  opacity: 0.65;
 }
 .rightArrow{
   height: 110px;
-  position: fixed;
-  right: 0;
+  position: absolute;
+  right: 25px;
   z-index: 1;
-  top: 50%;
+  top: 40%;
+  opacity: 0.65;
 }
+
+.SearchBar {
+  position: absolute;
+  top: 600px;
+  width: 100vw;
+  display: inline-flex;
+  background-color: rgb(46, 44, 150);
+  white-space: nowrap;
+  height: 50px;
+  /* overflow-x: hidden; */
+}
+
+.searchBarCategories{
+  padding: 0px;
+  margin-top: 0;
+  background-color: rgb(38, 35, 163);
+  border-radius: 30px;
+  display: flex;
+  height: 50px;
+  margin-left: 10px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-bottom: 0px;
+}
+
+.searchBarForm{
+  margin-top: 0;
+  margin-left: 70px;
+  padding: 10px 20px 10px 20px;
+  background-color: rgb(38, 35, 163);
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  position:absolute;
+  right:0;
+}
+.searchBarForm input{
+  width: 300px;
+  height: 26px;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: transparent;
+}
+.searchBarForm button{
+  margin-left: 20px;
+  width: 100px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: transparent;
+}
+
 .categoryLI{
   list-style: none;
   display: inline-flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: 13px;
+  width: 100px;
 }
-.categoryLI button{
-  min-width: 100px;
+.mainCategoryOptions button{
+  width: 100px;
   background-color: rgb(38, 35, 163);
   color: white;
   border-radius: 0px;
   box-shadow: none;
   border-color: transparent;
+  margin-bottom: -5px;
 }
-.categoryLI button:hover{
+.mainCategoryOptions button:hover{
   min-width: 100px;
   margin-top: -15px;
+  margin-bottom: -15px;
+  height: 35px;
+  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
+  border-radius: 25px;
+  box-shadow: none;
+  border-color: transparent;
+  margin-bottom: 0px;
+}
+
+.extendedCategoryOptions{
+  list-style: none;
+  display: inline-flex;
+  flex-direction: row;
+  transform: translate(0px, 10px);
+  min-height: 100px;
+  width: 400px;
+  flex-wrap: wrap;
+  background-color: rgb(38, 35, 163);
+  border-radius: 15px;
+  padding: 4px;
+}
+
+.extendedCategoryOptions button{
+  position:relative;
+  width: 100px;
+  height: 50px;
+  background-color: rgb(38, 35, 163);
+  color: white;
+  border-radius: 0px;
+  box-shadow: none;
+  border-color: transparent;
+  border-radius: 25px;
+}
+
+.extendedCategoryOptions button:hover{
+  width: 100px;
+  margin-top: 0px;
   height: 50px;
   background-color: rgba(255, 0, 0, 0.9);
   color: white;
@@ -201,6 +296,7 @@
   box-shadow: none;
   border-color: transparent;
 }
+
 .watchListContainer{
   z-index: 2;
   overflow: scroll;
@@ -210,7 +306,7 @@
   background-color: grey;
   padding: 20px;
   border-radius: 20px;
-  max-height: 800px;
+  max-height: 570px;
 }
 .watchListCard{
   height: 80px;
@@ -233,7 +329,7 @@
   height: 80px;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, .175);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .watchListCardRatingSpan{
   position: absolute;
@@ -287,7 +383,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  top: 650px;
+  top: 100px;
 }
 .Review-Movie{
   position: relative;
@@ -307,6 +403,7 @@
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 20px;
+  overflow: scroll;
 }
 .AuthorProfile{
   position: relative;

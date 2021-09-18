@@ -8,12 +8,14 @@ import MoviePage from "./page2/MoviePage"
 function MovieContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
+    const [genresList, setGenresList] = useState([])
+    const [watchListArray, setWatchListArray] = useState([])
     const [totalPagesCount, setTotalPagesCount]= useState(100)
     const [isLoadMoreMovies, setIsLoadMoreMovies] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
-    const [watchListArray, setWatchListArray] = useState([])
     const [togglePage2, setTogglePage2] =useState(false)
     const [toggleHeaderInfo, setToggleHeaderInfo] = useState(false)
+    const [movieID, setMovieID] = useState("movie/popular")       ///belongs to Header.js, moved up for watchlist cards not populating header with full details
     const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiUrl = "https://api.themoviedb.org/3/"
@@ -36,7 +38,6 @@ function MovieContainer(){
 
     return (
         <div id="movieContainer">
-            {/* <NavBar setTogglePage2={setTogglePage2}/> */}
 
             <Header 
                 apiKey={apiKey} 
@@ -53,6 +54,10 @@ function MovieContainer(){
                 toggleHeaderInfo={toggleHeaderInfo}
                 setTogglePage2={setTogglePage2}
                 togglePage2={togglePage2}
+                genresList={genresList}
+                setGenresList={setGenresList}
+                movieID={movieID} 
+                setMovieID={setMovieID}
             />
             
             <MoviePage 
@@ -60,6 +65,7 @@ function MovieContainer(){
                 togglePage2={togglePage2}
                 poster_prefixURL={poster_prefixURL}
                 broken_path={broken_path}
+                apiKey={apiKey}
             />
             
             <MovieList 
@@ -76,6 +82,9 @@ function MovieContainer(){
                 setMovie={setMovie}
                 togglePage2 = {togglePage2}
                 setTogglePage2={setTogglePage2}
+                setGenresList={setGenresList}
+                apiKey={apiKey}
+                setToggleHeaderInfo={setToggleHeaderInfo}
             />
 
 
@@ -96,6 +105,7 @@ function MovieContainer(){
                 broken_path={broken_path}
                 setMovie={setMovie}
                 setTogglePage2={setTogglePage2}
+                setMovieID={setMovieID}
             />
 
         </div>

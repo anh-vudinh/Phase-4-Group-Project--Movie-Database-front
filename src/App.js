@@ -1,5 +1,5 @@
 import './App.css';
-import MovieContainer from './components/MovieContainer';
+import MovieContainer from './components/MOVIEFILES/MovieContainer';
 import NavBar from './components/NavBar';
 import TVContainer from './components/TVFILES/TVContainer'
 import { Switch, Route } from "react-router-dom";

@@ -1,3 +1,28 @@
+vu - 9/17/2021
+- moved movie files into a seperate section
+- higher resolution back_drop
+- added ternary for broken image for header movie cover
+- limited watchlist to max-hieght 570
+- changed year release category to have 12 years
+- placed extendedcategoryoptions into a div with a classname to manipulate in css
+- fixed Genres and Year Release not closing when their extended option was not chosen after opening dropdown list
+    - added const [currentCategorySelected, setCurrentCategorySelected] = useState("") to search to double check which category was chosen because setting a state in filtercategory.js made a state for each one. So there was never a true double check.
+- added movie language to header info
+- added movie status to header info
+- added homepage link to header info, will open to new tab of movie homepage if
+    they have one, if not the icon will not appear
+- moved genrelist up to higher level to pass to movie cards, the header genre list doesnt update because it doesnt replace the data for the genrelist set it in the handleCardImageClick
+- setTimeout 120ms for above ^
+- adjusted relative and absolute positions of headerbannercontainer, headerimagecontainer and mainpage2container
+- interpolated all api_key to read from moviecontainer
+- changed cast.js to use the index as the key instead of id, some cast in the array are the same
+- setTimeout of 150ms on togglepage2 when user clicks on movie card to give the cast time to load. the longer the array of cast the more you can visually see it as the array changes out
+- made better informationIcon
+- cannot add duplicate movies to watchlist now
+- moved setMovieID and movieID to mainContainer, header was not populating full info on header if you clicked on movie in watchlist, the two variables passed down to watchlistcard.js
+- adjusted movielist cardcontainer to be relative so that i can adjust the next and prev arrows to absolute position based on the container
+- card container given hidden tag when you are on page 2 because it's position: was changed to relative earlier
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

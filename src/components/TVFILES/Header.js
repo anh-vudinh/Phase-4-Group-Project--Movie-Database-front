@@ -47,7 +47,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
         <>
             <div className="headerBannerContainer">
                 <img className={toggleHeaderInfo? "headerDisplayInfoSmall" : "headerDisplayInfoBig"} src={informationIcon} alt="headerDisplayInfoIcon" onClick={()=> setToggleHeaderInfo(toggleHeaderInfo => !toggleHeaderInfo)}/>
-                <img className="headerBannerBackground" src={movie.backdrop_path === null ? broken_path :`${poster_prefixURL}${movie.backdrop_path}`} alt={movie.name}></img>
+                <img className="headerBannerBackground" src={movie.backdrop_path === null ? broken_path :`https://www.themoviedb.org/t/p/w640_and_h360_multi_faces/${movie.backdrop_path}`} alt={movie.name}></img>
             </div>
             
             <div className={toggleHeaderInfo? "headerImageContainer" : "hidden"}>
@@ -60,7 +60,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                     <div>Genres: <span><ul className="headerGenresUL">{genreLI}</ul></span></div>
                 </div>
                 
-                <img id="headerImage" src={`${poster_prefixURL}${movie.poster_path}`} alt={movie.name}></img>
+                <img id="headerImage" src={movie.backdrop_path === null ? broken_path : `${poster_prefixURL}${movie.poster_path}`} alt={movie.name}></img>
                 
             </div>
 

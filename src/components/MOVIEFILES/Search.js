@@ -1,17 +1,18 @@
 import React,{useState} from "react";
 import FilterCategory from './FilterCategory'
 
-function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, setSuffix, setSearchSuffix, setTogglePage2}){
+function Search({setmovieCateogry, apiKey, setMoviesData, setSuffix, setSearchSuffix, setTogglePage2}){
     
-
-    const genresURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&page=50`
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
     const [genresArray, setGenresArray] = useState([])
+    const [currentCategorySelected, setCurrentCategorySelected] = useState("")
+
+    const genresURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&page=50`
     const searchUrl =`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=1`
     
     const currentYear = new Date().getFullYear()
     const yearArray =[]
-    for (let i= 0; i < 5; i ++){
+    for (let i= 0; i < 12; i ++){
         yearArray.push(currentYear - i)
     }
 
@@ -23,10 +24,8 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
             setMoviesData(dataMovies.results)
             }
         )
-
     }
     
-
 
     const categoryButtons = categoryButtonArray.map(category => 
         <FilterCategory 
@@ -38,11 +37,12 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
         handleSearchYearOrGenres={handleSearchYearOrGenres}
         setmovieCateogry={setmovieCateogry}
         setTogglePage2={setTogglePage2}
-
+        currentCategorySelected={currentCategorySelected}
+        setCurrentCategorySelected={setCurrentCategorySelected}
         />
     )
     
-    function getGenresArray(categoryName){
+    function getGenresArray(){
         fetch(genresURL)
         .then(resp => resp.json())
         .then(genresArrayData => {
@@ -58,7 +58,6 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
         setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
         setTimeout(()=> {setTogglePage2(false)}, 110)
         setQuery("")
-
         }
     }   
     
@@ -68,7 +67,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
             <ul className="searchBarCategories">{categoryButtons}</ul> 
 
             <form className="searchBarForm" onSubmit={(e) => handleSubmit(e)}>  
-            <input type="text" placeholder="Search Movie Name" value={query} onChange={e => setQuery(e.target.value)} ></input>
+            <input type="text" placeholder=" Movie Name" value={query} onChange={e => setQuery(e.target.value)} ></input>
             <button>Search</button>   
             </form>     
         </div>

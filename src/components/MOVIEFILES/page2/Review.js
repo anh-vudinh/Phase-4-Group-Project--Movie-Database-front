@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from "react";
-import blankAvatar from "../../assets/blankAvatar.jpg"
+import blankAvatar from "../../../assets/blankAvatar.jpg"
 import CommentForm from "./CommentForm";
-function Review({movie, togglePage2}){
-const [reviewsArray, setReviewsArray] = useState([])
+function Review({movie, togglePage2, apiKey}){
+
+    const [reviewsArray, setReviewsArray] = useState([])
+    
     useEffect(()=>{
         if(movie.id !== undefined){
-            fetch(`https://api.themoviedb.org/3/movie/${movie.id}/reviews?api_key=9b9db796275919f97fb742c582ab0008`)
+            fetch(`https://api.themoviedb.org/3/movie/${movie.id}/reviews?api_key=${apiKey}`)
             .then(res=> res.json())
             .then(reviewsArray => { 
                 setReviewsArray(reviewsArray.results) 
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
 
-    const avatarPrefix ="https://www.themoviedb.org/t/p/w64_and_h64_face"
+    const avatarPrefix ="https://www.themoviedb.org/t/p/w100_and_h100_face"
     const review = reviewsArray === undefined ? null : reviewsArray.map(reviews =>
         <div className="ReviewCardContainer" key={reviews.id}>
             <div className="AuthorProfie">

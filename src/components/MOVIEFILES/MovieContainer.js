@@ -37,7 +37,7 @@ function MovieContainer(){
     },[isLoadMoreMovies, movieCateogry, suffix, searchSuffix])
 
     return (
-        <div id="movieContainer">
+        <div className="movieContainer">
 
             <Header 
                 apiKey={apiKey} 

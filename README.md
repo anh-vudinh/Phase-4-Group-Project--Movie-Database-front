@@ -1,3 +1,14 @@
+vu - 9/18/2021
+- (HEADER MOVIE DETAILS OVERLAY IS COMPLETE)
+- defined more classNames in Header div to better customize how their elements show/perform
+- adjusted CSS of header elements
+- -added logo logic to pull logo icons, for now they are on banner but will move that logic to page2
+- adjusted element layout of movie card text so it's easier to customize
+- adjusted movieContainer to display-flex column with align items centered
+- adjusted headerinfosmall's center-line to line up with headerinfobig's center-line
+** for some reason upcoming eventually stops populating movie cards, have not yet noticed a pattern
+
+
 vu - 9/17/2021
 - moved movie files into a seperate section
 - higher resolution back_drop

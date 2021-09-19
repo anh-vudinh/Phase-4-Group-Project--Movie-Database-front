@@ -4,7 +4,7 @@ import informationIcon from "../../assets/informationIcon.png"
 import languageBubble from "../../assets/languageBubble.png"
 import wwwLinkIcon from "../../assets/wwwLinkIcon.png"
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID}){
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray}){
     const [companyLogosArray, setcompanyLogosArray] = useState([])
     const companyLogoPrefix = "https://www.themoviedb.org/t/p/h50_filter(negate,0,666)"
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
@@ -89,7 +89,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                 </div>
             </div>
 
-            <Trailer movie={movie} togglePage2={togglePage2} apiKey={apiKey}/>
+            <Trailer movie={movie} togglePage2={togglePage2} apiKey={apiKey} movieArray={movieArray} setMovieArray={setMovieArray}/>
             
         </>
 

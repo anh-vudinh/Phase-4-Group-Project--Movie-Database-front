@@ -4,12 +4,14 @@ import Header from "./Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
 import MoviePage from "./page2/MoviePage"
+import YoutubeFreeMovie from "./YoutubeFreeMovie"
 
 function MovieContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [genresList, setGenresList] = useState([])
     const [watchListArray, setWatchListArray] = useState([])
+    const [movieArray, setMovieArray] = useState([])
     const [totalPagesCount, setTotalPagesCount]= useState(100)
     const [isLoadMoreMovies, setIsLoadMoreMovies] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
@@ -58,6 +60,8 @@ function MovieContainer(){
                 setGenresList={setGenresList}
                 movieID={movieID} 
                 setMovieID={setMovieID}
+                movieArray={movieArray}
+                setMovieArray={setMovieArray}
             />
             
             <MoviePage 
@@ -87,7 +91,6 @@ function MovieContainer(){
                 setToggleHeaderInfo={setToggleHeaderInfo}
             />
 
-
             <Search 
                 setmovieCateogry={setmovieCateogry} 
                 apiKey={apiKey} 
@@ -106,6 +109,11 @@ function MovieContainer(){
                 setMovie={setMovie}
                 setTogglePage2={setTogglePage2}
                 setMovieID={setMovieID}
+            />
+
+            <YoutubeFreeMovie 
+                movie={movie}
+                setMovieArray={setMovieArray}
             />
 
         </div>

@@ -16,7 +16,6 @@
   z-index: 5;
 }
 
-
 .movieContainer {
   position: relative;
   height: 100%;
@@ -39,6 +38,19 @@
 .movie-details span{
   margin-left: 10px;
 }
+
+.youtubeFreeMovieLogo{
+  position: absolute;
+  z-index: 0;
+  top: 550px;
+  right: 35px;
+  width: fit-content;
+}
+
+.youtubeFreeMovieLogo img{
+  width: 150px;
+}
+
 
 .headerBannerContainer {
   width: 100vw;
@@ -126,7 +138,6 @@
     max-height: 120px;
   }
 }
-
 
 .languageContainer{
   position: relative;
@@ -247,7 +258,7 @@
 .rightArrow{
   height: 110px;
   position: absolute;
-  right: 5px;
+  right: 30px;
   z-index: 1;
   top: 40%;
   opacity: 0.65;

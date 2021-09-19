@@ -10,7 +10,6 @@ function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray
             setMovie(fullData)
             setGenresList(fullData.genres)
         })
-        //setToggleHeaderInfo(true)
         setTimeout(()=>{setTogglePage2(true)},150)
     }
 

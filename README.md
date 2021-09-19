@@ -6,6 +6,8 @@ vu - 9/18/2021
 - adjusted element layout of movie card text so it's easier to customize
 - adjusted movieContainer to display-flex column with align items centered
 - adjusted headerinfosmall's center-line to line up with headerinfobig's center-line
+- added button to replace trailer with full movie if available for free on youtube
+- added logic to only display button if free movie is available
 ** for some reason upcoming eventually stops populating movie cards, have not yet noticed a pattern
 
 

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react"
-import Video from "./video"
+import React, { useEffect} from "react"
+import Video from "./Video"
 
 
-function Trailer({movie, apiKey}){
-
-    const [movieArray, setMovieArray] = useState([])
+function Trailer({movie, apiKey, movieArray, setMovieArray}){
 
     useEffect(()=>{
         if(movie.id !== undefined){

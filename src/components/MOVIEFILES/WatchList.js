@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import WatchListCard from "./WatchListCard";
 import eyeballIcon from "../../assets/eyeballicon.png"
 function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2, setMovieID}){
+    
     const [toggleShowWatchList, setToggleShowWatchList] = useState(false)
 
     function handleDelete(id){

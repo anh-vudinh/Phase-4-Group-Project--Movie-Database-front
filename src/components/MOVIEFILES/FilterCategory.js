@@ -49,7 +49,6 @@ function FilterCategory({category, genresArray, getGenresArray, yearArray, handl
                 <button onClick={() => handleDropDownLI(category)}>{category}</button>
             </div>
 
-            {/* {isExtendedOptions === true && category === "Year Release"? <div className="extendedCategoryOptions">{yearOptionBtn}</div> : null} */}
             {isExtendedOptions === true && category === "Genres" && currentCategorySelected === "Genres"? <div className="extendedCategoryOptions">{genreOptionBtn}</div> : null}
             {isExtendedOptions === true && category === "Year Release" && currentCategorySelected === "Year Release"? <div className="extendedCategoryOptions">{yearOptionBtn}</div> : null}
         </li>

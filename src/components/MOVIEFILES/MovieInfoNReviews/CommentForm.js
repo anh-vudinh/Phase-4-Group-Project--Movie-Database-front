@@ -3,8 +3,8 @@ import React,{useState} from "react";
 function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
     const defaultName ="Default Name"
     const username = "DefaultUsername"
-    const [newRating, setNewRating] = useState("")
-    const [newContent, setNewContent] = useState("")
+    const [newReviewRating, setNewReviewRating] = useState("")
+    const [newReviewContent, setNewReviewContent] = useState("")
     function handleSubmit(e){
         const date = `${new Date().toISOString()}`
         e.preventDefault()
@@ -13,10 +13,10 @@ function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
             results:{
                 id:`${reviewsArray.length + 1}`,
                 author: defaultName,
-                content: newContent,
+                content: newReviewContent,
                 updated_at: date,
                 author_details : {
-                    rating: parseInt(newRating),
+                    rating: parseInt(newReviewRating),
                     avatar_path: null,
                     username:username
                 }
@@ -24,14 +24,14 @@ function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
         }
 
         setReviewsArray([...reviewsArray, newData.results])
-        setNewRating("")
-        setNewContent("")
+        setNewReviewRating("")
+        setNewReviewContent("")
     }
     return(
         <div className={togglePage2? "CommentForm" : "hidden"} >
             <form onSubmit={handleSubmit}>
-                <input className="ratingInput" type='number' max="10" name="rating" placeholder="Rating / ⭐" onChange={(e)=>setNewRating(e.target.value)} value={newRating}></input>
-                <textarea className="contentInput" type='text' name="content" placeholder="Tell Us Your Thoughts..." onChange={(e)=>setNewContent(e.target.value)} value={newContent}></textarea>
+                <input className="ratingInput" type='number' max="10" name="rating" placeholder="Rating / ⭐" onChange={(e)=>setNewReviewRating(e.target.value)} value={newReviewRating}></input>
+                <textarea className="contentInput" type='text' name="content" placeholder="Tell Us Your Thoughts..." onChange={(e)=>setNewReviewContent(e.target.value)} value={newReviewContent}></textarea>
                 <input className="reviewFormSubmitButton" type="submit"></input>
             </form>
         </div>

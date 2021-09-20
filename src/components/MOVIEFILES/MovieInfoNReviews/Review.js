@@ -45,7 +45,12 @@ function Review({movie, togglePage2, apiKey}){
         <div className ={togglePage2? "Review-Movie" : "hidden"}>
             {togglePage2? review : null}
         </div>
-        <CommentForm reviewsArray={reviewsArray} setReviewsArray={setReviewsArray} movie={movie} togglePage2={togglePage2}/>
+        <CommentForm 
+            reviewsArray={reviewsArray} 
+            setReviewsArray={setReviewsArray} 
+            movie={movie} 
+            togglePage2={togglePage2}
+        />
         </>
     )
 }

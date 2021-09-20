@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from "react";
-import youtubelogo from "../../assets/youtubelogo.png"
+import youtubelogo from "../../../assets/youtubelogo.png"
 
 function YoutubeFreeMovie({movie, setMovieArray}){
+    const {title, release_date} = movie
     const youtubeAPIURL = "https://www.googleapis.com/youtube/v3/search"
-    //const youtubeAPIKey = "AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc"
-    const youtubeAPIKey = "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc"
+    const youtubeAPIKey = "AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc"          //both api keys are valid, youtube has a 100 query limit per day so alternate if one is maxed for the day
+    //const youtubeAPIKey = "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc"
     const freeMoviesChannelID = "UCuVPpxrm2VAgpH3Ktln4HXg"
     const [toggleShowYTBtn, setToggleShowYTBtn] = useState(false)
     const [storedYTMovieLink, setStoredYTMovieLink] = useState([])
-    const {title} = movie
 
     useEffect(()=>{
         if(movie.id !== undefined){
-            fetch(`${youtubeAPIURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q=intitle:"${title.replaceAll(" ","%20").toLowerCase()}"&type=video&videoType=movie&key=${youtubeAPIKey}`)
+            fetch(`${youtubeAPIURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q="${release_date.slice(0,4)}"+intitle:"${title.replaceAll(" ","%20").toLowerCase()}"&type=video&videoType=movie&key=${youtubeAPIKey}`)
             .then(resp => resp.json())
             .then(dataArray => {
                 if(dataArray.pageInfo !== undefined){
@@ -25,7 +25,7 @@ function YoutubeFreeMovie({movie, setMovieArray}){
                 }
             })
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
 
     function handleOnClick(){
@@ -42,9 +42,6 @@ function YoutubeFreeMovie({movie, setMovieArray}){
         </div>
     )
 }
-
-
-
 
 export default YoutubeFreeMovie;
 

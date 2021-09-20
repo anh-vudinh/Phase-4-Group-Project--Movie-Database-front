@@ -1,10 +1,11 @@
 import React,{useState} from "react";
 import FilterCategory from './FilterCategory'
 
-function Search({setmovieCateogry, apiKey, setMoviesData, setSuffix, setSearchSuffix, setTogglePage2}){
+function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, setSearchSuffix, setTogglePage2}){
     
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
     const [genresArray, setGenresArray] = useState([])
+    const [searchInput, setSearchInput] = useState("")
     const [currentCategorySelected, setCurrentCategorySelected] = useState("")
 
     const genresURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&page=50`
@@ -17,7 +18,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setSuffix, setSearchSu
     }
 
     function handleSearchYearOrGenres(suffix){
-        setSuffix(suffix)
+        setYearOrGenreSuffix(suffix)
         fetch(`${searchUrl}${suffix}`)
         .then(res => res.json())
         .then(dataMovies =>  {
@@ -26,7 +27,6 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setSuffix, setSearchSu
         )
     }
     
-
     const categoryButtons = categoryButtonArray.map(category => 
         <FilterCategory 
         key={category} 
@@ -49,30 +49,25 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setSuffix, setSearchSu
             setGenresArray(genresArrayData.genres)
         })
     }
-    const [query, setQuery] = useState("")
 
     function handleSubmit(e){
     e.preventDefault()
-    if(query.length > 0){
+    if(searchInput.length > 0){
         setmovieCateogry("search/movie")
-        setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
+        setSearchSuffix(`&query=${searchInput.replaceAll(" ", "%20").toLowerCase()}`)
         setTimeout(()=> {setTogglePage2(false)}, 110)
-        setQuery("")
+        setSearchInput("")
         }
     }   
     
-
     return(
         <div className="SearchBar">
-            <ul className="searchBarCategories">{categoryButtons}</ul> 
-
+            <ul className="searchBarCategories">{categoryButtons}</ul>
             <form className="searchBarForm" onSubmit={(e) => handleSubmit(e)}>  
-            <input type="text" placeholder=" Movie Name" value={query} onChange={e => setQuery(e.target.value)} ></input>
+            <input type="text" placeholder=" Movie Name" value={searchInput} onChange={e => setSearchInput(e.target.value)} ></input>
             <button>Search</button>   
             </form>     
         </div>
-        
-
     )
 }
 

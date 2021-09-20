@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from "react"
-import MovieList from "./page1/MovieList"
-import Header from "./Header"
+import MovieList from "./MovieCards/MovieList"
+import Header from "./HeaderBanner/Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
-import MoviePage from "./page2/MoviePage"
-import YoutubeFreeMovie from "./YoutubeFreeMovie"
+import MoviePage2Container from "./MovieInfoNReviews/MoviePage2Conatiner"
+import YoutubeFreeMovie from "./HeaderBanner/YoutubeFreeMovie"
 
 function MovieContainer(){
     const [movie, setMovie]= useState([])
@@ -18,16 +18,19 @@ function MovieContainer(){
     const [togglePage2, setTogglePage2] =useState(false)
     const [toggleHeaderInfo, setToggleHeaderInfo] = useState(false)
     const [movieID, setMovieID] = useState("movie/popular")       ///belongs to Header.js, moved up for watchlist cards not populating header with full details
+    const [movieCateogry, setmovieCateogry] = useState("movie/popular")
+    const [yearOrGenreSuffix, setYearOrGenreSuffix]= useState("") // rename the state
+    const [searchSuffix, setSearchSuffix] = useState("")
+
     const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiUrl = "https://api.themoviedb.org/3/"
     const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
-    const [movieCateogry, setmovieCateogry] = useState("movie/popular")
-    const [suffix, setSuffix]= useState("") // rename the state
-    const [searchSuffix, setSearchSuffix] = useState("")
+
     const searchUrl = (movieCateogry === 'Genres' || movieCateogry === 'Year Release')  ?
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNumber}${suffix}` : 
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNumber}${yearOrGenreSuffix}` : 
     `${apiUrl}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
+    
     useEffect(() => {
         fetch(searchUrl)
         .then(res=> res.json())
@@ -36,18 +39,17 @@ function MovieContainer(){
             setMoviesData(moviesListData.results)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[isLoadMoreMovies, movieCateogry, suffix, searchSuffix])
+    },[isLoadMoreMovies, movieCateogry, yearOrGenreSuffix, searchSuffix])
 
     return (
         <div className="movieContainer">
-
             <Header 
                 apiKey={apiKey} 
                 apiUrl={apiUrl} 
                 totalPagesCount={totalPagesCount} 
                 moviesDataLength={moviesData.length} 
                 poster_prefixURL={poster_prefixURL}
-                setSuffix={setSuffix}
+                setYearOrGenreSuffix={setYearOrGenreSuffix}
                 setmovieCateogry={setmovieCateogry}
                 broken_path={broken_path}
                 setMovie={setMovie}
@@ -64,7 +66,7 @@ function MovieContainer(){
                 setMovieArray={setMovieArray}
             />
             
-            <MoviePage 
+            <MoviePage2Container
                 movie={movie}
                 togglePage2={togglePage2}
                 poster_prefixURL={poster_prefixURL}
@@ -96,7 +98,7 @@ function MovieContainer(){
                 apiKey={apiKey} 
                 setMoviesData={setMoviesData} 
                 setTotalPagesCount={setTotalPagesCount}
-                setSuffix={setSuffix}
+                setYearOrGenreSuffix={setYearOrGenreSuffix}
                 setSearchSuffix={setSearchSuffix}
                 setTogglePage2={setTogglePage2}
             />
@@ -115,7 +117,6 @@ function MovieContainer(){
                 movie={movie}
                 setMovieArray={setMovieArray}
             />
-
         </div>
     )
 }

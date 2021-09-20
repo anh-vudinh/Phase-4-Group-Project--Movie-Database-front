@@ -1,3 +1,6 @@
+vu - 9/19/2021
+- added release date to youtube api search to filter movies with duplicate names
+
 vu - 9/18/2021
 - (HEADER MOVIE DETAILS OVERLAY IS COMPLETE)
 - defined more classNames in Header div to better customize how their elements show/perform

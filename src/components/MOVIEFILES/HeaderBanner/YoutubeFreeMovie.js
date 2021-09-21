@@ -4,15 +4,18 @@ import youtubelogo from "../../../assets/youtubelogo.png"
 function YoutubeFreeMovie({movie, setMovieArray}){
     const {title, release_date} = movie
     const youtubeAPIURL = "https://www.googleapis.com/youtube/v3/search"
-    const youtubeAPIKey = "AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc"          //both api keys are valid, youtube has a 100 query limit per day so alternate if one is maxed for the day
-    //const youtubeAPIKey = "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc"
+    const youtubeAPIKey1 = "AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc"          //both api keys are valid, youtube has a 100 query limit per day so alternate if one is maxed for the day
+    const youtubeAPIKey2 = "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc"
+    const youtubeAPIKey3 = "AIzaSyCAZ5RwZDLww9K_SkPuOyLcTHhhchQO0-w"
     const freeMoviesChannelID = "UCuVPpxrm2VAgpH3Ktln4HXg"
+    const [currentAPIKey, setCurrentAPIKey] = useState(youtubeAPIKey3)
     const [toggleShowYTBtn, setToggleShowYTBtn] = useState(false)
     const [storedYTMovieLink, setStoredYTMovieLink] = useState([])
+    const [toggleRetryFetch, setToggleRetryFetch] = useState(false)
 
     useEffect(()=>{
         if(movie.id !== undefined){
-            fetch(`${youtubeAPIURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q="${release_date.slice(0,4)}"+intitle:"${title.replaceAll(" ","%20").toLowerCase()}"&type=video&videoType=movie&key=${youtubeAPIKey}`)
+            fetch(`${youtubeAPIURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q="${release_date.slice(0,4)}"+intitle:"${title.replaceAll(" ","%20").toLowerCase()}"&type=video&videoType=movie&key=${currentAPIKey}`)
             .then(resp => resp.json())
             .then(dataArray => {
                 if(dataArray.pageInfo !== undefined){
@@ -22,11 +25,16 @@ function YoutubeFreeMovie({movie, setMovieArray}){
                     }else{
                         setToggleShowYTBtn(false)
                     }
+                }else{
+                    // if(dataArray.error.code === 403){
+                    //     setCurrentAPIKey(youtubeAPIKey2)
+                    //     setToggleRetryFetch(!toggleRetryFetch)
+                    // }
                 }
             })
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[movie])
+    },[movie, toggleRetryFetch])
 
     function handleOnClick(){
         setMovieArray(

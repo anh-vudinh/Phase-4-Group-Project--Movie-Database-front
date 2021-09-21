@@ -90,7 +90,6 @@ function MovieContainer(){
                 setTogglePage2={setTogglePage2}
                 setGenresList={setGenresList}
                 apiKey={apiKey}
-                setToggleHeaderInfo={setToggleHeaderInfo}
             />
 
             <Search 

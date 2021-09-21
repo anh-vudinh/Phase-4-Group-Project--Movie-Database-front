@@ -3,7 +3,7 @@ import Cast from "./Cast"
 import Review from "./Review";
 import MovieExtraInfo from "./MovieExtraInfo"
 
-function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, apiKey}){
+function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, apiKey, setToggleShowMoreCast, toggleShowMoreCast}){
     
     return(
         <div className="MoviePage2Container">
@@ -15,6 +15,8 @@ function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, 
                 poster_prefixURL={poster_prefixURL} 
                 broken_path={broken_path} 
                 apiKey={apiKey}
+                toggleShowMoreCast={toggleShowMoreCast}
+                setToggleShowMoreCast={setToggleShowMoreCast}
             />
             <Review 
                 movie={movie} 

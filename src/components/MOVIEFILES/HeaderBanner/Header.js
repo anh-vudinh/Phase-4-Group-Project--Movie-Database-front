@@ -5,8 +5,8 @@ import languageBubble from "../../../assets/languageBubble.png"
 import wwwLinkIcon from "../../../assets/wwwLinkIcon.png"
 
 function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray}){
-    // const [companyLogosArray, setcompanyLogosArray] = useState([])
-    // const companyLogoPrefix = "https://www.themoviedb.org/t/p/h50_filter(negate,0,666)"
+    const [companyLogosArray, setcompanyLogosArray] = useState([])
+    const companyLogoPrefix = "https://www.themoviedb.org/t/p/h50_filter(negate,0,666)"
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const randomMoviePageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
     const randomOrSpecificMovieURL = typeof movieID === "string"? 
@@ -21,10 +21,10 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movieID])
     
-    // useEffect(()=>{
-    //     createCompanyLogoImages()
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // },[movie])
+    useEffect(()=>{
+        createCompanyLogoImages()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[movie])
 
     const genreLI = genresList.map(listItem => 
         <li key={listItem.name} 
@@ -39,17 +39,17 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
             {listItem.name} 
         </li>)
 
-    // const companyLogos = companyLogosArray.length > 0? companyLogosArray.map(company => <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/>) : null
+    const companyLogos = companyLogosArray.length > 0? companyLogosArray.map(company => <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/>) : null
     
-    // function createCompanyLogoImages(){
-    //     //prevent undefined because of first invoke happens before obj is assigned,
-    //     //filter out null because some donot have logo paths, map available logo paths
-    //     if(movie.production_companies !== undefined) {
-    //         if(movie.production_companies.length > 0){
-    //             setcompanyLogosArray((movie.production_companies.filter(company => company.logo_path !== null)))
-    //         }
-    //     }
-    // }
+    function createCompanyLogoImages(){
+        //prevent undefined because of first invoke happens before obj is assigned,
+        //filter out null because some donot have logo paths, map available logo paths
+        if(movie.production_companies !== undefined) {
+            if(movie.production_companies.length > 0){
+                setcompanyLogosArray((movie.production_companies.filter(company => company.logo_path !== null)))
+            }
+        }
+    }
 
 
     function handlePageLoad(randomMovieArray){
@@ -67,7 +67,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
             <div className="headerBannerContainer">
                 <img className={toggleHeaderInfo? "headerDisplayInfoSmall" : "headerDisplayInfoBig"} src= {informationIcon}alt="headerDisplayInfoIcon" onClick={()=> setToggleHeaderInfo(toggleHeaderInfo => !toggleHeaderInfo)}/>
                 <img className="headerBannerBackground" src={movie.backdrop_path === null ? broken_path : `https://www.themoviedb.org/t/p/w640_and_h360_multi_faces/${movie.backdrop_path}`} alt={movie.title}></img>
-                {/* <div className="headerBannerCompanyLogo">{companyLogos}</div> */}
+                <div className="headerBannerCompanyLogo">{companyLogos}</div>
             </div>
             
             <div className={toggleHeaderInfo? "headerImageContainer" : "hidden"}>

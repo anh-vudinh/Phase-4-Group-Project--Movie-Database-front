@@ -1,7 +1,7 @@
 import React from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 
-function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList, setToggleHeaderInfo}){
+function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList}){
     
     const {title, poster_path, release_date, id} = movie
 
@@ -25,7 +25,7 @@ function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray
             default:{ //checks to see if the movie.id to add matches any movie ids currently in the watchlist, if return false then add clicked movie
                 if(watchListArray.find(watchListItem => watchListItem.id === movie.id)  === undefined){
                     setWatchListArray([...watchListArray, movie])
-                }                
+                }
             }
         }
     }

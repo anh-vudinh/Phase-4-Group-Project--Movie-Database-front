@@ -211,8 +211,12 @@
 .cardContainer{
   position: relative;
   top: 0;
+  display: flex;
   width: 100%;
   transform: translateY(110px);
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .movieCardsContainer{
@@ -224,7 +228,7 @@
   height: 100%;
   justify-content: center;
   width:100%;
-  transform: translate(-15px,-80px);
+  transform: translate(-9px, 25px);
 }
 
 .movieCard{
@@ -260,6 +264,14 @@
 .cardReleaseDate {
 }
 
+.arrowsContainer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+}
+
 .leftArrow{
   height: 110px;
   transform: rotate(180deg) translateY(-100px);
@@ -274,7 +286,7 @@
   height: 110px;
   transform: translateY(100px);
   position: sticky;
-  right: 30px;
+  right: 20px;
   z-index: 1;
   top: 45%;
   opacity: 0.70;

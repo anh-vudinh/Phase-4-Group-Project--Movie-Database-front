@@ -37,12 +37,13 @@ function MovieContainer(){
         .then(moviesListData => {
             setTotalPagesCount(moviesListData.total_pages)
             //console.log(pageNumber)
-            if(Number.isInteger(moviesListData.page/2) === false){
+            if(Number.isInteger(moviesListData.page/2) === true){
+                setMoviesData([...moviesData, ...moviesListData.results])
+            }else{
+                console.log(Number.isInteger(Math.floor(moviesListData.page/2)/2) === true)
                 setMoviesData(moviesListData.results)
                 setPageNumber(pageNumber+1)
                 setIsLoadMoreMovies(!isLoadMoreMovies)
-            }else{
-                setMoviesData([...moviesData, ...moviesListData.results])
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps

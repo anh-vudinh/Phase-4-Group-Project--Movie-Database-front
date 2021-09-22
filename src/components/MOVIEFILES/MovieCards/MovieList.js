@@ -28,8 +28,10 @@ function MovieList({apiKey, moviesData, poster_prefixURL, totalPagesCount, setPa
     
     return (
         <div className={togglePage2? "hidden" : "cardContainer"}>
+            <div className="arrowsContainer">
             {togglePage2? null : <img className="leftArrow"src={arrowIcon} alt="left arrow" onClick={preivousPageLoad}/>}
             {togglePage2? null : <img className="rightArrow"src={arrowIcon} alt="right arrow" onClick={handleLoadMoreMovies}/>}
+            </div>
             <div className="movieCardsContainer">
                 {togglePage2? null : displayMovies}
             </div>

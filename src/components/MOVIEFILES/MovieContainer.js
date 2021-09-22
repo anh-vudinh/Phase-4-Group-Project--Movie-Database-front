@@ -36,10 +36,17 @@ function MovieContainer(){
         .then(res=> res.json())
         .then(moviesListData => {
             setTotalPagesCount(moviesListData.total_pages)
-            setMoviesData(moviesListData.results)
+            //console.log(pageNumber)
+            if(Number.isInteger(moviesListData.page/2) === false){
+                setMoviesData(moviesListData.results)
+                setPageNumber(pageNumber+1)
+                setIsLoadMoreMovies(!isLoadMoreMovies)
+            }else{
+                setMoviesData([...moviesData, ...moviesListData.results])
+            }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[isLoadMoreMovies, movieCateogry, yearOrGenreSuffix, searchSuffix])
+    },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix])
 
     return (
         <div className="movieContainer">
@@ -100,6 +107,9 @@ function MovieContainer(){
                 setYearOrGenreSuffix={setYearOrGenreSuffix}
                 setSearchSuffix={setSearchSuffix}
                 setTogglePage2={setTogglePage2}
+                setPageNumber={setPageNumber}
+                setIsLoadMoreMovies={setIsLoadMoreMovies}
+                isLoadMoreMovies={isLoadMoreMovies}
             />
 
             <WatchList 

@@ -1,3 +1,18 @@
+vu - 9/22/2021
+- added extra logic to moviecontainer to pull in 40 movies
+- adjusted next and previous buttons logic to cycle through the new 40 movies instead of 20
+- adjusted filter categories to work with the new useEffect of moviecontainer movieCategory as a dependency, this prevents the useEffect from firing off if you chose genres or year release without yet choosing a filter from their categories
+- added setIsLoadMoreMovies to the genres and year logics to trigger the moviecontainer useEffect
+- changed the key of MovieCards to be movie.id+index, there are some movies in the array that have duplicates (ex. Wonder 2017, in popular)
+- adjusted the trigger of the useeffect to no longer use 
+- added extra logic to youtubefreemovie to automatically cycle through api keys incase the default reaches it's quota limit
+- better nested moviecards so that I can change left and right arrows to use position sticky
+- raised the min-height of moviecardlist container to 1600px to account for the sticky arrows and 40 movies instead of 20
+- adjusted default position of left and right arrows
+- adjusted cardContainer to no longer be display:flex
+- additionally adjusted all of contents related to cardContainer because of the change to cardContainer
+
+
 vu - 9/19/2021
 - added release date to youtube api search to filter movies with duplicate names
 

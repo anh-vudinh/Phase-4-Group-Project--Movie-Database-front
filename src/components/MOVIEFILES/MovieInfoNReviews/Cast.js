@@ -27,7 +27,7 @@ function Cast({movie, togglePage2, poster_prefixURL, broken_path, apiKey}){
 
     return (
         <div className={togglePage2? "castContainer":"hidden"}>
-            {(togglePage2 && toggleShowMoreCast)? cast : cast.slice(0,11)}
+            {togglePage2? toggleShowMoreCast? cast : cast.slice(0,11) : null}
             {cast.length < 11? null :
                 <button onClick={()=> setToggleShowMoreCast(!toggleShowMoreCast)}>
                     {toggleShowMoreCast? <><p>Show</p> <p>Less...</p></> : <><p>Show</p> <p>More...</p></>}

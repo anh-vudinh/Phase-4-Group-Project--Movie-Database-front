@@ -57,9 +57,11 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, 
     e.preventDefault()
     if(searchInput.length > 0){
         setmovieCateogry("search/movie")
+        setPageNumber(1)
         setSearchSuffix(`&query=${searchInput.replaceAll(" ", "%20").toLowerCase()}`)
         setTimeout(()=> {setTogglePage2(false)}, 110)
         setSearchInput("")
+        setIsLoadMoreMovies(!isLoadMoreMovies)
         }
     }   
     

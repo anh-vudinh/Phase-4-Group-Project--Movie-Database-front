@@ -3,7 +3,6 @@ import FilterCategory from './FilterCategory'
 
 function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, setSuffix, setSearchSuffix, setTogglePage2}){
     
-
     const genresURL = `https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&page=50`
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release"]
     const [genresArray, setGenresArray] = useState([])
@@ -23,7 +22,6 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
             setMoviesData(dataMovies.results)
             }
         )
-
     }
     
 

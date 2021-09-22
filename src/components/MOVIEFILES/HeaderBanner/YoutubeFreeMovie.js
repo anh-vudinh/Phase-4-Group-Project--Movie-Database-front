@@ -4,11 +4,12 @@ import youtubelogo from "../../../assets/youtubelogo.png"
 function YoutubeFreeMovie({movie, setMovieArray}){
     const {title, release_date} = movie
     const youtubeAPIURL = "https://www.googleapis.com/youtube/v3/search"
-    const youtubeAPIKey1 = "AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc"          //both api keys are valid, youtube has a 100 query limit per day so alternate if one is maxed for the day
-    const youtubeAPIKey2 = "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc"
-    const youtubeAPIKey3 = "AIzaSyCAZ5RwZDLww9K_SkPuOyLcTHhhchQO0-w"
+    //const youtubeAPIKey1 = "AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc"          //all api keys are valid, youtube has a 100 query limit per day so alternate if one is maxed for the day
+    // const youtubeAPIKey2 = "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc"
+    // const youtubeAPIKey3 = "AIzaSyCAZ5RwZDLww9K_SkPuOyLcTHhhchQO0-w"
+    const youtubeAPIKeysArray = ["AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc", "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc", "AIzaSyCAZ5RwZDLww9K_SkPuOyLcTHhhchQO0-w"]
     const freeMoviesChannelID = "UCuVPpxrm2VAgpH3Ktln4HXg"
-    const [currentAPIKey, setCurrentAPIKey] = useState(youtubeAPIKey3)
+    const [currentAPIKey, setCurrentAPIKey] = useState(youtubeAPIKeysArray[0])
     const [toggleShowYTBtn, setToggleShowYTBtn] = useState(false)
     const [storedYTMovieLink, setStoredYTMovieLink] = useState([])
     const [toggleRetryFetch, setToggleRetryFetch] = useState(false)
@@ -25,11 +26,12 @@ function YoutubeFreeMovie({movie, setMovieArray}){
                     }else{
                         setToggleShowYTBtn(false)
                     }
-                }else{
-                    // if(dataArray.error.code === 403){
-                    //     setCurrentAPIKey(youtubeAPIKey2)
-                    //     setToggleRetryFetch(!toggleRetryFetch)
-                    // }
+                    return
+                }else{ //if first key is maxed out cycle to next available key
+                    if(dataArray.error.code === 403){
+                        setCurrentAPIKey(youtubeAPIKeysArray.indexOf(currentAPIKey)+1 < youtubeAPIKeysArray.length? youtubeAPIKeysArray[youtubeAPIKeysArray.indexOf(currentAPIKey)+1] : youtubeAPIKeysArray[0])
+                        setToggleRetryFetch(!toggleRetryFetch)
+                    }
                 }
             })
         }

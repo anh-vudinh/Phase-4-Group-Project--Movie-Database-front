@@ -11,7 +11,12 @@ vu - 9/22/2021
 - adjusted default position of left and right arrows
 - adjusted cardContainer to no longer be display:flex
 - additionally adjusted all of contents related to cardContainer because of the change to cardContainer
-
+- added a limiter on YT API key retry, otherwise it would keep looping if all keys quotas were maxed
+- added a rough draft of movieExtraInfo on page2
+- pushed castContainer down to make room for movieExtraInfo
+- added visual feedback for when a search fails to return results
+- made a toggle which hides the movieCardsContainer if no results are returned. This is to prevent user from see a long empty space and clicking next and previous buttons. which will cause a bug because there's no coding to iterate through a 0 length array
+- added stock images for blankAvatar and blankPoster
 
 vu - 9/19/2021
 - added release date to youtube api search to filter movies with duplicate names

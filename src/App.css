@@ -126,6 +126,8 @@
   margin: 15px;
   position: absolute;
   transform: translate(-130%,0%);
+  width: 220px;
+  height: 320px;
 }
 
 .headerMovieOverview{
@@ -206,6 +208,27 @@
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.popOutDetails{
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  z-index: 5;
+  background-color: red;
+}
+
+.noResults{
+  position: absolute;
+  display: flex;
+  top: 150%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.noResults h1{
+  color: red;
+  text-align: center;
 }
 
 .cardContainer{
@@ -588,6 +611,59 @@
   height: 100%;
   top: 100px;
 }
+
+.extraMovieInfoContainer{
+  width: 100%;
+  height: 250px;
+  background-color: rgb(46, 44, 150);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+.financesContainer{
+  height: fit-content;
+  border-radius: 25px;
+}
+
+.financesItems{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.extraInfoDetailContainer{
+  background-color: skyblue;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+}
+
+.extraInfoDetailContainer p{
+  padding: 0px 15px 0px 15px;
+  display: inline-flex;
+}
+
+.profit{
+  color: greenyellow;
+}
+.loss{
+  color: red;
+}
+
+.flagContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.flagImage{
+  height: 20px;
+  margin-left: 8px;
+}
+
 
 .Review-Movie{
   position: relative;

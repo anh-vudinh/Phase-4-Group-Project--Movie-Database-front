@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import blankAvatar from "../../../assets/blankAvatar.jpg"
-import CommentForm from "./CommentForm";
-function Review({movie, togglePage2, apiKey}){
+import CommentForm from "./CommentForm"
+
+function Review({movie, togglePage2, apiKey, blankAvatar}){
 
     const [reviewsArray, setReviewsArray] = useState([])
     

@@ -30,9 +30,28 @@ function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray
         }
     }
 
+    function handleEnterOrLeave(event){
+        // switch(event.type){
+        //     case "mouseenter":
+        //         console.log(event)
+        //         const cardContainer = document.querySelector(".cardContainer")
+        //         const hoverDetails = document.createElement("DIV")
+        //         hoverDetails.className = "popOutDetails"
+        //         hoverDetails.style.top= `${event.pageY-680}px`
+        //         hoverDetails.style.left= `${event.pageX}px`
+        //         cardContainer.append(hoverDetails)
+        //         break;
+        //     case "mouseleave":
+        //         hoverDetails.remove()
+        //         break;
+        // }
+        
+    }
+
+
     return (  
         <div className="movieCard">
-            <img className="cardImage" onClick={() => handleCardImageClick()} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
+            <img className="cardImage" onClick={() => handleCardImageClick()} onMouseEnter={(e)=>handleEnterOrLeave(e)} onMouseLeave={(e)=>handleEnterOrLeave(e)} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
             <img src={eyeballicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWatchListAddClick} />
             <div className="cardTextContainer">
                 {title === "" ? "No Title" : 

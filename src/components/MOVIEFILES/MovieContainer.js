@@ -3,6 +3,7 @@ import MovieList from "./MovieCards/MovieList"
 import Header from "./HeaderBanner/Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
+import BlankPoster from "../../assets/blankposter.jpg"
 import MoviePage2Container from "./MovieInfoNReviews/MoviePage2Conatiner"
 import YoutubeFreeMovie from "./HeaderBanner/YoutubeFreeMovie"
 
@@ -21,8 +22,9 @@ function MovieContainer(){
     const [movieCateogry, setmovieCateogry] = useState("movie/popular")
     const [yearOrGenreSuffix, setYearOrGenreSuffix]= useState("") // rename the state
     const [searchSuffix, setSearchSuffix] = useState("")
+    const [noResultsFound, setNoResultsFound] = useState(false)
 
-    const broken_path = `https://www.movie-trailer.co.uk/static/images/site/blank-poster.jpg`
+    const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiUrl = "https://api.themoviedb.org/3/"
     const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
@@ -35,15 +37,20 @@ function MovieContainer(){
         fetch(searchUrl)
         .then(res=> res.json())
         .then(moviesListData => {
-            setTotalPagesCount(moviesListData.total_pages)
-            //console.log(pageNumber)
-            if(Number.isInteger(moviesListData.page/2) === true){
-                setMoviesData([...moviesData, ...moviesListData.results])
+            if(moviesListData.total_pages === 0){
+                setNoResultsFound(true)
             }else{
-                console.log(Number.isInteger(Math.floor(moviesListData.page/2)/2) === true)
-                setMoviesData(moviesListData.results)
-                setPageNumber(pageNumber+1)
-                setIsLoadMoreMovies(!isLoadMoreMovies)
+                setNoResultsFound(false)
+                setTotalPagesCount(moviesListData.total_pages)
+                //console.log(pageNumber)
+                if(Number.isInteger(moviesListData.page/2) === true){
+                    setMoviesData([...moviesData, ...moviesListData.results])
+                }else{
+                    //console.log(Number.isInteger(Math.floor(moviesListData.page/2)/2) === true)
+                    setMoviesData(moviesListData.results)
+                    setPageNumber(pageNumber+1)
+                    setIsLoadMoreMovies(!isLoadMoreMovies)
+                }
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -98,6 +105,8 @@ function MovieContainer(){
                 setTogglePage2={setTogglePage2}
                 setGenresList={setGenresList}
                 apiKey={apiKey}
+                noResultsFound={noResultsFound}
+                searchSuffix={searchSuffix}
             />
 
             <Search 

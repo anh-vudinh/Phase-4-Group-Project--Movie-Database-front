@@ -2,12 +2,16 @@ import React from 'react'
 import Cast from "./Cast"
 import Review from "./Review";
 import MovieExtraInfo from "./MovieExtraInfo"
+import BlankAvatar from "../../../assets/blankAvatar.png"
 
 function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, apiKey, setToggleShowMoreCast, toggleShowMoreCast}){
     
     return(
         <div className="MoviePage2Container">
-            <MovieExtraInfo movie={movie}/>
+            <MovieExtraInfo 
+                movie={movie}
+                togglePage2={togglePage2}
+            />
 
             <Cast 
                 movie={movie} 
@@ -17,11 +21,13 @@ function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, 
                 apiKey={apiKey}
                 toggleShowMoreCast={toggleShowMoreCast}
                 setToggleShowMoreCast={setToggleShowMoreCast}
+                blankAvatar={BlankAvatar}
             />
             <Review 
                 movie={movie} 
                 togglePage2={togglePage2} 
                 apiKey={apiKey}
+                blankAvatar={BlankAvatar}
             />
         </div>
     )

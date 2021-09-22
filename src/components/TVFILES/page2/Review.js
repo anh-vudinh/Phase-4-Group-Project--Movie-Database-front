@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import blankAvatar from "../../../assets/blankAvatar.jpg"
+import blankAvatar from "../../../assets/blankAvatar.png"
 import CommentForm from "./CommentForm";
 function Review({movie, togglePage2}){
 const [reviewsArray, setReviewsArray] = useState([])

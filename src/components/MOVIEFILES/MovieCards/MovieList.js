@@ -22,7 +22,7 @@ function MovieList({apiKey, moviesData, poster_prefixURL, totalPagesCount, setPa
     }
     
     function preivousPageLoad(){
-        setPageNumber(pageNumber => pageNumber > 2 ? pageNumber - 3 : 1)
+        setPageNumber(pageNumber => pageNumber > 2 ? pageNumber - 3 : totalPagesCount-1)
         setIsLoadMoreMovies(!isLoadMoreMovies)
     }
     

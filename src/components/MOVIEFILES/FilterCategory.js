@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 function FilterCategory({category, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry, setTogglePage2, currentCategorySelected, setCurrentCategorySelected, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies, isExtendedOptions, setExtendedOptions}){
 

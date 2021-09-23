@@ -8,7 +8,7 @@ function App() {
 
   // const [page, setPage] = useState("/")
   return (
-    <div> 
+    <div className="webpageContainer"> 
       <NavBar onChangePage={"/"}/>
         <Switch>
           <Route exact path="/">

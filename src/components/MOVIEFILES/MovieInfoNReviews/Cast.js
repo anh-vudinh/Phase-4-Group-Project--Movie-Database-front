@@ -24,47 +24,40 @@ function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar}){
         </div>
     )
 
-    const ele = document.getElementsByClassName('castContainer')
-    ele.scrollTop = 100;
-    ele.scrollLeft = 150;
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-    let pos = { top: 0, left: 0, x: 0, y: 0 };
-
-    const mouseDownHandler = function(e) {
-        console.log(e)
-        pos = {
-            // The current scroll 
-            left: ele.scrollLeft,
-            // top: ele.scrollTop,
-            // Get the current mouse position
-            x: e.clientX,
-            y: e.clientY,
-        };
-
-        ele.style.cursor = 'grabbing';
-        ele.style.userSelect = 'none';
-
-        document.addEventListener('mousemove', mouseMoveHandler);
-        document.addEventListener('mouseup', mouseUpHandler);
+    function handleMouseDown(){
+        const slider = document.querySelector('.castContainer');
+        slider.addEventListener('mousedown', (e)=> {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        })
+    
+        slider.addEventListener('mouseleave', ()=> {
+            isDown = false;
+            slider.classList.remove('active');
+        })
+    
+        slider.addEventListener('mouseup', ()=> {
+            isDown = false;
+            slider.classList.remove('active');
+        })
+    
+        slider.addEventListener('mousemove', (e)=> {
+            if(!isDown) return; //stop function from running
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX)*2;
+            slider.scrollLeft = scrollLeft - walk;
+        })
     }
 
-    const mouseMoveHandler = function(e) {
-        // How far the mouse has been moved
-        const dx = e.clientX - pos.x;
-        const dy = e.clientY - pos.y;
-    
-        // Scroll the element
-        ele.scrollTop = pos.top - dy;
-        ele.scrollLeft = pos.left - dx;
-    };
-
-    const mouseUpHandler = function() {
-        ele.style.cursor = 'grab';
-        ele.style.removeProperty('user-select');
-    };
-
     return (
-        <div className={togglePage2? "castContainer":"hidden"} onMouseDown={()=> mouseDownHandler}>
+        <div className={togglePage2? "castContainer":"hidden"} onMouseDown={(e)=> handleMouseDown(e)}>
             {togglePage2? toggleShowMoreCast? cast : cast.slice(0,11) : null}
             {cast.length < 11? null :
                 <button onClick={()=> setToggleShowMoreCast(!toggleShowMoreCast)}>

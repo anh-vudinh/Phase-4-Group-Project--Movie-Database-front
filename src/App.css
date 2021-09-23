@@ -573,12 +573,18 @@
   justify-content: space-between;
 }
 
+.castContainer.active{ 
+  background: rgba(255,255,255,0.1);
+  cursor:grabbing;
+  cursor: -webkit-grabbing;
+}
+
 .castContainer::-webkit-scrollbar {
-  height: 5px;
+  height: 6px;
 }
 
 .castContainer::-webkit-scrollbar-track {
-  height: 25px;
+  height: 6px;
   background-color: rgb(10, 10, 10);
 }
 
@@ -593,7 +599,6 @@
 }
 
 .castCardContainer{
-  pointer-events: none;
   margin: 0px 20px 0px 20px;
   display: flex;
   flex-direction: column;
@@ -603,13 +608,11 @@
 }
 
 .castImage{
-  pointer-events: none;
   height: 165px;
   width: 110px;
 }
 
 .castName{
-  pointer-events: none;
   white-space: nowrap;
 }
 

@@ -413,7 +413,7 @@
   list-style: none;
   display: inline-flex;
   flex-direction: row;
-  transform: translateY(20px);
+  transform: translateY(15px);
   min-height: 100px;
   width: 400px;
   flex-wrap: wrap;

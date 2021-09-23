@@ -5,6 +5,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, 
     
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
     const [genresArray, setGenresArray] = useState([])
+    const [isExtendedOptions, setExtendedOptions] = useState(false)
     const [searchInput, setSearchInput] = useState("")
     const [currentCategorySelected, setCurrentCategorySelected] = useState("")
 
@@ -42,6 +43,8 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, 
         setPageNumber={setPageNumber}
         setIsLoadMoreMovies={setIsLoadMoreMovies}
         isLoadMoreMovies={isLoadMoreMovies}
+        isExtendedOptions={isExtendedOptions}
+        setExtendedOptions={setExtendedOptions}
         />
     )
     
@@ -66,7 +69,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, 
     }   
     
     return(
-        <div className="SearchBar">
+        <div className="SearchBar" onMouseLeave={()=>{setExtendedOptions(false)}}>
             <ul className="searchBarCategories">{categoryButtons}</ul>
             <form className="searchBarForm" onSubmit={(e) => handleSubmit(e)}>  
             <input type="text" placeholder=" Movie Name" value={searchInput} onChange={e => setSearchInput(e.target.value)} ></input>

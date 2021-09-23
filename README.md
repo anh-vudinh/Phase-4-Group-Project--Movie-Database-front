@@ -17,6 +17,9 @@ vu - 9/22/2021
 - added visual feedback for when a search fails to return results
 - made a toggle which hides the movieCardsContainer if no results are returned. This is to prevent user from see a long empty space and clicking next and previous buttons. which will cause a bug because there's no coding to iterate through a 0 length array
 - added stock images for blankAvatar and blankPoster
+- clicking Genres or Year Release no longer triggers togglePage2 to false until you choose a child option.
+- extended delay of togglepage2 changing to false. Now that we load 40 movies, it needs some extra time or user will see the first array clearing and being replaced
+- changed logic to close extendedoptions when mouse leaves searchbar rather than when a genre/year extendedoption is selected
 
 vu - 9/19/2021
 - added release date to youtube api search to filter movies with duplicate names

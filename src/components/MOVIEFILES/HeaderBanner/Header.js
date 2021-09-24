@@ -4,7 +4,7 @@ import informationIcon from "../../../assets/informationIcon.png"
 import languageBubble from "../../../assets/languageBubble.png"
 import wwwLinkIcon from "../../../assets/wwwLinkIcon.png"
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray}){
+function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray, setIsLoadMoreMovies, isLoadMoreMovies, setPageNumber}){
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const randomMoviePageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
     const randomOrSpecificMovieURL = typeof movieID === "string"? 
@@ -25,6 +25,8 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
             onClick={()=> {
                 setYearOrGenreSuffix(`&with_genres=${listItem.id}`)
                 setmovieCateogry("Genres")
+                setPageNumber(1)
+                setIsLoadMoreMovies(!isLoadMoreMovies)
                 setTimeout(()=> {setTogglePage2(false)}, 120)
                 }
             }

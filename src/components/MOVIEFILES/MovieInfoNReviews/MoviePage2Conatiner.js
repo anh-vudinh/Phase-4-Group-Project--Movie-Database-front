@@ -3,6 +3,7 @@ import Cast from "./Cast"
 import Review from "./Review";
 import MovieExtraInfo from "./MovieExtraInfo"
 import BlankAvatar from "../../../assets/blankAvatar.png"
+import BlankAvatarF from "../../../assets/blankAvatarF.png"
 
 function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, apiKey, setToggleShowMoreCast, toggleShowMoreCast}){
     
@@ -22,6 +23,7 @@ function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, 
                 toggleShowMoreCast={toggleShowMoreCast}
                 setToggleShowMoreCast={setToggleShowMoreCast}
                 blankAvatar={BlankAvatar}
+                blankAvatarF={BlankAvatarF}
             />
             <Review 
                 movie={movie} 

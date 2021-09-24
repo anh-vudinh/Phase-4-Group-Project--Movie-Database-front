@@ -1,3 +1,14 @@
+vu- 9/23/2021
+- css overhaul
+- forgot to update genresLI buttons when I did the overhaul for loading more movies, fixed now
+- page 2 logos an cast are draggable to scroll
+- updated stock images and icons
+- cast blanks now differentiate between male and female avatars
+- enabled/disabled MoviePage2Container and MovieList components based on if togglePage2 is true or false. There is a performance benefit for doing so if the user performs tasks on the respective page. However when loading from page 1 to page 2 or vice versa you can tell there's a slight load time because some parts of the components such as empty divs arent preloaded and hidden.
+- logos now display a company text if the company did not have a logo in the DB
+- watchlist eyeballs now toggle between watched and unwatched, but not fully function with watchlist because there is no database and users created yet to store the information
+- prepared a rough draft outline of page 2 reviews/comments section
+
 vu - 9/22/2021
 - added extra logic to moviecontainer to pull in 40 movies
 - adjusted next and previous buttons logic to cycle through the new 40 movies instead of 20

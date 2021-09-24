@@ -1,9 +1,11 @@
-import React from "react";
+import React,{useState} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
+import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
 function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList}){
     
     const {title, poster_path, release_date, id} = movie
+    const [isWatched, setIsWatched] = useState(false)
 
     function handleCardImageClick(){
         fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
@@ -20,11 +22,13 @@ function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray
         switch(watchListArray.length){
             case 0:{
                 setWatchListArray([...watchListArray, movie])
+                setIsWatched(true)
                 break;
             }
             default:{ //checks to see if the movie.id to add matches any movie ids currently in the watchlist, if return false then add clicked movie
                 if(watchListArray.find(watchListItem => watchListItem.id === movie.id)  === undefined){
                     setWatchListArray([...watchListArray, movie])
+                    setIsWatched(true)
                 }
             }
         }
@@ -52,7 +56,7 @@ function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray
     return (  
         <div className="movieCard">
             <img className="cardImage" onClick={() => handleCardImageClick()} onMouseEnter={(e)=>handleEnterOrLeave(e)} onMouseLeave={(e)=>handleEnterOrLeave(e)} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
-            <img src={eyeballicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWatchListAddClick} />
+            <img src={isWatched? eyeballicon : eyeballClosedicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWatchListAddClick} />
             <div className="cardTextContainer">
                 {title === "" ? "No Title" : 
                     <p className="cardText">{`${title}`}

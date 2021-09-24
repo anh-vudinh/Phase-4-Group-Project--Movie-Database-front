@@ -79,8 +79,12 @@ function MovieContainer(){
                 setMovieID={setMovieID}
                 movieArray={movieArray}
                 setMovieArray={setMovieArray}
+                setIsLoadMoreMovies={setIsLoadMoreMovies}
+                isLoadMoreMovies={isLoadMoreMovies} 
+                setPageNumber={setPageNumber}
             />
-            
+
+        {togglePage2? 
             <MoviePage2Container
                 movie={movie}
                 togglePage2={togglePage2}
@@ -88,7 +92,9 @@ function MovieContainer(){
                 broken_path={broken_path}
                 apiKey={apiKey}
             />
-            
+        : null}
+
+        {togglePage2? null :
             <MovieList 
                 moviesData={moviesData} 
                 poster_prefixURL={poster_prefixURL} 
@@ -108,6 +114,7 @@ function MovieContainer(){
                 noResultsFound={noResultsFound}
                 searchSuffix={searchSuffix}
             />
+        }
 
             <Search 
                 setmovieCateogry={setmovieCateogry} 

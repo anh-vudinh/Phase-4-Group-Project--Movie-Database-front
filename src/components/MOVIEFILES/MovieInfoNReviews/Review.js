@@ -4,7 +4,8 @@ import CommentForm from "./CommentForm"
 function Review({movie, togglePage2, apiKey, blankAvatar}){
 
     const [reviewsArray, setReviewsArray] = useState([])
-    
+    const maxReviewContentLength = 500
+
     useEffect(()=>{
         if(movie.id !== undefined){
             fetch(`https://api.themoviedb.org/3/movie/${movie.id}/reviews?api_key=${apiKey}`)
@@ -34,7 +35,10 @@ function Review({movie, togglePage2, apiKey, blankAvatar}){
                 </div>
 
                 <div className="ReviewContentContainer">
-                    <p className="ReviewContent">{reviews.content}</p>
+                    <p className="ReviewContent">{reviews.content.substr(0,maxReviewContentLength)} {reviews.content.length < maxReviewContentLength? "" : "....."}</p>
+                </div>
+                <div className="readMoreContainer">
+                    <button className="readMoreBtn">Read More</button>
                 </div>
             </div>
         </div>
@@ -42,15 +46,20 @@ function Review({movie, togglePage2, apiKey, blankAvatar}){
 
     return(
         <>
-        <div className ={togglePage2? "Review-Movie" : "hidden"}>
-            {togglePage2? review : null}
-        </div>
-        <CommentForm 
-            reviewsArray={reviewsArray} 
-            setReviewsArray={setReviewsArray} 
-            movie={movie} 
-            togglePage2={togglePage2}
-        />
+            <div className={togglePage2? "reviewSectionA" : "hidden"}>
+                <div className="reviewColumnA">
+                    
+                </div>
+                <div className ="Review-Movie">
+                    {togglePage2? review : null}
+                </div>
+            </div>
+            <CommentForm 
+                reviewsArray={reviewsArray} 
+                setReviewsArray={setReviewsArray} 
+                movie={movie} 
+                togglePage2={togglePage2}
+            />
         </>
     )
 }

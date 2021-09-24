@@ -13,14 +13,17 @@ function MovieExtraInfo({movie, togglePage2}){
         </p>
     )
 
-    const companyLogos = companyLogosArray.length > 0? companyLogosArray.map(company => <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/>) : null
-    
+    const companyLogos = companyLogosArray.length > 0? companyLogosArray.map((company, index) => company.logo_path !== null? 
+        <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/> 
+        : <p className="logoPFiller" key={`logoFiller${index}`}>{company.name}</p>)
+        : null
+
     function createCompanyLogoImages(){
         //prevent undefined because of first invoke happens before obj is assigned,
         //filter out null because some donot have logo paths, map available logo paths
         if(movie.production_companies !== undefined) {
             if(movie.production_companies.length > 0){
-                setcompanyLogosArray((movie.production_companies.filter(company => company.logo_path !== null)))
+                setcompanyLogosArray([...movie.production_companies.filter(company => company.logo_path !== null),...movie.production_companies.filter(company => company.logo_path === null)])
             }
         }
     }
@@ -29,6 +32,42 @@ function MovieExtraInfo({movie, togglePage2}){
         createCompanyLogoImages()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
+
+    function handleMouseDown(){
+        const slider = document.querySelector('.columnD');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e)=> {
+            e.preventDefault();
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        })
+    
+        slider.addEventListener('mouseleave', ()=> {
+            isDown = false;
+            slider.classList.remove('active');
+        })
+    
+        slider.addEventListener('mouseup', ()=> {
+            isDown = false;
+            slider.classList.remove('active');
+        })
+    
+        slider.addEventListener('mousemove', (e)=> {
+            if(!isDown) return; //stop function from running
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX)*2;
+            slider.scrollLeft = scrollLeft - walk;
+        })
+    }
+
+
+
 
     return(
         <div className={togglePage2? "extraMovieInfoContainer" : "hidden"}>
@@ -55,7 +94,7 @@ function MovieExtraInfo({movie, togglePage2}){
                             <div className="extraInfoDetailContainer"><p>{Math.round(popularity)}</p></div>                
                     </div>
                 </div>
-                <div className="columnD">
+                <div className="columnD" onMouseDown={(e)=> handleMouseDown(e)}>
                     <div className="companyLogo">{companyLogos}</div>               
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 
-function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar}){
+function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar, blankAvatarF}){
 
     const [movieCastArray, setMovieCastArray] = useState([])
     const [toggleShowMoreCast, setToggleShowMoreCast] = useState(false)
@@ -16,21 +16,24 @@ function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar}){
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
-
-    const cast = movieCastArray === undefined? null : movieCastArray.map((casts,index) =>
+    
+    const cast = movieCastArray === undefined? null : movieCastArray.map((casts, index) =>
         <div className="castCardContainer" key={index}>
-            <img className="castImage" src={casts.profile_path === null ? blankAvatar :`${poster_prefixURL}${casts.profile_path}`} alt={casts.id}/>
+            <img className="castImage" alt={casts.id} src={casts.profile_path === null ? 
+                casts.gender === 1? blankAvatarF : blankAvatar 
+                :`${poster_prefixURL}${casts.profile_path}`}/>
             <div className="castName"><p>{casts.name}</p></div>
         </div>
     )
 
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
     function handleMouseDown(){
         const slider = document.querySelector('.castContainer');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
         slider.addEventListener('mousedown', (e)=> {
+            e.preventDefault();
             isDown = true;
             slider.classList.add('active');
             startX = e.pageX - slider.offsetLeft;

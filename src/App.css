@@ -691,9 +691,6 @@
 
 .castName{
   white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 }
 
 .castContainer button{
@@ -707,13 +704,17 @@
   flex-direction: column;
   justify-content: center;
   flex-wrap: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .castContainer p{
-  pointer-events: none;
   margin: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
-
 
 .MoviePage2Container{
   position: relative;

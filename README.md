@@ -1,3 +1,11 @@
+vu- 9/24/2021
+- cleaned up code
+- removed drag to scroll from main container
+- made certain elements unselectable through mouse drag
+- added loading gif to wait for all 40 movies to load
+- added variable to manually disable the YT API key cycler to save quotas when developing/rerendering webpage
+- added filler if there are currently no reviews for the selected movie
+
 vu- 9/23/2021
 - css overhaul
 - forgot to update genresLI buttons when I did the overhaul for loading more movies, fixed now

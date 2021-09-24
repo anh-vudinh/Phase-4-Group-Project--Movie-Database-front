@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 
-function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
+function CommentForm({reviewsArray, setReviewsArray, movie}){
     const defaultName ="Default Name"
     const username = "DefaultUsername"
     const [newReviewRating, setNewReviewRating] = useState("")
@@ -28,7 +28,7 @@ function CommentForm({reviewsArray, setReviewsArray, movie, togglePage2}){
         setNewReviewContent("")
     }
     return(
-        <div className={togglePage2? "CommentForm" : "hidden"} >
+        <div className="CommentForm">
             <form onSubmit={handleSubmit}>
                 <input className="ratingInput" type='number' max="10" name="rating" placeholder="Rating / ⭐" onChange={(e)=>setNewReviewRating(e.target.value)} value={newReviewRating}></input>
                 <textarea className="contentInput" type='text' name="content" placeholder="Tell Us Your Thoughts..." onChange={(e)=>setNewReviewContent(e.target.value)} value={newReviewContent}></textarea>

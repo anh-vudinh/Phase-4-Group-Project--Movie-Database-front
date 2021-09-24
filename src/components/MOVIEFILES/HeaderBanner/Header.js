@@ -4,11 +4,11 @@ import informationIcon from "../../../assets/informationIcon.png"
 import languageBubble from "../../../assets/languageBubble.png"
 import wwwLinkIcon from "../../../assets/wwwLinkIcon.png"
 
-function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray, setIsLoadMoreMovies, isLoadMoreMovies, setPageNumber}){
+function Header({apiKey, apiPrefixURL, totalPagesCount, moviesDataLength, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray, setIsLoadMoreMovies, isLoadMoreMovies, setPageNumber}){
     const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
     const randomMoviePageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
     const randomOrSpecificMovieURL = typeof movieID === "string"? 
-        `${apiUrl}${movieID}?api_key=${apiKey}${randomMoviePageNumber}`:`${apiUrl}movie/${movieID}?api_key=${apiKey}`
+        `${apiPrefixURL}${movieID}?api_key=${apiKey}${randomMoviePageNumber}`:`${apiPrefixURL}movie/${movieID}?api_key=${apiKey}`
 
     useEffect(()=>{
         fetch(randomOrSpecificMovieURL)
@@ -48,12 +48,12 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
         <>
             <div className="headerBannerContainer">
                 <img className={toggleHeaderInfo? "headerDisplayInfoSmall" : "headerDisplayInfoBig"} src= {informationIcon}alt="headerDisplayInfoIcon" onClick={()=> setToggleHeaderInfo(toggleHeaderInfo => !toggleHeaderInfo)}/>
-                <img className="headerBannerBackground" src={movie.backdrop_path === null ? broken_path : `https://www.themoviedb.org/t/p/w640_and_h360_multi_faces/${movie.backdrop_path}`} alt={movie.title}></img>
+                <img className="headerBannerBackground" src={(movie.backdrop_path === null || movie.backdrop_path === undefined) ? broken_path : `https://www.themoviedb.org/t/p/w640_and_h360_multi_faces/${movie.backdrop_path}`} alt={movie.title}></img>
             </div>
             
             <div className={toggleHeaderInfo? "headerImageContainer" : "hidden"}>
                 <div className="movie-details">
-                <img className="headerImage" src={movie.backdrop_path === null ? broken_path : `${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
+                <img className="headerImage" src={(movie.backdrop_path === null || movie.backdrop_path === undefined) ? broken_path : `${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                     <h1>{movie.title} 
                         <span style={{fontSize:"22px"}}> ({movie.length !== 0 ? movie.release_date.slice(0,4) : null })</span>
                         <div className="languageContainer">
@@ -70,7 +70,7 @@ function Header({apiKey, apiUrl, totalPagesCount, moviesDataLength, poster_prefi
                 </div>
             </div>
 
-            <Trailer movie={movie} togglePage2={togglePage2} apiKey={apiKey} movieArray={movieArray} setMovieArray={setMovieArray}/>
+            <Trailer movie={movie} togglePage2={togglePage2} apiKey={apiKey} apiPrefixURL={apiPrefixURL} movieArray={movieArray} setMovieArray={setMovieArray}/>
             
         </>
 

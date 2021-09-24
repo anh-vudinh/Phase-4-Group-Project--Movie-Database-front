@@ -2,11 +2,11 @@ import React, { useEffect} from "react"
 import Video from "./Video"
 
 
-function Trailer({movie, apiKey, movieArray, setMovieArray}){
+function Trailer({movie, apiKey, movieArray, setMovieArray, apiPrefixURL}){
 
     useEffect(()=>{
         if(movie.id !== undefined){
-            fetch(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}`)
+            fetch(`${apiPrefixURL}movie/${movie.id}/videos?api_key=${apiKey}`)
             .then(res =>res.json())
             .then(data => 
                 data === undefined ? null : setMovieArray(data.results)

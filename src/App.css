@@ -2,20 +2,20 @@
   height: 100%;
   width: 100%;
   position:relative;
-  background-color: rgb(15, 15, 15);
+  /* background-color: rgb(15, 15, 15); */
 }
 
 .App {
   text-align: center;
   position:relative;
-  background-color: rgb(15, 15, 15);
+  /* background-color: rgb(15, 15, 15); */
   overflow: auto;
 }
 
 .webpageContainer{
   height: 100%;
   position: relative;
-  background-color: rgb(15, 15, 15);
+  /* background-color: rgb(15, 15, 15); */
   /* overflow: auto; */
 }
 
@@ -38,7 +38,6 @@
 
 .movieContainer {
   position: relative;
-  cursor:grab;
   height: 100%;
   width: 100vw;
   display: flex;
@@ -51,8 +50,6 @@
   background: rgba(255,255,255,0.10);
   height: 100%;
   width: 100vw;
-  cursor:grabbing;
-  cursor: -webkit-grabbing;
 }
 
 .movie-details{
@@ -96,6 +93,9 @@
   height: 75px;
   top: 90px;
   left: 25px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .headerDisplayInfoSmall{
@@ -104,6 +104,9 @@
   height: 35px;
   top: 110px;
   left: 45px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .headerBannerBackground{
@@ -111,6 +114,9 @@
   height: 720px;
   width: 100%;
   /* transform: translate(0%,-12%); */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .headerImageContainer{
@@ -140,6 +146,9 @@
   transform: translate(-130%,0%);
   width: 220px;
   height: 320px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .headerMovieOverview{
@@ -163,6 +172,9 @@
   display: inline-flex;
   top: -22px;
   left: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .languageBox{
@@ -186,6 +198,9 @@
   display: inline-flex;
   flex-direction: row;
   align-items: baseline;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .headerGenresUL{
@@ -219,6 +234,9 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .popOutDetails{
@@ -230,11 +248,14 @@
 }
 
 .noResults{
-  position: absolute;
+  position: relative;
   display: flex;
-  top: 115%;
+  margin-top: 80px;
+  margin-bottom: 101px;
   flex-direction: column;
   align-items: center;
+  width:100%;
+  color: whitesmoke;
 }
 
 .noResults h1{
@@ -250,7 +271,22 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+}
 
+.loadingOrangeDiv{
+  position:sticky;
+  top: 45%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.loadingOrangeImage{
+  margin: 50px 0px 80px 0px;
+  height: 250px;
 }
 
 .movieCardsContainer{
@@ -260,6 +296,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   height: 100%;
+  min-height: 1000px;
   justify-content: center;
   width:100%;
   margin-bottom: 30px;
@@ -271,9 +308,6 @@
   margin: 0px 15px 0px 15px;
   width: 160px;
   min-height: 357px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 }
 
 .cardTextContainer{
@@ -298,6 +332,9 @@
   height: 240px;
   width: 160px;
   border-radius: 10px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .cardReleaseDate {
@@ -309,6 +346,9 @@
   display: flex;
   justify-content: space-between;
   position: absolute;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .leftArrow{
@@ -320,6 +360,9 @@
   top: 45%;
   opacity: 0.70;
   float: left;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .rightArrow{
   height: 110px;
@@ -388,7 +431,9 @@
   flex-direction: column;
   margin-top: 13px;
   width: 100px;
-  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .mainCategoryOptions button{
@@ -469,7 +514,7 @@
   overflow: auto;
   position: absolute;
   right: 0;
-  top: 40px;
+  top: 85px;
   background-color: grey;
   padding: 20px;
   border-radius: 20px;
@@ -588,6 +633,9 @@
   left: 110px;
   top: 10px;
   height: 25px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .castContainer{ 
@@ -604,7 +652,7 @@
 }
 
 .castContainer.active{ 
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   cursor:grabbing;
   cursor: -webkit-grabbing;
 }
@@ -752,7 +800,7 @@
 }
 
 .columnD.active{ 
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   cursor:grabbing;
   cursor: -webkit-grabbing;
 }
@@ -917,15 +965,25 @@
   justify-content: center;
 }
 .DateAndRating{
-  width: 600px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: nowrap;
   position: absolute;
   top: 10px;
-  right: 10px;
 }
+
+.Date{
+  position: absolute;
+  left: 200px;
+}
+
+.Rating{
+  position: absolute;
+  right: 15px;
+}
+
 .ReviewContentContainer{
   width: 100%;
   height: 300px;

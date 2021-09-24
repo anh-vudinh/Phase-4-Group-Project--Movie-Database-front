@@ -6,24 +6,21 @@ import BlankAvatarM from "../../../assets/blankAvatarM.png"
 import BlankAvatarF from "../../../assets/blankAvatarF.png"
 import BlankAvatar from "../../../assets/blankAvatar.png"
 
-function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, apiKey, setToggleShowMoreCast, toggleShowMoreCast}){
-    
+function MoviePage2Container({movie, poster_prefixURL, broken_path, apiKey, apiPrefixURL}){
+
     return(
         <div className="MoviePage2Container">
         
             <MovieExtraInfo 
                 movie={movie}
-                togglePage2={togglePage2}
             />
 
             <Cast 
-                movie={movie} 
-                togglePage2={togglePage2} 
+                movie={movie}
                 poster_prefixURL={poster_prefixURL} 
                 broken_path={broken_path} 
                 apiKey={apiKey}
-                toggleShowMoreCast={toggleShowMoreCast}
-                setToggleShowMoreCast={setToggleShowMoreCast}
+                apiPrefixURL={apiPrefixURL}
                 blankAvatarM={BlankAvatarM}
                 blankAvatarF={BlankAvatarF}
                 blankAvatar={BlankAvatar}
@@ -31,8 +28,8 @@ function MoviePage2Container({movie,togglePage2, poster_prefixURL, broken_path, 
 
             <Review 
                 movie={movie} 
-                togglePage2={togglePage2} 
                 apiKey={apiKey}
+                apiPrefixURL={apiPrefixURL}
                 blankAvatar={BlankAvatar}
             />
         </div>

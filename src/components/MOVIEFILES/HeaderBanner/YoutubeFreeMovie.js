@@ -3,12 +3,10 @@ import youtubelogo from "../../../assets/youtubelogo.png"
 
 function YoutubeFreeMovie({movie, setMovieArray}){
     const {title, release_date} = movie
-    const youtubeAPIURL = "https://www.googleapis.com/youtube/v3/search"
-    //const youtubeAPIKey1 = "AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc"          //all api keys are valid, youtube has a 100 query limit per day so alternate if one is maxed for the day
-    // const youtubeAPIKey2 = "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc"
-    // const youtubeAPIKey3 = "AIzaSyCAZ5RwZDLww9K_SkPuOyLcTHhhchQO0-w"
-    const youtubeAPIKeysArray = ["AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc", "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc", "AIzaSyCAZ5RwZDLww9K_SkPuOyLcTHhhchQO0-w", "AIzaSyDXr28bhyORGrn9GJOu3oP1qh-wBwiPSJU"]
+    const disableAPICycle = true
+    const youtubeSearchURL = "https://www.googleapis.com/youtube/v3/search"
     const freeMoviesChannelID = "UCuVPpxrm2VAgpH3Ktln4HXg"
+    const youtubeAPIKeysArray = ["AIzaSyBZFkxNgDZ1T0TJjmYe7Mr4KzXfaI11slc", "AIzaSyAOiv8mStM1qbCxD9RXTey75e333JrGpFc", "AIzaSyCAZ5RwZDLww9K_SkPuOyLcTHhhchQO0-w", "AIzaSyDXr28bhyORGrn9GJOu3oP1qh-wBwiPSJU"]
     const [currentAPIKey, setCurrentAPIKey] = useState(youtubeAPIKeysArray[0])
     const [toggleShowYTBtn, setToggleShowYTBtn] = useState(false)
     const [storedYTMovieLink, setStoredYTMovieLink] = useState([])
@@ -17,7 +15,7 @@ function YoutubeFreeMovie({movie, setMovieArray}){
 
     useEffect(()=>{
         if(movie.id !== undefined){
-            fetch(`${youtubeAPIURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q="${release_date.slice(0,4)}"+intitle:"${title.replaceAll(" ","%20").toLowerCase()}"&type=video&videoType=movie&key=${currentAPIKey}`)
+            fetch(`${youtubeSearchURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q="${release_date.slice(0,4)}"+intitle:"${title.replaceAll(" ","%20").toLowerCase()}"&type=video&videoType=movie&key=${currentAPIKey}`)
             .then(resp => resp.json())
             .then(dataArray => {
                 if(dataArray.pageInfo !== undefined){
@@ -29,14 +27,16 @@ function YoutubeFreeMovie({movie, setMovieArray}){
                     }
                     return
                 }else{ //if first key is maxed out cycle to next available key
-                    if(dataArray.error.code === 403){
-                        if(toggleRetryFetchCounter < youtubeAPIKeysArray.length-1){
-                            setCurrentAPIKey(youtubeAPIKeysArray.indexOf(currentAPIKey)+1 < youtubeAPIKeysArray.length? youtubeAPIKeysArray[youtubeAPIKeysArray.indexOf(currentAPIKey)+1] : youtubeAPIKeysArray[0])
-                            setToggleRetryFetchCounter(toggleRetryFetchCounter+1)
-                            setTimeout(()=>{setToggleRetryFetch(!toggleRetryFetch)}, 500)
-                        }else{
-                            setToggleRetryFetchCounter(0)
-                            console.log("No available API Search Quotas")
+                    if(!disableAPICycle){
+                        if(dataArray.error.code === 403){
+                            if(toggleRetryFetchCounter < youtubeAPIKeysArray.length-1){
+                                setCurrentAPIKey(youtubeAPIKeysArray.indexOf(currentAPIKey)+1 < youtubeAPIKeysArray.length? youtubeAPIKeysArray[youtubeAPIKeysArray.indexOf(currentAPIKey)+1] : youtubeAPIKeysArray[0])
+                                setToggleRetryFetchCounter(toggleRetryFetchCounter+1)
+                                setTimeout(()=>{setToggleRetryFetch(!toggleRetryFetch)}, 500)
+                            }else{
+                                setToggleRetryFetchCounter(0)
+                                console.log("No available API Search Quotas")
+                            }
                         }
                     }
                 }

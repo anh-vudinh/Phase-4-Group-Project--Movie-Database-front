@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-function MovieExtraInfo({movie, togglePage2}){
+function MovieExtraInfo({movie}){
 
     const [companyLogosArray, setcompanyLogosArray] = useState([])
     const companyLogoPrefix = "https://www.themoviedb.org/t/p/h50_filter(negate,0,666)"
@@ -18,6 +18,12 @@ function MovieExtraInfo({movie, togglePage2}){
         : <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/> )
         : null
 
+    useEffect(()=>{
+        createCompanyLogoImages()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[movie])
+
+
     function createCompanyLogoImages(){
         //prevent undefined because of first invoke happens before obj is assigned,
         //filter out null because some donot have logo paths, map available logo paths
@@ -28,11 +34,6 @@ function MovieExtraInfo({movie, togglePage2}){
             }
         }
     }
-
-    useEffect(()=>{
-        createCompanyLogoImages()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[movie])
 
     function handleMouseDown(){
         const slider = document.querySelector('.columnD');
@@ -69,7 +70,7 @@ function MovieExtraInfo({movie, togglePage2}){
 
 
     return(
-        <div className={togglePage2? "extraMovieInfoContainer" : "hidden"}>
+        <div className="extraMovieInfoContainer">
             <div className="columnA">
                 <label>Finance</label>
                 <div className="financesContainer">

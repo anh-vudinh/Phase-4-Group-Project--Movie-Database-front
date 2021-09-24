@@ -23,15 +23,16 @@ function MovieContainer(){
     const [yearOrGenreSuffix, setYearOrGenreSuffix]= useState("") // rename the state
     const [searchSuffix, setSearchSuffix] = useState("")
     const [noResultsFound, setNoResultsFound] = useState(false)
+    const [waitForLoad, setWaitForLoad] = useState(false)
 
     const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
-    const apiUrl = "https://api.themoviedb.org/3/"
+    const apiPrefixURL = "https://api.themoviedb.org/3/"
     const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
 
     const searchUrl = (movieCateogry === 'Genres' || movieCateogry === 'Year Release')  ?
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNumber}${yearOrGenreSuffix}` : 
-    `${apiUrl}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
+    `${apiPrefixURL}discover/movie?api_key=${apiKey}&page=${pageNumber}${yearOrGenreSuffix}` : 
+    `${apiPrefixURL}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
     
     useEffect(() => {
         fetch(searchUrl)
@@ -40,13 +41,14 @@ function MovieContainer(){
             if(moviesListData.total_pages === 0){
                 setNoResultsFound(true)
             }else{
+                setMoviesData([])
                 setNoResultsFound(false)
                 setTotalPagesCount(moviesListData.total_pages)
-                //console.log(pageNumber)
                 if(Number.isInteger(moviesListData.page/2) === true){
                     setMoviesData([...moviesData, ...moviesListData.results])
+                    setTimeout(()=>setWaitForLoad(false),130)
                 }else{
-                    //console.log(Number.isInteger(Math.floor(moviesListData.page/2)/2) === true)
+                    setWaitForLoad(true)
                     setMoviesData(moviesListData.results)
                     setPageNumber(pageNumber+1)
                     setIsLoadMoreMovies(!isLoadMoreMovies)
@@ -56,115 +58,91 @@ function MovieContainer(){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix])
 
-    function handleMouseDown(){
-        // const slider = document.querySelector('.movieContainer');
-        // let isDown = false;
-        // let startY;
-        // slider.addEventListener('mousedown', (e)=> {
-        //     isDown = true;
-        //     slider.classList.add('active');
-        //     startY = e.pageY-80;
-        // })
-
-        // slider.addEventListener('mouseup', ()=> {
-        //     isDown = false;
-        //     slider.classList.remove('active');
-        //     setTimeout(()=>{isDown = false},3000);
-        // })
-    
-        // slider.addEventListener('mousemove', (e)=> {
-        //     if(!isDown) return; //stop function from running
-        //     e.preventDefault();
-        //     const y = e.pageY-80;
-        //     const factor = 30;
-        //     const walk = -(y - startY)/factor;
-        //     window.scrollBy(0, walk)
-        //     window.scrollBy({behavior: 'auto'})
-        // })
-    }
-
-
     return (
-        <div className="movieContainer" onMouseDown={(e)=> handleMouseDown(e)}>
-            <Header 
-                apiKey={apiKey} 
-                apiUrl={apiUrl} 
-                totalPagesCount={totalPagesCount} 
-                moviesDataLength={moviesData.length} 
-                poster_prefixURL={poster_prefixURL}
-                setYearOrGenreSuffix={setYearOrGenreSuffix}
-                setmovieCateogry={setmovieCateogry}
+        <div className="movieContainer">
+            <Header
+                apiKey={apiKey}
+                apiPrefixURL={apiPrefixURL}
+                blankPoster={BlankPoster}
                 broken_path={broken_path}
-                setMovie={setMovie}
-                movie={movie}
-                setToggleHeaderInfo={setToggleHeaderInfo}
-                toggleHeaderInfo={toggleHeaderInfo}
-                setTogglePage2={setTogglePage2}
-                togglePage2={togglePage2}
                 genresList={genresList}
+                isLoadMoreMovies={isLoadMoreMovies}
+                movie={movie} movieArray={movieArray}
+                movieID={movieID}
+                moviesDataLength={moviesData.length}
+                poster_prefixURL={poster_prefixURL}
                 setGenresList={setGenresList}
-                movieID={movieID} 
-                setMovieID={setMovieID}
-                movieArray={movieArray}
-                setMovieArray={setMovieArray}
                 setIsLoadMoreMovies={setIsLoadMoreMovies}
-                isLoadMoreMovies={isLoadMoreMovies} 
+                setMovie={setMovie}
+                setMovieArray={setMovieArray}
+                setmovieCateogry={setmovieCateogry}
+                setMovieID={setMovieID}
                 setPageNumber={setPageNumber}
+                setToggleHeaderInfo={setToggleHeaderInfo}
+                setTogglePage2={setTogglePage2}
+                setYearOrGenreSuffix={setYearOrGenreSuffix}
+                toggleHeaderInfo={toggleHeaderInfo}
+                togglePage2={togglePage2}
+                totalPagesCount={totalPagesCount}
             />
 
         {togglePage2? 
             <MoviePage2Container
-                movie={movie}
-                togglePage2={togglePage2}
-                poster_prefixURL={poster_prefixURL}
-                broken_path={broken_path}
                 apiKey={apiKey}
+                apiPrefixURL={apiPrefixURL}
+                broken_path={broken_path}
+                movie={movie}
+                poster_prefixURL={poster_prefixURL}
+                togglePage2={togglePage2}
             />
         : null}
 
         {togglePage2? null :
-            <MovieList 
-                moviesData={moviesData} 
-                poster_prefixURL={poster_prefixURL} 
-                totalPagesCount={totalPagesCount}
-                setPageNumber = {setPageNumber}
-                pageNumber={pageNumber}
-                setIsLoadMoreMovies ={setIsLoadMoreMovies}
-                isLoadMoreMovies={isLoadMoreMovies}
-                broken_path={broken_path}
-                setWatchListArray={setWatchListArray}
-                watchListArray={watchListArray}
-                setMovie={setMovie}
-                togglePage2 = {togglePage2}
-                setTogglePage2={setTogglePage2}
-                setGenresList={setGenresList}
+            <MovieList
                 apiKey={apiKey}
+                apiPrefixURL={apiPrefixURL}
+                broken_path={broken_path}
+                isLoadMoreMovies={isLoadMoreMovies}
+                moviesData={moviesData}
                 noResultsFound={noResultsFound}
+                pageNumber={pageNumber}
+                poster_prefixURL={poster_prefixURL} 
                 searchSuffix={searchSuffix}
+                setGenresList={setGenresList}
+                setIsLoadMoreMovies={setIsLoadMoreMovies}
+                setMovie={setMovie}
+                setPageNumber={setPageNumber}
+                setTogglePage2={setTogglePage2}
+                setWatchListArray={setWatchListArray}
+                togglePage2={togglePage2}
+                totalPagesCount={totalPagesCount}
+                waitForLoad={waitForLoad}
+                watchListArray={watchListArray}
             />
         }
 
             <Search 
-                setmovieCateogry={setmovieCateogry} 
-                apiKey={apiKey} 
-                setMoviesData={setMoviesData} 
-                setTotalPagesCount={setTotalPagesCount}
-                setYearOrGenreSuffix={setYearOrGenreSuffix}
+                apiKey={apiKey}
+                apiPrefixURL={apiPrefixURL}
+                isLoadMoreMovies={isLoadMoreMovies}
+                setIsLoadMoreMovies={setIsLoadMoreMovies}
+                setmovieCateogry={setmovieCateogry}
+                setMoviesData={setMoviesData}
+                setPageNumber={setPageNumber}
                 setSearchSuffix={setSearchSuffix}
                 setTogglePage2={setTogglePage2}
-                setPageNumber={setPageNumber}
-                setIsLoadMoreMovies={setIsLoadMoreMovies}
-                isLoadMoreMovies={isLoadMoreMovies}
+                setTotalPagesCount={setTotalPagesCount}
+                setYearOrGenreSuffix={setYearOrGenreSuffix}
             />
 
             <WatchList 
-                watchListArray={watchListArray} 
-                setWatchListArray={setWatchListArray} 
-                poster_prefixURL={poster_prefixURL}
                 broken_path={broken_path}
+                poster_prefixURL={poster_prefixURL}
                 setMovie={setMovie}
-                setTogglePage2={setTogglePage2}
                 setMovieID={setMovieID}
+                setTogglePage2={setTogglePage2}
+                setWatchListArray={setWatchListArray}
+                watchListArray={watchListArray}
             />
 
             <YoutubeFreeMovie 

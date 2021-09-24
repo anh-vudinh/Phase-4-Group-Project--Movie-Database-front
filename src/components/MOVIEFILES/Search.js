@@ -1,22 +1,22 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 import FilterCategory from './FilterCategory'
 
-function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, setSearchSuffix, setTogglePage2, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies}){
+function Search({setmovieCateogry, apiKey, apiPrefixURL, setMoviesData, setYearOrGenreSuffix, setSearchSuffix, setTogglePage2, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies}){
     
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
-    const [genresArray, setGenresArray] = useState([])
+    const [genresArray, setGenresArray] = useState([]) //
     const [isExtendedOptions, setExtendedOptions] = useState(false)
     const [searchInput, setSearchInput] = useState("")
-    const [currentCategorySelected, setCurrentCategorySelected] = useState("")
+    const [currentCategorySelected, setCurrentCategorySelected] = useState("") //
 
-    const genresURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&page=50`
-    const searchUrl =`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=1`
+    const genresURL = `${apiPrefixURL}genre/movie/list?api_key=${apiKey}&page=50` //
+    const searchUrl =`${apiPrefixURL}discover/movie?api_key=${apiKey}&page=1`
     
     const currentYear = new Date().getFullYear()
     const yearArray =[]
     for (let i= 0; i < 12; i ++){
         yearArray.push(currentYear - i)
-    }
+    } //
 
     function handleSearchYearOrGenres(suffix){
         setYearOrGenreSuffix(suffix)
@@ -30,21 +30,21 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, 
     
     const categoryButtons = categoryButtonArray.map(category => 
         <FilterCategory 
-        key={category} 
-        category={category} 
-        genresArray={genresArray}
-        getGenresArray={getGenresArray}
-        yearArray={yearArray}
-        handleSearchYearOrGenres={handleSearchYearOrGenres}
-        setmovieCateogry={setmovieCateogry}
-        setTogglePage2={setTogglePage2}
-        currentCategorySelected={currentCategorySelected}
-        setCurrentCategorySelected={setCurrentCategorySelected}
-        setPageNumber={setPageNumber}
-        setIsLoadMoreMovies={setIsLoadMoreMovies}
-        isLoadMoreMovies={isLoadMoreMovies}
-        isExtendedOptions={isExtendedOptions}
-        setExtendedOptions={setExtendedOptions}
+            key={category} 
+            category={category} 
+            genresArray={genresArray} //
+            getGenresArray={getGenresArray} //
+            yearArray={yearArray}
+            handleSearchYearOrGenres={handleSearchYearOrGenres}
+            setmovieCateogry={setmovieCateogry}
+            setTogglePage2={setTogglePage2}
+            currentCategorySelected={currentCategorySelected}
+            setCurrentCategorySelected={setCurrentCategorySelected}
+            setPageNumber={setPageNumber}
+            setIsLoadMoreMovies={setIsLoadMoreMovies}
+            isLoadMoreMovies={isLoadMoreMovies}
+            isExtendedOptions={isExtendedOptions}
+            setExtendedOptions={setExtendedOptions}
         />
     )
     
@@ -54,7 +54,7 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setYearOrGenreSuffix, 
         .then(genresArrayData => {
             setGenresArray(genresArrayData.genres)
         })
-    }
+    } //
 
     function handleSubmit(e){
     e.preventDefault()

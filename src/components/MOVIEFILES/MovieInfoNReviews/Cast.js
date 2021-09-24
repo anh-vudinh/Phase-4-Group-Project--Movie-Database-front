@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 
-function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar,blankAvatarM, blankAvatarF}){
+function Cast({movie, poster_prefixURL, apiKey, apiPrefixURL, blankAvatar,blankAvatarM, blankAvatarF}){
 
     const numberOfCastToLoad = 10
     const [movieCastArray, setMovieCastArray] = useState([])
@@ -9,7 +9,7 @@ function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar,blankAv
     useEffect(()=>{
         if(movie.id !== undefined){
             setMovieCastArray([])  //reset the array so that we don't have a visual problem where user can see the old array for a split second before it refreshes
-            fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${apiKey}`)
+            fetch(`${apiPrefixURL}movie/${movie.id}/credits?api_key=${apiKey}`)
             .then(res=> res.json())
             .then(creditArray => { 
                 setMovieCastArray(creditArray.cast)
@@ -62,8 +62,8 @@ function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar,blankAv
     }
 
     return (
-        <div className={togglePage2? "castContainer":"hidden"} onMouseDown={(e)=> handleMouseDown(e)}>
-            {togglePage2? toggleShowMoreCast? cast : cast.slice(0,numberOfCastToLoad) : null}
+        <div className="castContainer" onMouseDown={(e)=> handleMouseDown(e)}>
+            {toggleShowMoreCast? cast : cast.slice(0,numberOfCastToLoad)}
             {cast.length < numberOfCastToLoad? null :
                 <button onClick={()=> setToggleShowMoreCast(!toggleShowMoreCast)}>
                     {toggleShowMoreCast? <><p>Show</p> <p>Less...</p></> : <><p>Show</p> <p>More...</p></>}

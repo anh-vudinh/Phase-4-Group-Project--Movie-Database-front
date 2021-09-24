@@ -2,13 +2,13 @@ import React,{useState} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList, isDragScrolling}){
+function MovieCard({apiKey, apiPrefixURL, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList}){
     
     const {title, poster_path, release_date, id} = movie
     const [isWatched, setIsWatched] = useState(false)
 
     function handleCardImageClick(){
-            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
+            fetch(`${apiPrefixURL}movie/${id}?api_key=${apiKey}`)
             .then(res =>res.json())
             .then(fullMovieData => {
                 setMovie(fullMovieData)
@@ -34,28 +34,9 @@ function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray
         }
     }
 
-    function handleEnterOrLeave(event){
-        // switch(event.type){
-        //     case "mouseenter":
-        //         console.log(event)
-        //         const cardContainer = document.querySelector(".cardContainer")
-        //         const hoverDetails = document.createElement("DIV")
-        //         hoverDetails.className = "popOutDetails"
-        //         hoverDetails.style.top= `${event.pageY-680}px`
-        //         hoverDetails.style.left= `${event.pageX}px`
-        //         cardContainer.append(hoverDetails)
-        //         break;
-        //     case "mouseleave":
-        //         hoverDetails.remove()
-        //         break;
-        // }
-        
-    }
-
-
     return (  
         <div className="movieCard">
-            <img className="cardImage" onDoubleClick={() => handleCardImageClick()} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
+            <img className="cardImage" onClick={() => handleCardImageClick()} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
             <img src={isWatched? eyeballicon : eyeballClosedicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWatchListAddClick} />
             <div className="cardTextContainer">
                 {title === "" ? "No Title" : 

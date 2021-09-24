@@ -2,19 +2,19 @@ import React,{useState} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList}){
+function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList, isDragScrolling}){
     
     const {title, poster_path, release_date, id} = movie
     const [isWatched, setIsWatched] = useState(false)
 
     function handleCardImageClick(){
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
-        .then(res =>res.json())
-        .then(fullMovieData => {
-            setMovie(fullMovieData)
-            setGenresList(fullMovieData.genres)
-        })
-        setTimeout(()=> {setTogglePage2(true)}, 120)
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
+            .then(res =>res.json())
+            .then(fullMovieData => {
+                setMovie(fullMovieData)
+                setGenresList(fullMovieData.genres)
+            })
+            setTimeout(()=> {setTogglePage2(true)}, 170)
     }
 
     function handleWatchListAddClick(){
@@ -55,7 +55,7 @@ function MovieCard({apiKey, movie, poster_prefixURL, broken_path, watchListArray
 
     return (  
         <div className="movieCard">
-            <img className="cardImage" onClick={() => handleCardImageClick()} onMouseEnter={(e)=>handleEnterOrLeave(e)} onMouseLeave={(e)=>handleEnterOrLeave(e)} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
+            <img className="cardImage" onDoubleClick={() => handleCardImageClick()} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
             <img src={isWatched? eyeballicon : eyeballClosedicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWatchListAddClick} />
             <div className="cardTextContainer">
                 {title === "" ? "No Title" : 

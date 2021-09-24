@@ -13,9 +13,9 @@ function MovieExtraInfo({movie, togglePage2}){
         </p>
     )
 
-    const companyLogos = companyLogosArray.length > 0? companyLogosArray.map((company, index) => company.logo_path !== null? 
-        <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/> 
-        : <p className="logoPFiller" key={`logoFiller${index}`}>{company.name}</p>)
+    const companyLogos = companyLogosArray.length > 0? companyLogosArray.map((company, index) => company.logo_path === null? 
+        <p className="logoPFiller" key={`logoFiller${index}`}>{company.name}</p>
+        : <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/> )
         : null
 
     function createCompanyLogoImages(){
@@ -23,7 +23,8 @@ function MovieExtraInfo({movie, togglePage2}){
         //filter out null because some donot have logo paths, map available logo paths
         if(movie.production_companies !== undefined) {
             if(movie.production_companies.length > 0){
-                setcompanyLogosArray([...movie.production_companies.filter(company => company.logo_path !== null),...movie.production_companies.filter(company => company.logo_path === null)])
+                setcompanyLogosArray([...movie.production_companies.filter(company => company.logo_path !== null),
+                    ...movie.production_companies.filter(company => company.logo_path === null)])
             }
         }
     }
@@ -65,8 +66,6 @@ function MovieExtraInfo({movie, togglePage2}){
             slider.scrollLeft = scrollLeft - walk;
         })
     }
-
-
 
 
     return(

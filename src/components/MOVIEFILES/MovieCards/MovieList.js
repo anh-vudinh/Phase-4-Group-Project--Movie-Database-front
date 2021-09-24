@@ -1,7 +1,7 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import arrowIcon from "../../../assets/arrowIcon.png"
-function MovieList({apiKey, moviesData, poster_prefixURL, totalPagesCount, setPageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, togglePage2, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
+function MovieList({apiKey, moviesData, poster_prefixURL, totalPagesCount, setPageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, togglePage2, setTogglePage2, setGenresList, noResultsFound, searchSuffix, isDragScrolling}){
     const displayMovies = moviesData.map((movie, index) => 
         <MovieCard key={`${movie.id}${index}`} 
             movie={movie} 
@@ -13,6 +13,7 @@ function MovieList({apiKey, moviesData, poster_prefixURL, totalPagesCount, setPa
             setTogglePage2={setTogglePage2}
             setGenresList={setGenresList}
             apiKey={apiKey}
+            isDragScrolling={isDragScrolling}
         />
     )
 

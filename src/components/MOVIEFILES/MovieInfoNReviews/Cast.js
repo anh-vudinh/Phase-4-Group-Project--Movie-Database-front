@@ -1,7 +1,8 @@
 import React,{useEffect, useState} from "react";
 
-function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar, blankAvatarF}){
+function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar,blankAvatarM, blankAvatarF}){
 
+    const numberOfCastToLoad = 10
     const [movieCastArray, setMovieCastArray] = useState([])
     const [toggleShowMoreCast, setToggleShowMoreCast] = useState(false)
 
@@ -20,7 +21,8 @@ function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar, blankA
     const cast = movieCastArray === undefined? null : movieCastArray.map((casts, index) =>
         <div className="castCardContainer" key={index}>
             <img className="castImage" alt={casts.id} src={casts.profile_path === null ? 
-                casts.gender === 1? blankAvatarF : blankAvatar 
+                casts.gender === 1? blankAvatarF : 
+                casts.gender === 0? blankAvatar : blankAvatarM 
                 :`${poster_prefixURL}${casts.profile_path}`}/>
             <div className="castName"><p>{casts.name}</p></div>
         </div>
@@ -61,8 +63,8 @@ function Cast({movie, togglePage2, poster_prefixURL, apiKey, blankAvatar, blankA
 
     return (
         <div className={togglePage2? "castContainer":"hidden"} onMouseDown={(e)=> handleMouseDown(e)}>
-            {togglePage2? toggleShowMoreCast? cast : cast.slice(0,11) : null}
-            {cast.length < 11? null :
+            {togglePage2? toggleShowMoreCast? cast : cast.slice(0,numberOfCastToLoad) : null}
+            {cast.length < numberOfCastToLoad? null :
                 <button onClick={()=> setToggleShowMoreCast(!toggleShowMoreCast)}>
                     {toggleShowMoreCast? <><p>Show</p> <p>Less...</p></> : <><p>Show</p> <p>More...</p></>}
                 </button> 

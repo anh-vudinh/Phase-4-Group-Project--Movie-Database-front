@@ -56,8 +56,36 @@ function MovieContainer(){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix])
 
+    function handleMouseDown(){
+        // const slider = document.querySelector('.movieContainer');
+        // let isDown = false;
+        // let startY;
+        // slider.addEventListener('mousedown', (e)=> {
+        //     isDown = true;
+        //     slider.classList.add('active');
+        //     startY = e.pageY-80;
+        // })
+
+        // slider.addEventListener('mouseup', ()=> {
+        //     isDown = false;
+        //     slider.classList.remove('active');
+        //     setTimeout(()=>{isDown = false},3000);
+        // })
+    
+        // slider.addEventListener('mousemove', (e)=> {
+        //     if(!isDown) return; //stop function from running
+        //     e.preventDefault();
+        //     const y = e.pageY-80;
+        //     const factor = 30;
+        //     const walk = -(y - startY)/factor;
+        //     window.scrollBy(0, walk)
+        //     window.scrollBy({behavior: 'auto'})
+        // })
+    }
+
+
     return (
-        <div className="movieContainer">
+        <div className="movieContainer" onMouseDown={(e)=> handleMouseDown(e)}>
             <Header 
                 apiKey={apiKey} 
                 apiUrl={apiUrl} 

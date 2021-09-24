@@ -8,6 +8,7 @@ vu- 9/23/2021
 - logos now display a company text if the company did not have a logo in the DB
 - watchlist eyeballs now toggle between watched and unwatched, but not fully function with watchlist because there is no database and users created yet to store the information
 - prepared a rough draft outline of page 2 reviews/comments section
+- added dragscrolling to mainContainer, questionable about it's functionality. Need to somehow ignore clicks on movie images when scrolling for better user experience
 
 vu - 9/22/2021
 - added extra logic to moviecontainer to pull in 40 movies

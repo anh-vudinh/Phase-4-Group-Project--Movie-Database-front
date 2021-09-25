@@ -72,10 +72,55 @@
   top: 600px;
   right: 35px;
   width: fit-content;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .youtubeFreeMovieLogo img{
   width: 150px;
+}
+
+.crackleIcon{
+  position:absolute;
+  z-index: 0;
+  top: 580px;
+  right: 35px;
+  width: 65px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.crackleIFrameContainer{
+  position:absolute;
+  top: 90px;
+  z-index: 0;
+  overflow: hidden;
+  width: 1000px; 
+  height: 570px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.crackleIFrame{
+  overflow: hidden;
+  width: 1000px; 
+  height: 650px;
+  transform: translate(0, -80px);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.crackleUnderlay{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.97);
+  display: flex;
+  justify-content: center;
 }
 
 .headerBannerContainer {

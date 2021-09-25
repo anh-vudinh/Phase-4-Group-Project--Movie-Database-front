@@ -55,7 +55,7 @@ function Header({apiKey, apiPrefixURL, totalPagesCount, moviesDataLength, poster
                 <div className="movie-details">
                 <img className="headerImage" src={(movie.backdrop_path === null || movie.backdrop_path === undefined) ? broken_path : `${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                     <h1>{movie.title} 
-                        <span style={{fontSize:"22px"}}> ({movie.length !== 0 ? movie.release_date.slice(0,4) : null })</span>
+                        <span style={{fontSize:"22px"}}> ({movie.length !== 0 && movie !== undefined && movie !== null? movie.release_date.slice(0,4) : null })</span>
                         <div className="languageContainer">
                             <img className="languageBox" src={languageBubble} alt={movie.original_language}/>
                             <p className="languageText">{movie.original_language !== undefined? movie.original_language.toUpperCase() : ""}</p>

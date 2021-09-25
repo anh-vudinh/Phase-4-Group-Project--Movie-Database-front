@@ -1,3 +1,15 @@
+vu- 9/25/2021
+- added Crackle video component
+- notes: because crackle's api is not particularly good/easily accessible, their movie names/release dates aren't exactly correct, api data isn't uptodate or complete, and their videos aren't embed friendly a workaround was done
+    - iframe is actually their whole webpage for that movie, but overflow is hidden to just show their video player and uninteractable/scrollable/selectable
+    - logic was used to alter and match the names between data from tmdb(main data) with crackle data stored on local db.json
+      - however it's not perfect because some crackle movie names are missing entire words from the movie title
+    - if there's a match it'll return the crackle movie id to the iframe src
+    - release year was also used to filter the match, but additional logic was also placed on release year with a potential offset of 1 year, because again crackle data isn't accurate to tmdb
+    - double click the underlay to close the iframe
+    - there are functions commented out at the bottom which can check for any crackle movies in db.json that have passed their expiration date, if it's true then it should delete the database and refetch. (however there's a problem, I'm trying to figure out how to clear entire database crackle array with fetch request without having to delete objects 1 by 1)
+    - the crackle db.json matches the api of available movies, however it does not match what's actually free and available on crackles website. The website has more. Either this limit to the api is done purposely or the api used to query was incorrect. Maybe check if not specificying genre defaults to a genre instead of being all. Maybe you must query throlugh all genres and add it to the db. However how do you handle movies that exist in multiple genres
+
 vu- 9/24/2021
 - cleaned up code
 - removed drag to scroll from main container

@@ -3,9 +3,10 @@ import MovieList from "./MovieCards/MovieList"
 import Header from "./HeaderBanner/Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
-import BlankPoster from "../../assets/blankposter.jpg"
+import CrackleFreeMovie from "./HeaderBanner/Crackle"
 import MoviePage2Container from "./MovieInfoNReviews/MoviePage2Conatiner"
 import YoutubeFreeMovie from "./HeaderBanner/YoutubeFreeMovie"
+import BlankPoster from "../../assets/blankposter.jpg"
 
 function MovieContainer(){
     const [movie, setMovie]= useState([])
@@ -57,6 +58,7 @@ function MovieContainer(){
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix])
+
 
     return (
         <div className="movieContainer">
@@ -149,6 +151,12 @@ function MovieContainer(){
                 movie={movie}
                 setMovieArray={setMovieArray}
             />
+            
+            <CrackleFreeMovie
+                movie={movie}
+                togglePage2={togglePage2}
+            />
+
         </div>
     )
 }

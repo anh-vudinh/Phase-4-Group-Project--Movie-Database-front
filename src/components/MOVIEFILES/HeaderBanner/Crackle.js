@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import crackleIcon from "../../../assets/crackleIcon.png"
+import x from "../../../assets/X.png"
 
 function CrackleFreeMovie({movie, togglePage2}){
     const {title, release_date} = movie
@@ -11,7 +12,6 @@ function CrackleFreeMovie({movie, togglePage2}){
     const regex = /[^a-zA-Z0-9]/g
 
     useEffect(()=>{
-        //test()
         setVideoLink(undefined) //reset videolink to default state
         if(movie.id !==undefined && crackleObjsArray.length === 0){
             fetch(crackleDB)
@@ -33,32 +33,17 @@ function CrackleFreeMovie({movie, togglePage2}){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
 
-//3667FEAA-EC17-4652-B271-82F792417E50
-
-    function test() {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("platformId", "4feff02f-9c08-4570-9c77-52c789d6c127");
-        myHeaders.append("region", "us");
-        
-        const requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'manual'
-        };
-        
-        fetch("https://stg-api-v2.crackle.com/browse/movies?pageNumber=1&pageSize=5", requestOptions)
-        .then(response => response.json())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-    }
-
     return(
         <>
-            {videoLink === undefined || togglePage2 === false? null : <img className="crackleIcon" src={crackleIcon} onClick={()=>setToggleShowCrackleVideo(!toggleShowCrackleVideo)} alt="crackleIcon"/>}
-            {toggleShowCrackleVideo?
-                <div className="crackleUnderlay" onDoubleClick={()=>setToggleShowCrackleVideo(false)}>
-                    <div className="crackleIFrameContainer">
+            {videoLink === undefined? null : 
+            <>
+                <img className="crackleIcon" 
+                    src={crackleIcon} 
+                    onClick={()=>setToggleShowCrackleVideo(!toggleShowCrackleVideo)} 
+                    alt="crackleIcon"
+                />
+                <div className={toggleShowCrackleVideo? "crackleUnderlay" : "hidden"} onClick={()=>setToggleShowCrackleVideo(!toggleShowCrackleVideo)}>
+                    <div className={toggleShowCrackleVideo? "crackleIFrameContainer" : "hidden"}>
                         <iframe 
                             className="crackleIFrame"
                             scrolling="no"
@@ -68,8 +53,12 @@ function CrackleFreeMovie({movie, togglePage2}){
                             allow="accelerometer; encrypted-media; autoplay;" allowFullScreen>
                         </iframe>
                     </div>
+                    <img className="crackleExitUnderlay" 
+                        src={x}
+                        alt="x"
+                    />
                 </div>
-            : null
+            </>
             }
         </>
     )

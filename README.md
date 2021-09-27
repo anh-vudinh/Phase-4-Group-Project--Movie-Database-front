@@ -4,6 +4,7 @@ vu- 9/27/2021
 - experimented more with Crackles API. Unfortunately it's as I guessed, sony does not keep their api up to date with their website, and their search api is unreliable in returning current and relevent data. The only option left is to Data scrap their movies catalog to pull movie id, movie name, movie release_date and build a database on that.
 - removed setTogglePage2(false) from multiple functions and placed a single useState switch in MovieContainer when the last page loads
 - eyeballicon for moviecards now have opacity 0.40 when not hovered, when hovered changes to opacity 1, this is so they don't stand out too much and take away from the movie posters
+- finetuned when crackle video loads, closes, persists and visuals
 
 vu- 9/25/2021
 - added Crackle video component

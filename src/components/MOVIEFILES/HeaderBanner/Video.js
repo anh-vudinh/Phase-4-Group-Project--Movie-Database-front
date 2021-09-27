@@ -5,7 +5,7 @@ function Video({videoID}){
         <iframe 
             width="800" 
             height="500" 
-            src={`https://www.youtube.com/embed/${videoID}`}
+            src={`https://www.youtube.com/embed/${videoID}?enablejsapi=1&origin=http://localhost:3000`}
             title="YouTube video player" 
             frameBorder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>

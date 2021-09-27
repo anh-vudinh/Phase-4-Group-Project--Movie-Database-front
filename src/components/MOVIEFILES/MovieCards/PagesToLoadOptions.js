@@ -1,6 +1,6 @@
 import React from "react";
 
-function PagesToLoadOptions({setPagesToLoad, pagesToLoad}){
+function PagesToLoadOptions({setPagesToLoad, pageNumber, currentPageCounter, pagesToLoad, setPageNumber, setCurrentPageCounter}){
 
     const pageOptionsArray = [20, 40, 60, 80, 100]
 
@@ -8,11 +8,17 @@ function PagesToLoadOptions({setPagesToLoad, pagesToLoad}){
         <button 
             key={index} 
             className={pagesToLoad === option/20? "pageOptionsBtnsSelected" : "pageOptionBtns"}
-            onClick={()=>setPagesToLoad(option/20)}
+            onClick={()=>handleOnPageOptionClick(option)}
         >
                 {option}
         </button>
     )
+
+    function handleOnPageOptionClick(option){
+        setPageNumber(pageNumber-(pagesToLoad)+(currentPageCounter))
+        setCurrentPageCounter(1)
+        setPagesToLoad(option/20)
+    }
 
     return(
         <div className="pageOptionsDiv">

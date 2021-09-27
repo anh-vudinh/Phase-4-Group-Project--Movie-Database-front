@@ -9,6 +9,11 @@ vu- 9/27/2021
 - replaced logic on mainCategories to now keep highlighted which category is selected
 - replaced logic on extendedOptions to persists the selected extendedoption highlight
 - improved CSS on extendedOptions
+- !! bug going from 20 => next page > 40 causes infinite appending pages -fixed (the issue was that setCurrentCounter would be +1 higher than the pageCount so it would keep running the else statement. I made choosing a different amount of pages to load would reset both page number and counter to 1)
+- ^^ for the above I changed it so that user does not lose the current page they're on when changing selection. no more reset to page 1
+- next and previous arrows now hidden during waitforload, I think if client double clicked arrow as it was loading new page, there was a chance duplicate page would be added in place of one that should truly belong there
+- added logic to dynamically adjust the min-height of cardContainer and movieContainer. This is to prevent webpage visual jumpiness when user clicks the previous and next arrows
+- added logic that now changes mainCategory textContent to display the selected extendedOptions.
 
 vu- 9/25/2021
 - added Crackle video component

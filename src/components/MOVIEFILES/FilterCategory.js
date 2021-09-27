@@ -23,7 +23,6 @@ function FilterCategory({category, yearOrGenreSuffix,movieCateogry, togglePage2,
     )
 
     function handleDropDownLI(categoryName, ...extra){
-        console.log(category)
         switch (categoryName){
             case 'Genres':
                 getGenresArray()
@@ -31,6 +30,7 @@ function FilterCategory({category, yearOrGenreSuffix,movieCateogry, togglePage2,
                 setmovieCateogry(categoryName)
                 setCurrentCategorySelected(categoryName)
                 if(typeof extra[0] === "number"){
+                    replaceGenreOrYearTitle(category, extra[0])
                     setPageNumber(1)
                     handleSearchYearOrGenres(`&with_genres=${extra[0]}`)
                     setIsLoadMoreMovies(!isLoadMoreMovies)
@@ -40,18 +40,34 @@ function FilterCategory({category, yearOrGenreSuffix,movieCateogry, togglePage2,
                 setmovieCateogry(categoryName)
                 setExtendedOptions(true)
                 setCurrentCategorySelected(categoryName)
-                if(typeof extra[0] === "number"){
+                if(typeof extra[0] === "number"){      
+                    replaceGenreOrYearTitle(category, extra[0])
                     setPageNumber(1)
                     handleSearchYearOrGenres(`&primary_release_year=${extra[0]}`)
                     setIsLoadMoreMovies(!isLoadMoreMovies)
                 }
                 break;
             default:
+                replaceGenreOrYearTitle(categoryName, extra[0])
                 setPageNumber(1)
                 setExtendedOptions(false)
                 setmovieCateogry(`movie/${categoryName.replaceAll(" ", "_").toLowerCase()}`)
                 setCurrentCategorySelected(categoryName)
                 setIsLoadMoreMovies(!isLoadMoreMovies)
+        }
+    }
+
+    function replaceGenreOrYearTitle(categoryName, extendedOption){
+        const mainCategory = document.querySelector(".mainCategoryOptionsSelected button")
+        if(categoryName === "Genres"){
+            document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
+            mainCategory.textContent = genresArray.find(genre => genre.id === extendedOption).name
+        }else if(categoryName === "Year Release"){
+            document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
+            mainCategory.textContent = extendedOption
+        }else{
+            document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
+            document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
         }
     }
 

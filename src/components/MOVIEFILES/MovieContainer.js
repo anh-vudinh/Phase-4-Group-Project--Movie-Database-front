@@ -33,7 +33,7 @@ function MovieContainer(){
     const [noResultsFound, setNoResultsFound] = useState(false)
     const [waitForLoad, setWaitForLoad] = useState(false)
     const [currentPageCounter, setCurrentPageCounter] = useState(1)
-    const [pagesToLoad, setPagesToLoad] = useState(3)
+    const [pagesToLoad, setPagesToLoad] = useState(2)
 
     // const pagesToLoad = 3 //each page is 20 movies
     const broken_path = BlankPoster
@@ -123,6 +123,7 @@ function MovieContainer(){
                 apiKey={apiKey}
                 apiPrefixURL={apiPrefixURL}
                 broken_path={broken_path}
+                currentPageCounter={currentPageCounter}
                 isLoadMoreMovies={isLoadMoreMovies}
                 moviesData={moviesData}
                 noResultsFound={noResultsFound}
@@ -130,6 +131,7 @@ function MovieContainer(){
                 pagesToLoad={pagesToLoad}
                 poster_prefixURL={poster_prefixURL} 
                 searchSuffix={searchSuffix}
+                setCurrentPageCounter={setCurrentPageCounter}
                 setGenresList={setGenresList}
                 setIsLoadMoreMovies={setIsLoadMoreMovies}
                 setMovie={setMovie}

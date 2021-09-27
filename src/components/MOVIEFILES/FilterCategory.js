@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterCategory({category, yearOrGenreSuffix,movieCateogry, togglePage2, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry, currentCategorySelected, setCurrentCategorySelected, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies, isExtendedOptions, setExtendedOptions}){
+function FilterCategory({category, replaceGenreOrYearTitle, yearOrGenreSuffix,movieCateogry, togglePage2, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry, currentCategorySelected, setCurrentCategorySelected, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies, isExtendedOptions, setExtendedOptions}){
 
     const genreOptionBtn = genresArray.map(genreOption => 
         <button 
@@ -54,20 +54,6 @@ function FilterCategory({category, yearOrGenreSuffix,movieCateogry, togglePage2,
                 setmovieCateogry(`movie/${categoryName.replaceAll(" ", "_").toLowerCase()}`)
                 setCurrentCategorySelected(categoryName)
                 setIsLoadMoreMovies(!isLoadMoreMovies)
-        }
-    }
-
-    function replaceGenreOrYearTitle(categoryName, extendedOption){
-        const mainCategory = document.querySelector(".mainCategoryOptionsSelected button")
-        if(categoryName === "Genres"){
-            document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
-            mainCategory.textContent = genresArray.find(genre => genre.id === extendedOption).name
-        }else if(categoryName === "Year Release"){
-            document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
-            mainCategory.textContent = extendedOption
-        }else{
-            document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
-            document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
         }
     }
 

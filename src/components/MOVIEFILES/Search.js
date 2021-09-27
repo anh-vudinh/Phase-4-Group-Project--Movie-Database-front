@@ -47,6 +47,7 @@ function Search({setmovieCateogry, togglePage2, yearOrGenreSuffix, apiKey, apiPr
             isExtendedOptions={isExtendedOptions}
             setExtendedOptions={setExtendedOptions}
             yearOrGenreSuffix={yearOrGenreSuffix}
+            replaceGenreOrYearTitle={replaceGenreOrYearTitle}
         />
     )
     
@@ -61,6 +62,7 @@ function Search({setmovieCateogry, togglePage2, yearOrGenreSuffix, apiKey, apiPr
     function handleSubmit(e){
     e.preventDefault()
     if(searchInput.length > 0){
+        replaceGenreOrYearTitle("search", null)
         setmovieCateogry("search/movie")
         setPageNumber(1)
         setSearchSuffix(`&query=${searchInput.replaceAll(" ", "%20").toLowerCase()}`)
@@ -68,6 +70,22 @@ function Search({setmovieCateogry, togglePage2, yearOrGenreSuffix, apiKey, apiPr
         setIsLoadMoreMovies(!isLoadMoreMovies)
         }
     }   
+
+    function replaceGenreOrYearTitle(categoryName, extendedOption){
+        if(document.querySelector(".mainCategoryOptionsSelected button") !== null){
+            const mainCategory = document.querySelector(".mainCategoryOptionsSelected button")
+            if(categoryName === "Genres"){
+                document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
+                mainCategory.textContent = genresArray.find(genre => genre.id === extendedOption).name
+            }else if(categoryName === "Year Release"){
+                document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
+                mainCategory.textContent = extendedOption
+            }else{
+                document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
+                document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
+            }
+        }
+    }
     
     return(
         <div className="SearchBar" onMouseLeave={()=>{setExtendedOptions(false)}}>

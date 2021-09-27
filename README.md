@@ -14,6 +14,7 @@ vu- 9/27/2021
 - next and previous arrows now hidden during waitforload, I think if client double clicked arrow as it was loading new page, there was a chance duplicate page would be added in place of one that should truly belong there
 - added logic to dynamically adjust the min-height of cardContainer and movieContainer. This is to prevent webpage visual jumpiness when user clicks the previous and next arrows
 - added logic that now changes mainCategory textContent to display the selected extendedOptions.
+- added same logic of resetting maincategory to search function
 
 vu- 9/25/2021
 - added Crackle video component

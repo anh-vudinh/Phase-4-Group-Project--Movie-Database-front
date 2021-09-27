@@ -1,3 +1,8 @@
+vu- 9/27/2021
+- added logic to make amount of pages loaded dynamic. Dev can now determine how many pages to load by changing const pagesToLoad, to whatever they want
+- with new logic dev can now make and option where users can determine how many pages they wish to see per load (not yet implemented)
+- experimented more with Crackles API. Unfortunately it's as I guessed, sony does not keep their api up to date with their website, and their search api is unreliable in returning current and relevent data. The only option left is to Data scrap their movies catalog to pull movie id, movie name, movie release_date and build a database on that.
+
 vu- 9/25/2021
 - added Crackle video component
 - notes: because crackle's api is not particularly good/easily accessible, their movie names/release dates aren't exactly correct, api data isn't uptodate or complete, and their videos aren't embed friendly a workaround was done
@@ -9,6 +14,7 @@ vu- 9/25/2021
     - double click the underlay to close the iframe
     - there are functions commented out at the bottom which can check for any crackle movies in db.json that have passed their expiration date, if it's true then it should delete the database and refetch. (however there's a problem, I'm trying to figure out how to clear entire database crackle array with fetch request without having to delete objects 1 by 1)
     - the crackle db.json matches the api of available movies, however it does not match what's actually free and available on crackles website. The website has more. Either this limit to the api is done purposely or the api used to query was incorrect. Maybe check if not specificying genre defaults to a genre instead of being all. Maybe you must query throlugh all genres and add it to the db. However how do you handle movies that exist in multiple genres
+    - better to make a website scrapper to pull movies section movie title and releaseYear along with their url id
 
 vu- 9/24/2021
 - cleaned up code

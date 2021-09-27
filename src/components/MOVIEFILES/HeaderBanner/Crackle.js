@@ -11,6 +11,7 @@ function CrackleFreeMovie({movie, togglePage2}){
     const regex = /[^a-zA-Z0-9]/g
 
     useEffect(()=>{
+        //test()
         setVideoLink(undefined) //reset videolink to default state
         if(movie.id !==undefined && crackleObjsArray.length === 0){
             fetch(crackleDB)
@@ -31,6 +32,26 @@ function CrackleFreeMovie({movie, togglePage2}){
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
+
+//3667FEAA-EC17-4652-B271-82F792417E50
+
+    function test() {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("platformId", "4feff02f-9c08-4570-9c77-52c789d6c127");
+        myHeaders.append("region", "us");
+        
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'manual'
+        };
+        
+        fetch("https://stg-api-v2.crackle.com/browse/movies?pageNumber=1&pageSize=5", requestOptions)
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    }
 
     return(
         <>

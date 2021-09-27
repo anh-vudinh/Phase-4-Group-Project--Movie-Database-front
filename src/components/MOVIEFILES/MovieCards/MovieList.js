@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard";
 import arrowIcon from "../../../assets/arrowIcon.png"
 import loadingOrange from "../../../assets/loadingOrange.gif"
 
-function MovieList({apiKey, apiPrefixURL, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
+function MovieList({apiKey, apiPrefixURL, pagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
     const displayMovies = moviesData.map((movie, index) => 
         <MovieCard key={`${movie.id}${index}`} 
             movie={movie} 
@@ -20,12 +20,16 @@ function MovieList({apiKey, apiPrefixURL, moviesData, poster_prefixURL, totalPag
     )
 
     function handleLoadMoreMovies(){
-        setPageNumber(pageNumber => pageNumber < totalPagesCount ? pageNumber + 1 : 1)
+        setPageNumber(pageNumber < totalPagesCount ? pageNumber + 1 : 1)
         setIsLoadMoreMovies(!isLoadMoreMovies)
     }
     
     function preivousPageLoad(){
-        setPageNumber(pageNumber => pageNumber > 2 ? pageNumber - 3 : totalPagesCount-1)
+        if(pageNumber <= totalPagesCount && pageNumber > pagesToLoad){
+            setPageNumber(pageNumber-(pagesToLoad)-(pagesToLoad-1))
+        }else{
+            setPageNumber(totalPagesCount-(pagesToLoad-1))
+        }
         setIsLoadMoreMovies(!isLoadMoreMovies)
     }
     

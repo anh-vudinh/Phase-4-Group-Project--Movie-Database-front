@@ -25,7 +25,9 @@ function MovieContainer(){
     const [searchSuffix, setSearchSuffix] = useState("")
     const [noResultsFound, setNoResultsFound] = useState(false)
     const [waitForLoad, setWaitForLoad] = useState(false)
+    const [currentPageCounter, setCurrentPageCounter] = useState(1)
 
+    const pagesToLoad = 2 //each page is 20 movies
     const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiPrefixURL = "https://api.themoviedb.org/3/"
@@ -42,23 +44,32 @@ function MovieContainer(){
             if(moviesListData.total_pages === 0){
                 setNoResultsFound(true)
             }else{
-                setMoviesData([])
                 setNoResultsFound(false)
                 setTotalPagesCount(moviesListData.total_pages)
-                if(Number.isInteger(moviesListData.page/2) === true){
-                    setMoviesData([...moviesData, ...moviesListData.results])
-                    setTimeout(()=>setWaitForLoad(false),130)
-                }else{
-                    setWaitForLoad(true)
-                    setMoviesData(moviesListData.results)
-                    setPageNumber(pageNumber+1)
-                    setIsLoadMoreMovies(!isLoadMoreMovies)
+            if(currentPageCounter === 1 || pagesToLoad === 1){                          // load first page of pages
+                    setWaitForLoad(true)                                                // activate the loading circle until pages are done loading
+                    setMoviesData(moviesListData.results)                               // clear out moviesData array and overwrite with first page
+                    setCurrentPageCounter(currentPageCounter+1)                         // increment page Counter
+                    if(pagesToLoad !== 1) {                                             // normal procedure if user is not only loading 1 page
+                        setPageNumber(pageNumber+1)                                     // increment page number by 1 to fetch next page
+                        setIsLoadMoreMovies(!isLoadMoreMovies)}                         // toggle this.UseEffect() to run again
+                    if(pagesToLoad === 1) setTimeout(()=>setWaitForLoad(false),130)     // if user only wanted to load 1 page then disable loading circle
+                    return
+                }else if(currentPageCounter === pagesToLoad){                           // load last page of pages
+                    setMoviesData([...moviesData, ...moviesListData.results])           // spread last page into current array
+                    setCurrentPageCounter(1)                                            // reset the page Counter back to default
+                    setTimeout(()=>setWaitForLoad(false),130)                           // disable loading circle to display movies array
+                    return
+                }else{                                                                  // load all other pages but first and last pages
+                    setMoviesData([...moviesData, ...moviesListData.results])           // spread current page loaded into current array
+                    setPageNumber(pageNumber+1)                                         // increment page number by 1 to fetch next page
+                    setCurrentPageCounter(currentPageCounter+1)                         // increment page Counter to keep track of pages already added to array
+                    setIsLoadMoreMovies(!isLoadMoreMovies)                              // toggle this.UseEffect() to run again
                 }
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix])
-
 
     return (
         <div className="movieContainer">
@@ -120,6 +131,7 @@ function MovieContainer(){
                 totalPagesCount={totalPagesCount}
                 waitForLoad={waitForLoad}
                 watchListArray={watchListArray}
+                pagesToLoad={pagesToLoad}
             />
         }
 

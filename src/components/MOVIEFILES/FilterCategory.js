@@ -1,16 +1,29 @@
 import React from "react";
 
-function FilterCategory({category, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry, currentCategorySelected, setCurrentCategorySelected, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies, isExtendedOptions, setExtendedOptions}){
+function FilterCategory({category, yearOrGenreSuffix,movieCateogry, togglePage2, genresArray, getGenresArray, yearArray, handleSearchYearOrGenres, setmovieCateogry, currentCategorySelected, setCurrentCategorySelected, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies, isExtendedOptions, setExtendedOptions}){
 
     const genreOptionBtn = genresArray.map(genreOption => 
-        <button key={genreOption.id} onClick={()=> handleDropDownLI("Genres", genreOption.id)} >{genreOption.name}</button> 
+        <button 
+            key={genreOption.id} 
+            onClick={()=> handleDropDownLI("Genres", genreOption.id)}
+            className={yearOrGenreSuffix.includes(genreOption.id) && !togglePage2? "extendedCategoryOptionsBtnSelected" : "extendedCategoryOptionsBtn"}
+        >
+            {genreOption.name}
+        </button> 
     )
 
     const yearOptionBtn = yearArray.map(yearOption => 
-        <button key={yearOption} onClick={()=> handleDropDownLI("Year Release", yearOption)}>{yearOption}</button>
+        <button 
+            key={yearOption} 
+            onClick={()=> handleDropDownLI("Year Release", yearOption)}
+            className={yearOrGenreSuffix.includes(yearOption) && !togglePage2? "extendedCategoryOptionsBtnSelected" : "extendedCategoryOptionsBtn"}
+        >
+            {yearOption}
+        </button>
     )
 
     function handleDropDownLI(categoryName, ...extra){
+        console.log(category)
         switch (categoryName){
             case 'Genres':
                 getGenresArray()
@@ -44,7 +57,7 @@ function FilterCategory({category, genresArray, getGenresArray, yearArray, handl
 
     return(
         <li className="categoryLI">
-            <div className="mainCategoryOptions">
+            <div className={movieCateogry.replaceAll(" ", "_").toLowerCase().includes(category.replaceAll(" ", "_").toLowerCase()) && !togglePage2? "mainCategoryOptionsSelected" : "mainCategoryOptions"}>
                 <button onClick={() => handleDropDownLI(category)}>{category}</button>
             </div>
 

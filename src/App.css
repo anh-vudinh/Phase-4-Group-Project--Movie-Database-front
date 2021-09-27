@@ -52,6 +52,53 @@
   width: 100vw;
 }
 
+.pageOptionsDiv{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: 7px;
+  margin-right: 60px;
+}
+
+.pageOptionsContainer{
+  background-color: rgba(25, 25, 25, 1);
+  padding: 1px 5px 5px 5px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pageOptionsContainer label{
+  color: white;
+  margin-right: 5px;
+  font-size: 13px;
+
+}
+
+.pageOptionBtns{
+  color: white;
+  background-color: transparent;
+  box-shadow: none;
+  border-width: 0px;
+  background-color: rgba(25, 25, 25, 1);
+}
+
+.pageOptionBtns:hover{
+  background-color: rgb(65, 161, 0);
+  border-radius: 8px;
+}
+
+.pageOptionsBtnsSelected{
+  color: white;
+  background-color: transparent;
+  box-shadow: none;
+  border-width: 0px;
+  background-color: rgb(65, 161, 0);
+  border-radius: 8px;
+}
+
+
 .movie-details{
   position: relative;
   /* background-color: rgba(0,0,0,0.02); */
@@ -318,7 +365,7 @@
 
 .cardContainer{
   position: relative;
-  margin-top: 35px;
+  margin-top: 20px;
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -349,7 +396,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   height: 100%;
-  min-height: 1000px;
+  /* min-height: 1000px; */
   justify-content: center;
   width:100%;
   margin-bottom: 30px;
@@ -361,6 +408,8 @@
   margin: 0px 15px 0px 15px;
   width: 160px;
   min-height: 357px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cardTextContainer{
@@ -483,7 +532,7 @@
   display: inline-flex;
   flex-direction: column;
   margin-top: 13px;
-  width: 100px;
+  width: 110px;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -500,7 +549,7 @@
   font-size: 14px;
 }
 
-.mainCategoryOptions button:focus{
+.mainCategoryOptionsSelected button{
   min-width: 100px;
   margin-top: -15px;
   margin-bottom: -25px;
@@ -510,6 +559,7 @@
   border-radius: 25px;
   box-shadow: none;
   border-color: transparent;
+  font-size: 14px;
 }
 
 .mainCategoryOptions button:hover{
@@ -535,23 +585,36 @@
   min-height: 100px;
   width: 400px;
   flex-wrap: wrap;
-  background-color: rgba(10, 10, 10, 1);
+  background-color: rgba(10, 10, 10, 0.85);
   padding: 5px;
   border-radius: 20px;
+  overflow: hidden;
 }
 
-.extendedCategoryOptions button{
+.extendedCategoryOptionsBtn{
   position:relative;
   width: 100px;
   height: 50px;
-  background-color: rgba(10, 10, 10, 0.9);
+  background-color: transparent;
   color: white;
   border-radius: 2.5px;
   box-shadow: none;
   border-color: transparent;
 }
 
-.extendedCategoryOptions button:hover{
+.extendedCategoryOptionsBtnSelected{
+  width: 100px;
+  margin-top: 0px;
+  height: 50px;
+  background-color: rgba(255, 127, 39, 0.9);
+  color: white;
+  border-radius: 25px;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+
+.extendedCategoryOptionsBtn:hover{
   width: 100px;
   margin-top: 0px;
   height: 50px;
@@ -573,6 +636,7 @@
   border-radius: 20px;
   max-height: 570px;
 }
+
 .watchListCard{
   height: 80px;
   width: 425px;
@@ -580,6 +644,7 @@
   border-radius: 13px;
   position: relative;
 }
+
 .watchListCardBackground{
   width: 100%;
   height: 225px;

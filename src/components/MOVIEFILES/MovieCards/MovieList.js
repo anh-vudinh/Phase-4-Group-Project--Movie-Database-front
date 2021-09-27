@@ -2,8 +2,9 @@ import React from "react";
 import MovieCard from "./MovieCard";
 import arrowIcon from "../../../assets/arrowIcon.png"
 import loadingOrange from "../../../assets/loadingOrange.gif"
+import PagesToLoadOptions from "./PagesToLoadOptions";
 
-function MovieList({apiKey, apiPrefixURL, pagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
+function MovieList({apiKey, apiPrefixURL, pagesToLoad, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
     const displayMovies = moviesData.map((movie, index) => 
         <MovieCard key={`${movie.id}${index}`} 
             movie={movie} 
@@ -35,9 +36,9 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, moviesData, poster_prefix
     
     return (
         <>
+            <PagesToLoadOptions setPagesToLoad={setPagesToLoad} pagesToLoad={pagesToLoad}/>
             {noResultsFound? <div className="noResults"><h1>NO RESULTS FOUND</h1><h2>{searchSuffix.slice(7)}</h2></div> : null}
             <div className={noResultsFound? "hidden" : "cardContainer"}>
-                
                 <div className="arrowsContainer">
                     <img className="leftArrow"src={arrowIcon} alt="left arrow" onClick={preivousPageLoad}/>
                     <img className="rightArrow"src={arrowIcon} alt="right arrow" onClick={handleLoadMoreMovies}/>

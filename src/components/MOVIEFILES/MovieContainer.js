@@ -28,13 +28,14 @@ function MovieContainer(){
     const [toggleHeaderInfo, setToggleHeaderInfo] = useState(false)
     const [movieID, setMovieID] = useState("movie/popular")       ///belongs to Header.js, moved up for watchlist cards not populating header with full details
     const [movieCateogry, setmovieCateogry] = useState("movie/popular")
-    const [yearOrGenreSuffix, setYearOrGenreSuffix]= useState("") // rename the state
+    const [yearOrGenreSuffix, setYearOrGenreSuffix]= useState("")
     const [searchSuffix, setSearchSuffix] = useState("")
     const [noResultsFound, setNoResultsFound] = useState(false)
     const [waitForLoad, setWaitForLoad] = useState(false)
     const [currentPageCounter, setCurrentPageCounter] = useState(1)
+    const [pagesToLoad, setPagesToLoad] = useState(3)
 
-    const pagesToLoad = 3 //each page is 20 movies
+    // const pagesToLoad = 3 //each page is 20 movies
     const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiPrefixURL = "https://api.themoviedb.org/3/"
@@ -45,15 +46,14 @@ function MovieContainer(){
     `${apiPrefixURL}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
     
     useEffect(() => {
-        fetch(searchUrl)
-        .then(res=> res.json())
+        fetch(searchUrl)                                                                // URL alternates to populate movieList for pageload, main categories, 
+        .then(res=> res.json())                                                         // sub categories, and search movie by name results
         .then(moviesListData => {
             if(moviesListData.total_pages === 0){
-                setNoResultsFound(true)
+                setNoResultsFound(true)                                                 // search, enable no results page
             }else{
-                setNoResultsFound(false)
-                setTotalPagesCount(moviesListData.total_pages)
-                console.log(pageNumber)
+                setNoResultsFound(false)                                                // search, disable no results page
+                setTotalPagesCount(moviesListData.total_pages)                          // sets max amount of pages
             if(currentPageCounter === 1 || pagesToLoad === 1){                          // load first page of pages
                     setWaitForLoad(true)                                                // activate the loading circle until pages are done loading
                     setMoviesData(moviesListData.results)                               // clear out moviesData array and overwrite with first page
@@ -78,7 +78,7 @@ function MovieContainer(){
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix])
+    },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix, pagesToLoad])
 
     return (
         <div className="movieContainer">
@@ -127,19 +127,20 @@ function MovieContainer(){
                 moviesData={moviesData}
                 noResultsFound={noResultsFound}
                 pageNumber={pageNumber}
+                pagesToLoad={pagesToLoad}
                 poster_prefixURL={poster_prefixURL} 
                 searchSuffix={searchSuffix}
                 setGenresList={setGenresList}
                 setIsLoadMoreMovies={setIsLoadMoreMovies}
                 setMovie={setMovie}
                 setPageNumber={setPageNumber}
+                setPagesToLoad={setPagesToLoad}
                 setTogglePage2={setTogglePage2}
                 setWatchListArray={setWatchListArray}
                 togglePage2={togglePage2}
                 totalPagesCount={totalPagesCount}
                 waitForLoad={waitForLoad}
                 watchListArray={watchListArray}
-                pagesToLoad={pagesToLoad}
             />
         }
 
@@ -147,6 +148,7 @@ function MovieContainer(){
                 apiKey={apiKey}
                 apiPrefixURL={apiPrefixURL}
                 isLoadMoreMovies={isLoadMoreMovies}
+                movieCateogry={movieCateogry}
                 setIsLoadMoreMovies={setIsLoadMoreMovies}
                 setmovieCateogry={setmovieCateogry}
                 setMoviesData={setMoviesData}
@@ -154,6 +156,8 @@ function MovieContainer(){
                 setSearchSuffix={setSearchSuffix}
                 setTotalPagesCount={setTotalPagesCount}
                 setYearOrGenreSuffix={setYearOrGenreSuffix}
+                togglePage2={togglePage2}
+                yearOrGenreSuffix={yearOrGenreSuffix}
             />
 
             <WatchList 

@@ -5,6 +5,10 @@ vu- 9/27/2021
 - removed setTogglePage2(false) from multiple functions and placed a single useState switch in MovieContainer when the last page loads
 - eyeballicon for moviecards now have opacity 0.40 when not hovered, when hovered changes to opacity 1, this is so they don't stand out too much and take away from the movie posters
 - finetuned when crackle video loads, closes, persists and visuals
+- added PagesToLoadOptions functionality and styling, users can now choose how many pages to load, limited to 100 movies max per page to proactively reduce performance impact
+- replaced logic on mainCategories to now keep highlighted which category is selected
+- replaced logic on extendedOptions to persists the selected extendedoption highlight
+- improved CSS on extendedOptions
 
 vu- 9/25/2021
 - added Crackle video component

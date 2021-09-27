@@ -2,6 +2,8 @@ vu- 9/27/2021
 - added logic to make amount of pages loaded dynamic. Dev can now determine how many pages to load by changing const pagesToLoad, to whatever they want
 - with new logic dev can now make and option where users can determine how many pages they wish to see per load (not yet implemented)
 - experimented more with Crackles API. Unfortunately it's as I guessed, sony does not keep their api up to date with their website, and their search api is unreliable in returning current and relevent data. The only option left is to Data scrap their movies catalog to pull movie id, movie name, movie release_date and build a database on that.
+- removed setTogglePage2(false) from multiple functions and placed a single useState switch in MovieContainer when the last page loads
+- eyeballicon for moviecards now have opacity 0.40 when not hovered, when hovered changes to opacity 1, this is so they don't stand out too much and take away from the movie posters
 
 vu- 9/25/2021
 - added Crackle video component

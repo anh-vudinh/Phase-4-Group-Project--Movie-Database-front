@@ -4,11 +4,13 @@ import informationIcon from "../../../assets/informationIcon.png"
 import languageBubble from "../../../assets/languageBubble.png"
 import wwwLinkIcon from "../../../assets/wwwLinkIcon.png"
 
-function Header({apiKey, apiPrefixURL, totalPagesCount, moviesDataLength, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, setTogglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray, setIsLoadMoreMovies, isLoadMoreMovies, setPageNumber}){
-    const randomMovieIndex = Math.floor(Math.random() * moviesDataLength)
+function Header({apiKey, apiPrefixURL, moviesData, totalPagesCount, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray, setIsLoadMoreMovies, isLoadMoreMovies, setPageNumber}){
+    const randomMovieIndex = Math.floor(Math.random() * moviesData.length)
     const randomMoviePageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
     const randomOrSpecificMovieURL = typeof movieID === "string"? 
-        `${apiPrefixURL}${movieID}?api_key=${apiKey}${randomMoviePageNumber}`:`${apiPrefixURL}movie/${movieID}?api_key=${apiKey}`
+        `${apiPrefixURL}${movieID}?api_key=${apiKey}${randomMoviePageNumber}`:          // used to load random movie on first page load
+        `${apiPrefixURL}movie/${movieID}?api_key=${apiKey}`                             // used for everytime after first load to fetch specific movie full info 
+                                                                                        // movie data linked by movie cards/watchlist cards do not contain full data || example: release_year
 
     useEffect(()=>{
         fetch(randomOrSpecificMovieURL)
@@ -27,12 +29,12 @@ function Header({apiKey, apiPrefixURL, totalPagesCount, moviesDataLength, poster
                 setmovieCateogry("Genres")
                 setPageNumber(1)
                 setIsLoadMoreMovies(!isLoadMoreMovies)
-                setTimeout(()=> {setTogglePage2(false)}, 120)
                 }
             }
         >  
             {listItem.name} 
-        </li>)
+        </li>
+    )
 
     function handlePageLoad(randomMovieArray){
         if(((movieID === "popular" || movieID ==="movie/popular") && randomMovieArray.results !== undefined)){
@@ -70,8 +72,7 @@ function Header({apiKey, apiPrefixURL, totalPagesCount, moviesDataLength, poster
                 </div>
             </div>
 
-            <Trailer movie={movie} togglePage2={togglePage2} apiKey={apiKey} apiPrefixURL={apiPrefixURL} movieArray={movieArray} setMovieArray={setMovieArray}/>
-            
+            <Trailer movie={movie} togglePage2={togglePage2} apiKey={apiKey} apiPrefixURL={apiPrefixURL} movieArray={movieArray} setMovieArray={setMovieArray}/>  
         </>
 
     )

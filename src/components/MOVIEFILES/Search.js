@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import FilterCategory from './FilterCategory'
 
-function Search({setmovieCateogry, apiKey, apiPrefixURL, setMoviesData, setYearOrGenreSuffix, setSearchSuffix, setTogglePage2, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies}){
+function Search({setmovieCateogry, apiKey, apiPrefixURL, setMoviesData, setYearOrGenreSuffix, setSearchSuffix, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies}){
     
     const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
     const [genresArray, setGenresArray] = useState([]) //
@@ -37,7 +37,6 @@ function Search({setmovieCateogry, apiKey, apiPrefixURL, setMoviesData, setYearO
             yearArray={yearArray}
             handleSearchYearOrGenres={handleSearchYearOrGenres}
             setmovieCateogry={setmovieCateogry}
-            setTogglePage2={setTogglePage2}
             currentCategorySelected={currentCategorySelected}
             setCurrentCategorySelected={setCurrentCategorySelected}
             setPageNumber={setPageNumber}
@@ -62,7 +61,6 @@ function Search({setmovieCateogry, apiKey, apiPrefixURL, setMoviesData, setYearO
         setmovieCateogry("search/movie")
         setPageNumber(1)
         setSearchSuffix(`&query=${searchInput.replaceAll(" ", "%20").toLowerCase()}`)
-        setTimeout(()=> {setTogglePage2(false)}, 110)
         setSearchInput("")
         setIsLoadMoreMovies(!isLoadMoreMovies)
         }

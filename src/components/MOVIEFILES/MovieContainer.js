@@ -8,6 +8,13 @@ import MoviePage2Container from "./MovieInfoNReviews/MoviePage2Conatiner"
 import YoutubeFreeMovie from "./HeaderBanner/YoutubeFreeMovie"
 import BlankPoster from "../../assets/blankposter.jpg"
 
+//useEffects() exist in : [dependencies]
+// MovieContainer : [isLoadMoreMovies, yearOrGenreSuffix, searchSuffix]
+// Header : [movieID]
+// YoutubeFreeMovie : [movie, toggleRetryFetch]
+// Trailer : [movie]
+// Crackle : [movie]
+
 function MovieContainer(){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
@@ -27,7 +34,7 @@ function MovieContainer(){
     const [waitForLoad, setWaitForLoad] = useState(false)
     const [currentPageCounter, setCurrentPageCounter] = useState(1)
 
-    const pagesToLoad = 2 //each page is 20 movies
+    const pagesToLoad = 3 //each page is 20 movies
     const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiPrefixURL = "https://api.themoviedb.org/3/"
@@ -46,6 +53,7 @@ function MovieContainer(){
             }else{
                 setNoResultsFound(false)
                 setTotalPagesCount(moviesListData.total_pages)
+                console.log(pageNumber)
             if(currentPageCounter === 1 || pagesToLoad === 1){                          // load first page of pages
                     setWaitForLoad(true)                                                // activate the loading circle until pages are done loading
                     setMoviesData(moviesListData.results)                               // clear out moviesData array and overwrite with first page
@@ -59,6 +67,7 @@ function MovieContainer(){
                     setMoviesData([...moviesData, ...moviesListData.results])           // spread last page into current array
                     setCurrentPageCounter(1)                                            // reset the page Counter back to default
                     setTimeout(()=>setWaitForLoad(false),130)                           // disable loading circle to display movies array
+                    setTogglePage2(false)                                               // disable page2 enable page1 if not already
                     return
                 }else{                                                                  // load all other pages but first and last pages
                     setMoviesData([...moviesData, ...moviesListData.results])           // spread current page loaded into current array
@@ -82,7 +91,7 @@ function MovieContainer(){
                 isLoadMoreMovies={isLoadMoreMovies}
                 movie={movie} movieArray={movieArray}
                 movieID={movieID}
-                moviesDataLength={moviesData.length}
+                moviesData={moviesData}
                 poster_prefixURL={poster_prefixURL}
                 setGenresList={setGenresList}
                 setIsLoadMoreMovies={setIsLoadMoreMovies}
@@ -92,7 +101,6 @@ function MovieContainer(){
                 setMovieID={setMovieID}
                 setPageNumber={setPageNumber}
                 setToggleHeaderInfo={setToggleHeaderInfo}
-                setTogglePage2={setTogglePage2}
                 setYearOrGenreSuffix={setYearOrGenreSuffix}
                 toggleHeaderInfo={toggleHeaderInfo}
                 togglePage2={togglePage2}
@@ -144,7 +152,6 @@ function MovieContainer(){
                 setMoviesData={setMoviesData}
                 setPageNumber={setPageNumber}
                 setSearchSuffix={setSearchSuffix}
-                setTogglePage2={setTogglePage2}
                 setTotalPagesCount={setTotalPagesCount}
                 setYearOrGenreSuffix={setYearOrGenreSuffix}
             />

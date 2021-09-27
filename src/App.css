@@ -678,9 +678,14 @@
   left: 110px;
   top: 10px;
   height: 25px;
+  opacity: 0.40;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+}
+
+.eyeBallIcon:hover{
+  opacity: 1;
 }
 
 .castContainer{ 

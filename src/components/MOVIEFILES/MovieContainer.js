@@ -49,35 +49,42 @@ function MovieContainer(){
     `${apiPrefixURL}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
     
     useEffect(() => {
-        fetch(searchUrl)                                                                // URL alternates to populate movieList for pageload, main categories, 
-        .then(res=> res.json())                                                         // sub categories, and search movie by name results
+        console.log("P#",pageNumber)
+        fetch(searchUrl)                                                                    // URL alternates to populate movieList for pageload, main categories, 
+        .then(res=> res.json())                                                             // sub categories, and search movie by name results
         .then(moviesListData => {
-            if(moviesListData.total_pages === 0){
-                setNoResultsFound(true)                                                 // search, enable no results page
-            }else{
-                setNoResultsFound(false)                                                // search, disable no results page
-                setTotalPagesCount(moviesListData.total_pages)                          // sets max amount of pages
-            if(currentPageCounter === 1 || pagesToLoad === 1){                          // load first page of pages
-                    setWaitForLoad(true)                                                // activate the loading circle until pages are done loading
-                    setMoviesData(moviesListData.results)                               // clear out moviesData array and overwrite with first page
-                    setCurrentPageCounter(currentPageCounter+1)                         // increment page Counter
-                    if(pagesToLoad !== 1) {                                             // normal procedure if user is not only loading 1 page
-                        setPageNumber(pageNumber+1)                                     // increment page number by 1 to fetch next page
-                        setIsLoadMoreMovies(!isLoadMoreMovies)}                         // toggle this.UseEffect() to run again
-                    if(pagesToLoad === 1) setTimeout(()=>setWaitForLoad(false),130)     // if user only wanted to load 1 page then disable loading circle
-                    return
-                }else if(currentPageCounter === pagesToLoad){                           // load last page of pages
-                    setMoviesData([...moviesData, ...moviesListData.results])           // spread last page into current array
-                    setCurrentPageCounter(1)                                            // reset the page Counter back to default
-                    setTimeout(()=>setWaitForLoad(false),130)                           // disable loading circle to display movies array
-                    setTogglePage2(false)                                               // disable page2 enable page1 if not already
-                    return
-                }else{                                                                  // load all other pages but first and last pages
-                    setMoviesData([...moviesData, ...moviesListData.results])           // spread current page loaded into current array
-                    setPageNumber(pageNumber+1)                                         // increment page number by 1 to fetch next page
-                    setCurrentPageCounter(currentPageCounter+1)                         // increment page Counter to keep track of pages already added to array
-                    setIsLoadMoreMovies(!isLoadMoreMovies)                              // toggle this.UseEffect() to run again
+            if(moviesListData.errors === undefined){                                        // catch error messages, which means the page requested does not exist (requesting page greater than totalpages)
+                if(moviesListData.total_pages === 0){
+                    setNoResultsFound(true)                                                 // search, enable no results page
+                }else{
+                    setNoResultsFound(false)                                                // search, disable no results page
+                    setTotalPagesCount(moviesListData.total_pages)                          // sets max amount of pages
+                if(currentPageCounter === 1 || pagesToLoad === 1){                          // load first page of pages
+                        setWaitForLoad(true)                                                // activate the loading circle until pages are done loading
+                        setMoviesData(moviesListData.results)                               // clear out moviesData array and overwrite with first page
+                        setCurrentPageCounter(currentPageCounter+1)                         // increment page Counter
+                        if(pagesToLoad !== 1) {                                             // normal procedure if user is not only loading 1 page
+                            setPageNumber(pageNumber+1)                                     // increment page number by 1 to fetch next page
+                            setIsLoadMoreMovies(!isLoadMoreMovies)}                         // toggle this.UseEffect() to run again
+                        if(pagesToLoad === 1) setTimeout(()=>setWaitForLoad(false),130)     // if user only wanted to load 1 page then disable loading circle
+                        return
+                    }else if(currentPageCounter === pagesToLoad){                           // load last page of pages
+                        setMoviesData([...moviesData, ...moviesListData.results])           // spread last page into current array
+                        setCurrentPageCounter(1)                                            // reset the page Counter back to default
+                        setTimeout(()=>setWaitForLoad(false),130)                           // disable loading circle to display movies array
+                        setTogglePage2(false)                                               // disable page2 enable page1 if not already
+                        return
+                    }else{                                                                  // load all other pages but first and last pages
+                        setMoviesData([...moviesData, ...moviesListData.results])           // spread current page loaded into current array
+                        setPageNumber(pageNumber+1)                                         // increment page number by 1 to fetch next page
+                        setCurrentPageCounter(currentPageCounter+1)                         // increment page Counter to keep track of pages already added to array
+                        setIsLoadMoreMovies(!isLoadMoreMovies)                              // toggle this.UseEffect() to run again
+                    }
                 }
+            }else{                                                                          // reset as psuedo last page if api returns error message because pages do not exist and 
+                setCurrentPageCounter(1)
+                setTimeout(()=>setWaitForLoad(false),130)
+                setTogglePage2(false)
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps

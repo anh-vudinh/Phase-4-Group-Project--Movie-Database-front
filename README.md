@@ -1,8 +1,12 @@
 vu- 9/29/2021
+- added notes alongside functions and important lines of code for future understanding
 - added better textarea component (functionality needs work)
 - added modal functionality and style when hovering movie card
 - modal now fades in, using react. Couldnt do it through css
 - modal overview now has 3 different font sizes based on how many characters are in the overview
+- fixed errors messages from api being pushed into movies data array
+- adjusted logic of dynamically adjusting moviecardscontainer and cardscontainer
+- throughly adjusted and fixed next, previous, pageOptions buttons interaction with each other. Should be no more problems regardless of how user decides to browse or press buttons in whichever order
 
 vu- 9/28/2021
 - added variable to MovieContainer to control whether YT and Crackle components are loaded

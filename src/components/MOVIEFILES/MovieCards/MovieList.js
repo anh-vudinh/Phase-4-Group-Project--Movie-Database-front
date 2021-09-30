@@ -35,40 +35,41 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCur
     )
 
     function handleLoadMoreMovies(){
-        setPageNumber(pageNumber < totalPagesCount ? pageNumber + 1 : 1)
-        setIsLoadMoreMovies(!isLoadMoreMovies)
+        setPageNumber(pageNumber < totalPagesCount ? pageNumber + 1 : 1)                                                    // increments up 1 page count and toggles fetch, dependent on error catcher in useEffect() of MovieContainer to prevent nonexistent pages from populating the main array
+        setIsLoadMoreMovies(!isLoadMoreMovies)                                                                              // toggles the useEffect fetch in MovieContainer
     }
     
     function preivousPageLoad(){
-        if(pageNumber <= totalPagesCount && pageNumber > pagesToLoad){
-            setPageNumber(pageNumber-(pagesToLoad)-(pagesToLoad-1))
+        if(pageNumber <= totalPagesCount && pageNumber > pagesToLoad){                                                      // the default previous button logic handles going backwards from highest pages to lowest pages
+            setPageNumber(pageNumber-(pagesToLoad)-(pagesToLoad-1) > 0? pageNumber-(pagesToLoad)-(pagesToLoad-1) : 1)       // logic to catch if pages go below 1, set pages to 1, api does not have pages < 0, error message returned
         }else{
-            setPageNumber(totalPagesCount-(pagesToLoad-1))
+            console.log("b",totalPagesCount-(pagesToLoad-1))
+            setPageNumber(totalPagesCount-(pagesToLoad-1))                                                                  // logic to handle going backwards through first elements of array to its last elements, looping from lowest to highest
         }
-        setIsLoadMoreMovies(!isLoadMoreMovies)
+        setIsLoadMoreMovies(!isLoadMoreMovies)                                                                              // toggles the useEffect fetch in MovieContainer
     }
 
     useEffect(()=>{
-        if(startModalTimer === true){                               //start timer top open modal, client must hover for 1500 ms to trigger
-            document.body.style.cursor = `wait`
-            setTimeoutID(setTimeout(handleWait, 1500))
+        if(startModalTimer === true){                                           // start timer top open modal, client must hover for 1500 ms to trigger
+            document.body.style.cursor = `wait`                                 // changes cursor to hourglass
+            setTimeoutID(setTimeout(handleWait, 1500))                          // if user hovers for movie card image for 1.5 seconds, create the modal through handlewait
         }else{                         
-            document.body.style.cursor = "default"                             //if client removes their hover, the handlewait is cancelled and modal does not open
-            clearTimeout(timeoutID)
-            setToggleMovieCardModal(false)
-            setOpacityValue(0)
+            document.body.style.cursor = "default"                              // switches back to normal cursor
+            clearTimeout(timeoutID)                                             // if client removes their hover, the handlewait is cancelled and modal does not open
+            setToggleMovieCardModal(false)                                      // close the modal if it's open, this belongs solely to MovieCard handleMouseLeave()
+            setOpacityValue(0)                                                  // reset opacity so that the next time it's run modal can fade in
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[startModalTimer])
 
-    function handleWait(){
-        fetch(`${apiPrefixURL}movie/${modalMovieID}?api_key=${apiKey}`)
-        .then(res => res.json())
+    function handleWait(){                                                      // if client hovers for 1.5 seconds, fetch full movie data from api, 
+        fetch(`${apiPrefixURL}movie/${modalMovieID}?api_key=${apiKey}`)         // and set the data into a use state to pass data to the modal componenet
+        .then(res => res.json())                                                // this timer was done to minimize calls to the api
         .then(movieObj => {
             setMovieCardModalDetails(movieObj)
         })
         document.body.style.cursor = "default"
-        setTimeout(()=>setToggleMovieCardModal(true),150)
+        setTimeout(()=>setToggleMovieCardModal(true),150)                       // toggle to allow the modal to be created
     }
 
     return (
@@ -80,14 +81,15 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCur
                 currentPageCounter={currentPageCounter}
                 setPageNumber={setPageNumber}
                 setCurrentPageCounter={setCurrentPageCounter}
+                totalPagesCount={totalPagesCount}
             />
             {noResultsFound? <div className="noResults"><h1>NO RESULTS FOUND</h1><h2>{searchSuffix.slice(7)}</h2></div> : null}
-            <div className={noResultsFound? "hidden" : "cardContainer"} style={{minHeight: `${cardContainerMinHeight*pagesToLoad}px`}}>
+            <div className={noResultsFound? "hidden" : "cardContainer"} style={{minHeight: `${cardContainerMinHeight*(moviesData.length/20)}px`}}>
                 <div className={waitForLoad? "hidden" : "arrowsContainer"}>
                     <img className="leftArrow"src={arrowIcon} alt="left arrow" onClick={preivousPageLoad}/>
                     <img className="rightArrow"src={arrowIcon} alt="right arrow" onClick={handleLoadMoreMovies}/>
                 </div>
-                <div className="movieCardsContainer" style={{minHeight: `${cardContainerMinHeight*pagesToLoad}px`}}>
+                <div className="movieCardsContainer" style={{minHeight: `${cardContainerMinHeight*(moviesData.length/20)}px`}}>
                     {waitForLoad? <div className="loadingOrangeDiv"><img className="loadingOrangeImage" src={loadingOrange} alt="loadingCircle"></img></div> : displayMovies}
                 </div>
             </div>

@@ -1,11 +1,12 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieCard({apiKey, apiPrefixURL, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList}){
+function MovieCard({apiKey, apiPrefixURL, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList}){
     
     const {title, poster_path, release_date, id} = movie
     const [isWatched, setIsWatched] = useState(false)
+    const movieCardModalWidth = 275
 
     function handleCardImageClick(){
             fetch(`${apiPrefixURL}movie/${id}?api_key=${apiKey}`)
@@ -34,9 +35,30 @@ function MovieCard({apiKey, apiPrefixURL, movie, poster_prefixURL, broken_path, 
         }
     }
 
+    function handleCardImageHover(e, movie){
+        const movieCardsContainerWidth = document.querySelector(".movieCardsContainer").clientWidth                         //checks to see if modal will go off screen
+        if(movieCardModalWidth + (e.target.offsetParent.offsetLeft + e.target.width) > movieCardsContainerWidth){
+            //position modal to the left
+            setMovieCardModalPosition([(e.target.offsetParent.offsetLeft - 300), 
+                (e.target.offsetParent.offsetTop + e.target.offsetParent.offsetParent.offsetParent.offsetTop - 10)])
+        }else{
+            //position modal to the right
+            setMovieCardModalPosition([(e.target.offsetParent.offsetLeft + e.target.width), 
+                (e.target.offsetParent.offsetTop + e.target.offsetParent.offsetParent.offsetParent.offsetTop - 10)])
+        }
+        // setMouseMovePosition([e.pageY, e.pageX])
+        setModalMovieID(movie.id)       //shares the movieID with the modal Component
+        setStartModalTimer(true)        //toggles useState to start useEffect() in MovieList
+    }
+    
+    function handleMouseLeave(){
+        setStartModalTimer(false)
+    }
+
+
     return (  
         <div className="movieCard">
-            <img className="cardImage" onClick={() => handleCardImageClick()} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
+            <img className="cardImage" onMouseLeave={handleMouseLeave} onMouseOver={(e)=>handleCardImageHover(e, movie)} onClick={handleCardImageClick} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
             <img src={isWatched? eyeballicon : eyeballClosedicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWatchListAddClick} />
             <div className="cardTextContainer">
                 {title === "" ? "No Title" : 

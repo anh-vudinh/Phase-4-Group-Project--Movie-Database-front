@@ -10,6 +10,8 @@ import BlankPoster from "../../assets/blankposter.jpg"
 
 //useEffects() exist in : [dependencies]
 // MovieContainer : [isLoadMoreMovies, yearOrGenreSuffix, searchSuffix]
+// MovieList : [startModalTimer]
+// MovieCardModal : [opacityValue]
 // Header : [movieID]
 // YoutubeFreeMovie : [movie, toggleRetryFetch]
 // Trailer : [movie]
@@ -33,9 +35,10 @@ function MovieContainer(){
     const [noResultsFound, setNoResultsFound] = useState(false)
     const [waitForLoad, setWaitForLoad] = useState(false)
     const [currentPageCounter, setCurrentPageCounter] = useState(1)
-    const [pagesToLoad, setPagesToLoad] = useState(2)
-
-    // const pagesToLoad = 3 //each page is 20 movies
+    const [pagesToLoad, setPagesToLoad] = useState(2)       //each page is 20 movies
+    
+    const enableCrackleVideo = false
+    const enableYoutubeVideo = false
     const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiPrefixURL = "https://api.themoviedb.org/3/"
@@ -172,15 +175,19 @@ function MovieContainer(){
                 watchListArray={watchListArray}
             />
 
-            <YoutubeFreeMovie 
-                movie={movie}
-                setMovieArray={setMovieArray}
-            />
+            {enableYoutubeVideo?
+                <YoutubeFreeMovie 
+                    movie={movie}
+                    setMovieArray={setMovieArray}
+                />
+            : null}
             
-            <CrackleFreeMovie
-                movie={movie}
-                togglePage2={togglePage2}
-            />
+            {enableCrackleVideo? 
+                <CrackleFreeMovie
+                    movie={movie}
+                    togglePage2={togglePage2}
+                />
+            : null}
 
         </div>
     )

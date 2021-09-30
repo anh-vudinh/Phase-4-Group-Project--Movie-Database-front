@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import MovieCard from "./MovieCard";
+import MovieCardModal from "./MovieCardModal";
 import arrowIcon from "../../../assets/arrowIcon.png"
 import loadingOrange from "../../../assets/loadingOrange.gif"
 import PagesToLoadOptions from "./PagesToLoadOptions";
@@ -7,6 +8,13 @@ import PagesToLoadOptions from "./PagesToLoadOptions";
 function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
     
     const cardContainerMinHeight = 744
+    const [toggleMovieCardModal, setToggleMovieCardModal] = useState(false)
+    const [movieCardModalPosition, setMovieCardModalPosition] = useState([0,0])
+    const [movieCardModalDetails, setMovieCardModalDetails] = useState({})
+    const [startModalTimer, setStartModalTimer] = useState(false)
+    const [modalMovieID, setModalMovieID] = useState(100)
+    const [timeoutID, setTimeoutID] = useState()
+    const [opacityValue, setOpacityValue] = useState(0)
 
     const displayMovies = moviesData.map((movie, index) => 
         <MovieCard key={`${movie.id}${index}`} 
@@ -20,6 +28,9 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCur
             setGenresList={setGenresList}
             apiKey={apiKey}
             apiPrefixURL={apiPrefixURL}
+            setStartModalTimer={setStartModalTimer}
+            setMovieCardModalPosition={setMovieCardModalPosition}
+            setModalMovieID={setModalMovieID}
         />
     )
 
@@ -36,7 +47,30 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCur
         }
         setIsLoadMoreMovies(!isLoadMoreMovies)
     }
-    
+
+    useEffect(()=>{
+        if(startModalTimer === true){                               //start timer top open modal, client must hover for 1500 ms to trigger
+            document.body.style.cursor = `wait`
+            setTimeoutID(setTimeout(handleWait, 1500))
+        }else{                         
+            document.body.style.cursor = "default"                             //if client removes their hover, the handlewait is cancelled and modal does not open
+            clearTimeout(timeoutID)
+            setToggleMovieCardModal(false)
+            setOpacityValue(0)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[startModalTimer])
+
+    function handleWait(){
+        fetch(`${apiPrefixURL}movie/${modalMovieID}?api_key=${apiKey}`)
+        .then(res => res.json())
+        .then(movieObj => {
+            setMovieCardModalDetails(movieObj)
+        })
+        document.body.style.cursor = "default"
+        setTimeout(()=>setToggleMovieCardModal(true),150)
+    }
+
     return (
         <>
             <PagesToLoadOptions 
@@ -57,6 +91,17 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCur
                     {waitForLoad? <div className="loadingOrangeDiv"><img className="loadingOrangeImage" src={loadingOrange} alt="loadingCircle"></img></div> : displayMovies}
                 </div>
             </div>
+            {toggleMovieCardModal?
+                <MovieCardModal
+                    apiKey={apiKey}
+                    apiPrefixURL={apiPrefixURL}
+                    movieCardModalPosition={movieCardModalPosition}
+                    movieCardModalDetails={movieCardModalDetails}
+                    opacityValue={opacityValue}
+                    setOpacityValue={setOpacityValue}
+                />
+                : null
+            }
         </>
     )
 }

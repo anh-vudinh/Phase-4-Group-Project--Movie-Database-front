@@ -1,3 +1,12 @@
+vu- 9/29/2021
+- added better textarea component (functionality needs work)
+- added modal functionality and style when hovering movie card
+- modal now fades in, using react. Couldnt do it through css
+- modal overview now has 3 different font sizes based on how many characters are in the overview
+
+vu- 9/28/2021
+- added variable to MovieContainer to control whether YT and Crackle components are loaded
+
 vu- 9/27/2021
 - added logic to make amount of pages loaded dynamic. Dev can now determine how many pages to load by changing const pagesToLoad, to whatever they want
 - with new logic dev can now make and option where users can determine how many pages they wish to see per load (not yet implemented)

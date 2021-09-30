@@ -69,11 +69,11 @@ function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
                     }
                 </div>
             </div>
-            <CommentForm 
+            {/* <CommentForm 
                 reviewsArray={reviewsArray} 
                 setReviewsArray={setReviewsArray} 
                 movie={movie}
-            />
+            /> */}
         </>
     )
 }

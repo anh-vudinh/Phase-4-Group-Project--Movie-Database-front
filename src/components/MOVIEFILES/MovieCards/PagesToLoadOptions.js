@@ -1,23 +1,23 @@
 import React from "react";
 
-function PagesToLoadOptions({setPagesToLoad, pageNumber, totalPagesCount, currentPageCounter, pagesToLoad, setPageNumber, setCurrentPageCounter}){
+function PagesToLoadOptions({setPagesToLoad, previousPage, pageNumber, totalPagesCount, currentPageCounter, pagesToLoad, setPageNumber, setCurrentPageCounter}){
 
-    const pageOptionsArray = [20, 40, 60, 80, 100]
+    const pageOptionsArray = [1, 2, 3, 4, 5]                        // display how many pages? each page is 20 movies
 
     const pageOptionsBtns = pageOptionsArray.map((option, index) => 
         <button 
             key={index} 
-            className={pagesToLoad === option/20? "pageOptionsBtnsSelected" : "pageOptionBtns"}
+            className={pagesToLoad === option? "pageOptionsBtnsSelected" : "pageOptionBtns"}
             onClick={()=>handleOnPageOptionClick(option)}
         >
-                {option}
+            {option*20}                                             {/* pageOption is multiplied by 20 because there are 20 movies per page */}
         </button>
     )
 
-    function handleOnPageOptionClick(option){                                                                                                   // allows client to choose how many movies to load per page
-        setPageNumber(totalPagesCount >= pageNumber-(pagesToLoad)+(currentPageCounter)? pageNumber-(pagesToLoad)+(currentPageCounter): 1)       // logic to add on or remove pages from current view if client decides to choose more or less movies to see. 
-        setCurrentPageCounter(1)                                                                                                                // 1 is error catcher, example user is on page 18 of 18, they then choose to change page options to load 4 more pages when they're already on the last page pageNumber will be set to 19
-        setPagesToLoad(option/20)                                                                                                               // with the current MovieContainer.useEffect() an error will happen this defaults it to page 1, because that's what the user expects to show 
+    function handleOnPageOptionClick(option){                       // allows client to choose how many movies to load per page
+        setPageNumber(previousPage)                                 // previousPage is set by MovieContainer.useEffect(), this way client won't lose their spot when changing pages to display                                                                          
+        setCurrentPageCounter(1)                                    // error handling is done by MovieContainer.useEffect()
+        setPagesToLoad(option)                                      // makes sure the pageCounter is reset, and tells useEffect how many pages to fetch                                                         
     }
 
     return(

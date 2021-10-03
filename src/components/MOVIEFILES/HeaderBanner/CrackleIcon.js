@@ -1,34 +1,35 @@
 import React, {useState, useEffect} from "react"
 import crackleIcon from "../../../assets/crackleIcon.png"
-import x from "../../../assets/X.png"
 
-function CrackleFreeMovie({movie, togglePage2}){
+function CrackleIcon({movie, showCrackleVideo, showExtraMovieContainer, videoLink, setVideoLink, setShowCrackleVideo, setShowExtraMovieContainer, setExtraMovieWarning}){
     const {title, release_date} = movie
     const crackleDB = "http://localhost:3001/crackle"
     const [crackleObjsArray, setCrackleObjsArray] = useState([])
-    const [videoLink, setVideoLink] = useState(undefined)
-    const [toggleShowCrackleVideo, setToggleShowCrackleVideo] = useState(false)
-    const date = `${new Date().toISOString()}`
     const regex = /[^a-zA-Z0-9]/g
 
-    useEffect(()=>{
-        setVideoLink(undefined) //reset videolink to default state
-        if(movie.id !==undefined && crackleObjsArray.length === 0){
+    useEffect(()=>{                                                         // checks the crackle DB stored in file for movies of the same name
+        setVideoLink(undefined)                                             // reset videolink to default state
+        setShowExtraMovieContainer(false)                                   // reset extramoviecontainer to hidden, master controller
+        setExtraMovieWarning(false)                                         // reset warning to false, master controller
+        if(movie.id !== undefined && crackleObjsArray.length === 0){         
             fetch(crackleDB)
             .then(resp => resp.json())
             .then(data => {
-                setCrackleObjsArray(data)
+                setCrackleObjsArray(data)                                   // puts all the crackle data into an array
             })
         }
-        if(crackleObjsArray.length > 0){
-            // const crackleMovieObject = crackleObjsArray.find(crackleMovieItem => console.log(crackleMovieItem.Title.toLowerCase() === title.toLowerCase()))
+        if(crackleObjsArray.length > 0){                                    // logic if the fetch was able to populate the array
             const crackleMovieObject = crackleObjsArray.find(crackleMovieItem => (
-                    (crackleMovieItem.Title.replaceAll(regex, "").toLowerCase() === title.replaceAll(regex, "").toLowerCase()
-                    && Math.abs(crackleMovieItem.ReleaseYear - parseInt(release_date.slice(0,4))) < 2)
+                    (crackleMovieItem.Title.replaceAll(regex, "").toLowerCase() === title.replaceAll(regex, "").toLowerCase()       // compares the name of crackles movie vs the names from TMDB, removes all special characters and spaces
+                    && Math.abs(crackleMovieItem.ReleaseYear - parseInt(release_date.slice(0,4))) < 2)                              // also compare release years
                     )
                 )
-            if(crackleMovieObject === undefined)return;
-            setVideoLink(crackleMovieObject.Id)
+            if(crackleMovieObject === undefined){
+                return setShowCrackleVideo(false)
+            }                                                                             // if movie was not found do not create a Free movie icon
+            setVideoLink(crackleMovieObject.Id)    
+            setExtraMovieWarning(true)                                                                                 // if movie is found set the movie.id to useState so it can be used by component 
+
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
@@ -36,35 +37,17 @@ function CrackleFreeMovie({movie, togglePage2}){
     return(
         <>
             {videoLink === undefined? null : 
-            <>
-                <img className="crackleIcon" 
+                <img className={showExtraMovieContainer? "crackleIcon" : "hidden"}
                     src={crackleIcon} 
-                    onClick={()=>setToggleShowCrackleVideo(!toggleShowCrackleVideo)} 
+                    onClick={()=>setShowCrackleVideo(!showCrackleVideo)} 
                     alt="crackleIcon"
                 />
-                <div className={toggleShowCrackleVideo? "crackleUnderlay" : "hidden"} onClick={()=>setToggleShowCrackleVideo(!toggleShowCrackleVideo)}>
-                    <div className={toggleShowCrackleVideo? "crackleIFrameContainer" : "hidden"}>
-                        <iframe 
-                            className="crackleIFrame"
-                            scrolling="no"
-                            src={`https://www.crackle.com/watch/${videoLink}`}
-                            title="Crackle video player" 
-                            frameBorder="0" 
-                            allow="accelerometer; encrypted-media; autoplay;" allowFullScreen>
-                        </iframe>
-                    </div>
-                    <img className="crackleExitUnderlay" 
-                        src={x}
-                        alt="x"
-                    />
-                </div>
-            </>
             }
         </>
     )
 }
 
-export default CrackleFreeMovie;
+export default CrackleIcon;
 
 
     // function test(){

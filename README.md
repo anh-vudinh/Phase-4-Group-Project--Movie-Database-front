@@ -1,3 +1,21 @@
+vu- 10/03
+- added a return ()=> clearTimeout to the end of the useEffect in MovieCardModal to fix !! from 10/02
+- adjsuted cracklevideo to be the same size as youtubevideo
+- crackle video now properly doesnt show if video not found, needed to adjust logic because of the change from previous iteration
+- !! try to adjust the Gernes and Year Release without doing document.querySelector
+- !! make modal to read full user review
+- !! make comment form submit save comment to DB
+- !! try to figure out how to disable crackle autoplay while keeping the iframe functioning (currently removing autoplay prevents the crackle player for playing. I think it's because of the ad componenent they use on their player)
+
+vu- 10/02
+- added/remade components, parent (FreeMovieContainer), children (CrackleIcon, CrackleVideo, YoutubeIcon, YoutubeTrailer, YoutubeVideo)
+- Header now is the grandparent of all the above
+- adjusted CSS of all the above
+- added a container to house all the free movie icons, and 4 vertical dots to toggle to hide or show that container
+- added a line to reset YT free movie to it's default state, previously there was no proper reset when a different movie was choosen to featured
+- added a display to let the user know there are free source for the movie they selected. CSS needs to be cleaned up, and logic needs to be put in a place it can refresh data on first run. possibly need to move useState up to main container
+- !! need to find reason console is saying there's an unmounted component warning when going to page2, possibly it's the modal
+
 vu- 9/29/2021
 - added notes alongside functions and important lines of code for future understanding
 - added better textarea component (functionality needs work)

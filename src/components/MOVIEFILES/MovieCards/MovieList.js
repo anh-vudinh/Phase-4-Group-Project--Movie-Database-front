@@ -5,7 +5,7 @@ import arrowIcon from "../../../assets/arrowIcon.png"
 import loadingOrange from "../../../assets/loadingOrange.gif"
 import PagesToLoadOptions from "./PagesToLoadOptions";
 
-function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
+function MovieList({apiKey, apiPrefixURL, pagesToLoad, previousPage, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
     
     const cardContainerMinHeight = 744
     const [toggleMovieCardModal, setToggleMovieCardModal] = useState(false)
@@ -59,6 +59,7 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCur
             setToggleMovieCardModal(false)                                      // close the modal if it's open, this belongs solely to MovieCard handleMouseLeave()
             setOpacityValue(0)                                                  // reset opacity so that the next time it's run modal can fade in
         }
+        return() => clearTimeout(timeoutID)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[startModalTimer])
 
@@ -82,6 +83,7 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, currentPageCounter,setCur
                 setPageNumber={setPageNumber}
                 setCurrentPageCounter={setCurrentPageCounter}
                 totalPagesCount={totalPagesCount}
+                previousPage={previousPage}
             />
             {noResultsFound? <div className="noResults"><h1>NO RESULTS FOUND</h1><h2>{searchSuffix.slice(7)}</h2></div> : null}
             <div className={noResultsFound? "hidden" : "cardContainer"} style={{minHeight: `${cardContainerMinHeight*(moviesData.length/20)}px`}}>

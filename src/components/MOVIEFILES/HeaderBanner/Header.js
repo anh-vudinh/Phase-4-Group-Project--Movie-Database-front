@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
-import Trailer from "./Trailer";
+import YoutubeTrailer from "./YoutubeTrailer";
+import FreeMovieContainer from "./FreeMovieContainer"
 import informationIcon from "../../../assets/informationIcon.png"
 import languageBubble from "../../../assets/languageBubble.png"
 import wwwLinkIcon from "../../../assets/wwwLinkIcon.png"
 
-function Header({apiKey, apiPrefixURL, moviesData, totalPagesCount, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray, setIsLoadMoreMovies, isLoadMoreMovies, setPageNumber}){
+function Header({apiKey, apiPrefixURL, enableCrackleVideo, enableYoutubeVideo, moviesData, totalPagesCount, poster_prefixURL, setYearOrGenreSuffix, setmovieCateogry, broken_path, setMovie, movie, toggleHeaderInfo, setToggleHeaderInfo, togglePage2, genresList, setGenresList, movieID, setMovieID, movieArray, setMovieArray, setIsLoadMoreMovies, isLoadMoreMovies, setPageNumber}){
     const randomMovieIndex = Math.floor(Math.random() * moviesData.length)
     const randomMoviePageNumber =`&page=${Math.floor(Math.random() * totalPagesCount)}`
     const randomOrSpecificMovieURL = typeof movieID === "string"? 
@@ -12,10 +13,10 @@ function Header({apiKey, apiPrefixURL, moviesData, totalPagesCount, poster_prefi
         `${apiPrefixURL}movie/${movieID}?api_key=${apiKey}`                             // used for everytime after first load to fetch specific movie full info 
                                                                                         // movie data linked by movie cards/watchlist cards do not contain full data || example: release_year
 
-    useEffect(()=>{
-        fetch(randomOrSpecificMovieURL)
-        .then(res => res.json())
-        .then(randomMovieObj => {
+    useEffect(()=>{                                                                     // fetches full movie data for header for first pageload
+        fetch(randomOrSpecificMovieURL)                                                 // exactly the same as fetch when clicking image on MovieCard. 
+        .then(res => res.json())                                                        // however they aren't shared because seperation of responsibilites
+        .then(randomMovieObj => {                                                       // it would be odd if header was responsible for populating data on page2
             handlePageLoad(randomMovieObj)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,10 +26,9 @@ function Header({apiKey, apiPrefixURL, moviesData, totalPagesCount, poster_prefi
         <li key={listItem.name} 
             className="headerGenresLI" 
             onClick={()=> {
-                setYearOrGenreSuffix(`&with_genres=${listItem.id}`)
-                setmovieCateogry("Genres")
-                setPageNumber(1)
-                setIsLoadMoreMovies(!isLoadMoreMovies)
+                setmovieCateogry("Genres")                                              // specifies to api we are searching for genre
+                setPageNumber(1)                                                        // set to page 1 of search results
+                setYearOrGenreSuffix(`&with_genres=${listItem.id}`)                     // triggers MovieContainer.useEffect()
                 }
             }
         >  
@@ -36,11 +36,11 @@ function Header({apiKey, apiPrefixURL, moviesData, totalPagesCount, poster_prefi
         </li>
     )
 
-    function handlePageLoad(randomMovieArray){
-        if(((movieID === "popular" || movieID ==="movie/popular") && randomMovieArray.results !== undefined)){
-            setMovie(randomMovieArray.results[randomMovieIndex])     
+    function handlePageLoad(randomMovieArray){                                                                      // fetches data on first page load
+        if(((movieID === "popular" || movieID ==="movie/popular") && randomMovieArray.results !== undefined)){      // first fetch returns a page of movies, function will select one of those movies
+            setMovie(randomMovieArray.results[randomMovieIndex])                                                    // then run it through again using the provided movie.id to get full data, the first cycle only provides partial data
             setMovieID(randomMovieArray.results[randomMovieIndex].id) 
-        }else if (typeof movieID === "number" ){
+        }else if (typeof movieID === "number" ){                                                                    // with the specific movie.id it can get the full data to populate header details
             setMovie(randomMovieArray)
             setGenresList([...randomMovieArray.genres])
         }
@@ -72,7 +72,21 @@ function Header({apiKey, apiPrefixURL, moviesData, totalPagesCount, poster_prefi
                 </div>
             </div>
 
-            <Trailer movie={movie} togglePage2={togglePage2} apiKey={apiKey} apiPrefixURL={apiPrefixURL} movieArray={movieArray} setMovieArray={setMovieArray}/>  
+            <YoutubeTrailer 
+                movie={movie} 
+                togglePage2={togglePage2} 
+                apiKey={apiKey} 
+                apiPrefixURL={apiPrefixURL} 
+                movieArray={movieArray} 
+                setMovieArray={setMovieArray}
+            />  
+
+            <FreeMovieContainer
+                enableCrackleVideo={enableCrackleVideo}
+                enableYoutubeVideo={enableYoutubeVideo}
+                setMovieArray={setMovieArray}
+                movie={movie}
+            />
         </>
 
     )

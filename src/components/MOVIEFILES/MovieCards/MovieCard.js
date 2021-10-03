@@ -8,25 +8,24 @@ function MovieCard({apiKey, apiPrefixURL, setStartModalTimer, setMovieCardModalP
     const [isWatched, setIsWatched] = useState(false)
     const movieCardModalWidth = 275
 
-    function handleCardImageClick(){
-            fetch(`${apiPrefixURL}movie/${id}?api_key=${apiKey}`)
-            .then(res =>res.json())
+    function handleCardImageClick(){                                // this fetch is specifically to pull the full data of selected movie
+            fetch(`${apiPrefixURL}movie/${id}?api_key=${apiKey}`)   // after image is clicked, because the movieCards do not provide full data
+            .then(res =>res.json())                                 // header details rely on the full data
             .then(fullMovieData => {
-                setMovie(fullMovieData)
-                setGenresList(fullMovieData.genres)
+                setMovie(fullMovieData)                             // this changes the data stored in movie state, Header component, and Videos rely on this data, possibly all components
+                setGenresList(fullMovieData.genres)                 // feeds genreslist to header
             })
-            setTimeout(()=> {setTogglePage2(true)}, 170)
+            setTimeout(()=> {setTogglePage2(true)}, 170)            // enables the MoviePage2Container, disables MovieList
     }
 
     function handleWatchListAddClick(){
-        //add function to find match? if any matches dont allow add to watchlists
-        switch(watchListArray.length){
-            case 0:{
-                setWatchListArray([...watchListArray, movie])
+        switch(watchListArray.length){                              // checks to see if movie is allowed to be added into watchlist
+            case 0:{                                                // handles adding the first movie into an empty watchlist
+                setWatchListArray([...watchListArray, movie])       
                 setIsWatched(true)
                 break;
             }
-            default:{ //checks to see if the movie.id to add matches any movie ids currently in the watchlist, if return false then add clicked movie
+            default:{                                               // checks to see if the movie.id to add matches any movie ids currently in the watchlist, if return false then add clicked movie
                 if(watchListArray.find(watchListItem => watchListItem.id === movie.id)  === undefined){
                     setWatchListArray([...watchListArray, movie])
                     setIsWatched(true)
@@ -36,8 +35,8 @@ function MovieCard({apiKey, apiPrefixURL, setStartModalTimer, setMovieCardModalP
     }
 
     function handleCardImageHover(e, movie){
-        const movieCardsContainerWidth = document.querySelector(".movieCardsContainer").clientWidth                         //checks to see if modal will go off screen
-        if(movieCardModalWidth + (e.target.offsetParent.offsetLeft + e.target.width) > movieCardsContainerWidth){
+        const movieCardsContainerWidth = document.querySelector(".movieCardsContainer").clientWidth                         // checks to see if modal will go off screen
+        if(movieCardModalWidth + (e.target.offsetParent.offsetLeft + e.target.width) > movieCardsContainerWidth){           // and adjust whether modal populates to the left or righ tof the movie image
             //position modal to the left
             setMovieCardModalPosition([(e.target.offsetParent.offsetLeft - 300), 
                 (e.target.offsetParent.offsetTop + e.target.offsetParent.offsetParent.offsetParent.offsetTop - 10)])
@@ -46,12 +45,11 @@ function MovieCard({apiKey, apiPrefixURL, setStartModalTimer, setMovieCardModalP
             setMovieCardModalPosition([(e.target.offsetParent.offsetLeft + e.target.width), 
                 (e.target.offsetParent.offsetTop + e.target.offsetParent.offsetParent.offsetParent.offsetTop - 10)])
         }
-        // setMouseMovePosition([e.pageY, e.pageX])
-        setModalMovieID(movie.id)       //shares the movieID with the modal Component
-        setStartModalTimer(true)        //toggles useState to start useEffect() in MovieList
+        setModalMovieID(movie.id)       // shares the movieID with the modal Component
+        setStartModalTimer(true)        // toggles useState to start useEffect() in MovieList
     }
     
-    function handleMouseLeave(){
+    function handleMouseLeave(){        // when users leaves the cardImage, toggle the Movielist.useEffect() to land in first else statement to remove modal
         setStartModalTimer(false)
     }
 

@@ -3,9 +3,7 @@ import MovieList from "./MovieCards/MovieList"
 import Header from "./HeaderBanner/Header"
 import Search from "./Search"
 import WatchList from "./WatchList"
-import CrackleFreeMovie from "./HeaderBanner/Crackle"
 import MoviePage2Container from "./MovieInfoNReviews/MoviePage2Conatiner"
-import YoutubeFreeMovie from "./HeaderBanner/YoutubeFreeMovie"
 import BlankPoster from "../../assets/blankposter.jpg"
 
 //useEffects() exist in : [dependencies]
@@ -23,22 +21,23 @@ function MovieContainer(){
     const [genresList, setGenresList] = useState([])
     const [watchListArray, setWatchListArray] = useState([])
     const [movieArray, setMovieArray] = useState([])
+    const [previousPage, setPreviousPage] = useState(0)
     const [totalPagesCount, setTotalPagesCount]= useState(100)
     const [isLoadMoreMovies, setIsLoadMoreMovies] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
     const [togglePage2, setTogglePage2] =useState(false)
     const [toggleHeaderInfo, setToggleHeaderInfo] = useState(false)
-    const [movieID, setMovieID] = useState("movie/popular")       ///belongs to Header.js, moved up for watchlist cards not populating header with full details
+    const [movieID, setMovieID] = useState("movie/popular")         //belongs to Header.js, moved up for watchlist cards not populating header with full details
     const [movieCateogry, setmovieCateogry] = useState("movie/popular")
     const [yearOrGenreSuffix, setYearOrGenreSuffix]= useState("")
     const [searchSuffix, setSearchSuffix] = useState("")
     const [noResultsFound, setNoResultsFound] = useState(false)
     const [waitForLoad, setWaitForLoad] = useState(false)
     const [currentPageCounter, setCurrentPageCounter] = useState(1)
-    const [pagesToLoad, setPagesToLoad] = useState(2)       //each page is 20 movies
+    const [pagesToLoad, setPagesToLoad] = useState(2)               //each page is 20 movies
     
-    const enableCrackleVideo = false
-    const enableYoutubeVideo = false
+    const enableCrackleVideo = true
+    const enableYoutubeVideo = true
     const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiPrefixURL = "https://api.themoviedb.org/3/"
@@ -49,7 +48,6 @@ function MovieContainer(){
     `${apiPrefixURL}${movieCateogry}?api_key=${apiKey}${searchSuffix}&page=${pageNumber}`
     
     useEffect(() => {
-        console.log("P#",pageNumber)
         fetch(searchUrl)                                                                    // URL alternates to populate movieList for pageload, main categories, 
         .then(res=> res.json())                                                             // sub categories, and search movie by name results
         .then(moviesListData => {
@@ -60,6 +58,7 @@ function MovieContainer(){
                     setNoResultsFound(false)                                                // search, disable no results page
                     setTotalPagesCount(moviesListData.total_pages)                          // sets max amount of pages
                 if(currentPageCounter === 1 || pagesToLoad === 1){                          // load first page of pages
+                        setPreviousPage(pageNumber)
                         setWaitForLoad(true)                                                // activate the loading circle until pages are done loading
                         setMoviesData(moviesListData.results)                               // clear out moviesData array and overwrite with first page
                         setCurrentPageCounter(currentPageCounter+1)                         // increment page Counter
@@ -115,6 +114,8 @@ function MovieContainer(){
                 toggleHeaderInfo={toggleHeaderInfo}
                 togglePage2={togglePage2}
                 totalPagesCount={totalPagesCount}
+                enableCrackleVideo={enableCrackleVideo}
+                enableYoutubeVideo={enableYoutubeVideo}
             />
 
         {togglePage2? 
@@ -153,6 +154,7 @@ function MovieContainer(){
                 totalPagesCount={totalPagesCount}
                 waitForLoad={waitForLoad}
                 watchListArray={watchListArray}
+                previousPage={previousPage}
             />
         }
 
@@ -181,21 +183,6 @@ function MovieContainer(){
                 setWatchListArray={setWatchListArray}
                 watchListArray={watchListArray}
             />
-
-            {enableYoutubeVideo?
-                <YoutubeFreeMovie 
-                    movie={movie}
-                    setMovieArray={setMovieArray}
-                />
-            : null}
-            
-            {enableCrackleVideo? 
-                <CrackleFreeMovie
-                    movie={movie}
-                    togglePage2={togglePage2}
-                />
-            : null}
-
         </div>
     )
 }

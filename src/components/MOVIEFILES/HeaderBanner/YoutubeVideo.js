@@ -1,6 +1,6 @@
 import React from "react"
 
-function Video({videoID}){
+function YoutubeVideo({videoID}){
     return (
         <iframe 
             width="800" 
@@ -13,4 +13,4 @@ function Video({videoID}){
     )
 }
 
-export default Video
+export default YoutubeVideo

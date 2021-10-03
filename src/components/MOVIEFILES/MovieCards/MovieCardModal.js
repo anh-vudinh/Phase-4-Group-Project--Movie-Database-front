@@ -5,7 +5,7 @@ function MovieCardModal({movieCardModalPosition, movieCardModalDetails, setOpaci
 
     const genresItems = genres !== undefined? genres.map((genre,index) => <p key={index} className="movieCardModalGenresItem">{genre.name}</p>) : null
 
-    useEffect(()=>{
+    useEffect(()=>{                                                 // useEffect to increment opacity until modal is fully visible
         if(opacityValue < 1){
             setOpacityValue(opacityValue + 0.032)
         }

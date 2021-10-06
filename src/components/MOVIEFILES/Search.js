@@ -3,7 +3,7 @@ import FilterCategory from './FilterCategory'
 
 function Search({setmovieCateogry, togglePage2, yearOrGenreSuffix, apiKey, apiPrefixURL, movieCateogry, setMoviesData, setYearOrGenreSuffix, setSearchSuffix, setPageNumber, setIsLoadMoreMovies, isLoadMoreMovies}){
     
-    const categoryButtonArray = ["Popular","Top Rated", "Genres", "Year Release", "Upcoming"]
+    const categoryButtonArray = ["Popular", "Top Rated", "Genres", "Year Release", "Upcoming"]
     const [genresArray, setGenresArray] = useState([]) //
     const [isExtendedOptions, setExtendedOptions] = useState(false)
     const [searchInput, setSearchInput] = useState("")
@@ -30,7 +30,7 @@ function Search({setmovieCateogry, togglePage2, yearOrGenreSuffix, apiKey, apiPr
     
     const categoryButtons = categoryButtonArray.map(category => 
         <FilterCategory 
-            key={category} 
+            key={category}
             category={category} 
             genresArray={genresArray} //
             getGenresArray={getGenresArray} //
@@ -75,14 +75,14 @@ function Search({setmovieCateogry, togglePage2, yearOrGenreSuffix, apiKey, apiPr
         if(document.querySelector(".mainCategoryOptionsSelected button") !== null){
             const mainCategory = document.querySelector(".mainCategoryOptionsSelected button")
             if(categoryName === "Genres"){
-                document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
+                document.querySelector(".Year_Release").textContent = "Year Release"
                 mainCategory.textContent = genresArray.find(genre => genre.id === extendedOption).name
             }else if(categoryName === "Year Release"){
-                document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
+                document.querySelector(".Genres").textContent = "Genres"
                 mainCategory.textContent = extendedOption
             }else{
-                document.querySelector(".searchBarCategories").children.item(3).childNodes[0].childNodes[0].textContent = "Year Release"
-                document.querySelector(".searchBarCategories").children.item(2).childNodes[0].childNodes[0].textContent = "Genres"
+                document.querySelector(".Year_Release").textContent = "Year Release"
+                document.querySelector(".Genres").textContent = "Genres"
             }
         }
     }

@@ -60,7 +60,7 @@ function FilterCategory({category, replaceGenreOrYearTitle, yearOrGenreSuffix,mo
     return(
         <li className="categoryLI">
             <div className={movieCateogry.replaceAll(" ", "_").toLowerCase().includes(category.replaceAll(" ", "_").toLowerCase()) && !togglePage2? "mainCategoryOptionsSelected" : "mainCategoryOptions"}>
-                <button onClick={() => handleDropDownLI(category)}>{category}</button>
+                <button className={`${category.replaceAll(" ", "_")}`} onClick={() => handleDropDownLI(category)}>{category}</button>
             </div>
 
             {isExtendedOptions === true && category === "Genres" && currentCategorySelected === "Genres"? <div className="extendedCategoryOptions">{genreOptionBtn}</div> : null}

@@ -4,9 +4,9 @@ import NavBar from './components/NavBar';
 import TVContainer from './components/TVFILES/TVContainer'
 import { Switch, Route } from "react-router-dom";
 import React from "react";
+
 function App() {
 
-  // const [page, setPage] = useState("/")
   return (
     <div className="webpageContainer"> 
       <NavBar onChangePage={"/"}/>

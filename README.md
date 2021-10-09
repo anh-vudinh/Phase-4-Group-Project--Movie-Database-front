@@ -2,6 +2,7 @@ vu- 10/09
 - added opening npm start and npm server to run on one line, npm start
 - changed Genres and Year Release titles to no longer use document.querySelector, they use useState now
 - clicking movieCard now resets GenreNYear titles
+- watchlistIcon now drag and droppable
 
 
 vu- 10/03

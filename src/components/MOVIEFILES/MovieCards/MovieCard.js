@@ -71,5 +71,4 @@ function MovieCard({apiKey, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, 
     )
 }
 
-
 export default MovieCard

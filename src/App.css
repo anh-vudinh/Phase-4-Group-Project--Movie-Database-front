@@ -545,9 +545,6 @@
   user-select: none;
 }
 
-.cardReleaseDate {
-}
-
 .arrowsContainer{
   width: 100%;
   height: 100%;
@@ -797,6 +794,7 @@
 
 .watchListToggleImage{
   height: 25px;
+  pointer-events: none;
 }
 
 .watchListToggleContainerShow{
@@ -808,11 +806,14 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(65, 161, 0);
-  border-radius: 25px;
+  border-radius: 100px;
   width: 55px;
   height: 53px;
-  right:25px;
-  top: 15px;
+  /* right:25px;
+  top: 15px; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .watchListToggleContainerHide{
@@ -824,11 +825,14 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(65, 161, 0);
-  border-radius: 25px;
+  border-radius: 100px;
   width: 180px;
   height: 53px;
-  right:25px;
-  top: 15px;
+  /* right:25px;
+  top: 15px; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .watchListToggleContainerHide p{
   margin-right: 10px;

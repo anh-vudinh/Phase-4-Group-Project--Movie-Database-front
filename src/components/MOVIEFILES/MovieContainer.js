@@ -120,47 +120,41 @@ function MovieContainer(){
                 enableYoutubeVideo={enableYoutubeVideo}
             />
 
-        {togglePage2? 
-            <MoviePage2Container
-                apiKey={apiKey}
-                apiPrefixURL={apiPrefixURL}
-                broken_path={broken_path}
-                movie={movie}
-                poster_prefixURL={poster_prefixURL}
-                togglePage2={togglePage2}
-            />
-        : null}
+            {togglePage2? 
+                <MoviePage2Container
+                    apiKey={apiKey}
+                    apiPrefixURL={apiPrefixURL}
+                    broken_path={broken_path}
+                    movie={movie}
+                    poster_prefixURL={poster_prefixURL}
+                    togglePage2={togglePage2}
+                />
+            : null}
 
-        {togglePage2? null :
-            <MovieList
-                apiKey={apiKey}
-                apiPrefixURL={apiPrefixURL}
-                broken_path={broken_path}
-                currentPageCounter={currentPageCounter}
-                isLoadMoreMovies={isLoadMoreMovies}
-                moviesData={moviesData}
-                noResultsFound={noResultsFound}
-                pageNumber={pageNumber}
-                pagesToLoad={pagesToLoad}
-                poster_prefixURL={poster_prefixURL} 
-                searchSuffix={searchSuffix}
-                setCurrentPageCounter={setCurrentPageCounter}
-                setGenresList={setGenresList}
-                setIsLoadMoreMovies={setIsLoadMoreMovies}
-                setMovie={setMovie}
-                setPageNumber={setPageNumber}
-                setPagesToLoad={setPagesToLoad}
-                setTogglePage2={setTogglePage2}
-                setWatchListArray={setWatchListArray}
-                togglePage2={togglePage2}
-                totalPagesCount={totalPagesCount}
-                waitForLoad={waitForLoad}
-                watchListArray={watchListArray}
-                previousPage={previousPage}
-                genreTitle={genreTitle} setGenreTitle={setGenreTitle}
-                yearTitle={yearTitle} setYearTitle={setYearTitle}
-            />
-        }
+            {togglePage2? null :
+                <MovieList
+                    apiKey={apiKey}
+                    apiPrefixURL={apiPrefixURL}
+                    broken_path={broken_path}
+                    moviesData={moviesData}
+                    noResultsFound={noResultsFound}
+                    poster_prefixURL={poster_prefixURL} 
+                    searchSuffix={searchSuffix}
+                    setGenresList={setGenresList}
+                    setMovie={setMovie}
+                    totalPagesCount={totalPagesCount}
+                    waitForLoad={waitForLoad}
+                    previousPage={previousPage}
+                    currentPageCounter={currentPageCounter} setCurrentPageCounter={setCurrentPageCounter}
+                    isLoadMoreMovies={isLoadMoreMovies} setIsLoadMoreMovies={setIsLoadMoreMovies}
+                    pageNumber={pageNumber} setPageNumber={setPageNumber}
+                    pagesToLoad={pagesToLoad} setPagesToLoad={setPagesToLoad}
+                    togglePage2={togglePage2} setTogglePage2={setTogglePage2}
+                    watchListArray={watchListArray} setWatchListArray={setWatchListArray}
+                    genreTitle={genreTitle} setGenreTitle={setGenreTitle}
+                    yearTitle={yearTitle} setYearTitle={setYearTitle}
+                />
+            }
 
             <Search 
                 apiKey={apiKey}

@@ -3,6 +3,9 @@ vu- 10/09
 - changed Genres and Year Release titles to no longer use document.querySelector, they use useState now
 - clicking movieCard now resets GenreNYear titles
 - watchlistIcon now drag and droppable
+- watchlistContainer now moves with watchlistIcon
+- restyled styled watchlistContainer
+- watchlistRating now changes from R -> G based on rating of movie
 
 
 vu- 10/03

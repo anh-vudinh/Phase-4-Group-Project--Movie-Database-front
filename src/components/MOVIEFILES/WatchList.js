@@ -38,7 +38,7 @@ function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_
                 <img className="watchListToggleImage" src={eyeballIcon} alt="eyeballicon"/>
                 <div className="watchListToggleCounter">{watchListArray.length}</div>
             </div>
-            <div className={toggleShowWatchList && watchListArray.length > 0? "watchListContainer": "hidden" }> 
+            <div className={toggleShowWatchList && watchListArray.length > 0? "watchListContainer": "hidden" } style={{top:`${watchListPos[1]+50}px`, left:`${watchListPos[0]-280}px`}}> 
                 {toggleShowWatchList? watchListItem : null}
             </div>
         </>

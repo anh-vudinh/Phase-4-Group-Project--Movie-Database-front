@@ -14,7 +14,18 @@ function WatchListCard({watchListCardObj, poster_prefixURL, broken_path, handleD
             }}>
                 <span className="watchListCardTitleSpan">{`${title} (${release_date.slice(0,4)})`}</span>
                 <span className="watchListCardRatingSpan">         
-                    <button className={vote_average < 1? "watchListCardRatingLess10" : "watchListCardRating"}>{vote_average * 10}%</button>
+                    <button className={vote_average < 1? "watchListCardRatingLess10" : "watchListCardRating"}
+                    style={{
+                        borderColor: (vote_average*10) === 50? `rgb(255,255,0)` 
+                        : (vote_average*10) < 50? `rgb(255,${255*((vote_average*10)/50)},0)` 
+                        : `rgb(${255*(1-(vote_average*10)/100)},255,0)`,
+                        color: (vote_average*10) === 50? `rgb(255,255,0)` 
+                        : (vote_average*10) < 50? `rgb(255,${255*((vote_average*10)/50)},0)` 
+                        : `rgb(${255*(1-(vote_average*10)/100)},255,0)`
+                    }}
+                    >
+                            {vote_average * 10}
+                    </button>
                 </span>
             
             </div>

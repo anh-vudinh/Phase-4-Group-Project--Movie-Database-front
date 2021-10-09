@@ -732,20 +732,35 @@
   z-index: 2;
   overflow: auto;
   position: absolute;
-  right: 0;
-  top: 85px;
-  background-color: grey;
-  padding: 20px;
-  border-radius: 20px;
+  /* right: 0;
+  top: 85px; */
+  background-color: rgba(255, 127, 39, 0.7);
+  padding: 8px;
+  border-radius: 8px;
   max-height: 570px;
 }
+
+.watchListContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.watchListContainer::-webkit-scrollbar-track {
+  width: 6px;
+  background-color: rgba(10, 10, 10, 0.5);
+}
+
+.watchListContainer::-webkit-scrollbar-thumb {
+  background-color:rgba(255, 114, 19, 0.85)
+}
+
 
 .watchListCard{
   height: 80px;
   width: 425px;
   overflow: hidden;
-  border-radius: 13px;
+  border-radius: 10px;
   position: relative;
+  margin-bottom: 5px;
 }
 
 .watchListCardBackground{
@@ -770,11 +785,13 @@
 }
 .watchListCardRating{
   border-radius: 30px;
-  padding: 15px 10px 15px 10px;
+  padding: 15px 16px 15px 16px;
+  background-color: rgba(15,15,15,0.8);
 }
 .watchListCardRatingLess10{
   border-radius: 30px;
-  padding: 15px 13px 15px 13px;
+  padding: 15px 19px 15px 19px;
+  background-color: rgba(15,15,15,0.8);
 }
 .watchListCardTitleSpan{
   position: absolute;

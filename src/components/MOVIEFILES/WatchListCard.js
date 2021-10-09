@@ -5,8 +5,7 @@ function WatchListCard({watchListCardObj, poster_prefixURL, broken_path, handleD
     const {backdrop_path, vote_average, title, release_date, id} = watchListCardObj
 
     return (
-        <div className ="watchListCard"
-        >
+        <div className ="watchListCard">
             <img className="watchListCardBackground" src={backdrop_path === null? broken_path: `${poster_prefixURL}${backdrop_path}`} alt={title} />
             <div className="watchListCardText" onClick={() => {
                 setTogglePage2(true)

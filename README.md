@@ -6,6 +6,7 @@ vu- 10/09
 - watchlistContainer now moves with watchlistIcon
 - restyled styled watchlistContainer
 - watchlistRating now changes from R -> G based on rating of movie
+- added login/register form with css, need to complete functionality
 
 
 vu- 10/03

@@ -4,7 +4,7 @@ import eyeballIcon from "../../assets/watchListEyeballIcon.png"
 function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2, setMovieID}){
     
     const [toggleShowWatchList, setToggleShowWatchList] = useState(false)
-    const [watchListPos, setWatchListPos] = useState([1528,122]) // [X,Y]
+    const [watchListPos, setWatchListPos] = useState([1700,122]) // [X,Y]
 
     function handleDelete(id){
         const updateWatchList = watchListArray.filter(movieList => movieList.id !== id)
@@ -23,7 +23,7 @@ function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_
         />
     )
 
-    function handleOnClickToggleWatchlist(){
+    function handleOnClickToggleWatchlist(e){
         setToggleShowWatchList(!toggleShowWatchList)
     }
 
@@ -33,13 +33,15 @@ function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_
 
     return(
         <>
-            <div className={toggleShowWatchList? "watchListToggleContainerHide" : "watchListToggleContainerShow"} style={{top:`${watchListPos[1]}px`, left:`${watchListPos[0]}px`}} onDragEnd={handleOnDragEndWLIcon} onClick={handleOnClickToggleWatchlist} draggable="true">
-                <p>{toggleShowWatchList? "Hide Watchlist" : ""}</p>
-                <img className="watchListToggleImage" src={eyeballIcon} alt="eyeballicon"/>
-                <div className="watchListToggleCounter">{watchListArray.length}</div>
+            <div className={toggleShowWatchList? "watchListToggleContainerHide" : "watchListToggleContainerShow"} onDragEnd={handleOnDragEndWLIcon} onClick={handleOnClickToggleWatchlist} draggable="true"
+                style={{top:`${watchListPos[1]}px`, left:`${watchListPos[0]}px`}}>
+                    <p>{toggleShowWatchList? "Hide Watchlist" : ""}</p>
+                    <img className="watchListToggleImage" src={eyeballIcon} alt="eyeballicon"/>
+                    <div className="watchListToggleCounter">{watchListArray.length}</div>
             </div>
-            <div className={toggleShowWatchList && watchListArray.length > 0? "watchListContainer": "hidden" } style={{top:`${watchListPos[1]+50}px`, left:`${watchListPos[0]-280}px`}}> 
-                {toggleShowWatchList? watchListItem : null}
+            <div className={toggleShowWatchList && watchListArray.length > 0? "watchListContainer": "hidden" } 
+                style={{top:`${watchListPos[1]+50}px`, left:`${watchListPos[0]-280}px`}}> 
+                    {toggleShowWatchList? watchListItem : null}
             </div>
         </>
     )

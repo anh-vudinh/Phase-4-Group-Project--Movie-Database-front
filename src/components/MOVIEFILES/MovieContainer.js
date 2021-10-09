@@ -35,6 +35,8 @@ function MovieContainer(){
     const [waitForLoad, setWaitForLoad] = useState(false)
     const [currentPageCounter, setCurrentPageCounter] = useState(1)
     const [pagesToLoad, setPagesToLoad] = useState(2)               //each page is 20 movies
+    const [genreTitle, setGenreTitle] = useState({title:"Genres",extTitle:""})
+    const [yearTitle, setYearTitle] = useState({title:"Year Release",extTitle:""})
     
     const enableCrackleVideo = true
     const enableYoutubeVideo = true
@@ -155,6 +157,8 @@ function MovieContainer(){
                 waitForLoad={waitForLoad}
                 watchListArray={watchListArray}
                 previousPage={previousPage}
+                genreTitle={genreTitle} setGenreTitle={setGenreTitle}
+                yearTitle={yearTitle} setYearTitle={setYearTitle}
             />
         }
 
@@ -172,6 +176,8 @@ function MovieContainer(){
                 setYearOrGenreSuffix={setYearOrGenreSuffix}
                 togglePage2={togglePage2}
                 yearOrGenreSuffix={yearOrGenreSuffix}
+                genreTitle={genreTitle} setGenreTitle={setGenreTitle}
+                yearTitle={yearTitle} setYearTitle={setYearTitle}
             />
 
             <WatchList 

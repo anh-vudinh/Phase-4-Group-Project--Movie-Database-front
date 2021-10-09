@@ -5,7 +5,7 @@ import arrowIcon from "../../../assets/arrowIcon.png"
 import loadingOrange from "../../../assets/loadingOrange.gif"
 import PagesToLoadOptions from "./PagesToLoadOptions";
 
-function MovieList({apiKey, apiPrefixURL, pagesToLoad, previousPage, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
+function MovieList({apiKey, genreTitle, setGenreTitle, yearTitle, setYearTitle, apiPrefixURL, pagesToLoad, previousPage, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
     
     const cardContainerMinHeight = 744
     const [toggleMovieCardModal, setToggleMovieCardModal] = useState(false)
@@ -31,6 +31,8 @@ function MovieList({apiKey, apiPrefixURL, pagesToLoad, previousPage, currentPage
             setStartModalTimer={setStartModalTimer}
             setMovieCardModalPosition={setMovieCardModalPosition}
             setModalMovieID={setModalMovieID}
+            genreTitle={genreTitle} setGenreTitle={setGenreTitle}
+            yearTitle={yearTitle} setYearTitle={setYearTitle}
         />
     )
 

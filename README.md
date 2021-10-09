@@ -1,3 +1,9 @@
+vu- 10/09
+- added opening npm start and npm server to run on one line, npm start
+- changed Genres and Year Release titles to no longer use document.querySelector, they use useState now
+- clicking movieCard now resets GenreNYear titles
+
+
 vu- 10/03
 - added a return ()=> clearTimeout to the end of the useEffect in MovieCardModal to fix !! from 10/02
 - adjsuted cracklevideo to be the same size as youtubevideo

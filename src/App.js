@@ -10,15 +10,15 @@ function App() {
   return (
     <div className="webpageContainer"> 
       <NavBar onChangePage={"/"}/>
-        <Switch>
-          <Route exact path="/">
-            <MovieContainer/>
-          </Route>
+      <Switch>
+        <Route exact path="/">
+          <MovieContainer/>
+        </Route>
 
-          <Route path="/tvShows">
-            <TVContainer/>
-          </Route>
-        </Switch>
+        <Route path="/tvShows">
+          <TVContainer/>
+        </Route>
+      </Switch>
     </div>
     
   );

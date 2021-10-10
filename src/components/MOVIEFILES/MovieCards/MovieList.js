@@ -57,8 +57,7 @@ function MovieList({apiKey, genreTitle, setGenreTitle, yearTitle, setYearTitle, 
         }else{                         
             document.body.style.cursor = "default"                              // switches back to normal cursor
             clearTimeout(timeoutID)                                             // if client removes their hover, the handlewait is cancelled and modal does not open
-            setToggleMovieCardModal(false)                                      // close the modal if it's open, this belongs solely to MovieCard handleMouseLeave()
-            setOpacityValue(0)                                                  // reset opacity so that the next time it's run modal can fade in
+            setToggleMovieCardModal(false)                                      // close the modal if it's open, this belongs solely to MovieCard handleMouseLeave()                                          // reset opacity so that the next time it's run modal can fade in
         }
         return() => clearTimeout(timeoutID)
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,9 +68,9 @@ function MovieList({apiKey, genreTitle, setGenreTitle, yearTitle, setYearTitle, 
         .then(res => res.json())                                                // this timer was done to minimize calls to the api
         .then(movieObj => {
             setMovieCardModalDetails(movieObj)
+            document.body.style.cursor = "default"
+            setToggleMovieCardModal(true)                                       // toggle to allow the modal to be created
         })
-        document.body.style.cursor = "default"
-        setTimeout(()=>setToggleMovieCardModal(true),150)                       // toggle to allow the modal to be created
     }
 
     return (
@@ -96,17 +95,16 @@ function MovieList({apiKey, genreTitle, setGenreTitle, yearTitle, setYearTitle, 
                     {waitForLoad? <div className="loadingOrangeDiv"><img className="loadingOrangeImage" src={loadingOrange} alt="loadingCircle"></img></div> : displayMovies}
                 </div>
             </div>
-            {toggleMovieCardModal?
-                <MovieCardModal
-                    apiKey={apiKey}
-                    apiPrefixURL={apiPrefixURL}
-                    movieCardModalPosition={movieCardModalPosition}
-                    movieCardModalDetails={movieCardModalDetails}
-                    opacityValue={opacityValue}
-                    setOpacityValue={setOpacityValue}
-                />
-                : null
-            }
+            <MovieCardModal
+                apiKey={apiKey}
+                apiPrefixURL={apiPrefixURL}
+                movieCardModalPosition={movieCardModalPosition}
+                movieCardModalDetails={movieCardModalDetails}
+                opacityValue={opacityValue}
+                setOpacityValue={setOpacityValue}
+                startModalTimer={startModalTimer}
+                toggleMovieCardModal={toggleMovieCardModal}
+            />
         </>
     )
 }

@@ -1,3 +1,6 @@
+vu- 10/10
+- moviecardModal now uses css opacity transition instead of opacity controlled by javascript
+
 vu- 10/09
 - added opening npm start and npm server to run on one line, npm start
 - changed Genres and Year Release titles to no longer use document.querySelector, they use useState now
@@ -17,7 +20,6 @@ vu- 10/09
 - adjusted extraMovieWarning
 - loginUnderlay has transition effects
 - added a useState to crackleIcon, one starts the video component for the first time, the other lets the user toggle to show the video or to hide
-
 
 vu- 10/03
 - added a return ()=> clearTimeout to the end of the useEffect in MovieCardModal to fix !! from 10/02

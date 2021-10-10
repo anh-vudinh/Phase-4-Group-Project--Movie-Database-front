@@ -78,17 +78,16 @@
 
 .loginUnderlay{
   position: absolute;
-  background-color: rgba(0,0,0,0.25);
+  background-color: rgba(0,0,0,0.5);
   top: 0;
   width: 100%;
   height: 100%;
   z-index: 3;
   display: flex;
   justify-content: center;
-  transform: translateY(-30px);
   visibility: hidden;
   opacity: 0;
-  transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out, transform 400ms ease-in-out;
+  transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out, transform 400ms ease-in-out, background 400ms ease-in-out;
 }
 
 .userLoginContainer {
@@ -103,6 +102,8 @@
   top: 200px;
   overflow: hidden;
   border-radius: 15px;
+  transform: translateY(-30px);
+  transition: transform 400ms ease-in-out;
 }
 
 .userLoginBG {
@@ -221,12 +222,6 @@
   align-items: center;
   flex-direction: column;
   background-color: rgb(35, 35, 35);
-}
-
-.movieContainer.active{
-  background: rgba(255,255,255,0.10);
-  height: 100%;
-  width: 100vw;
 }
 
 .pageOptionsDiv{
@@ -601,6 +596,7 @@
   justify-content: center;
   width:100%;
   margin-bottom: 30px;
+  transition-duration: 100ms;
 }
 
 .movieCard{
@@ -627,8 +623,9 @@
   overflow: hidden;
   margin-left: 10px;
   opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms ease-in, visibility 300ms ease-in;
 }
-
 
 .movieCardModalDetails{
   height: 313px;
@@ -996,7 +993,7 @@
 .watchListToggleContainerShow{
   position: absolute;
   z-index: 5;
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
@@ -1005,17 +1002,17 @@
   border-radius: 100px;
   width: 55px;
   height: 53px;
-  /* right:25px;
-  top: 15px; */
+  white-space: nowrap;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  transition: width 150ms ease-in;
 }
 
 .watchListToggleContainerHide{
   position: absolute;
   z-index: 5;
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
@@ -1024,22 +1021,32 @@
   border-radius: 100px;
   width: 180px;
   height: 53px;
-  /* right:25px;
-  top: 15px; */
+  white-space: nowrap;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  transition: width 150ms ease-out;
 }
+
+.watchListToggleContainerShow p{
+  visibility: hidden;
+  opacity: 0;
+}
+
 .watchListToggleContainerHide p{
   margin-right: 10px;
   color: rgba(10, 10, 10, 1);
   font-size: 16px;
   font-weight: 500;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 500ms ease-in-out, visibility 500ms ease-in-out;
 }
+
 .watchListToggleContainerHide img{
   height: 28px;
-
 }
+
 .watchListToggleCounter{
   position: absolute;
   color: rgb(255, 136, 0);

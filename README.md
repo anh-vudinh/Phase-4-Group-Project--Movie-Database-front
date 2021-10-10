@@ -1,5 +1,8 @@
 vu- 10/10
 - moviecardModal now uses css opacity transition instead of opacity controlled by javascript
+- added background blur effect to all underlays
+- front end logic for userLogin/Registration done, just need backend to be built
+- adjusted css elements
 
 vu- 10/09
 - added opening npm start and npm server to run on one line, npm start
@@ -17,7 +20,7 @@ vu- 10/09
 - displayinfobtn now transitions to a smaller scale
 - headerImageContainer renamed headerUnderlay to better reflect it's role
 - headerUnderlay also got transition effects
-- adjusted extraMovieWarning
+- adjusted extraMovieWarning 
 - loginUnderlay has transition effects
 - added a useState to crackleIcon, one starts the video component for the first time, the other lets the user toggle to show the video or to hide
 

@@ -79,6 +79,7 @@
 .loginUnderlay{
   position: absolute;
   background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
   top: 0;
   width: 100%;
   height: 100%;
@@ -196,6 +197,15 @@
   transform: translate(140px, -100px);
 }
 
+.showPassword{
+  position: absolute;
+  height: 20px;
+  transform: translate(100px, 335px);
+  z-index: 1;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
 .usLogXIcon {
   position: absolute;
   top: 10px;
@@ -209,9 +219,18 @@
   transform: rotate(270deg);
 }
 
+.errorMessage {
+  position: absolute;
+  top: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease-in, visibility 150ms ease-in;
+}
+
 .errorMessage p {
   margin: 0;
   color:red;
+  font-size: 19px;
 }
 
 .movieContainer {
@@ -360,6 +379,7 @@
   height: 590px;
   width: 100%;
   background-color: rgba(0,0,0,0.8);
+  backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
   opacity: 0;
@@ -417,6 +437,7 @@
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
   position: absolute;
   z-index: 2;
   top: 80px;
@@ -596,7 +617,7 @@
   justify-content: center;
   width:100%;
   margin-bottom: 30px;
-  transition-duration: 100ms;
+  transition-duration: 300ms;
 }
 
 .movieCard{
@@ -737,20 +758,27 @@
 }
 
 .leftArrow{
-  height: 110px;
-  transform: rotate(180deg) translateY(-100px);
+  height: 70px;
+  transform: scale(1) rotate(180deg) translateY(-100px);
   position: sticky;
   left: 20px;
   z-index: 1;
   top: 45%;
   opacity: 0.70;
   float: left;
+  transition: transform 300ms ease-in-out;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
+
+.leftArrow:hover{
+  transform: scale(1.6) rotate(180deg) translateY(-70px);
+}
+
 .rightArrow{
-  height: 110px;
+  height: 70px;
+  transform: scale(1);
   transform: translateY(100px);
   position: sticky;
   right: 20px;
@@ -758,6 +786,14 @@
   top: 45%;
   opacity: 0.70;
   float: right;
+  transition: transform 300ms ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.rightArrow:hover{
+  transform: scale(1.6) translateY(70px);
 }
 
 .SearchBar {

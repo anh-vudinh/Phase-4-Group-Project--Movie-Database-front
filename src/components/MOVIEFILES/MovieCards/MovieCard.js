@@ -55,7 +55,6 @@ function MovieCard({apiKey, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, 
         setStartModalTimer(false)
     }
 
-
     return (  
         <div className="movieCard">
             <img className="cardImage" onMouseLeave={handleMouseLeave} onMouseOver={(e)=>handleCardImageHover(e, movie)} onClick={handleCardImageClick} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>

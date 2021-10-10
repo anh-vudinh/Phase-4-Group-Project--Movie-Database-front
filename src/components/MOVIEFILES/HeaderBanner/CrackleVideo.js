@@ -4,8 +4,8 @@ import x from "../../../assets/X.png"
 function CrackleVideo({videoLink, showCrackleVideo, setShowCrackleVideo}){
 
     return(
-        <div className={showCrackleVideo? "crackleUnderlay" : "hidden"} onClick={()=>setShowCrackleVideo(!showCrackleVideo)}>
-            <div className={showCrackleVideo? "crackleIFrameContainer" : "hidden"}>
+        <div className={showCrackleVideo? "crackleUnderlay fade-in" : "crackleUnderlay"} onClick={()=>setShowCrackleVideo(false)}>
+            <div className="crackleIFrameContainer">
                 <iframe 
                     className="crackleIFrame"
                     width="800" 
@@ -17,10 +17,7 @@ function CrackleVideo({videoLink, showCrackleVideo, setShowCrackleVideo}){
                     allow="accelerometer; encrypted-media; autoplay;" allowFullScreen>
                 </iframe>
             </div>
-            <img className="crackleExitUnderlay" 
-                src={x}
-                alt="x"
-            />
+            <img className="crackleExitUnderlay" src={x} alt="x"/>
         </div>
     )
 }

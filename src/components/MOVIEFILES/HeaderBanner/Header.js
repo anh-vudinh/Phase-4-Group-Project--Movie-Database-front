@@ -49,11 +49,11 @@ function Header({apiKey, apiPrefixURL, enableCrackleVideo, enableYoutubeVideo, m
     return(
         <>
             <div className="headerBannerContainer">
-                <img className={toggleHeaderInfo? "headerDisplayInfoSmall" : "headerDisplayInfoBig"} src= {informationIcon}alt="headerDisplayInfoIcon" onClick={()=> setToggleHeaderInfo(toggleHeaderInfo => !toggleHeaderInfo)}/>
+                <img className={toggleHeaderInfo? "headerDisplayInfo headerDisplayInfoShrink" : "headerDisplayInfo"} src= {informationIcon}alt="headerDisplayInfoIcon" onClick={()=> setToggleHeaderInfo(toggleHeaderInfo => !toggleHeaderInfo)}/>
                 <img className="headerBannerBackground" src={(movie.backdrop_path === null || movie.backdrop_path === undefined) ? broken_path : `https://www.themoviedb.org/t/p/w640_and_h360_multi_faces/${movie.backdrop_path}`} alt={movie.title}></img>
             </div>
             
-            <div className={toggleHeaderInfo? "headerImageContainer" : "hidden"}>
+            <div className={toggleHeaderInfo? "headerUnderlay fade-in" : "headerUnderlay"}>
                 <div className="movie-details">
                 <img className="headerImage" src={(movie.backdrop_path === null || movie.backdrop_path === undefined) ? broken_path : `${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                     <h1>{movie.title} 

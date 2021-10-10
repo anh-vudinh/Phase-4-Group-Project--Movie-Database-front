@@ -13,6 +13,7 @@ function FreeMovieContainer({movie, setMovieArray, enableCrackleVideo, enableYou
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
     const [videoLink, setVideoLink] = useState(undefined)
     const [showCrackleVideo, setShowCrackleVideo] = useState(false)
+    const [startCrackleVideo, setStartCrackleVideo] = useState(false)
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
 //\\////\\////\\////\\////                    END Crackle Section               ////\\////\\////\\////\\//
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
@@ -23,26 +24,28 @@ function FreeMovieContainer({movie, setMovieArray, enableCrackleVideo, enableYou
 
     return(
         <div className = "freeMovieContainer">
-            <CrackleVideo
-                videoLink={videoLink}
-                showCrackleVideo={showCrackleVideo}
-                setShowCrackleVideo={setShowCrackleVideo}
-            />
+            {startCrackleVideo? 
+                <CrackleVideo
+                    videoLink={videoLink}
+                    showCrackleVideo={showCrackleVideo}
+                    setShowCrackleVideo={setShowCrackleVideo}
+                />
+            : null}
 
             <div className="extraMovieIcon" onClick={handleOnClick4Dots}>
                 <img src={extraMovieIcon} alt="extraMoviesIcon"/>
-                <p className={extraMovieWarning? "extraMovieCounter" : "hidden"}> ! </p>
+                <p className={extraMovieWarning? "extraMovieWarning fade-in" : "extraMovieWarning"}> ! </p>
             </div>
 
             <div className="extraMovieContainer">
                 {enableCrackleVideo?
                     <CrackleIcon
                         movie={movie}
-                        showCrackleVideo={showCrackleVideo}
                         videoLink={videoLink}
                         showExtraMovieContainer={showExtraMovieContainer}
                         setVideoLink={setVideoLink}
                         setShowCrackleVideo={setShowCrackleVideo}
+                        startCrackleVideo={startCrackleVideo} setStartCrackleVideo={setStartCrackleVideo}
                         setShowExtraMovieContainer={setShowExtraMovieContainer}
                         setExtraMovieWarning={setExtraMovieWarning}
                     />

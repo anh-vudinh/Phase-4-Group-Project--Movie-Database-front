@@ -27,7 +27,7 @@ function Login({toggleLoginContainer, setToggleLoginContainer}){
     }
 
     return(
-        <div className={toggleLoginContainer? "loginUnderlay" : "hidden"}>
+        <div className={toggleLoginContainer? "loginUnderlay fade-in" : "loginUnderlay"}>
             <div className="userLoginContainer">
                 <div className="usEmptySpace"></div>
                 <button className="loginRegisterButton" onClick={handleToggle}>{toggleRegister ? "Login?" : "Register?"}</button>
@@ -40,12 +40,10 @@ function Login({toggleLoginContainer, setToggleLoginContainer}){
                         <label>Password:</label>
                         <input type="password" name="password" autoComplete="off" value={formData.password} onChange={handleOnChange}/>
                     </div>
-                    {toggleRegister? 
-                        <div className="userCFPW">
+                        <div className={toggleRegister?"userCFPW fade-in" : "userCFPW hidden"}>
                             <label>Confirm Password: </label> 
                             <input type="password" name="confirm_password" autoComplete="off" onChange={(e) => setConfirmPassword(e.target.value)}/> 
                         </div>
-                    : null } 
                     <div> 
                         <input className="usLogRegSubmit" value={toggleRegister ? "Register" : "Log In"} type="submit"/>
                     </div>

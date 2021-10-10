@@ -71,9 +71,8 @@ function FilterCategory({category, genreTitle, yearTitle, setYearTitle, setGenre
                     }
                 </button>
             </div>
-
-            {isExtendedOptions === true && category === "Genres" && currentCategorySelected === "Genres"? <div className="extendedCategoryOptions">{genreOptionBtn}</div> : null}
-            {isExtendedOptions === true && category === "Year Release" && currentCategorySelected === "Year Release"? <div className="extendedCategoryOptions">{yearOptionBtn}</div> : null}
+            <div className={isExtendedOptions === true && category === "Genres" && currentCategorySelected === "Genres"? "extendedCategoryOptions fade-in" : "extendedCategoryOptions"}>{genreOptionBtn}</div>
+            <div className={isExtendedOptions === true && category === "Year Release" && currentCategorySelected === "Year Release"? "extendedCategoryOptions fade-in" : "extendedCategoryOptions"}>{yearOptionBtn}</div>
         </li>
     );
 }

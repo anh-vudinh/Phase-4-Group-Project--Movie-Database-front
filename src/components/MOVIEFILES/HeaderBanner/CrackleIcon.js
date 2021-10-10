@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import crackleIcon from "../../../assets/crackleIcon.png"
 
-function CrackleIcon({movie, showCrackleVideo, showExtraMovieContainer, videoLink, setVideoLink, setShowCrackleVideo, setShowExtraMovieContainer, setExtraMovieWarning}){
+function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraMovieContainer, videoLink, setVideoLink, setShowCrackleVideo, setShowExtraMovieContainer, setExtraMovieWarning}){
     const {title, release_date} = movie
     const crackleDB = "http://localhost:3001/crackle"
     const [crackleObjsArray, setCrackleObjsArray] = useState([])
@@ -26,20 +26,28 @@ function CrackleIcon({movie, showCrackleVideo, showExtraMovieContainer, videoLin
                 )
             if(crackleMovieObject === undefined){
                 return setShowCrackleVideo(false)
-            }                                                                             // if movie was not found do not create a Free movie icon
+            }                                                                                                                       // if movie was not found do not create a Free movie icon
             setVideoLink(crackleMovieObject.Id)    
-            setExtraMovieWarning(true)                                                                                 // if movie is found set the movie.id to useState so it can be used by component 
-
+            setExtraMovieWarning(true)                                                                                          // if movie is found set the movie.id to useState so it can be used by component 
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
 
+    function handleIconClick(){
+        if(startCrackleVideo === false){                                                                                            //makes it so that crackle video persists until user chooses a new video without resetting video to very beginning
+            setStartCrackleVideo(true)
+            setShowCrackleVideo(true)
+        }else{
+            setShowCrackleVideo(true)
+        }
+    }
+
     return(
         <>
             {videoLink === undefined? null : 
-                <img className={showExtraMovieContainer? "crackleIcon" : "hidden"}
+                <img className={showExtraMovieContainer? "crackleIcon fade-in" : "crackleIcon"}
                     src={crackleIcon} 
-                    onClick={()=>setShowCrackleVideo(!showCrackleVideo)} 
+                    onClick={handleIconClick} 
                     alt="crackleIcon"
                 />
             }

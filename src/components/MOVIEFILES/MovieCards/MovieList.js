@@ -45,7 +45,6 @@ function MovieList({apiKey, genreTitle, setGenreTitle, yearTitle, setYearTitle, 
         if(pageNumber <= totalPagesCount && pageNumber > pagesToLoad){                                                      // the default previous button logic handles going backwards from highest pages to lowest pages
             setPageNumber(pageNumber-(pagesToLoad)-(pagesToLoad-1) > 0? pageNumber-(pagesToLoad)-(pagesToLoad-1) : 1)       // logic to catch if pages go below 1, set pages to 1, api does not have pages < 0, error message returned
         }else{
-            console.log("b",totalPagesCount-(pagesToLoad-1))
             setPageNumber(totalPagesCount-(pagesToLoad-1))                                                                  // logic to handle going backwards through first elements of array to its last elements, looping from lowest to highest
         }
         setIsLoadMoreMovies(!isLoadMoreMovies)                                                                              // toggles the useEffect fetch in MovieContainer

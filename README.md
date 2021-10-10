@@ -7,6 +7,16 @@ vu- 10/09
 - restyled styled watchlistContainer
 - watchlistRating now changes from R -> G based on rating of movie
 - added login/register form with css, need to complete functionality
+- corrected styling of mainCategoryBtns and extendedCategoryOptions, visually the same but css code better
+- added transtion duration on pageOptions, textArea toolbar, navlinks
+- added fade-in class
+- gave ExtendedOptions fade-in class conditional
+- displayinfobtn now transitions to a smaller scale
+- headerImageContainer renamed headerUnderlay to better reflect it's role
+- headerUnderlay also got transition effects
+- adjusted extraMovieWarning
+- loginUnderlay has transition effects
+- added a useState to crackleIcon, one starts the video component for the first time, the other lets the user toggle to show the video or to hide
 
 
 vu- 10/03

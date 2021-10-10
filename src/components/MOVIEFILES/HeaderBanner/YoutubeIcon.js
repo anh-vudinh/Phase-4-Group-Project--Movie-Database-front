@@ -57,7 +57,7 @@ function YoutubeIcon({movie, setMovieArray, showExtraMovieContainer, setExtraMov
 
     return(
         <>
-            {toggleShowYTBtn? <img className={showExtraMovieContainer? "youtubeIcon" : "hidden"} src={youtubelogo} alt="youtube logo" onClick={handleOnClick}/> : null}
+            {toggleShowYTBtn? <img className={showExtraMovieContainer? "youtubeIcon fade-in" : "youtubeIcon"} src={youtubelogo} alt="youtube logo" onClick={handleOnClick}/> : null}
         </>
     )
 }

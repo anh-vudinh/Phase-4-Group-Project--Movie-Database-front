@@ -16,7 +16,7 @@
   height: 100%;
   position: relative;
   /* background-color: rgb(15, 15, 15); */
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 .navBar{
@@ -74,6 +74,73 @@
   border-radius: 15px;
   font-weight: 550;
   border-width: 1px;
+}
+
+.navLogContainer{
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  width: 250px;
+  height: 80px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.navLogText{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.navUsernameContainer{
+  height: 55px;
+  width: 100%;
+  display: flex;
+  white-space: nowrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.navUsernameText{
+  height: 30px;
+  margin: 0;
+  font-size: 20px;
+}
+
+.navLogoutContainer{
+  height: 10px;
+  width: 100%;
+  margin: 2px 0 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navLogoutText{
+  margin: 0;
+  font-size: 10px;
+}
+
+.navLogoutText:hover{
+  text-decoration: underline;
+  font-weight: 550;
+  color: red;
+}
+
+.navProfileIcon{
+  display: flex;
+  width: 30%;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.navProfileIcon img{
+  width: 50px;
+  background-color: white;
+  border-radius: 100px;
 }
 
 .loginUnderlay{
@@ -135,7 +202,7 @@
   z-index: 1;
 }
 
-.userSignUpForm {
+.userRegisterForm {
   transform: translateY(85px);
   display: flex;
   flex-direction: column;
@@ -145,11 +212,11 @@
   z-index: 1;
 } 
 
-.userSignUpForm div {
+.userRegisterForm div {
   margin-bottom: 15px;
 }
 
-.userSignUpForm label {
+.userRegisterForm label {
   color: whitesmoke;
   font-size: 25px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -609,7 +676,7 @@
 
 .movieCardsContainer{
   position: relative;
-  top: 0;
+  margin-left: -10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

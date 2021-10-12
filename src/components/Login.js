@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import loginBG from "../assets/loginBG.png"
 import X from "../assets/X.png"
 import eyeballIcon from "../assets/eyeballicon.png"
 import eyeballClosedIcon from "../assets/eyeballClosedicon.png"
 
-function Login({toggleLoginContainer, setToggleLoginContainer}){
+function Login({toggleLoginContainer, setToggleLoginContainer, sessionToken, setSessionToken, setSessionUsername}){
     
-    const BASE_URL = ""
+    const BASE_URL = "http://localhost:9292"
     const resetFormData = {username:"", password:""}
     const [formData, setFormData] = useState({username:"", password:""})
     const [errorMessage,setErrorMessage] = useState("")
@@ -19,8 +19,7 @@ function Login({toggleLoginContainer, setToggleLoginContainer}){
         e.preventDefault()
         if(toggleRegister){
             if(formData.password === confirmPassword){                          // register action matching password and confirm
-                sendUserDataToDB(formData, `${BASE_URL}/users/signup`)
-                setToggleLoginContainer(false)
+                sendUserDataToDB(formData, `${BASE_URL}/users/register`)
             }else{                                                              // register action mis-match password and confirm
                 setErrorMessage("Error: Mismatch Passwords")
                 setShowErrorMessage(true)
@@ -42,26 +41,26 @@ function Login({toggleLoginContainer, setToggleLoginContainer}){
 
         fetch(fetchURL, headers)
         .then(resp => resp.json())
-        .then(userID => {
-            switch (userID) {
-                case "c": 
-                    setErrorMessage("User Already Exist")
+        .then(resp => {
+            switch (resp) {
+                case "user_exist": 
+                    setErrorMessage("Error: User Already Exist")
                     setShowErrorMessage(true)
                     break;
-                case "a": 
+                case "wrong_pwd": 
                     setErrorMessage("Wrong Password")
                     setShowErrorMessage(true)
                     break;
-                case "b":
+                case "no_user":
                     setErrorMessage("User doesn't exist")
                     setShowErrorMessage(true)
                     break;
                 default: //(Successful login/register)
-                    // setSessionID(userID)
+                    setSessionToken(resp)
                     setErrorMessage("")
                     setShowErrorMessage(false)
                     setToggleLoginContainer(false)
-                    // setSessionUsername(formData.name)
+                    setSessionUsername(formData.username)
                     setFormData(resetFormData)
                     setConfirmPassword("")
             }
@@ -83,7 +82,7 @@ function Login({toggleLoginContainer, setToggleLoginContainer}){
                 <div className="usEmptySpace"></div>
                 <button className="loginRegisterButton" onClick={handleToggle}>{toggleRegister ? "Login?" : "Register?"}</button>
                 <div className={showErrorMessage? "errorMessage fade-in" : "errorMessage"}><p>{errorMessage}</p></div>
-                <form className="userSignUpForm" onSubmit={handleOnLoginSubmit}>
+                <form className="userRegisterForm" onSubmit={handleOnLoginSubmit}>
                     <div className="userLogIn">
                         <label>Username: </label>
                         <input type="text" name="username" value={formData.username} onChange={handleOnChange}/>

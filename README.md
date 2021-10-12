@@ -1,3 +1,10 @@
+vu- 10/11
+- login/register logic complete front end and backend
+- added user profile and name to top right corner
+- watchlist button no longer goes off page or sits off page if user shrinks screen
+- !! need to persist sessionToken in client cache
+- !! need to make logic so when user first loads page check cache for sessionToken to auto log them in
+
 vu- 10/10
 - moviecardModal now uses css opacity transition instead of opacity controlled by javascript
 - added background blur effect to all underlays

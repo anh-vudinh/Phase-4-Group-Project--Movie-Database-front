@@ -1,11 +1,39 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import WatchListCard from "./WatchListCard";
 import eyeballIcon from "../../assets/watchListEyeballIcon.png"
 function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2, setMovieID}){
     
     const [toggleShowWatchList, setToggleShowWatchList] = useState(false)
-    const [watchListPos, setWatchListPos] = useState([1700,122]) // [X,Y]
-
+    const [watchListPos, setWatchListPos] = useState([window.innerWidth*0.93, window.innerHeight*0.10]) // [X,Y]
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+  
+    useEffect(() => {
+      window.addEventListener('resize', handleResize);
+      if(toggleShowWatchList){
+        if(watchListPos[0]+200 > windowDimensions.width){
+            setWatchListPos([windowDimensions.width-200, watchListPos[1]])
+        }
+      } else{
+        if(watchListPos[0]+80 > windowDimensions.width){
+            setWatchListPos([windowDimensions.width-80, watchListPos[1]])
+        }
+      }
+      return () => window.removeEventListener('resize', handleResize);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [windowDimensions, toggleShowWatchList]);
+  
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+  
+    function getWindowDimensions() {
+      const { innerWidth: width, innerHeight: height } = window;
+      return {
+        width,
+        height
+      };
+    }
+    
     function handleDelete(id){
         const updateWatchList = watchListArray.filter(movieList => movieList.id !== id)
         setWatchListArray(updateWatchList)

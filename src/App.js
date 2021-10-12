@@ -9,13 +9,18 @@ import TVContainer from './components/TVFILES/TVContainer'
 function App() {
 
   const [toggleLoginContainer, setToggleLoginContainer] = useState(false)
+  const [sessionToken, setSessionToken] = useState("")
+  const [sessionUsername, setSessionUsername] = useState("")
 
   return (
     <div className="webpageContainer"> 
       <NavBar 
         onChangePage={"/"}
+        setSessionToken={setSessionToken}
+        sessionUsername={sessionUsername} setSessionUsername={setSessionUsername}
         setToggleLoginContainer={setToggleLoginContainer}
       />
+      
       <Switch>
         <Route exact path="/">
           <MovieContainer/>
@@ -25,7 +30,10 @@ function App() {
           <TVContainer/>
         </Route>
       </Switch>
+
       <Login
+        sessionToken={sessionToken} setSessionToken={setSessionToken}
+        setSessionUsername={setSessionUsername}
         toggleLoginContainer={toggleLoginContainer} setToggleLoginContainer={setToggleLoginContainer}
       />
     </div>

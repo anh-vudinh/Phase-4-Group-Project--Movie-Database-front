@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function MovieCardModal({movieCardModalPosition, movieCardModalDetails, toggleMovieCardModal, startModalTimer}){
     const {runtime, vote_average, overview, genres} = movieCardModalDetails

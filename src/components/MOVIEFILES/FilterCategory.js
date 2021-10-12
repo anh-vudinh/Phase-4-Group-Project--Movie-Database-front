@@ -61,7 +61,7 @@ function FilterCategory({category, genreTitle, yearTitle, setYearTitle, setGenre
     }
 
     return(
-        <li className="categoryLI">
+        <li className="categoryLI" onMouseLeave={()=>{setExtendedOptions(false)}}>
             <div className={movieCateogry.replaceAll(" ", "_").toLowerCase().includes(category.replaceAll(" ", "_").toLowerCase()) && !togglePage2? "mainCategoryOptionsSelected" : "mainCategoryOptions"}>
                 <button className={`${category.replaceAll(" ", "_")}`} onClick={() => handleDropDownLI(category)}>
                     {category === "Year Release" || category === "Genres"? 

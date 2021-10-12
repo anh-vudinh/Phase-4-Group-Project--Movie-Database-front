@@ -28,15 +28,14 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
 
     const categoryButtons = categoryButtonArray.map(category => 
         <FilterCategory 
-        key={category} 
-        category={category} 
-        genresArray={genresArray}
-        getGenresArray={getGenresArray}
-        yearArray={yearArray}
-        handleSearchYearOrGenres={handleSearchYearOrGenres}
-        setmovieCateogry={setmovieCateogry}
-        setTogglePage2={setTogglePage2}
-
+            key={category} 
+            category={category} 
+            genresArray={genresArray}
+            getGenresArray={getGenresArray}
+            yearArray={yearArray}
+            handleSearchYearOrGenres={handleSearchYearOrGenres}
+            setmovieCateogry={setmovieCateogry}
+            setTogglePage2={setTogglePage2}
         />
     )
     
@@ -50,14 +49,13 @@ function Search({setmovieCateogry, apiKey, setMoviesData, setTotalPagesCount, se
     const [query, setQuery] = useState("")
 
     function handleSubmit(e){
-    e.preventDefault()
-    if(query.length > 0){
-    setmovieCateogry("search/tv")
-    setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
-    setTimeout(()=> {setTogglePage2(false)}, 110)
-    setQuery("")
-
-    }
+        e.preventDefault()
+        if(query.length > 0){
+            setmovieCateogry("search/tv")
+            setSearchSuffix(`&query=${query.replaceAll(" ", "%20").toLowerCase()}`)
+            setTimeout(()=> {setTogglePage2(false)}, 110)
+            setQuery("")
+        }
     }   
     
 

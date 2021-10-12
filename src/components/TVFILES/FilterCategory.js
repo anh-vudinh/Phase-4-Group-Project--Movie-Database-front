@@ -37,7 +37,7 @@ function FilterCategory({category, genresArray, getGenresArray, yearArray, handl
     }
 
     return(
-        <li className="categoryLI">
+        <li className="categoryLI" onMouseLeave={()=>{setExtendedOptions(false)}}>
             <button onClick={() => handleDropDownLI(category)}>{category}</button>
 
             {isExtendedOptions === true && category === "Year Release"? yearOptionBtn : null}

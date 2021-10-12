@@ -41,8 +41,8 @@ function Login({toggleLoginContainer, setToggleLoginContainer, sessionToken, set
 
         fetch(fetchURL, headers)
         .then(resp => resp.json())
-        .then(resp => {
-            switch (resp) {
+        .then(message => {
+            switch (message) {
                 case "user_exist": 
                     setErrorMessage("Error: User Already Exist")
                     setShowErrorMessage(true)
@@ -98,7 +98,6 @@ function Login({toggleLoginContainer, setToggleLoginContainer, sessionToken, set
                     <div> 
                         <input className="usLogRegSubmit" value={toggleRegister ? "Register" : "Log In"} type="submit"/>
                     </div>
-                    
                 </form>
                 <img className="userLoginBG" src={loginBG} alt="backgroundImg"/>
                 <img className="usLogXIcon" src={X} alt="xicon" onClick={()=> setToggleLoginContainer(false)}/>

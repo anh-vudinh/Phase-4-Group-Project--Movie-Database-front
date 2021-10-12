@@ -63,20 +63,20 @@ function Search({setmovieCateogry, genreTitle, setGenreTitle, yearTitle, setYear
     }
 
     function handleSubmit(e){
-    e.preventDefault()
-    if(searchInput.length > 0){
-        setYearTitle({...yearTitle, extTitle:""})
-        setGenreTitle({...genreTitle, extTitle:""})
-        setmovieCateogry("search/movie")
-        setPageNumber(1)
-        setSearchSuffix(`&query=${searchInput.replaceAll(" ", "%20").toLowerCase()}`)
-        setSearchInput("")
-        setIsLoadMoreMovies(!isLoadMoreMovies)
+        e.preventDefault()
+        if(searchInput.length > 0){
+            setYearTitle({...yearTitle, extTitle:""})
+            setGenreTitle({...genreTitle, extTitle:""})
+            setmovieCateogry("search/movie")
+            setPageNumber(1)
+            setSearchSuffix(`&query=${searchInput.replaceAll(" ", "%20").toLowerCase()}`)
+            setSearchInput("")
+            setIsLoadMoreMovies(!isLoadMoreMovies)
         }
     }
 
     return(
-        <div className="SearchBar" onMouseLeave={()=>{setExtendedOptions(false)}}>
+        <div className="SearchBar">
             <ul className="searchBarCategories">{categoryButtons}</ul>
             <form className="searchBarForm" onSubmit={(e) => handleSubmit(e)}>  
             <input type="text" placeholder=" Movie Name" value={searchInput} onChange={(e) => setSearchInput(e.target.value)}/>

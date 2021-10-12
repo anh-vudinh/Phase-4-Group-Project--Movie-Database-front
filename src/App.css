@@ -963,6 +963,7 @@
 
 .extendedCategoryOptions{
   position:absolute;
+  left: -105px;
   list-style: none;
   display: flex;
   flex-direction: row;

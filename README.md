@@ -4,6 +4,12 @@ vu- 10/13
 - watchlist add and remove now works with backend and front end
 - watchlist eyeball icons now properly reflect if they're in the watchlist
 - current iteration of watchlist is fully functional
+- adjusted page change arrows
+- removed extra width of webpage
+- disabled eyeball icon if not logged in
+- added functional watchlist add/remove button to MP2C
+- readjusted reviews
+- made readmoreunderlay component
 
 vu- 10/11
 - login/register logic complete front end and backend

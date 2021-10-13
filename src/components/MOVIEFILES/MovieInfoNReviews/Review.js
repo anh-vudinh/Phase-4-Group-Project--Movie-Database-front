@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from "react";
 import CommentForm from "./CommentForm"
+import ReviewReadMore from "./ReviewReadMore";
 
 function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
 
     const [reviewsArray, setReviewsArray] = useState([])
+    const [displayReadMore, setDisplayReadMore] = useState(false)
+    const [readMoreDetails, setReadMoreDetails] =  useState([])
+    const avatarPrefix ="https://www.themoviedb.org/t/p/w100_and_h100_face"
     const maxReviewContentLength = 500
 
     useEffect(()=>{
@@ -17,32 +21,39 @@ function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
 
-    const avatarPrefix ="https://www.themoviedb.org/t/p/w100_and_h100_face"
+
+    function handleReadMoreClick(review){
+        setReadMoreDetails(review)
+        setDisplayReadMore(true)
+    }
+
+
     const review = reviewsArray === undefined ? 
         null
         :
-        reviewsArray.map(reviews =>
-            <div className="ReviewCardContainer" key={reviews.id}>
-                <div className="AuthorProfie">
-                    <div className="AuthorPicture">
-                        <img alt="author" src={reviews.author_details.avatar_path === null ? blankAvatar : reviews.author_details.avatar_path.includes("http") ? reviews.author_details.avatar_path.slice(1)  : `${avatarPrefix}${reviews.author_details.avatar_path}` }></img>
+        reviewsArray.map(review =>
+            <div className="ReviewCardContainer" key={review.id}>
+                    <div className="reviewSecA">
+                        <div className="AuthorPicture">
+                            <img alt="author" src={review.author_details.avatar_path === null ? blankAvatar : review.author_details.avatar_path.includes("http") ? review.author_details.avatar_path.slice(1)  : `${avatarPrefix}${review.author_details.avatar_path}` }></img>
+                        </div>
                         <div className="AuthorName">
-                            <p>{reviews.author}</p>
+                                <p>{review.author}</p>
                         </div>
                     </div>
+                    <div className="reviewSecB">
+                        <div className="DateAndRating">
+                            <div className="Date">{`${review.updated_at.slice(5, 7)}-${review.updated_at.slice(8, 10)}-${review.updated_at.slice(0, 4)}`}</div>
+                            <div className="Rating">{review.author_details.rating} / 10 ⭐ </div>
+                        </div>
 
-                    <div className="DateAndRating">
-                        <div className="Date">{`${reviews.updated_at.slice(5, 7)}-${reviews.updated_at.slice(8, 10)}-${reviews.updated_at.slice(0, 4)}`}</div>
-                        <div className="Rating">{reviews.author_details.rating} / 10 ⭐ </div>
+                        <div className="ReviewContentContainer">
+                            <p className="ReviewContent">{review.content.substr(0,maxReviewContentLength)} {review.content.length < maxReviewContentLength? "" : "....."}</p>
+                            <div className="readMoreContainer">
+                                <button className="readMoreBtn" onClick={()=> handleReadMoreClick(review)}>Read More</button>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="ReviewContentContainer">
-                        <p className="ReviewContent">{reviews.content.substr(0,maxReviewContentLength)} {reviews.content.length < maxReviewContentLength? "" : "....."}</p>
-                    </div>
-                    <div className="readMoreContainer">
-                        <button className="readMoreBtn">Read More</button>
-                    </div>
-                </div>
             </div>
     )
 
@@ -54,11 +65,21 @@ function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
                 </div>
                 <div className ="Review-Movie">
                     {review.length ===0?
-                        <div className="ReviewCardContainer">
-                            <div className="AuthorProfie">
+                        <div className="ReviewCardContainer" key={review.id}>
+                            <div className="reviewSecA">
                                 <div className="AuthorPicture">
                                     <img alt="author" src={blankAvatar}/>
                                 </div>
+                                <div className="AuthorName">
+                                        <p></p>
+                                </div>
+                            </div>
+                            <div className="reviewSecB">
+                                <div className="DateAndRating">
+                                    <div className="Date"></div>
+                                    <div className="Rating">0 / 10 ⭐ </div>
+                                </div>
+
                                 <div className="ReviewContentContainer">
                                     <p className="ReviewContent">Be the first to leave a Review!</p>
                                 </div>
@@ -69,11 +90,12 @@ function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
                     }
                 </div>
             </div>
-            {/* <CommentForm 
-                reviewsArray={reviewsArray} 
-                setReviewsArray={setReviewsArray} 
-                movie={movie}
-            /> */}
+            {displayReadMore? 
+                <ReviewReadMore 
+                    readMoreDetails={readMoreDetails}
+                    setDisplayReadMore={setDisplayReadMore}
+                /> 
+            : null}
         </>
     )
 }

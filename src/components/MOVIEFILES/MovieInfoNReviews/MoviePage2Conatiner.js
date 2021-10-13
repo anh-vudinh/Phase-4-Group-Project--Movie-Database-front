@@ -7,13 +7,15 @@ import BlankAvatarM from "../../../assets/blankAvatarM.png"
 import BlankAvatarF from "../../../assets/blankAvatarF.png"
 import BlankAvatar from "../../../assets/blankAvatar.png"
 
-function MoviePage2Container({movie, poster_prefixURL, broken_path, apiKey, apiPrefixURL}){
+function MoviePage2Container({movie, isWatchedMP2C, setIsWatchedMP2C, poster_prefixURL, broken_path, apiKey, apiPrefixURL, handleWatchListAddClick}){
 
     return(
         <div className="MoviePage2Container">
         
             <MovieExtraInfo 
                 movie={movie}
+                handleWatchListAddClick={handleWatchListAddClick}
+                isWatchedMP2C={isWatchedMP2C} setIsWatchedMP2C={setIsWatchedMP2C}
             />
 
             <Cast 

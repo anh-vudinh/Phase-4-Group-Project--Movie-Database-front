@@ -27,6 +27,7 @@ function MovieContainer({sessionToken}){
     const [pageNumber, setPageNumber] = useState(1)
     const [togglePage2, setTogglePage2] =useState(false)
     const [toggleHeaderInfo, setToggleHeaderInfo] = useState(false)
+    const [isWatchedMP2C, setIsWatchedMP2C] = useState(false)
     const [movieID, setMovieID] = useState("movie/popular")         //belongs to Header.js, moved up for watchlist cards not populating header with full details
     const [movieCateogry, setmovieCateogry] = useState("movie/popular")
     const [yearOrGenreSuffix, setYearOrGenreSuffix]= useState("")
@@ -75,7 +76,7 @@ function MovieContainer({sessionToken}){
                         setMoviesData([...moviesData, ...moviesListData.results])           // spread last page into current array
                         setCurrentPageCounter(1)                                            // reset the page Counter back to default
                         setTogglePage2(false)                                               // disable page2 enable page1 if not already             
-                        setTimeout(()=>setWaitForLoad(false),250)                           // disable loading circle to display movies array
+                        setTimeout(()=>setWaitForLoad(false),(150*pagesToLoad))                           // disable loading circle to display movies array
                         return
                     }else{                                                                  // load all other pages but first and last pages
                         setMoviesData([...moviesData, ...moviesListData.results])           // spread current page loaded into current array
@@ -91,7 +92,7 @@ function MovieContainer({sessionToken}){
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix, pagesToLoad])
+    },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix, pagesToLoad, sessionToken])
 
     function handleWatchListAddClick(movie, isWatched){
         if(sessionToken === null) return;                               // only valid users can send requests to server
@@ -184,17 +185,6 @@ function MovieContainer({sessionToken}){
                 enableYoutubeVideo={enableYoutubeVideo}
             />
 
-            {togglePage2? 
-                <MoviePage2Container
-                    apiKey={apiKey}
-                    apiPrefixURL={apiPrefixURL}
-                    broken_path={broken_path}
-                    movie={movie}
-                    poster_prefixURL={poster_prefixURL}
-                    togglePage2={togglePage2}
-                />
-            : null}
-
             {togglePage2? null :
                 <MovieList
                     apiKey={apiKey}
@@ -220,8 +210,22 @@ function MovieContainer({sessionToken}){
                     handleWatchListAddClick={handleWatchListAddClick}
                     sessionToken={sessionToken}
                     toggleEyeballRefresh={toggleEyeballRefresh}
+                    setIsWatchedMP2C={setIsWatchedMP2C}
                 />
             }
+
+            {togglePage2? 
+                <MoviePage2Container
+                    apiKey={apiKey}
+                    apiPrefixURL={apiPrefixURL}
+                    broken_path={broken_path}
+                    movie={movie}
+                    poster_prefixURL={poster_prefixURL}
+                    togglePage2={togglePage2}
+                    handleWatchListAddClick={handleWatchListAddClick}
+                    isWatchedMP2C={isWatchedMP2C} setIsWatchedMP2C={setIsWatchedMP2C}
+                />
+            : null}
 
             <Search 
                 apiKey={apiKey}
@@ -253,6 +257,7 @@ function MovieContainer({sessionToken}){
                 BASE_URL_BACK={BASE_URL_BACK}
                 deleteWLDataFromDB={deleteWLDataFromDB}
                 toggleEyeballRefresh={toggleEyeballRefresh} setToggleEyeballRefresh={setToggleEyeballRefresh}
+                setIsWatchedMP2C={setIsWatchedMP2C}
             />
         </div>
     )

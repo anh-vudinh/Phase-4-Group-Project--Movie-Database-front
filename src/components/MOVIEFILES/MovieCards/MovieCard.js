@@ -2,13 +2,13 @@ import React, {useState, useEffect} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieCard({apiKey, moviesData, toggleEyeballRefresh, sessionToken, watchListArray, handleWatchListAddClick, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, setYearTitle, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, setMovie, setTogglePage2, setGenresList}){
+function MovieCard({apiKey, moviesData, setIsWatchedMP2C, toggleEyeballRefresh, sessionToken, watchListArray, handleWatchListAddClick, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, setYearTitle, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, setMovie, setTogglePage2, setGenresList}){
     const {title, poster_path, release_date, id} = movie
     const [isWatched, setIsWatched] = useState(false)
     const movieCardModalWidth = 275
 
     useEffect(()=>{
-        if(sessionToken === null) return setIsWatched(false);
+        if(sessionToken === null) return;
         setIsWatched(watchListArray.find(movie => movie.movie_id === id) === undefined? false : true)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[toggleEyeballRefresh, sessionToken])
@@ -23,6 +23,7 @@ function MovieCard({apiKey, moviesData, toggleEyeballRefresh, sessionToken, watc
             setTimeout(()=> {setTogglePage2(true)}, 170)            // enables the MoviePage2Container, disables MovieList
             setYearTitle({...yearTitle, extTitle:""})               // resets title of year mainCategory
             setGenreTitle({...genreTitle, extTitle:""})             // resets title of genre mainCategory
+            setIsWatchedMP2C(isWatched)                             // passes out variable for MoviePage2Container.js
     }
 
     function handleCardImageHover(e, movie){
@@ -45,6 +46,7 @@ function MovieCard({apiKey, moviesData, toggleEyeballRefresh, sessionToken, watc
     }
 
     function handleWLCToggle(){
+        if(sessionToken === null) return;
         handleWatchListAddClick(movie, isWatched)
         setIsWatched(isWatched => !isWatched)
     }

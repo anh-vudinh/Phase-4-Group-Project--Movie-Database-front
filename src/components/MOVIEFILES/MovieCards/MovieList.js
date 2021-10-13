@@ -5,7 +5,7 @@ import arrowIcon from "../../../assets/arrowIcon.png"
 import loadingOrange from "../../../assets/loadingOrange.gif"
 import PagesToLoadOptions from "./PagesToLoadOptions";
 
-function MovieList({apiKey, sessionToken, toggleEyeballRefresh, handleWatchListAddClick, genreTitle, setGenreTitle, yearTitle, setYearTitle, apiPrefixURL, pagesToLoad, previousPage, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
+function MovieList({apiKey, sessionToken, setIsWatchedMP2C, toggleEyeballRefresh, handleWatchListAddClick, genreTitle, setGenreTitle, yearTitle, setYearTitle, apiPrefixURL, pagesToLoad, previousPage, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
     
     const cardContainerMinHeight = 744
     const [toggleMovieCardModal, setToggleMovieCardModal] = useState(false)
@@ -36,6 +36,7 @@ function MovieList({apiKey, sessionToken, toggleEyeballRefresh, handleWatchListA
             moviesData={moviesData}
             sessionToken={sessionToken}
             toggleEyeballRefresh={toggleEyeballRefresh}
+            setIsWatchedMP2C={setIsWatchedMP2C}
         />
     )
 
@@ -94,8 +95,12 @@ function MovieList({apiKey, sessionToken, toggleEyeballRefresh, handleWatchListA
             
             <div className={noResultsFound? "hidden" : "cardContainer"} style={{minHeight: `${cardContainerMinHeight*(moviesData.length/20)}px`}}>
                 <div className={waitForLoad? "hidden" : "arrowsContainer"}>
-                    <img className="leftArrow"src={arrowIcon} alt="left arrow" onClick={preivousPageLoad}/>
-                    <img className="rightArrow"src={arrowIcon} alt="right arrow" onClick={handleLoadMoreMovies}/>
+                    <div className="leftArrowContainer">
+                        <img className="leftArrow"src={arrowIcon} alt="left arrow" onClick={preivousPageLoad}/>
+                    </div>
+                    <div className="rightArrowContainer">
+                        <img className="rightArrow"src={arrowIcon} alt="right arrow" onClick={handleLoadMoreMovies}/>
+                    </div>
                 </div>
                 <div className="movieCardsContainer" style={{minHeight: `${cardContainerMinHeight*(moviesData.length/20)}px`}}>
                     {waitForLoad? <div className="loadingOrangeDiv"><img className="loadingOrangeImage" src={loadingOrange} alt="loadingCircle"></img></div> : displayMovies}

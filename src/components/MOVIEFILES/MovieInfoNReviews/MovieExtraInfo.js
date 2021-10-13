@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
+import eyeballicon from "../../../assets/eyeballicon.png"
+import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieExtraInfo({movie}){
+function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWatchedMP2C}){
 
     const [companyLogosArray, setcompanyLogosArray] = useState([])
     const companyLogoPrefix = "https://www.themoviedb.org/t/p/h50_filter(negate,0,666)"
@@ -9,13 +11,13 @@ function MovieExtraInfo({movie}){
     const productionCountries = production_countries === undefined? "No Data" : 
     production_countries.map((country,index) => 
         <p key={index}>
-            <img className="flagImage" src={`https://www.countryflags.io/${country.iso_3166_1}/flat/32.png`} alt="flag"/>
+            <img className="flagImage" src={`https://www.countryflags.io/${country.iso_3166_1}/flat/32.png`} alt="flag" title={country.iso_3166_1}/>
         </p>
     )
 
     const companyLogos = companyLogosArray.length > 0? companyLogosArray.map((company, index) => company.logo_path === null? 
         <p className="logoPFiller" key={`logoFiller${index}`}>{company.name}</p>
-        : <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name}/> )
+        : <img key={company.id} src={`${companyLogoPrefix}${company.logo_path}`} alt={company.name} title={company.name}/> )
         : null
 
     useEffect(()=>{
@@ -69,6 +71,11 @@ function MovieExtraInfo({movie}){
     }
 
 
+    function handleEyeballClick(){
+        handleWatchListAddClick(movie, isWatchedMP2C)
+        setIsWatchedMP2C(!isWatchedMP2C)
+    }
+
     return(
         <div className="extraMovieInfoContainer">
             <div className="columnA">
@@ -91,7 +98,8 @@ function MovieExtraInfo({movie}){
                     </div>
                     <div className="columnC">
                             <label>Popularity</label>
-                            <div className="extraInfoDetailContainer"><p>{Math.round(popularity)}</p></div>                
+                            <div className="extraInfoDetailContainer"><p>{Math.round(popularity)}</p></div>
+                            <div className="extraInfoDetailEyeball" onClick={handleEyeballClick}><img src={isWatchedMP2C? eyeballicon : eyeballClosedicon} alt="eyeball" title="Add/Remove from Watchlist"/></div>
                     </div>
                 </div>
                 <div className="columnD" onMouseDown={(e)=> handleMouseDown(e)}>

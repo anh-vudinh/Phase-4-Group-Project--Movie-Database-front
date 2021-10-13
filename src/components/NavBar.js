@@ -14,7 +14,7 @@ function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, s
 
     function handleNavLogoutClick(){
         setSessionUsername("")
-        setSessionToken("")
+        setSessionToken(null)
     }
 
     return(

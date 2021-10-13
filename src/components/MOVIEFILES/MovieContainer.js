@@ -15,7 +15,7 @@ import BlankPoster from "../../assets/blankposter.jpg"
 // Trailer : [movie]
 // Crackle : [movie]
 
-function MovieContainer(){
+function MovieContainer({sessionToken}){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [genresList, setGenresList] = useState([])
@@ -37,13 +37,15 @@ function MovieContainer(){
     const [pagesToLoad, setPagesToLoad] = useState(2)               //each page is 20 movies
     const [genreTitle, setGenreTitle] = useState({title:"Genres",extTitle:""})
     const [yearTitle, setYearTitle] = useState({title:"Year Release",extTitle:""})
+    const [toggleEyeballRefresh, setToggleEyeballRefresh] = useState(false)
     
     const enableCrackleVideo = true
     const enableYoutubeVideo = true
     const broken_path = BlankPoster
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiPrefixURL = "https://api.themoviedb.org/3/"
-    const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face/"
+    const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face"
+    const BASE_URL_BACK = "http://localhost:9292/"
 
     const searchUrl = (movieCateogry === 'Genres' || movieCateogry === 'Year Release')  ?
     `${apiPrefixURL}discover/movie?api_key=${apiKey}&page=${pageNumber}${yearOrGenreSuffix}` : 
@@ -72,8 +74,8 @@ function MovieContainer(){
                     }else if(currentPageCounter === pagesToLoad){                           // load last page of pages
                         setMoviesData([...moviesData, ...moviesListData.results])           // spread last page into current array
                         setCurrentPageCounter(1)                                            // reset the page Counter back to default
-                        setTimeout(()=>setWaitForLoad(false),130)                           // disable loading circle to display movies array
-                        setTogglePage2(false)                                               // disable page2 enable page1 if not already
+                        setTogglePage2(false)                                               // disable page2 enable page1 if not already             
+                        setTimeout(()=>setWaitForLoad(false),250)                           // disable loading circle to display movies array
                         return
                     }else{                                                                  // load all other pages but first and last pages
                         setMoviesData([...moviesData, ...moviesListData.results])           // spread current page loaded into current array
@@ -90,6 +92,68 @@ function MovieContainer(){
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix, pagesToLoad])
+
+    function handleWatchListAddClick(movie, isWatched){
+        if(sessionToken === null) return;                               // only valid users can send requests to server
+        const {title, poster_path, release_date, id, vote_average} = movie
+
+        if(!isWatched){                                                 // not yet added to WL so add to WL
+            const dataToSend = {
+                token: sessionToken,
+                movie_id: id,
+                movie_name: title,
+                movie_backdrop: poster_path,
+                movie_year: release_date,
+                movie_rating: vote_average
+            }
+            
+            switch(watchListArray.length){                              // checks to see if movie is allowed to be added into watchlist
+                case 0:{                                                // handles adding the first movie into an empty watchlist    
+                    sendWLDataToDB(dataToSend, `${BASE_URL_BACK}users/addWLC`)
+                    break;
+                }
+                default:{                                               // checks to see if the movie.id to add matches any movie ids currently in the watchlist, if return false then add clicked movie
+                    if(watchListArray.find(watchListItem => watchListItem.id === movie.id)  === undefined){
+                        sendWLDataToDB(dataToSend, `${BASE_URL_BACK}users/addWLC`)
+                    }
+                }
+            }
+        }else{                                                          // already added in WL so remove from WL
+            const dataToSend = {
+                token: sessionToken,
+                movie_id: id
+            }
+            deleteWLDataFromDB(dataToSend, `${BASE_URL_BACK}users/deleteWLC`)
+        }
+    }
+
+    function sendWLDataToDB(dataToSend, fetchURL){
+        const headers = {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(dataToSend)
+        }
+
+        fetch(fetchURL, headers)
+        .then(resp => resp.json())
+        .then(movieData => {
+            setWatchListArray([...watchListArray, movieData])
+        })
+    }
+
+    function deleteWLDataFromDB(dataToSend, fetchURL){
+        const headers = {
+            method: "PATCH",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(dataToSend)
+        }
+        fetch(fetchURL, headers)
+        .then(resp => resp.json())
+        .then(movieData => {
+            setWatchListArray(watchListArray.filter(watchListItem => watchListItem.id !== movieData.id))
+        })
+    }
+
 
     return (
         <div className="movieContainer">
@@ -153,6 +217,9 @@ function MovieContainer(){
                     watchListArray={watchListArray} setWatchListArray={setWatchListArray}
                     genreTitle={genreTitle} setGenreTitle={setGenreTitle}
                     yearTitle={yearTitle} setYearTitle={setYearTitle}
+                    handleWatchListAddClick={handleWatchListAddClick}
+                    sessionToken={sessionToken}
+                    toggleEyeballRefresh={toggleEyeballRefresh}
                 />
             }
 
@@ -182,6 +249,10 @@ function MovieContainer(){
                 setTogglePage2={setTogglePage2}
                 setWatchListArray={setWatchListArray}
                 watchListArray={watchListArray}
+                sessionToken={sessionToken}
+                BASE_URL_BACK={BASE_URL_BACK}
+                deleteWLDataFromDB={deleteWLDataFromDB}
+                toggleEyeballRefresh={toggleEyeballRefresh} setToggleEyeballRefresh={setToggleEyeballRefresh}
             />
         </div>
     )

@@ -1,12 +1,17 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieCard({apiKey, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, setYearTitle, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, watchListArray, setWatchListArray, setMovie, setTogglePage2, setGenresList}){
-    
+function MovieCard({apiKey, moviesData, toggleEyeballRefresh, sessionToken, watchListArray, handleWatchListAddClick, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, setYearTitle, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, setMovie, setTogglePage2, setGenresList}){
     const {title, poster_path, release_date, id} = movie
     const [isWatched, setIsWatched] = useState(false)
     const movieCardModalWidth = 275
+
+    useEffect(()=>{
+        if(sessionToken === null) return setIsWatched(false);
+        setIsWatched(watchListArray.find(movie => movie.movie_id === id) === undefined? false : true)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[toggleEyeballRefresh, sessionToken])
 
     function handleCardImageClick(){                                // this fetch is specifically to pull the full data of selected movie
             fetch(`${apiPrefixURL}movie/${id}?api_key=${apiKey}`)   // after image is clicked, because the movieCards do not provide full data
@@ -18,22 +23,6 @@ function MovieCard({apiKey, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, 
             setTimeout(()=> {setTogglePage2(true)}, 170)            // enables the MoviePage2Container, disables MovieList
             setYearTitle({...yearTitle, extTitle:""})               // resets title of year mainCategory
             setGenreTitle({...genreTitle, extTitle:""})             // resets title of genre mainCategory
-    }
-
-    function handleWatchListAddClick(){
-        switch(watchListArray.length){                              // checks to see if movie is allowed to be added into watchlist
-            case 0:{                                                // handles adding the first movie into an empty watchlist
-                setWatchListArray([...watchListArray, movie])       
-                setIsWatched(true)
-                break;
-            }
-            default:{                                               // checks to see if the movie.id to add matches any movie ids currently in the watchlist, if return false then add clicked movie
-                if(watchListArray.find(watchListItem => watchListItem.id === movie.id)  === undefined){
-                    setWatchListArray([...watchListArray, movie])
-                    setIsWatched(true)
-                }
-            }
-        }
     }
 
     function handleCardImageHover(e, movie){
@@ -55,10 +44,15 @@ function MovieCard({apiKey, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, 
         setStartModalTimer(false)
     }
 
+    function handleWLCToggle(){
+        handleWatchListAddClick(movie, isWatched)
+        setIsWatched(isWatched => !isWatched)
+    }
+
     return (  
         <div className="movieCard">
             <img className="cardImage" onMouseLeave={handleMouseLeave} onMouseOver={(e)=>handleCardImageHover(e, movie)} onClick={handleCardImageClick} src={poster_path === null ? broken_path : `${poster_prefixURL}${poster_path}`} alt={title}/>
-            <img src={isWatched? eyeballicon : eyeballClosedicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWatchListAddClick} />
+            <img src={isWatched? eyeballicon : eyeballClosedicon} className="eyeBallIcon" alt="eyeBall" onClick={handleWLCToggle} />
             <div className="cardTextContainer">
                 {title === "" ? "No Title" : 
                     <p className="cardText">{`${title}`}

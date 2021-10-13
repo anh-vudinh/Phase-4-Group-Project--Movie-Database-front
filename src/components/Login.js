@@ -56,7 +56,7 @@ function Login({toggleLoginContainer, setToggleLoginContainer, sessionToken, set
                     setShowErrorMessage(true)
                     break;
                 default: //(Successful login/register)
-                    setSessionToken(resp)
+                    setSessionToken(message)
                     setErrorMessage("")
                     setShowErrorMessage(false)
                     setToggleLoginContainer(false)

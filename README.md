@@ -1,3 +1,10 @@
+vu- 10/13
+- built watchlist in backend
+- WList now loads from backend when user logs in
+- watchlist add and remove now works with backend and front end
+- watchlist eyeball icons now properly reflect if they're in the watchlist
+- current iteration of watchlist is fully functional
+
 vu- 10/11
 - login/register logic complete front end and backend
 - added user profile and name to top right corner

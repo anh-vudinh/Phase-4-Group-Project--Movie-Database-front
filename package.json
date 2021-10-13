@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start & json-server --watch db.json -p 3001",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cat src/service-worker.js >> build/service-worker.js && serve -s build & json-server --watch db.json -p 3001",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -9,8 +9,22 @@ import TVContainer from './components/TVFILES/TVContainer'
 function App() {
 
   const [toggleLoginContainer, setToggleLoginContainer] = useState(false)
-  const [sessionToken, setSessionToken] = useState("")
+  const [sessionToken, setSessionToken] = useState(null)
   const [sessionUsername, setSessionUsername] = useState("")
+
+  // // start service worker
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.register("./service-worker.js")
+  //   .then((reg) => {
+  //     // registration worked
+  //     console.log('Registration succeeded. Scope is ' + reg.scope);
+  //   }).catch((error) => {
+  //     // registration failed
+  //     console.log('Registration failed with ' + error);
+  //   });
+  // }
+  // // end service worker
+
 
   return (
     <div className="webpageContainer"> 
@@ -23,7 +37,9 @@ function App() {
       
       <Switch>
         <Route exact path="/">
-          <MovieContainer/>
+          <MovieContainer
+            sessionToken={sessionToken}
+          />
         </Route>
 
         <Route path="/tvShows">

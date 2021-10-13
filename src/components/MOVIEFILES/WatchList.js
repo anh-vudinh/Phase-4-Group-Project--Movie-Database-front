@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import WatchListCard from "./WatchListCard";
 import eyeballIcon from "../../assets/watchListEyeballIcon.png"
-function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2, setMovieID}){
-    
+function WatchList({setWatchListArray, setToggleEyeballRefresh, toggleEyeballRefresh, deleteWLDataFromDB, BASE_URL_BACK, sessionToken, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2, setMovieID}){
+
+    // ! Watchlist logic to add cards stored in MovieContainer.js
+
     const [toggleShowWatchList, setToggleShowWatchList] = useState(false)
     const [watchListPos, setWatchListPos] = useState([window.innerWidth*0.93, window.innerHeight*0.10]) // [X,Y]
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
@@ -22,6 +24,30 @@ function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [windowDimensions, toggleShowWatchList]);
   
+    useEffect(()=>{                                                           //load WL from backend on user log in
+      if(sessionToken === null) return setWatchListArray([]);
+      const dataToSend = {
+        token: sessionToken
+      }
+      retrieveWLFromDB(dataToSend, `${BASE_URL_BACK}users/retrieveWL`)
+    },[sessionToken])
+
+    function retrieveWLFromDB(dataToSend, fetchURL){
+      const headers = {
+          method: "POST",
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(dataToSend)
+      }
+
+      fetch(fetchURL, headers)
+      .then(resp => resp.json())
+      .then(wLCArrayObj => {
+        setWatchListArray(wLCArrayObj)
+        setToggleEyeballRefresh(!toggleEyeballRefresh)                      //required because WLA does not get set fast enough so useEffect in MovieCard.js works with a empty array on pageload/login
+      })
+  }
+
+
     function handleResize() {
       setWindowDimensions(getWindowDimensions());
     }
@@ -34,20 +60,17 @@ function WatchList({setWatchListArray, watchListArray, poster_prefixURL, broken_
       };
     }
     
-    function handleDelete(id){
-        const updateWatchList = watchListArray.filter(movieList => movieList.id !== id)
-        setWatchListArray(updateWatchList)
-    }
-
     const watchListItem = watchListArray.map((watchListCardObj, index) => 
         <WatchListCard key={index} 
             watchListCardObj={watchListCardObj} 
             poster_prefixURL={poster_prefixURL} 
-            broken_path={broken_path} 
-            handleDelete={handleDelete} 
+            broken_path={broken_path}
             setMovie={setMovie} 
             setTogglePage2={setTogglePage2} 
             setMovieID={setMovieID}
+            deleteWLDataFromDB={deleteWLDataFromDB}
+            sessionToken={sessionToken}
+            BASE_URL_BACK={BASE_URL_BACK}
         />
     )
 

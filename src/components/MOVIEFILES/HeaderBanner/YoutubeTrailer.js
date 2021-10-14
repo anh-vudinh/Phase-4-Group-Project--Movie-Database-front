@@ -22,7 +22,9 @@ function YoutubeTrailer({movie, apiKey, movieArray, setMovieArray, apiPrefixURL}
 
     return(
         <div className="trailerContainer">
-            {movieTrailer}
+            <div className="YTtrailer">
+                {movieTrailer}
+            </div>
         </div>
     )
 }

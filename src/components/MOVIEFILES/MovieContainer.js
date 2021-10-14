@@ -15,7 +15,7 @@ import BlankPoster from "../../assets/blankposter.jpg"
 // Trailer : [movie]
 // Crackle : [movie]
 
-function MovieContainer({sessionToken}){
+function MovieContainer({sessionToken, sessionUsername, sessionProfilePic}){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [genresList, setGenresList] = useState([])
@@ -92,7 +92,7 @@ function MovieContainer({sessionToken}){
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix, pagesToLoad, sessionToken])
+    },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix, pagesToLoad])
 
     function handleWatchListAddClick(movie, isWatched){
         if(sessionToken === null) return;                               // only valid users can send requests to server
@@ -224,6 +224,9 @@ function MovieContainer({sessionToken}){
                     togglePage2={togglePage2}
                     handleWatchListAddClick={handleWatchListAddClick}
                     isWatchedMP2C={isWatchedMP2C} setIsWatchedMP2C={setIsWatchedMP2C}
+                    sessionToken={sessionToken}
+                    sessionUsername={sessionUsername}
+                    sessionProfilePic={sessionProfilePic}
                 />
             : null}
 

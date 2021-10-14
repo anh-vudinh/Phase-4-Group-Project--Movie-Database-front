@@ -11,6 +11,7 @@ function App() {
   const [toggleLoginContainer, setToggleLoginContainer] = useState(false)
   const [sessionToken, setSessionToken] = useState(null)
   const [sessionUsername, setSessionUsername] = useState("")
+  const [sessionProfilePic, setSessionProfilePic] = useState("")
 
   // // start service worker
   // if ('serviceWorker' in navigator) {
@@ -39,6 +40,8 @@ function App() {
         <Route exact path="/">
           <MovieContainer
             sessionToken={sessionToken}
+            sessionUsername={sessionUsername}
+            sessionProfilePic={sessionProfilePic}
           />
         </Route>
 

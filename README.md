@@ -10,6 +10,8 @@ vu- 10/13
 - added functional watchlist add/remove button to MP2C
 - readjusted reviews
 - made readmoreunderlay component
+- extracted YT api key cycler into it's own function
+- added readmorecontainer and style
 
 vu- 10/11
 - login/register logic complete front end and backend

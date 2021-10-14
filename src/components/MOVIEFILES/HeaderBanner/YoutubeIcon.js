@@ -29,23 +29,24 @@ function YoutubeIcon({movie, setMovieArray, showExtraMovieContainer, setExtraMov
                     }
                 }else{                                                                              // if the first search failed due to API key quota maxed, 
                     setToggleShowYTBtn(false)
-                    if(!disableAPICycle){                                                           // this else logic will cycle through the available keys until it tries them all once
-                        if(dataArray.error.code === 403){
-                            if(toggleRetryFetchCounter < youtubeAPIKeysArray.length-1){             // logic to determine which key is tried
-                                setCurrentAPIKey(youtubeAPIKeysArray.indexOf(currentAPIKey)+1 < youtubeAPIKeysArray.length? youtubeAPIKeysArray[youtubeAPIKeysArray.indexOf(currentAPIKey)+1] : youtubeAPIKeysArray[0]) 
-                                setToggleRetryFetchCounter(toggleRetryFetchCounter+1)               // keeps track of the current API Key being tried
-                                setTimeout(()=>{setToggleRetryFetch(!toggleRetryFetch)}, 500)       // prevents the cycler from iterating through the keys too quickly
-                            }else{                                                                  // if all YT API keys have been cycled through once and all are maxed, stop cycle
-                                setToggleRetryFetchCounter(0)
-                                console.log(`YT error code: ${dataArray.error.code}`)
-                            }
-                        }
-                    }
+                    if(!disableAPICycle){cycleAPIKeys(dataArray)}                                   // this else logic will cycle through the available keys until it tries them all once
                 }
             })
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie, toggleRetryFetch])
+
+    function cycleAPIKeys(errorArray){
+        if(errorArray.error.code === 403){
+            if(toggleRetryFetchCounter < youtubeAPIKeysArray.length-1){                             // logic to determine which key is tried
+                setCurrentAPIKey(youtubeAPIKeysArray.indexOf(currentAPIKey)+1 < youtubeAPIKeysArray.length? youtubeAPIKeysArray[youtubeAPIKeysArray.indexOf(currentAPIKey)+1] : youtubeAPIKeysArray[0]) 
+                setToggleRetryFetchCounter(toggleRetryFetchCounter+1)                               // keeps track of the current API Key being tried
+                setTimeout(()=>{setToggleRetryFetch(!toggleRetryFetch)}, 500)                       // prevents the cycler from iterating through the keys too quickly
+            }else{                                                                                  // if all YT API keys have been cycled through once and all are maxed, stop cycle
+                setToggleRetryFetchCounter(0)
+            }
+        }
+    }
 
     function handleOnClick(){
         setMovieArray(

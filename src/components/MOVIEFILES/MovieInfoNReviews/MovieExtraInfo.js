@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWatchedMP2C}){
+function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWatchedMP2C, sessionToken}){
 
     const [companyLogosArray, setcompanyLogosArray] = useState([])
     const companyLogoPrefix = "https://www.themoviedb.org/t/p/h50_filter(negate,0,666)"
@@ -72,6 +72,7 @@ function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWat
 
 
     function handleEyeballClick(){
+        if(sessionToken === null) return;
         handleWatchListAddClick(movie, isWatchedMP2C)
         setIsWatchedMP2C(!isWatchedMP2C)
     }
@@ -99,7 +100,7 @@ function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWat
                     <div className="columnC">
                             <label>Popularity</label>
                             <div className="extraInfoDetailContainer"><p>{Math.round(popularity)}</p></div>
-                            <div className="extraInfoDetailEyeball" onClick={handleEyeballClick}><img src={isWatchedMP2C? eyeballicon : eyeballClosedicon} alt="eyeball" title="Add/Remove from Watchlist"/></div>
+                            <div className="extraInfoDetailEyeball" onClick={handleEyeballClick}><img src={isWatchedMP2C? eyeballicon : eyeballClosedicon} alt="eyeball" title={sessionToken === null? "Log in first!" : "Add/Remove from Watchlist"}/></div>
                     </div>
                 </div>
                 <div className="columnD" onMouseDown={(e)=> handleMouseDown(e)}>

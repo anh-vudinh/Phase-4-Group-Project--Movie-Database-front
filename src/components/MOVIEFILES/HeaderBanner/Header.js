@@ -51,6 +51,23 @@ function Header({apiKey, apiPrefixURL, enableCrackleVideo, enableYoutubeVideo, m
             <div className="headerBannerContainer">
                 <img className={toggleHeaderInfo? "headerDisplayInfo headerDisplayInfoShrink" : "headerDisplayInfo"} src= {informationIcon}alt="headerDisplayInfoIcon" onClick={()=> setToggleHeaderInfo(toggleHeaderInfo => !toggleHeaderInfo)}/>
                 <img className="headerBannerBackground" src={(movie.backdrop_path === null || movie.backdrop_path === undefined) ? broken_path : `https://www.themoviedb.org/t/p/w640_and_h360_multi_faces/${movie.backdrop_path}`} alt={movie.title}></img>
+                
+                <YoutubeTrailer 
+                    movie={movie} 
+                    togglePage2={togglePage2} 
+                    apiKey={apiKey} 
+                    apiPrefixURL={apiPrefixURL} 
+                    movieArray={movieArray} 
+                    setMovieArray={setMovieArray}
+                />  
+
+                <FreeMovieContainer
+                    enableCrackleVideo={enableCrackleVideo}
+                    enableYoutubeVideo={enableYoutubeVideo}
+                    setMovieArray={setMovieArray}
+                    movie={movie}
+                />
+            
             </div>
             
             <div className={toggleHeaderInfo? "headerUnderlay fade-in" : "headerUnderlay"}>
@@ -71,22 +88,6 @@ function Header({apiKey, apiPrefixURL, enableCrackleVideo, enableYoutubeVideo, m
                     {movie.homepage !== ""? <a href={`${movie.homepage}`} target="_blank" rel="noreferrer"><img className="headerLinkIcon" src={wwwLinkIcon} alt="Homepage Link"/></a> : null}
                 </div>
             </div>
-
-            <YoutubeTrailer 
-                movie={movie} 
-                togglePage2={togglePage2} 
-                apiKey={apiKey} 
-                apiPrefixURL={apiPrefixURL} 
-                movieArray={movieArray} 
-                setMovieArray={setMovieArray}
-            />  
-
-            <FreeMovieContainer
-                enableCrackleVideo={enableCrackleVideo}
-                enableYoutubeVideo={enableYoutubeVideo}
-                setMovieArray={setMovieArray}
-                movie={movie}
-            />
         </>
 
     )

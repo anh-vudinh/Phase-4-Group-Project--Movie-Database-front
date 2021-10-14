@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 
 function CommentForm({reviewsArray, setReviewsArray, movie}){
     const defaultName ="Default Name"

@@ -15,21 +15,28 @@
   position: relative;
 }
 
-.navBar{
+.navBarContainer{
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  height: auto;
+  overflow: hidden;
   height: 80px;
   position: fixed;
   top: 0;
+  z-index: 5;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.navBar{
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   color: whitesmoke;
-  z-index: 5;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 }
 
 
@@ -375,6 +382,27 @@
   user-select: none;
 }
 
+.trailerContainer{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+
+  top: 80px;
+  width: 100%;
+  height: 590px;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.YTtrailer{
+  position: absolute;
+  height: fit-content;
+  z-index:1;
+  top: 40px;
+}
+
 .extraMovieIcon{
   position: absolute;
   right: 55px;
@@ -504,7 +532,7 @@
   position: absolute;
   z-index: 2;
   top: 80px;
-  overflow-y: clip;
+  overflow: hidden;
   visibility: hidden;
   opacity: 0;
   transition: opacity 500ms ease-in-out, visibility 500ms ease-in-out;
@@ -883,7 +911,6 @@
   background-color: rgba(10,10,10,1);
   white-space: nowrap;
   height: 50px;
-  /* overflow-x: hidden; */
 }
 
 .searchBarCategories{
@@ -1582,7 +1609,7 @@
   width: 100%;
 }
 
-.readMoreContainer{
+.readMoreBtnContainer{
   position: absolute;
   display: flex;
   bottom: 15px;
@@ -1602,13 +1629,143 @@
   white-space: nowrap;
 }
 
-.readMoreUnderlay{
+.readMoreContainer{
   position:absolute;
+  display: flex;
+  justify-content: center;
   z-index: 1;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(10,10,10,0.5);
+}
+
+
+
+.readMoreUnderlay{
+  position:absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10,10,10,0.95);
+}
+
+
+.readMoreCardContainer{
+  position: relative;
+  z-index: 100;
+  background-color: rgb(35, 35, 35);
+  overflow-y: scroll;
+  height: 100%;
+  width: 1000px;
+}
+
+.readMoreCardContainer::-webkit-scrollbar {
+  width: 3px;
+}
+
+.readMoreCardContainer::-webkit-scrollbar-track {
+  width: 3px;
+  background-color: rgb(10, 10, 10);
+}
+
+.readMoreCardContainer::-webkit-scrollbar-thumb {
+  width: 3px;
+  background-color:rgb(65, 161, 0);
+}
+
+.threadStarter{
+  height: auto;
+  width: 100%;
+  font-size: 22px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.tSText{
+  background-color: rgb(50, 185, 79);
+  height: fit-content;
+  width: 700px;
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid #888;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 10px rgba(15, 15, 15, 0.8);
+}
+
+.tSProfile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.tSProfile img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background-color: whitesmoke;
+}
+
+.tSDateTime{
+  display: flex;
+  justify-content: flex-end;
+  color: whitesmoke;
+}
+
+.tSIcon{
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  top: -20px;
+  right: 10px;
+  transform: rotate(-20deg);
+}
+
+.readMoreEmptyReply{
+  height: auto;
+  width: 100%;
+  font-size: 19px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.rMERText{
+  background-color: rgb(248, 242, 210);
+  height: fit-content;
+  width: 700px;
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid #888;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 10px rgba(15, 15, 15, 0.8);
+}
+
+.rMERProfile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.rMERProfile img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background-color: whitesmoke;
 }
 
 .CommentForm{
@@ -1650,14 +1807,9 @@
   border-width: 0;
 }
 
-.trailerContainer{
-  position: absolute;
-  z-index: 1;
-  top: 120px;
-}
-
 
 .textAreaContainer{
+  position: relative;
   background-color: transparent;
   display: flex;
   flex-direction: column;
@@ -1666,11 +1818,17 @@
   height: fit-content;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
+}
+
+.textArea{
+  width: 850px;
+  height: 100%;
 }
 
 .demo-wrapper{
   height: 100%;
-  width: 850px;
+  width: 100%;
 }
 
 .rdw-editor-toolbar {

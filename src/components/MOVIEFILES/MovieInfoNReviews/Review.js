@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import CommentForm from "./CommentForm"
 import ReviewReadMore from "./ReviewReadMore";
 
-function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
+function Review({movie, apiKey, apiPrefixURL, blankAvatar, sessionUsername, sessionProfilePic}){
 
     const [reviewsArray, setReviewsArray] = useState([])
     const [displayReadMore, setDisplayReadMore] = useState(false)
@@ -49,7 +49,7 @@ function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
 
                         <div className="ReviewContentContainer">
                             <p className="ReviewContent">{review.content.substr(0,maxReviewContentLength)} {review.content.length < maxReviewContentLength? "" : "....."}</p>
-                            <div className="readMoreContainer">
+                            <div className="readMoreBtnContainer">
                                 <button className="readMoreBtn" onClick={()=> handleReadMoreClick(review)}>Read More</button>
                             </div>
                         </div>
@@ -94,6 +94,10 @@ function Review({movie, apiKey, apiPrefixURL, blankAvatar}){
                 <ReviewReadMore 
                     readMoreDetails={readMoreDetails}
                     setDisplayReadMore={setDisplayReadMore}
+                    blankAvatar={blankAvatar}
+                    avatarPrefix={avatarPrefix}
+                    sessionUsername={sessionUsername}
+                    sessionProfilePic={sessionProfilePic}
                 /> 
             : null}
         </>

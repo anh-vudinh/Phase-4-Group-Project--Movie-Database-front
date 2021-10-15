@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import parse from "html-react-parser"
 import ReviewReadMore from "./ReviewReadMore";
 
 function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, reviewsArrayBE,  setReviewsArrayBE, BASE_URL_BACK, blankAvatar, sessionUsername, sessionToken, sessionProfilePic, displayReadMore, setDisplayReadMore}){
@@ -65,7 +66,9 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, re
                         </div>
 
                         <div className="ReviewContentContainer">
-                            <p className="ReviewContent">{review.content.substr(0,maxReviewContentLength)} {review.content.length < maxReviewContentLength? "" : "....."}</p>
+                            <div className="ReviewContent">
+                                <p>{parse(review.content.substr(0,maxReviewContentLength))} {review.content.length < maxReviewContentLength? "" : "....."}</p>
+                            </div>
                             <div className="readMoreBtnContainer">
                                 <button className="readMoreBtn" onClick={()=> handleReadMoreClick(review, "TMDB")}>Read More</button>
                             </div>
@@ -94,7 +97,7 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, re
                     </div>
 
                     <div className="ReviewContentContainer">
-                        <p className="ReviewContent">{review.content.substr(0,maxReviewContentLength)} {review.content.length < maxReviewContentLength? "" : "....."}</p>
+                        <p className="ReviewContent">{parse(review.content.substr(0,maxReviewContentLength))} {review.content.length < maxReviewContentLength? "" : "....."}</p>
                         <div className="readMoreBtnContainer">
                             <button className="readMoreBtn" onClick={()=> handleReadMoreClick(review, "BE")}>Read More</button>
                         </div>

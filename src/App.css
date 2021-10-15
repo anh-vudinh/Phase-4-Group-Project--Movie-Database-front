@@ -1607,6 +1607,22 @@
   position: relative;
   flex-wrap: nowrap;
   width: 100%;
+  height: 200px;
+  overflow: auto;
+}
+
+.ReviewContent::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ReviewContent::-webkit-scrollbar-track {
+  width: 5px;
+  background-color: rgb(10, 10, 10);
+}
+
+.ReviewContent::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color:rgb(65, 161, 0);
 }
 
 .readMoreBtnContainer{
@@ -1629,6 +1645,10 @@
   white-space: nowrap;
 }
 
+.readMoreBtn:active{
+  background-color: rgb(52, 131, 0);
+}
+
 .readMoreContainer{
   position:absolute;
   display: flex;
@@ -1637,38 +1657,35 @@
   top: 0;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
 }
 
-
-
 .readMoreUnderlay{
-  position:absolute;
+  position:relative;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 125%;
   background-color: rgba(10,10,10,0.95);
 }
 
-
 .readMoreCardContainer{
-  position: relative;
+  position: absolute;
   background-color: rgb(35, 35, 35);
-  overflow-y: scroll;
-  height: 100%;
+  height: fit-content;
   width: 1000px;
 }
 
-.readMoreCardContainer::-webkit-scrollbar {
-  width: 3px;
+.readMoreContainer::-webkit-scrollbar {
+  width: 10px;
 }
 
-.readMoreCardContainer::-webkit-scrollbar-track {
-  width: 3px;
+.readMoreContainer::-webkit-scrollbar-track {
+  width: 10px;
   background-color: rgb(10, 10, 10);
 }
 
-.readMoreCardContainer::-webkit-scrollbar-thumb {
-  width: 3px;
+.readMoreContainer::-webkit-scrollbar-thumb {
+  width: 10px;
   background-color:rgb(65, 161, 0);
 }
 
@@ -1742,6 +1759,12 @@
   position: relative;
 }
 
+.threadStarter p,
+.readMoreResponses p,
+.readMoreResponsesOG p{
+  margin: 2px;
+}
+
 .rMResponseText{
   background-color: rgb(125, 149, 214);
   height: fit-content;
@@ -1789,7 +1812,7 @@
 }
 
 .readMoreResponsesOGText{
-  background-color: rgb(50, 185, 79);
+  background-color: rgb(136, 233, 156);
   height: fit-content;
   width: 700px;
   padding: 15px;
@@ -1887,6 +1910,7 @@
   width: 800px;
   height: 350px;
 }
+
 .reviewFormSubmitButton{
   max-width: 850px;
   width: 100%;
@@ -1898,6 +1922,10 @@
   color: whitesmoke;
   box-shadow: none;
   border-width: 0;
+}
+
+.reviewFormSubmitButton:active{
+  background-color: rgb(52, 131, 0);
 }
 
 .textAreaContainer{

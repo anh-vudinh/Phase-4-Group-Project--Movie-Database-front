@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import parse from "html-react-parser"
 import TextArea from "./TextArea";
 
 function ReviewReadMore({movie, sessionToken, displayReadMore, readMoreDetails, BASE_URL_BACK, setDisplayReadMore, avatarPrefix, blankAvatar, sessionUsername, sessionProfilePic}){
@@ -28,7 +29,7 @@ function ReviewReadMore({movie, sessionToken, displayReadMore, readMoreDetails, 
             </div>
             <div className="readMoreResponsesOGBubble">
                 <div className="readMoreResponsesOGText">
-                    {response.content}
+                    {parse(response.content)}
                 </div>
                 <div className="readMoreResponsesOGDateTime">
                     {response.updated_at}
@@ -39,7 +40,7 @@ function ReviewReadMore({movie, sessionToken, displayReadMore, readMoreDetails, 
         <div className="readMoreResponses" key={index}>
             <div className="rMResponseBubble">
                 <div className="rMResponseText">
-                    {response.content}
+                    {parse(response.content)}
                 </div>
                 <div className="rMResponseDateTime">
                     {response.updated_at}
@@ -72,7 +73,7 @@ function ReviewReadMore({movie, sessionToken, displayReadMore, readMoreDetails, 
                     </div>
                     <div className="tSBubble">
                         <div className="tSText">
-                            {content}
+                            {parse(content)}
                         </div>
                         <div className="tSDateTime">
                             {updated_at}

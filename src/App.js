@@ -8,24 +8,11 @@ import TVContainer from './components/TVFILES/TVContainer'
 
 function App() {
 
+  const BASE_URL_BACK = "http://localhost:9292/"
   const [toggleLoginContainer, setToggleLoginContainer] = useState(false)
   const [sessionToken, setSessionToken] = useState(null)
   const [sessionUsername, setSessionUsername] = useState("")
-  const [sessionProfilePic, setSessionProfilePic] = useState("")
-
-  // // start service worker
-  // if ('serviceWorker' in navigator) {
-  //   navigator.serviceWorker.register("./service-worker.js")
-  //   .then((reg) => {
-  //     // registration worked
-  //     console.log('Registration succeeded. Scope is ' + reg.scope);
-  //   }).catch((error) => {
-  //     // registration failed
-  //     console.log('Registration failed with ' + error);
-  //   });
-  // }
-  // // end service worker
-
+  const [sessionProfilePic, setSessionProfilePic] = useState(null)
 
   return (
     <div className="webpageContainer"> 
@@ -42,6 +29,7 @@ function App() {
             sessionToken={sessionToken}
             sessionUsername={sessionUsername}
             sessionProfilePic={sessionProfilePic}
+            BASE_URL_BACK={BASE_URL_BACK}
           />
         </Route>
 
@@ -51,6 +39,7 @@ function App() {
       </Switch>
 
       <Login
+        BASE_URL_BACK={BASE_URL_BACK}
         sessionToken={sessionToken} setSessionToken={setSessionToken}
         setSessionUsername={setSessionUsername}
         toggleLoginContainer={toggleLoginContainer} setToggleLoginContainer={setToggleLoginContainer}

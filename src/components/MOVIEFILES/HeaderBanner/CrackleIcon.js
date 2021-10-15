@@ -66,14 +66,13 @@ export default CrackleIcon;
         
     //     var requestOptions = {
     //         method: 'GET',
-    //         headers: myHeaders,
-    //         redirect: 'follow'
-    //     };
-        
-    //     fetch("https://widevinedashus-crackle-com.akamaized.net/1/k/um/enc_ldzyb_Crackle-L08-1080hd-3800k.mp4/540ee898-ea31-4f92-b231-40dba58de797", requestOptions)
-    //     .then(response => response.json())
-    //     .then(result => console.log(result))
-    //     .catch(error => console.log('error', error));
+    //         redirect: 'manual'
+    //       };
+          
+    //       fetch("https://stg-api-v2.crackle.com/contentdiscovery/search/beta%20test?useFuzzyMatching=false&limit=1&excludeChildMediaIfChannelIsPresent=true", requestOptions)
+    //         .then(response => response.text())
+    //         .then(result => console.log(result))
+    //         .catch(error => console.log('error', error));
     // }
 
 

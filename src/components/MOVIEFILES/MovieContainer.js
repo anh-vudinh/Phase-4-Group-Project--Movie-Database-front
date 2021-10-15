@@ -15,7 +15,7 @@ import BlankPoster from "../../assets/blankposter.jpg"
 // Trailer : [movie]
 // Crackle : [movie]
 
-function MovieContainer({sessionToken, sessionUsername, sessionProfilePic}){
+function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_URL_BACK}){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [genresList, setGenresList] = useState([])
@@ -46,7 +46,7 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic}){
     const apiKey = '9b9db796275919f97fb742c582ab0008'
     const apiPrefixURL = "https://api.themoviedb.org/3/"
     const poster_prefixURL = "https://www.themoviedb.org/t/p/w220_and_h330_face"
-    const BASE_URL_BACK = "http://localhost:9292/"
+
 
     const searchUrl = (movieCateogry === 'Genres' || movieCateogry === 'Year Release')  ?
     `${apiPrefixURL}discover/movie?api_key=${apiKey}&page=${pageNumber}${yearOrGenreSuffix}` : 
@@ -227,6 +227,7 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic}){
                     sessionToken={sessionToken}
                     sessionUsername={sessionUsername}
                     sessionProfilePic={sessionProfilePic}
+                    BASE_URL_BACK={BASE_URL_BACK}
                 />
             : null}
 

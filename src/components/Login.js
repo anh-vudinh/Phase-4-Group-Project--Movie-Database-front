@@ -4,9 +4,8 @@ import X from "../assets/X.png"
 import eyeballIcon from "../assets/eyeballicon.png"
 import eyeballClosedIcon from "../assets/eyeballClosedicon.png"
 
-function Login({toggleLoginContainer, setToggleLoginContainer, sessionToken, setSessionToken, setSessionUsername}){
+function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, sessionToken, setSessionToken, setSessionUsername}){
     
-    const BASE_URL = "http://localhost:9292"
     const resetFormData = {username:"", password:""}
     const [formData, setFormData] = useState({username:"", password:""})
     const [errorMessage,setErrorMessage] = useState("")
@@ -19,14 +18,14 @@ function Login({toggleLoginContainer, setToggleLoginContainer, sessionToken, set
         e.preventDefault()
         if(toggleRegister){
             if(formData.password === confirmPassword){                          // register action matching password and confirm
-                sendUserDataToDB(formData, `${BASE_URL}/users/register`)
+                sendUserDataToDB(formData, `${BASE_URL_BACK}/users/register`)
             }else{                                                              // register action mis-match password and confirm
                 setErrorMessage("Error: Mismatch Passwords")
                 setShowErrorMessage(true)
                 setConfirmPassword("")                                          //reset password fields
             }
         }else{
-            sendUserDataToDB(formData, `${BASE_URL}/users/login`)               // default action for login
+            sendUserDataToDB(formData, `${BASE_URL_BACK}/users/login`)               // default action for login
         }
     }
 

@@ -1,37 +1,43 @@
-import React, {useState, useEffect} from "react"
+import React, {useEffect} from "react"
 import crackleIcon from "../../../assets/crackleIcon.png"
 
 function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraMovieContainer, videoLink, setVideoLink, setShowCrackleVideo, setShowExtraMovieContainer, setExtraMovieWarning}){
     const {title, release_date} = movie
-    const crackleDB = "http://localhost:3001/crackle"
-    const [crackleObjsArray, setCrackleObjsArray] = useState([])
+    const crackleDB = "http://localhost:9292/crackles/"
     const regex = /[^a-zA-Z0-9]/g
 
     useEffect(()=>{                                                         // checks the crackle DB stored in file for movies of the same name
         setVideoLink(undefined)                                             // reset videolink to default state
         setShowExtraMovieContainer(false)                                   // reset extramoviecontainer to hidden, master controller
         setExtraMovieWarning(false)                                         // reset warning to false, master controller
-        if(movie.id !== undefined && crackleObjsArray.length === 0){         
-            fetch(crackleDB)
+        
+        if(movie.id !== undefined){
+            const dataToSend = {
+                title: title,
+                release_year: release_date.slice(0,4)
+            }
+
+            const headers = {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(dataToSend)
+            }
+    
+            fetch(`${crackleDB}getMovie`, headers)
             .then(resp => resp.json())
             .then(data => {
-                setCrackleObjsArray(data)                                   // puts all the crackle data into an array
+                console.log(data)
+                if (data === null){                                   // puts all the crackle data into an array
+                    return setShowCrackleVideo(false)
+                }else{
+                    setVideoLink(data.c_id)    
+                    setExtraMovieWarning(true)
+                }
             })
-        }
-        if(crackleObjsArray.length > 0){                                    // logic if the fetch was able to populate the array
-            const crackleMovieObject = crackleObjsArray.find(crackleMovieItem => (
-                    (crackleMovieItem.Title.replaceAll(regex, "").toLowerCase() === title.replaceAll(regex, "").toLowerCase()       // compares the name of crackles movie vs the names from TMDB, removes all special characters and spaces
-                    && Math.abs(crackleMovieItem.ReleaseYear - parseInt(release_date.slice(0,4))) < 2)                              // also compare release years
-                    )
-                )
-            if(crackleMovieObject === undefined){
-                return setShowCrackleVideo(false)
-            }                                                                                                                       // if movie was not found do not create a Free movie icon
-            setVideoLink(crackleMovieObject.Id)    
-            setExtraMovieWarning(true)                                                                                          // if movie is found set the movie.id to useState so it can be used by component 
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
+
 
     function handleIconClick(){
         if(startCrackleVideo === false){                                                                                            //makes it so that crackle video persists until user chooses a new video without resetting video to very beginning
@@ -80,36 +86,88 @@ export default CrackleIcon;
 //\\////\\////\\////\\////                Crackle DATAPULL FROM API            ////\\////\\////\\////\\//
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
 
-    // const [pageNumberCrackle, setPageNumberCrackle] = useState(1)
-    // const [holderArray, setHolderArray] = useState([])
+// import xmlToJson from "../../functions/xml2json"
+// import sleep from "../../functions/sleep"
 
-    // useEffect(()=>{
-    //     if(pageNumberCrackle !== undefined){
-    //         fetch(`https://stg-api-v2.crackle.com/browse/movies?sortOrder=alpha-asc&pageNumber=${pageNumberCrackle}&pageSize=50`)
-    //         .then(resp => resp.json())
-    //         .then(data => {
-    //             if(pageNumberCrackle <= data.Page.Total){
-    //                 setHolderArray([...holderArray, ...data.Items])
-    //                 setTimeout(()=>{setPageNumberCrackle(pageNumberCrackle+1)},1500)
-    //             }else{
-    //                 //addToDB(holderArray)
-    //             }
-    //         })
-    //     }
-    // },[pageNumberCrackle])
+// const [pageNumberCrackle, setPageNumberCrackle] = useState(1)
+// const [maxPageNumberCrackle, setMaxPageNumberCrackle] = useState(0)
+// const [holderArray, setHolderArray] = useState([])
+
+// useEffect(()=>{
+//     return;
+//     fetch(`https://web-api-us.crackle.com/Service.svc/browse/movies/all/all/alpha-asc/US/20/${pageNumberCrackle}`)
+//     .then(resp => resp.text())
+//     .then(str => new DOMParser().parseFromString(str, "text/xml"))
+//     .then(data => {
+//         const fetchData = async () => {
+//             const xxx = xmlToJson(data)
+//             if(pageNumberCrackle > maxPageNumberCrackle){
+//                 setMaxPageNumberCrackle(parseInt(Object.values(xxx.BrowseDetails.PageResult.TotalPages)[0]))
+//             } 
+//             console.log(`fetching page: ${pageNumberCrackle} of ${maxPageNumberCrackle}`)
+//             if(xxx.BrowseDetails.Entries.BrowseItem !== undefined && pageNumberCrackle <= maxPageNumberCrackle){
+//                 xxx.BrowseDetails.Entries.BrowseItem.map((element, index) => {
+//                         console.log(`added item ${index+1}`)
+//                         const convertedData = {
+//                             Id: parseInt(Object.values(element.ID)[0]),
+//                             Title: Object.values(element.Title)[0],
+//                             ReleaseYear: parseInt(Object.values(element.ReleaseYear)[0])
+//                         }
+//                         setHolderArray(holderArray => [...holderArray, convertedData])
+//                     }
+                    
+//                 )
+//                 await sleep(500)
+//                 if(pageNumberCrackle === maxPageNumberCrackle) return addToDB(holderArray)
+//                 setPageNumberCrackle(pageNumberCrackle+1)
+//             }
+//         }
+//         const result = fetchData()
+//     })
+// },[pageNumberCrackle])
+
+// function addToDB(addData) {
+//     fetch("http://localhost:3001/crackle", {
+//     method: "POST",
+//     headers: {
+//     "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(addData)
+// })
+//     .then((resp) => resp.json())
+//     .then((data) => data);
+// }
+
+//\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
+//\\////\\////\\////\\////                Send JSON DATA TO RUBY BE             ////\\////\\////\\////\\//
+//\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
 
 
-    // function addToDB(addData) {
-    //     fetch("http://localhost:3001/crackle", {
-    //     method: "POST",
-    //     headers: {
-    //     "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify(addData)
-    // })
-    //     .then((resp) => resp.json())
-    //     .then((data) => data);
-    // }
+// function addCrackleDBJsonToRuby(){
+//     setTimeout(()=>addCrackleDBJsonToRuby(), 5000)
+//     //return
+//     fetch(crackleDB)
+//     .then(resp => resp.json())
+//     .then(data => {
+//         iterateThroughArray(data[0])
+//     })
+
+// }
+
+// async function iterateThroughArray(array){
+//     console.log(array)
+//     array.forEach(item => {
+//         const headers = {
+//             method: "POST",
+//             headers: {'Content-Type': 'application/json'},
+//             body: JSON.stringify(item)
+//         }
+
+//         fetch("http://localhost:9292/crackles/addMovies", headers)
+//         .then(resp => resp.json())
+//         .then(data => data)
+//     })
+// }
 
 
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\

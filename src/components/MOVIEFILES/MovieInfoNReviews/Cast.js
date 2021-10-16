@@ -62,7 +62,7 @@ function Cast({movie, poster_prefixURL, apiKey, apiPrefixURL, blankAvatar,blankA
     }
 
     return (
-        <div className="castContainer" onMouseDown={(e)=> handleMouseDown(e)}>
+        <div className={cast.length < numberOfCastToLoad? "castContainer ccshort" : "castContainer"} onMouseDown={(e)=> handleMouseDown(e)}>
             {toggleShowMoreCast? cast : cast.slice(0,numberOfCastToLoad)}
             {cast.length < numberOfCastToLoad? null :
                 <button onClick={()=> setToggleShowMoreCast(!toggleShowMoreCast)}>

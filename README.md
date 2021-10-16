@@ -1,5 +1,8 @@
 vu- 10/15
-- cleaning up and organizing code from previous days 
+- cleaning up and organizing code from previous days
+- added crackle DB to ruby backend, adjusted related front end logic
+- added function to pull crackle movies from their website to add data to db.json
+- added function to transfer the above from db.json to ruby back end (there is an issue where ruby back end stops recieving requests after too many post requests)
 
 vu- 10/14
 - finished functionality coding for backend and front end for adding reviews and review responses

@@ -1230,6 +1230,10 @@
   justify-content: space-between;
 }
 
+.ccshort{ 
+  justify-content: center;
+}
+
 .castContainer.active{ 
   background: rgba(255,255,255,0.15);
   cursor:grabbing;

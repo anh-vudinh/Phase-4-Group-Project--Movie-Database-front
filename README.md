@@ -1,3 +1,6 @@
+vu- 10/15
+- cleaning up and organizing code from previous days 
+
 vu- 10/14
 - finished functionality coding for backend and front end for adding reviews and review responses
 - !! all new code needs to be organized to their proper places. I made it "work" without consideration to where things should logically/properly belong.

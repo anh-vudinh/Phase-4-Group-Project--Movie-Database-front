@@ -10,7 +10,7 @@ function Search({setmovieCateogry, genreTitle, setGenreTitle, yearTitle, setYear
     const [currentCategorySelected, setCurrentCategorySelected] = useState("")
 
     const genresURL = `${apiPrefixURL}genre/movie/list?api_key=${apiKey}&page=50`
-    const searchUrl =`${apiPrefixURL}discover/movie?api_key=${apiKey}&page=1`
+    const searchUrl = `${apiPrefixURL}discover/movie?api_key=${apiKey}&page=1`
     
     const currentYear = new Date().getFullYear()
     const yearArray =[]

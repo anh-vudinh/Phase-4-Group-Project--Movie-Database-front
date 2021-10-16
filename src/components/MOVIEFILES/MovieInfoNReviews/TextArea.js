@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { EditorState, convertToRaw} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
+import sanitizeHtml from 'sanitize-html';
 
 function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, readMoreDetails, displayReadMore, reviewsArrayBE, setReviewsArrayBE, BASE_URL_BACK}){
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
     function handleSubmit(){
         if(sessionToken === null) return;
-        const textToSave = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+        const textToSave = sanitizeHtml(draftToHtml(convertToRaw(editorState.getCurrentContent())))
         submitReviewOrResponse(textToSave)
     }
     
     function submitReviewOrResponse(textToSave){
-        if(movie === undefined) return;
         if (displayReadMore){
             const dataToSend = {
                 token: sessionToken,
@@ -22,26 +22,8 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
                 movie_name: movie.title,
                 review_id: readMoreDetails.id
             }
+            sendDataToDB("responses/addResponse", dataToSend)
 
-            const headers = {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(dataToSend)
-            }
-
-            fetch(`${BASE_URL_BACK}/users/addResponse`, headers)
-            .then(resp=> resp.json())
-            .then(data=> {
-                const {id, author, updated_at, content, avatar_path} = data
-                const convertedData = {
-                    id: id,
-                    author: author,
-                    content: content,
-                    avatar_path: avatar_path,
-                    updated_at: updated_at
-                }
-                setReadMoreArrayBE([...readMoreArrayBE, convertedData])
-            })
         }else{
             const dataToSend = {
                 token: sessionToken,
@@ -49,31 +31,25 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
                 movie_id: movie.id,
                 movie_name: movie.title,
             }
-            
-            const headers = {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(dataToSend)
-            }
-
-            fetch(`${BASE_URL_BACK}/users/addReview`, headers)
-            .then(resp=> resp.json())
-            .then(data=> {
-                const {id, author, updated_at, content, avatar_path, rating} = data
-                const convertedData = {
-                    id: id,
-                    author: author,
-                    content: content,
-                    avatar_path: avatar_path,
-                    rating: rating,
-                    updated_at: updated_at
-                }
-                setReviewsArrayBE([...reviewsArrayBE, convertedData])
-                console.log(convertedData)
-            })
+            sendDataToDB("reviews/addReview", dataToSend)
         }
     }
 
+    function sendDataToDB(fetchURL, dataToSend){
+        const headers = {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(dataToSend)
+        }
+
+        fetch(`${BASE_URL_BACK}${fetchURL}`, headers)
+        .then(resp=> resp.json())
+        .then(data=> {
+            displayReadMore? 
+            setReadMoreArrayBE([...readMoreArrayBE, data]) 
+            : setReviewsArrayBE([...reviewsArrayBE, data])
+        })
+    }
 
     return(
         <>
@@ -81,7 +57,6 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
                 editorState={editorState}
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
-                // toolbarOnFocus
                 onEditorStateChange={(e)=> setEditorState(e)}
             />
             <button className="reviewFormSubmitButton" onClick={handleSubmit}>{sessionToken === null? "Log in to Post" : "Submit"}</button>

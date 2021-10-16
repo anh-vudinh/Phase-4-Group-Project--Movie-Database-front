@@ -10,12 +10,11 @@ import BlankAvatar from "../../../assets/blankAvatar.png"
 function MoviePage2Container({movie, sessionUsername, BASE_URL_BACK, sessionProfilePic, isWatchedMP2C, sessionToken, setIsWatchedMP2C, poster_prefixURL, broken_path, apiKey, apiPrefixURL, handleWatchListAddClick}){
 
     const [displayReadMore, setDisplayReadMore] = useState(false)
-    const [reviewsArray, setReviewsArray] = useState([])
     const [reviewsArrayBE, setReviewsArrayBE] = useState([])
 
     return(
         <div className="MoviePage2Container">
-        
+
             <MovieExtraInfo 
                 movie={movie}
                 handleWatchListAddClick={handleWatchListAddClick}
@@ -44,7 +43,6 @@ function MoviePage2Container({movie, sessionUsername, BASE_URL_BACK, sessionProf
                 sessionToken={sessionToken}
                 BASE_URL_BACK={BASE_URL_BACK}
                 displayReadMore={displayReadMore} setDisplayReadMore={setDisplayReadMore}
-                reviewsArray={reviewsArray} setReviewsArray={setReviewsArray}
                 reviewsArrayBE={reviewsArrayBE} setReviewsArrayBE={setReviewsArrayBE}
             />
 
@@ -59,6 +57,9 @@ function MoviePage2Container({movie, sessionUsername, BASE_URL_BACK, sessionProf
                         sessionUsername={sessionUsername}
                         sessionProfilePic={sessionProfilePic}
                     />
+                </div>
+                <div className="starRatingContainer">
+
                 </div>
             </div>
         </div>

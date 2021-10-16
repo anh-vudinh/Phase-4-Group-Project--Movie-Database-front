@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from "react";
 import parse from "html-react-parser"
+import sanitizeHtml from 'sanitize-html';
 import ReviewReadMore from "./ReviewReadMore";
+import ReviewCard from "./ReviewCard";
 
-function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, reviewsArrayBE,  setReviewsArrayBE, BASE_URL_BACK, blankAvatar, sessionUsername, sessionToken, sessionProfilePic, displayReadMore, setDisplayReadMore}){
+function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE,  setReviewsArrayBE, BASE_URL_BACK, blankAvatar, sessionUsername, sessionToken, sessionProfilePic, displayReadMore, setDisplayReadMore}){
 
+    const [reviewsArray, setReviewsArray] = useState([])
     const [readMoreDetails, setReadMoreDetails] =  useState([])
-    const avatarPrefix ="https://www.themoviedb.org/t/p/w100_and_h100_face"
     const maxReviewContentLength = 500
+    const avatarPrefix ="https://www.themoviedb.org/t/p/w100_and_h100_face"
 
     useEffect(()=>{
         if(movie.id !== undefined){
@@ -15,7 +18,7 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, re
             .then(reviewsArrayTMDB => { 
                 setReviewsArray(reviewsArrayTMDB.results) 
             })
-            fetch(`${BASE_URL_BACK}users/getReviews/${movie.id}`)
+            fetch(`${BASE_URL_BACK}reviews/getReviews/${movie.id}`)
             .then(resp=> resp.json())
             .then(reviewsArrayBE => {
                 setReviewsArrayBE(reviewsArrayBE)
@@ -24,6 +27,56 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, re
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
 
+
+    const review = reviewsArray.map((review, index) =>
+        <ReviewCard
+            key={index}
+            source={"TMDB"}
+            avatarPrefix={avatarPrefix}
+            blankAvatar={blankAvatar}
+            maxReviewContentLength={maxReviewContentLength}
+            review={review}
+            avatar_path={review.author_details.avatar_path}
+            author={review.author}
+            updated_at={review.updated_at}
+            rating={review.author_details.rating}
+            content={review.content}
+            parseDateTime={parseDateTime}
+            parseSanitizeHTML={parseSanitizeHTML}
+            handleReadMoreClick={handleReadMoreClick}
+        />
+    )
+
+    const reviewBE = reviewsArrayBE.map((review, index) =>
+        <ReviewCard
+            key={index}
+            source={"BE"}
+            avatarPrefix={avatarPrefix}
+            blankAvatar={blankAvatar}
+            maxReviewContentLength={maxReviewContentLength}
+            review={review}
+            avatar_path={review.avatar_path}
+            author={review.author}
+            updated_at={review.updated_at}
+            rating={review.rating}
+            content={review.content}
+            parseDateTime={parseDateTime}
+            parseSanitizeHTML={parseSanitizeHTML}
+            handleReadMoreClick={handleReadMoreClick}
+        />
+    )
+
+    function parseDateTime(dateTime){
+        const options = {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric'
+          };
+        return new Intl.DateTimeFormat('en-US', options).format(new Date(dateTime)).replace(",", " - ")
+    }
+
+    function parseSanitizeHTML(string){
+        return parse(sanitizeHtml(string))
+    }
 
     function handleReadMoreClick(review, source){
         if(source === "TMDB"){
@@ -45,68 +98,6 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, re
         setDisplayReadMore(true)
     }
 
-
-    const review = reviewsArray === undefined ? 
-        null
-        :
-        reviewsArray.map((review, index) =>
-            <div className="ReviewCardContainer" key={index}>
-                    <div className="reviewSecA">
-                        <div className="AuthorPicture">
-                            <img alt="author" src={review.author_details.avatar_path === null ? blankAvatar : review.author_details.avatar_path.includes("http") ? review.author_details.avatar_path.slice(1)  : `${avatarPrefix}${review.author_details.avatar_path}`}/>
-                        </div>
-                        <div className="AuthorName">
-                                <p>{review.author}</p>
-                        </div>
-                    </div>
-                    <div className="reviewSecB">
-                        <div className="DateAndRating">
-                            <div className="Date">{`${review.updated_at.slice(5, 7)}-${review.updated_at.slice(8, 10)}-${review.updated_at.slice(0, 4)}`}</div>
-                            <div className="Rating">{review.author_details.rating} / 10 ⭐ </div>
-                        </div>
-
-                        <div className="ReviewContentContainer">
-                            <div className="ReviewContent">
-                                <p>{parse(review.content.substr(0,maxReviewContentLength))} {review.content.length < maxReviewContentLength? "" : "....."}</p>
-                            </div>
-                            <div className="readMoreBtnContainer">
-                                <button className="readMoreBtn" onClick={()=> handleReadMoreClick(review, "TMDB")}>Read More</button>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        )
-
-    const reviewBE = reviewsArrayBE === undefined ? 
-    null
-    :
-    reviewsArrayBE.map((review, index) =>
-        <div className="ReviewCardContainer" key={index}>
-                <div className="reviewSecA">
-                    <div className="AuthorPicture">
-                        <img alt="author" src={review.avatar_path === null ? blankAvatar : review.avatar_path.includes("http") ? review.avatar_path.slice(1)  : `${avatarPrefix}${review.avatar_path}`}/>
-                    </div>
-                    <div className="AuthorName">
-                            <p>{review.author}</p>
-                    </div>
-                </div>
-                <div className="reviewSecB">
-                    <div className="DateAndRating">
-                        <div className="Date">{`${review.updated_at.slice(5, 7)}-${review.updated_at.slice(8, 10)}-${review.updated_at.slice(0, 4)}`}</div>
-                        <div className="Rating">{review.rating} / 10 ⭐ </div>
-                    </div>
-
-                    <div className="ReviewContentContainer">
-                        <p className="ReviewContent">{parse(review.content.substr(0,maxReviewContentLength))} {review.content.length < maxReviewContentLength? "" : "....."}</p>
-                        <div className="readMoreBtnContainer">
-                            <button className="readMoreBtn" onClick={()=> handleReadMoreClick(review, "BE")}>Read More</button>
-                        </div>
-                    </div>
-                </div>
-        </div>
-    )
-
-
     return(
         <>
             <div className="reviewSectionA">
@@ -115,26 +106,19 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, re
                 </div>
                 <div className ="Review-Movie">
                     {review.length ===0?
-                        <div className="ReviewCardContainer" key={review.id}>
-                            <div className="reviewSecA">
-                                <div className="AuthorPicture">
-                                    <img alt="author" src={blankAvatar}/>
-                                </div>
-                                <div className="AuthorName">
-                                        <p></p>
-                                </div>
-                            </div>
-                            <div className="reviewSecB">
-                                <div className="DateAndRating">
-                                    <div className="Date"></div>
-                                    <div className="Rating">0 / 10 ⭐ </div>
-                                </div>
-
-                                <div className="ReviewContentContainer">
-                                    <p className="ReviewContent">Be the first to leave a Review!</p>
-                                </div>
-                            </div>
-                        </div>
+                        <ReviewCard
+                            source={"EmptyCard"}
+                            avatarPrefix={avatarPrefix}
+                            blankAvatar={blankAvatar}
+                            maxReviewContentLength={maxReviewContentLength}
+                            avatar_path={null}
+                            author={""}
+                            updated_at={Date()}
+                            rating={5}
+                            content={"Be the first to leave a Review!"}
+                            parseDateTime={parseDateTime}
+                            parseSanitizeHTML={parseSanitizeHTML}
+                        />
                     :
                         <>  
                             {review}
@@ -143,17 +127,18 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArray,  setReviewsArray, re
                     }
                 </div>
             </div>
+
             {displayReadMore? 
                 <ReviewReadMore 
                     readMoreDetails={readMoreDetails}
                     displayReadMore={displayReadMore} setDisplayReadMore={setDisplayReadMore}
                     blankAvatar={blankAvatar}
                     avatarPrefix={avatarPrefix}
-                    sessionUsername={sessionUsername}
                     sessionToken={sessionToken}
-                    sessionProfilePic={sessionProfilePic}
                     BASE_URL_BACK={BASE_URL_BACK}
                     movie={movie}
+                    parseDateTime={parseDateTime}
+                    parseSanitizeHTML={parseSanitizeHTML}
                 /> 
             : null}
         </>

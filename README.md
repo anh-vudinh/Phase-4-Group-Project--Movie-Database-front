@@ -1,30 +1,46 @@
 // Requirements before you can use
+________________________________________________
 .. 1. cd Phase-2-Group-Project--Movie-Database
+________________________________________________
 .. 2. open terminal and run: npm install if not already done previously
+________________________________________________
 .. 3. open terminal and run: npm start (this start start the localhost:3000 for webpage, localhost:3001 for db.json| running db.json is only neccessary if you need to populate your ruby backend crackle table|)
+________________________________________________
 .. 4. open new terminal
 ________________________________________________
-
 .. 5. cd Phase-2-Group-Project--Movie-Database-Backend
+________________________________________________
 .. 6. in terminal run: bundle install
+________________________________________________
 .. 7. check if there are tables/schema/migrations needing to be made
+________________________________________________
 .. 8. Tables need to be made? run: rake db:create_migration NAME=create_tables
+________________________________________________
 .. 9. take the contents of the file, backupdb:create_migration, completely overwrite the new migration file you've just made, save your changes
+________________________________________________
 .. 10. in terminal run: rake db:migrate, your databases should now be made
+________________________________________________
 .. 11. in terminal run: rake server
 ________________________________________________
-
 .. 12. back in the front end, open file components > HeaderBanner > CrackleIcon.js
+________________________________________________
 .. 13. if your webpage is not loading due to an error that is because your crackle DB has not been populated, completely comment out the first useEffect()
+________________________________________________
 .. 14. ctrl+F to find section titled: Send JSON DATA TO RUBY BE 
+________________________________________________
 .. 15. in that section copy all the contents and paste it below the first commented out useEffect() the moment you save, the new useEffect will begin running it's logic, so before you save double check that all 3 of your servers are running. Webpage, db.json, ruby BE server. npm start initiates both webpage and db.json, rake server is for ruby BE
+________________________________________________
 .. 16. if you check your ruby terminal you should see many prints to terminal about posting to crackle table, wait for it to finish. there should be 34 pages
+________________________________________________
 .. 17. remove the second useEffect() the one you've added in step 15
+________________________________________________
 .. 18. uncomment out the first useEffect() from step 13, save changes
+________________________________________________
 .. 19. The website should be fully functional now
 ________________________________________________
 
 .. 20. go to Phase-2-Group-Project--Movie-Database > package.json
+________________________________________________
 .. 21. remove the line "& json-server --watch db.json -p 3001" from 
 "scripts":{"start":}, this will stop your db.json from running the next time you run npm start. db.json has already served it's purpose. You will no longer need it after the crackle table is populated
 

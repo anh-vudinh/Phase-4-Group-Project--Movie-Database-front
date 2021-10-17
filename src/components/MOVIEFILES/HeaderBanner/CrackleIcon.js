@@ -4,7 +4,6 @@ import crackleIcon from "../../../assets/crackleIcon.png"
 function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraMovieContainer, videoLink, setVideoLink, setShowCrackleVideo, setShowExtraMovieContainer, setExtraMovieWarning}){
     const {title, release_date} = movie
     const crackleDB = "http://localhost:9292/crackles/"
-    const regex = /[^a-zA-Z0-9]/g
 
     useEffect(()=>{                                                         // checks the crackle DB stored in file for movies of the same name
         setVideoLink(undefined)                                             // reset videolink to default state
@@ -12,21 +11,15 @@ function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraM
         setExtraMovieWarning(false)                                         // reset warning to false, master controller
         
         if(movie.id !== undefined){
-            const dataToSend = {
-                title: title,
-                release_year: release_date.slice(0,4)
-            }
-
             const headers = {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(dataToSend)
+                body: JSON.stringify({title: title, release_year: release_date.slice(0,4)})
             }
     
             fetch(`${crackleDB}getMovie`, headers)
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
                 if (data === null){                                   // puts all the crackle data into an array
                     return setShowCrackleVideo(false)
                 }else{
@@ -38,7 +31,7 @@ function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraM
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[movie])
 
-
+    
     function handleIconClick(){
         if(startCrackleVideo === false){                                                                                            //makes it so that crackle video persists until user chooses a new video without resetting video to very beginning
             setStartCrackleVideo(true)
@@ -62,24 +55,6 @@ function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraM
 }
 
 export default CrackleIcon;
-
-
-    // function test(){
-    //     var myHeaders = new Headers();
-    //     myHeaders.append("Content-Type", "application/json");
-    //     myHeaders.append("platformId", "4feff02f-9c08-4570-9c77-52c789d6c127");
-    //     myHeaders.append("region", "us");
-        
-    //     var requestOptions = {
-    //         method: 'GET',
-    //         redirect: 'manual'
-    //       };
-          
-    //       fetch("https://stg-api-v2.crackle.com/contentdiscovery/search/beta%20test?useFuzzyMatching=false&limit=1&excludeChildMediaIfChannelIsPresent=true", requestOptions)
-    //         .then(response => response.text())
-    //         .then(result => console.log(result))
-    //         .catch(error => console.log('error', error));
-    // }
 
 
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
@@ -142,33 +117,30 @@ export default CrackleIcon;
 //\\////\\////\\////\\////                Send JSON DATA TO RUBY BE             ////\\////\\////\\////\\//
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
 
+// useEffect(()=>{
+//     return getCrackleFromDBJson()
+// },[])
 
-// function addCrackleDBJsonToRuby(){
-//     setTimeout(()=>addCrackleDBJsonToRuby(), 5000)
-//     //return
-//     fetch(crackleDB)
+// function getCrackleFromDBJson(){
+//     fetch("http://localhost:3001/crackle")
 //     .then(resp => resp.json())
 //     .then(data => {
-//         iterateThroughArray(data[0])
-//     })
-
-// }
-
-// async function iterateThroughArray(array){
-//     console.log(array)
-//     array.forEach(item => {
-//         const headers = {
-//             method: "POST",
-//             headers: {'Content-Type': 'application/json'},
-//             body: JSON.stringify(item)
-//         }
-
-//         fetch("http://localhost:9292/crackles/addMovies", headers)
-//         .then(resp => resp.json())
-//         .then(data => data)
+//         console.log("sending", data)
+//         sendArrayToRuby(data)
 //     })
 // }
 
+// function sendArrayToRuby(array){
+//     const headers = {
+//     method: "POST",
+//     headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify({crackles:array[0]})
+//     }
+
+//     fetch("http://localhost:9292/crackles/addMovies", headers)
+//     .then(resp => resp.json())
+//     .then(data => console.log(data))
+// }
 
 //\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\////\\
 //\\////\\////\\////\\////                 Check if Movies Expired             ////\\////\\////\\////\\///

@@ -13,17 +13,27 @@ function YoutubeIcon({movie, setMovieArray, showExtraMovieContainer, setExtraMov
     const [storedYTMovieLink, setStoredYTMovieLink] = useState([])
     const [toggleRetryFetchCounter, setToggleRetryFetchCounter] = useState(0)
     const [toggleRetryFetch, setToggleRetryFetch] = useState(false)
+    const regex = /[^a-z0-9]/gi
 
     useEffect(()=>{                                         // this useEffect takes the first YT API Key and tries to perform a search on YT Free Movies channel
         if(movie.id !== undefined){                         // if a positive match is returned a YT Btn will be toggled to show to replace the trailer with a full movie to watch
-            fetch(`${youtubeSearchURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q="${release_date.slice(0,4)}"+intitle:"${title.replaceAll(" ","%20").toLowerCase()}"&type=video&videoType=movie&key=${currentAPIKey}`)
+            fetch(`${youtubeSearchURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q=${title.replaceAll(" ","%20").toLowerCase()}+${release_date.slice(0,4)}&type=video&videoType=movie&key=${currentAPIKey}`)
             .then(resp => resp.json())
             .then(dataArray => {
-                if(dataArray.pageInfo !== undefined){                                               
+                if(dataArray.pageInfo !== undefined){ 
                     if(dataArray.pageInfo.totalResults > 0){                                        // successful fetch and movie found
-                        setToggleShowYTBtn(true)                                                    
-                        setStoredYTMovieLink(dataArray)
-                        setExtraMovieWarning(true)
+                        const ytTitle = dataArray.items[0].snippet.title.toLowerCase()
+                        const indexofYTTitle = ytTitle.indexOf("(")
+                        const sliceYearYTTitle = indexofYTTitle === -1? ytTitle : ytTitle.slice(0,indexofYTTitle)
+                        const filteredYTTitle = sliceYearYTTitle.replaceAll("&amp;","").replaceAll("and","").replaceAll(regex, "")
+                        const filteredDBTitle = movie.title.toLowerCase().replaceAll("and","").replaceAll(regex, "")
+                        if(filteredDBTitle === filteredYTTitle){
+                            setToggleShowYTBtn(true)                                                    
+                            setStoredYTMovieLink(dataArray)
+                            setExtraMovieWarning(true)
+                        }else{
+                            setToggleShowYTBtn(false)
+                        }
                     }else{                                                                          // sucessful fetch but movie not found
                         setToggleShowYTBtn(false)
                     }

@@ -205,6 +205,14 @@
   z-index: 1;
 }
 
+.loginRegisterButton:hover{
+  color:rgb(64, 64, 255);
+}
+
+.loginRegisterButton:active{
+  color:rgb(35, 35, 202);
+}
+
 .userRegisterForm {
   transform: translateY(85px);
   display: flex;
@@ -258,6 +266,10 @@
   border-radius: 10px;
   color: whitesmoke;
   margin-top: 10px;
+}
+
+.usLogRegSubmit:active{
+  background-color: rgb(52, 131, 0);
 }
 
 .LogInLogo {

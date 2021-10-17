@@ -44,12 +44,13 @@ function MovieList({apiKey, sessionToken, setIsWatchedMP2C, toggleEyeballRefresh
         if(startModalTimer === true){                                           // start timer top open modal, client must hover for 1500 ms to trigger
             document.body.style.cursor = `wait`                                 // changes cursor to hourglass
             setTimeoutID(setTimeout(handleWait, 1500))                          // if user hovers for movie card image for 1.5 seconds, create the modal through handlewait
-            return() => clearTimeout(timeoutID)
+            //return() => clearTimeout(timeoutID)
         }else{                         
             document.body.style.cursor = "default"                              // switches back to normal cursor                                           
             setToggleMovieCardModal(false)                                      // close the modal if it's open, this belongs solely to MovieCard handleMouseLeave()                                          // reset opacity so that the next time it's run modal can fade in
-            return() => clearTimeout(timeoutID)                                 // if client removes their hover, the handlewait is cancelled and modal does not open
+            //return() => clearTimeout(timeoutID)                                 // if client removes their hover, the handlewait is cancelled and modal does not open
         }
+        return() => clearTimeout(timeoutID)   
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[startModalTimer])
 

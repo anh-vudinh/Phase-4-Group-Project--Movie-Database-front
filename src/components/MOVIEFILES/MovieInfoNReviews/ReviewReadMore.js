@@ -12,6 +12,7 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, sessionToken, 
         .then(data => {
             setReadMoreArrayBE(data)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
 
@@ -62,7 +63,9 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, sessionToken, 
 
     return(
         <div className="readMoreContainer">
-            <div className="readMoreUnderlay" onClick={()=>setDisplayReadMore(false)}></div>
+            <div className="readMoreUnderlay" onClick={()=>setDisplayReadMore(false)}>
+                
+            </div>
             <div className="readMoreCardContainer">
                 <div className="threadStarter">
                     <div className="tSProfile">

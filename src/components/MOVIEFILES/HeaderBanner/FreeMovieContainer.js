@@ -24,13 +24,13 @@ function FreeMovieContainer({movie, setMovieArray, enableCrackleVideo, enableYou
 
     return(
         <div className = "freeMovieContainer">
-            {startCrackleVideo? 
+            {/* {startCrackleVideo? 
                 <CrackleVideo
                     videoLink={videoLink}
                     showCrackleVideo={showCrackleVideo}
                     setShowCrackleVideo={setShowCrackleVideo}
                 />
-            : null}
+            : null} */}
 
             <div className="extraMovieIcon" onClick={handleOnClick4Dots}>
                 <img src={extraMovieIcon} alt="extraMoviesIcon"/>
@@ -38,7 +38,7 @@ function FreeMovieContainer({movie, setMovieArray, enableCrackleVideo, enableYou
             </div>
 
             <div className="extraMovieContainer">
-                {enableCrackleVideo?
+                {/* {enableCrackleVideo?
                     <CrackleIcon
                         movie={movie}
                         videoLink={videoLink}
@@ -49,16 +49,16 @@ function FreeMovieContainer({movie, setMovieArray, enableCrackleVideo, enableYou
                         setShowExtraMovieContainer={setShowExtraMovieContainer}
                         setExtraMovieWarning={setExtraMovieWarning}
                     />
-                : null}
+                : null} */}
 
-                {enableYoutubeVideo?
+                {/* {enableYoutubeVideo?
                     <YoutubeIcon
                         movie={movie}
                         setMovieArray={setMovieArray}
                         showExtraMovieContainer={showExtraMovieContainer}
                         setExtraMovieWarning={setExtraMovieWarning}
                     />
-                : null}
+                : null} */}
             </div>
         </div>
     )

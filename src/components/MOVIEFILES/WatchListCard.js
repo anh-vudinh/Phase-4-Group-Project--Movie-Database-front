@@ -12,6 +12,10 @@ function WatchListCard({watchListCardObj, setIsWatchedMP2C, BASE_URL_BACK, delet
         setIsWatchedMP2C(true)
     }
 
+    function handleDeleteWLCClick(){
+        deleteWLDataFromDB({movie_id: movie_id, token: sessionToken}, `${BASE_URL_BACK}watchlistcards/deleteWLC`)
+    }
+
     return (
         <div className ="watchListCard">
             <img className="watchListCardBackground" src={movie_backdrop === null? broken_path: `${poster_prefixURL}${movie_backdrop}`} alt={movie_name} />
@@ -32,7 +36,7 @@ function WatchListCard({watchListCardObj, setIsWatchedMP2C, BASE_URL_BACK, delet
                     </button>
                 </span>
             </div>
-            <button className="watchListCardDelete" onClick={()=> deleteWLDataFromDB({movie_id: movie_id, token: sessionToken}, `${BASE_URL_BACK}users/deleteWLC`)}>Remove</button> 
+            <button className="watchListCardDelete" onClick={handleDeleteWLCClick}>Remove</button> 
         </div>
     )
 }

@@ -20,7 +20,7 @@ function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraM
             fetch(`${crackleDB}getMovie`, headers)
             .then(resp => resp.json())
             .then(data => {
-                if (data === null){                                   // puts all the crackle data into an array
+                if (data === null){                                         // puts all the crackle data into an array
                     return setShowCrackleVideo(false)
                 }else{
                     setVideoLink(data.c_id)    
@@ -33,7 +33,7 @@ function CrackleIcon({movie, setStartCrackleVideo, startCrackleVideo, showExtraM
 
     
     function handleIconClick(){
-        if(startCrackleVideo === false){                                                                                            //makes it so that crackle video persists until user chooses a new video without resetting video to very beginning
+        if(startCrackleVideo === false){                                    //makes it so that crackle video persists until user chooses a new video without resetting video to very beginning
             setStartCrackleVideo(true)
             setShowCrackleVideo(true)
         }else{

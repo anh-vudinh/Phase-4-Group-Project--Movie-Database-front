@@ -1,3 +1,19 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  width: 10px;
+  background-color: rgb(10, 10, 10);
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color:rgb(65, 161, 0);
+  border-radius: 15px;
+}
+
+
 #root{
   height: 100%;
   width: 100%;
@@ -1689,7 +1705,9 @@
   background-color: rgb(35, 35, 35);
   height: fit-content;
   width: 1000px;
+  padding: 0 30px 0 30px;
 }
+
 
 .readMoreContainer::-webkit-scrollbar {
   width: 10px;
@@ -1737,6 +1755,7 @@
   flex-direction: column;
   align-items: center;
   color: whitesmoke;
+  text-align: center;
 }
 
 .tSProfile img{

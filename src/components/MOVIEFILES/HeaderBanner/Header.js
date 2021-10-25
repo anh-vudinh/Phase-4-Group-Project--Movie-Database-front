@@ -70,7 +70,7 @@ function Header({apiKey, apiPrefixURL, enableCrackleVideo, enableYoutubeVideo, m
             
             </div>
             
-            <div className={toggleHeaderInfo? "headerUnderlay fade-in" : "headerUnderlay"}>
+            <div className={toggleHeaderInfo? "headerUnderlay fade-in" : "headerUnderlay"} onDoubleClick={()=>setToggleHeaderInfo(false)}>
                 <div className="movie-details">
                 <img className="headerImage" src={(movie.backdrop_path === null || movie.backdrop_path === undefined) ? broken_path : `${poster_prefixURL}${movie.poster_path}`} alt={movie.title}></img>
                     <h1>{movie.title} 
@@ -89,7 +89,6 @@ function Header({apiKey, apiPrefixURL, enableCrackleVideo, enableYoutubeVideo, m
                 </div>
             </div>
         </>
-
     )
 
 }

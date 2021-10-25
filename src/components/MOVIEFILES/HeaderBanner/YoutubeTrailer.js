@@ -15,10 +15,10 @@ function YoutubeTrailer({movie, apiKey, movieArray, setMovieArray, apiPrefixURL}
     },[movie])
 
     const movieTrailer = (movieArray === undefined || movieArray.length === 0 )? null :     // as long as a trailer exist, create Video component using link from the first trailer in the Array
-    <YoutubeVideo
-        key={movieArray[0].id}
-        videoID={movieArray === undefined ? "JL2PB7NJ090" : movieArray[0].key}
-    />
+        <YoutubeVideo
+            key={movieArray[0].id}
+            videoID={movieArray === undefined ? "JL2PB7NJ090" : movieArray[0].key}
+        />
 
     return(
         <div className="trailerContainer">

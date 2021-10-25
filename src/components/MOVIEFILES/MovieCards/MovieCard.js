@@ -5,7 +5,7 @@ import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 function MovieCard({apiKey, moviesData, setIsWatchedMP2C, toggleEyeballRefresh, sessionToken, watchListArray, handleWatchListAddClick, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, setYearTitle, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, setMovie, setTogglePage2, setGenresList}){
     const {title, poster_path, release_date, id} = movie
     const [isWatched, setIsWatched] = useState(false)
-    const movieCardModalWidth = 275
+    const movieCardModalWidth = 280
 
     useEffect(()=>{
         if(sessionToken === null) return;

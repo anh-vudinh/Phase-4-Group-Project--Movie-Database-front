@@ -18,7 +18,7 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE,  setReviewsArrayBE
             .then(reviewsArrayTMDB => { 
                 setReviewsArray(reviewsArrayTMDB.results) 
             })
-            fetch(`${BASE_URL_BACK}reviews/getReviews/${movie.id}`)
+            fetch(`${BASE_URL_BACK}/reviews/${movie.id}`)
             .then(resp=> resp.json())
             .then(reviewsArrayBE => {
                 setReviewsArrayBE(reviewsArrayBE)
@@ -105,7 +105,7 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE,  setReviewsArrayBE
                     
                 </div>
                 <div className ="Review-Movie">
-                    {review.length ===0?
+                    {review.length === 0 && reviewBE.length === 0?
                         <ReviewCard
                             source={"EmptyCard"}
                             avatarPrefix={avatarPrefix}

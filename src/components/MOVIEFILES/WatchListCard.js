@@ -13,7 +13,7 @@ function WatchListCard({watchListCardObj, setIsWatchedMP2C, BASE_URL_BACK, delet
     }
 
     function handleDeleteWLCClick(){
-        deleteWLDataFromDB({movie_id: movie_id, token: sessionToken}, `${BASE_URL_BACK}watchlistcards/deleteWLC`)
+        deleteWLDataFromDB({movie_id: movie_id, token: sessionToken}, `${BASE_URL_BACK}/watchlist_cards/deleteWLC`)
     }
 
     return (

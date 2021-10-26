@@ -110,12 +110,12 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
             
             switch(watchListArray.length){                              // checks to see if movie is allowed to be added into watchlist
                 case 0:{                                                // handles adding the first movie into an empty watchlist    
-                    sendWLDataToDB(dataToSend, `${BASE_URL_BACK}watchlistcards/addWLC`)
+                    sendWLDataToDB(dataToSend, `${BASE_URL_BACK}/watchlist_cards`)
                     break;
                 }
                 default:{                                               // checks to see if the movie.id to add matches any movie ids currently in the watchlist, if return false then add clicked movie
                     if(watchListArray.find(watchListItem => watchListItem.id === movie.id)  === undefined){
-                        sendWLDataToDB(dataToSend, `${BASE_URL_BACK}watchlistcards/addWLC`)
+                        sendWLDataToDB(dataToSend, `${BASE_URL_BACK}/watchlist_cards`)
                     }
                 }
             }
@@ -124,7 +124,7 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
                 token: sessionToken,
                 movie_id: id
             }
-            deleteWLDataFromDB(dataToSend, `${BASE_URL_BACK}watchlistcards/deleteWLC`)
+            deleteWLDataFromDB(dataToSend, `${BASE_URL_BACK}watchlist_cards/deleteWLC`)
         }
     }
 

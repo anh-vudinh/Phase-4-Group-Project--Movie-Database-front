@@ -22,7 +22,7 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
                 movie_name: movie.title,
                 review_id: readMoreDetails.id
             }
-            sendDataToDB("responses/addResponse", dataToSend)
+            sendDataToDB("/responses", dataToSend)
 
         }else{
             const dataToSend = {
@@ -31,7 +31,7 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
                 movie_id: movie.id,
                 movie_name: movie.title,
             }
-            sendDataToDB("reviews/addReview", dataToSend)
+            sendDataToDB("/reviews", dataToSend)
         }
     }
 
@@ -45,6 +45,7 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
         fetch(`${BASE_URL_BACK}${fetchURL}`, headers)
         .then(resp=> resp.json())
         .then(data=> {
+            console.log(data)
             displayReadMore? 
             setReadMoreArrayBE([...readMoreArrayBE, data]) 
             : setReviewsArrayBE([...reviewsArrayBE, data])

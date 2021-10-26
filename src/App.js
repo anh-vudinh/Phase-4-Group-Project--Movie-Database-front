@@ -8,7 +8,7 @@ import TVContainer from './components/TVFILES/TVContainer'
 
 function App() {
 
-  const BASE_URL_BACK = "http://localhost:9292/"
+  const BASE_URL_BACK = "http://localhost:9292"
   const [toggleLoginContainer, setToggleLoginContainer] = useState(false)
   const [sessionToken, setSessionToken] = useState(null)
   const [sessionUsername, setSessionUsername] = useState("")

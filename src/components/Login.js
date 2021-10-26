@@ -3,6 +3,7 @@ import loginBG from "../assets/loginBG.png"
 import X from "../assets/X.png"
 import eyeballIcon from "../assets/eyeballicon.png"
 import eyeballClosedIcon from "../assets/eyeballClosedicon.png"
+import { compareDocumentPosition } from "domutils";
 
 function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, sessionToken, setSessionToken, setSessionUsername}){
     
@@ -18,7 +19,7 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
         e.preventDefault()
         if(toggleRegister){
             if(formData.password === confirmPassword){                          // register action matching password and confirm
-                sendUserDataToDB(formData, `${BASE_URL_BACK}/users/register`)
+                sendUserDataToDB(formData, `${BASE_URL_BACK}/users`)
             }else{                                                              // register action mis-match password and confirm
                 setErrorMessage("Error: Mismatch Passwords")
                 setShowErrorMessage(true)
@@ -37,32 +38,37 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(dataToSend)
         }
-
+        
         fetch(fetchURL, headers)
         .then(resp => resp.json())
         .then(message => {
-            switch (message) {
-                case "user_exist": 
-                    setErrorMessage("Error: User Already Exist")
-                    setShowErrorMessage(true)
-                    break;
-                case "wrong_pwd": 
-                    setErrorMessage("Wrong Password")
-                    setShowErrorMessage(true)
-                    break;
-                case "no_user":
-                    setErrorMessage("User doesn't exist")
-                    setShowErrorMessage(true)
-                    break;
-                default: //(Successful login/register)
-                    setSessionToken(message)
-                    setErrorMessage("")
-                    setShowErrorMessage(false)
-                    setToggleLoginContainer(false)
-                    setSessionUsername(formData.username)
-                    setFormData(resetFormData)
-                    setConfirmPassword("")
+            if(message.errors === undefined){
+                setSessionToken(message.token)
+                setErrorMessage("")
+                setShowErrorMessage(false)
+                setToggleLoginContainer(false)
+                setSessionUsername(formData.username)
+                setFormData(resetFormData)
+                setConfirmPassword("")
+            }else{
+                switch (message.errors) {
+                    case "user_exist": 
+                        setErrorMessage("Error: User Already Exist")
+                        setShowErrorMessage(true)
+                        break;
+                    case "wrong_pwd": 
+                        setErrorMessage("Wrong Password")
+                        setShowErrorMessage(true)
+                        break;
+                    case "no_user":
+                        setErrorMessage("User doesn't exist")
+                        setShowErrorMessage(true)
+                        break;
+                    default: //(Successful login/register)
+                        console.log("uncaught error")
+                }
             }
+
         })
     }
     

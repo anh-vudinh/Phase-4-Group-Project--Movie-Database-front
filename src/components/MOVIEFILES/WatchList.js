@@ -29,7 +29,7 @@ function WatchList({setWatchListArray, setIsWatchedMP2C, setToggleEyeballRefresh
       const dataToSend = {
         token: sessionToken
       }
-      retrieveWLFromDB(dataToSend, `${BASE_URL_BACK}watchlists/retrieveWL`)
+      retrieveWLFromDB(dataToSend, `${BASE_URL_BACK}/watchlists/retrieveWL`)
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[sessionToken])
 

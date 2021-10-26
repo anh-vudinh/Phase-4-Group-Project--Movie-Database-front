@@ -51,14 +51,14 @@ function FreeMovieContainer({movie, setMovieArray, enableCrackleVideo, enableYou
                     />
                 : null} */}
 
-                {/* {enableYoutubeVideo?
+                {enableYoutubeVideo?
                     <YoutubeIcon
                         movie={movie}
                         setMovieArray={setMovieArray}
                         showExtraMovieContainer={showExtraMovieContainer}
                         setExtraMovieWarning={setExtraMovieWarning}
                     />
-                : null} */}
+                : null}
             </div>
         </div>
     )

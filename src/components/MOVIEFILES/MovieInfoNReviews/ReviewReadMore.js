@@ -7,7 +7,7 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, sessionToken, 
     const [readMoreArrayBE, setReadMoreArrayBE] = useState([])
     
     useEffect(()=>{
-        fetch(`${BASE_URL_BACK}responses/getResponses/${readMoreDetails.id}`)
+        fetch(`${BASE_URL_BACK}/responses/${readMoreDetails.id}`)
         .then(resp => resp.json())
         .then(data => {
             setReadMoreArrayBE(data)

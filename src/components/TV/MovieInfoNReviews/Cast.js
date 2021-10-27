@@ -9,7 +9,7 @@ function Cast({movie, poster_prefixURL, apiKey, apiPrefixURL, blankAvatar,blankA
     useEffect(()=>{
         if(movie.id !== undefined){
             setMovieCastArray([])  //reset the array so that we don't have a visual problem where user can see the old array for a split second before it refreshes
-            fetch(`${apiPrefixURL}movie/${movie.id}/credits?api_key=${apiKey}`)
+            fetch(`${apiPrefixURL}tv/${movie.id}/credits?api_key=${apiKey}`)
             .then(res=> res.json())
             .then(creditArray => { 
                 setMovieCastArray(creditArray.cast)

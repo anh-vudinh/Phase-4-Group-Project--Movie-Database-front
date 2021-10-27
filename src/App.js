@@ -5,7 +5,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Login from "./components/Login";
 import MovieContainer from './components/MOVIEFILES/MovieContainer';
-import TVContainer from './components/TVFILES/TVContainer'
+import TVContainer from './components/TV/TVContainer'
 
 function App() {
 

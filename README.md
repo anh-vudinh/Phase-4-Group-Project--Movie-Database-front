@@ -52,6 +52,7 @@ vu- 10/27
 - brought cookies package import to App.js and passed it down as props instead of having each component needing it import the package
 - applied DRY to auto and manual login functions
 - added front end login error handling for expired session tokens
+- made TV container funcational again with new visuals from movies (old.TVFILES left just incase to reference)
 
 vu- 10/26
 - reworked login to use Cookies and auto login users with valid and non expired token, back end also has it's own expiration timer on the tokens to force a relog

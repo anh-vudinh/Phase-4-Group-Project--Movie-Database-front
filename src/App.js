@@ -6,7 +6,7 @@ import NavBar from './components/NavBar';
 import Login from "./components/Login";
 import MovieContainer from './components/MOVIEFILES/MovieContainer';
 import TVContainer from './components/TV/TVContainer'
-
+import ControlPanelContaier from './components/UserControlPanel/ControlPanelContainer';
 function App() {
 
   const BASE_URL_BACK = "http://localhost:9292"
@@ -28,7 +28,7 @@ function App() {
         isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
       />
       
-      <Switch>
+      {/* <Switch>
         <Route exact path="/">
           <MovieContainer
             cookies={cookies}
@@ -41,7 +41,13 @@ function App() {
         <Route path="/tvShows">
           <TVContainer/>
         </Route>
-      </Switch>
+      </Switch> */}
+
+      <ControlPanelContaier
+        BASE_URL_BACK={BASE_URL_BACK}
+      />
+
+      
 
       <Login
         cookies={cookies}

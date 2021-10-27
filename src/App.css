@@ -13,7 +13,16 @@
   border-radius: 15px;
 }
 
-
+.ControlPanelContainer{
+  position: absolute;
+  top: 200px;
+}
+.userItem{
+  background-color: transparent;
+}
+.UIselected{
+  background-color: red;
+}
 #root{
   height: 100%;
   width: 100%;

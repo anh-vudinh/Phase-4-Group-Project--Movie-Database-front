@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import TextArea from "./TextArea";
 
-function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, sessionToken, displayReadMore, readMoreDetails, BASE_URL_BACK, setDisplayReadMore, avatarPrefix, blankAvatar}){
+function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, isLoggedIn, cookies, displayReadMore, readMoreDetails, BASE_URL_BACK, setDisplayReadMore, avatarPrefix, blankAvatar}){
     const{author_details, content, updated_at, author} = readMoreDetails
     const [toggleTextBox, setToggleTextBox] = useState(false)
     const [readMoreArrayBE, setReadMoreArrayBE] = useState([])
@@ -99,7 +99,8 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, sessionToken, 
                                     readMoreDetails={readMoreDetails}
                                     BASE_URL_BACK={BASE_URL_BACK} 
                                     movie={movie}
-                                    sessionToken={sessionToken}
+                                    cookies={cookies}
+                                    isLoggedIn={isLoggedIn}
                                 /> 
                             : <p>Leave a reply!</p>}
                         </div>

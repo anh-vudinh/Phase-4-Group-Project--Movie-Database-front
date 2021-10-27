@@ -2,17 +2,17 @@ import React, {useState, useEffect} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWatchedMP2C, sessionToken}){
+function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWatchedMP2C , isLoggedIn}){
 
     const [companyLogosArray, setcompanyLogosArray] = useState([])
     const companyLogoPrefix = "https://www.themoviedb.org/t/p/h50_filter(negate,0,666)"
     const {budget, revenue, popularity, production_countries} = movie
 
     const productionCountries = production_countries === undefined? "No Data" : 
-    production_countries.map((country,index) => 
-        <p key={index}>
-            <img className="flagImage" src={`https://www.countryflags.io/${country.iso_3166_1}/flat/32.png`} alt="flag" title={country.iso_3166_1}/>
-        </p>
+        production_countries.map((country,index) => 
+            <p key={index}>
+                <img className="flagImage" src={`https://www.countryflagicons.com/FLAT/64/${country.iso_3166_1}.png`} alt="flag" title={country.iso_3166_1}/>
+            </p>
     )
 
     const companyLogos = companyLogosArray.length > 0? companyLogosArray.map((company, index) => company.logo_path === null? 
@@ -72,7 +72,7 @@ function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWat
 
 
     function handleEyeballClick(){
-        if(sessionToken === null) return;
+        if(isLoggedIn === false) return;
         handleWatchListAddClick(movie, isWatchedMP2C)
         setIsWatchedMP2C(!isWatchedMP2C)
     }
@@ -100,7 +100,7 @@ function MovieExtraInfo({movie, handleWatchListAddClick, setIsWatchedMP2C, isWat
                     <div className="columnC">
                             <label>Popularity</label>
                             <div className="extraInfoDetailContainer"><p>{Math.round(popularity)}</p></div>
-                            <div className="extraInfoDetailEyeball" onClick={handleEyeballClick}><img src={isWatchedMP2C? eyeballicon : eyeballClosedicon} alt="eyeball" title={sessionToken === null? "Log in first!" : "Add/Remove from Watchlist"}/></div>
+                            <div className="extraInfoDetailEyeball" onClick={handleEyeballClick}><img src={isWatchedMP2C? eyeballicon : eyeballClosedicon} alt="eyeball" title={isLoggedIn === false? "Log in first!" : "Add/Remove from Watchlist"}/></div>
                     </div>
                 </div>
                 <div className="columnD" onMouseDown={(e)=> handleMouseDown(e)}>

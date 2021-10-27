@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
-import Cookies from 'universal-cookie';
 import loginBG from "../assets/loginBG.png"
 import X from "../assets/X.png"
 import eyeballIcon from "../assets/eyeballicon.png"
 import eyeballClosedIcon from "../assets/eyeballClosedicon.png"
 
-function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, sessionToken, setSessionToken, setSessionUsername}){
+function Login({toggleLoginContainer, cookies, BASE_URL_BACK, setToggleLoginContainer, setSessionUsername, setIsLoggedIn}){
     
     const resetFormData = {username:"", password:""}
     const [formData, setFormData] = useState({username:"", password:""})
@@ -16,54 +15,41 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
     const [showPassword, setShowPassword] = useState(false)
 
     useEffect(() => {
-        if (document.cookie === undefined || new Cookies().get('session') === undefined) return;
-        const token = new Cookies().get('session')
-        const headers = {
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({token: token})
-        }
-        
-        fetch(`${BASE_URL_BACK}/sessions/token_login`, headers)
-        .then(resp=>resp.json())
-        .then(message =>{
-            if(message.errors === undefined){
-                handleSuccessLogin(message)
-            }else{
-                handleFailLogin(message)
-            }
-        })
-      },[])
+        if (cookies.get('session') === undefined) return;                // if there is no cookie named session, prevent execution of following code on pageLoad
+        const token = cookies.get('session')                             // takes token from session cookie and sends to backend to auto log in user
+        sendUserDataToDB({token: token}, '/sessions/token_login')
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     function handleOnLoginSubmit(e){
         e.preventDefault()
         if(toggleRegister){
             if(formData.password === confirmPassword){                          // register action matching password and confirm
-                sendUserDataToDB(formData, `${BASE_URL_BACK}/users`)
+                sendUserDataToDB(formData, `/users`)
             }else{                                                              // register action mis-match password and confirm
                 setErrorMessage("Error: Mismatch Passwords")
                 setShowErrorMessage(true)
                 setConfirmPassword("")                                          //reset password fields
             }
         }else{
-            sendUserDataToDB(formData, `${BASE_URL_BACK}/sessions/login`)               // default action for login
+            sendUserDataToDB(formData, `/sessions/login`)                       // default action for login
         }
     }
 
     function sendUserDataToDB(dataToSend, fetchURL){
         setShowErrorMessage(false)                                              // resets the errorMessage to false so that the fade in effect works again if user makes a different error
-
+        
         const headers = {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(dataToSend)
         }
         
-        fetch(fetchURL, headers)
+        fetch(`${BASE_URL_BACK}${fetchURL}`, headers)
         .then(resp => resp.json())
         .then(message => {
             if(message.errors === undefined){
-                new Cookies().set('session', message.token, { path: '/', maxAge: 2592000, domain:'localhost'})
+                cookies.set('session', message.token, { path: '/', maxAge: 2592000, domain:'localhost'})
                 handleSuccessLogin(message)
             }else{
                 handleFailLogin(message)
@@ -73,12 +59,12 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
 
     function handleSuccessLogin(message){
         setSessionUsername(message.username)
-        setSessionToken(message.token)
         setErrorMessage("")
         setShowErrorMessage(false)
         setToggleLoginContainer(false)
         setFormData(resetFormData)
         setConfirmPassword("")
+        setIsLoggedIn(true)
     }
 
     function handleFailLogin(message){
@@ -94,9 +80,9 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
             case "no_user":
                 setErrorMessage("User doesn't exist")
                 setShowErrorMessage(true)
-                new Cookies().remove('session')
+                cookies.remove('session')
                 break;
-            default: //(Successful login/register)
+            default:
                 console.log("uncaught error")
         }
     }

@@ -1,9 +1,8 @@
 import React from "react";
-import Cookies from 'universal-cookie';
 import { NavLink } from "react-router-dom"
 import blankAvatar from "../assets/blankAvatar.png"
 
-function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, setSessionToken, setOnLogOut}){
+function NavBar({setToggleLoginContainer, sessionUsername, isLoggedIn, cookies, setIsLoggedIn, setSessionUsername, setOnLogOut}){
 
     function handleNavLoginClick(){
         setToggleLoginContainer(true)
@@ -15,9 +14,9 @@ function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, s
 
     function handleNavLogoutClick(){
         setSessionUsername("")
-        setSessionToken(null)
-        new Cookies().remove('session')
+        cookies.remove('session')
         setOnLogOut(0)
+        setIsLoggedIn(false)
     }
 
     return(
@@ -28,9 +27,7 @@ function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, s
                     <NavLink exact to="/">Movies</NavLink>
                     <NavLink to="/tvShows">Tv Shows</NavLink>
                 </nav>
-                {sessionUsername === ""?
-                    <button className="navLogin" onClick={handleNavLoginClick}>Login</button>
-                :
+                {isLoggedIn?
                     <div className="navLogContainer">
                         <div className="navLogText">
                             <div className="navUsernameContainer">
@@ -44,8 +41,9 @@ function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, s
                             <img src={blankAvatar} alt="blankAvatar"/>
                         </div>
                     </div>
+                    :
+                    <button className="navLogin" onClick={handleNavLoginClick}>Login</button>
                 }
-                    
             </div>
         </div>
     )

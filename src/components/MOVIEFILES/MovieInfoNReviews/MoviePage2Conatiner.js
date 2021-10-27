@@ -7,7 +7,7 @@ import BlankAvatarM from "../../../assets/blankAvatarM.png"
 import BlankAvatarF from "../../../assets/blankAvatarF.png"
 import BlankAvatar from "../../../assets/blankAvatar.png"
 
-function MoviePage2Container({movie, sessionUsername, BASE_URL_BACK, sessionProfilePic, isWatchedMP2C, sessionToken, setIsWatchedMP2C, poster_prefixURL, broken_path, apiKey, apiPrefixURL, handleWatchListAddClick}){
+function MoviePage2Container({movie, isLoggedIn, cookies, BASE_URL_BACK, isWatchedMP2C, setIsWatchedMP2C, poster_prefixURL, broken_path, apiKey, apiPrefixURL, handleWatchListAddClick}){
 
     const [displayReadMore, setDisplayReadMore] = useState(false)
     const [reviewsArrayBE, setReviewsArrayBE] = useState([])
@@ -19,7 +19,7 @@ function MoviePage2Container({movie, sessionUsername, BASE_URL_BACK, sessionProf
                 movie={movie}
                 handleWatchListAddClick={handleWatchListAddClick}
                 isWatchedMP2C={isWatchedMP2C} setIsWatchedMP2C={setIsWatchedMP2C}
-                sessionToken={sessionToken}
+                isLoggedIn={isLoggedIn}
             />
 
             <Cast 
@@ -38,24 +38,22 @@ function MoviePage2Container({movie, sessionUsername, BASE_URL_BACK, sessionProf
                 apiKey={apiKey}
                 apiPrefixURL={apiPrefixURL}
                 blankAvatar={BlankAvatar}
-                sessionUsername={sessionUsername}
-                sessionProfilePic={sessionProfilePic}
-                sessionToken={sessionToken}
                 BASE_URL_BACK={BASE_URL_BACK}
                 displayReadMore={displayReadMore} setDisplayReadMore={setDisplayReadMore}
                 reviewsArrayBE={reviewsArrayBE} setReviewsArrayBE={setReviewsArrayBE}
+                cookies={cookies}
+                isLoggedIn={isLoggedIn}
             />
 
             <div className="textAreaContainer">
                 <div className="textArea">
                     <TextArea
                         movie={movie}
-                        sessionToken={sessionToken}
                         displayReadMore={displayReadMore} setDisplayReadMore={setDisplayReadMore}
                         BASE_URL_BACK={BASE_URL_BACK}
                         reviewsArrayBE={reviewsArrayBE} setReviewsArrayBE={setReviewsArrayBE}
-                        sessionUsername={sessionUsername}
-                        sessionProfilePic={sessionProfilePic}
+                        cookies={cookies}
+                        isLoggedIn={isLoggedIn}
                     />
                 </div>
                 <div className="starRatingContainer">

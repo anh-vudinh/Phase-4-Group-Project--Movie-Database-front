@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function WatchListCard({watchListCardObj, setIsWatchedMP2C, BASE_URL_BACK, deleteWLDataFromDB, sessionToken, poster_prefixURL, broken_path, setTogglePage2, setMovieID}){
+function WatchListCard({watchListCardObj, setIsWatchedMP2C, BASE_URL_BACK, deleteWLDataFromDB, cookies, poster_prefixURL, broken_path, setTogglePage2, setMovieID}){
     
     // ! Take note that our database keys are different from TMDB keys 
     const {movie_backdrop, movie_rating, movie_name, movie_year, movie_id} = watchListCardObj
@@ -13,7 +13,7 @@ function WatchListCard({watchListCardObj, setIsWatchedMP2C, BASE_URL_BACK, delet
     }
 
     function handleDeleteWLCClick(){
-        deleteWLDataFromDB({movie_id: movie_id, token: sessionToken}, `${BASE_URL_BACK}/watchlist_cards/deleteWLC`)
+        deleteWLDataFromDB({movie_id: movie_id, token: cookies.get('session')}, `${BASE_URL_BACK}/watchlist_cards/deleteWLC`)
     }
 
     return (

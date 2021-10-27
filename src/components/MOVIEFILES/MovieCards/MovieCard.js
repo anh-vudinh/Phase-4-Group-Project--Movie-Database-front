@@ -2,20 +2,20 @@ import React, {useState, useEffect} from "react";
 import eyeballicon from "../../../assets/eyeballicon.png"
 import eyeballClosedicon from "../../../assets/eyeballClosedicon.png"
 
-function MovieCard({apiKey, moviesData, setIsWatchedMP2C, onLogOut, setOnLogOut, toggleEyeballRefresh, sessionToken, watchListArray, handleWatchListAddClick, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, setYearTitle, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, setMovie, setTogglePage2, setGenresList}){
+function MovieCard({apiKey, isLoggedIn, setIsWatchedMP2C, onLogOut, setOnLogOut, toggleEyeballRefresh, watchListArray, handleWatchListAddClick, apiPrefixURL, genreTitle, setGenreTitle, yearTitle, setYearTitle, setStartModalTimer, setMovieCardModalPosition, setModalMovieID, movie, poster_prefixURL, broken_path, setMovie, setTogglePage2, setGenresList}){
     const {title, poster_path, release_date, id} = movie
     const [isWatched, setIsWatched] = useState(false)
     const movieCardModalWidth = 280
 
-    useEffect(()=>{
+    useEffect(()=>{                                                 // useEffect for when eyeball is toggled
         if(onLogOut === 0){                                         // switches all eyes to "not watched", only runs once after log out
             setIsWatched(false)
             setOnLogOut(onLogOut => onLogOut+1)
         }
-        if(sessionToken === null) return;                           // if no one is logged in, it will block the next line of code from running. Helps save unregistered clients processing power
+        if(isLoggedIn === false) return;                           // if no one is logged in, it will block the next line of code from running. Helps save unregistered clients processing power
         setIsWatched(watchListArray.find(movie => movie.movie_id === id) === undefined? false : true)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[toggleEyeballRefresh, sessionToken])
+    },[toggleEyeballRefresh, isLoggedIn])
 
     function handleCardImageClick(){                                // this fetch is specifically to pull the full data of selected movie
             fetch(`${apiPrefixURL}movie/${id}?api_key=${apiKey}`)   // after image is clicked, because the movieCards do not provide full data
@@ -50,7 +50,7 @@ function MovieCard({apiKey, moviesData, setIsWatchedMP2C, onLogOut, setOnLogOut,
     }
 
     function handleWLCToggle(){
-        if(sessionToken === null) return;
+        if(isLoggedIn === false) return;
         handleWatchListAddClick(movie, isWatched)
         setIsWatched(isWatched => !isWatched)
     }

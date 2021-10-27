@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import WatchListCard from "./WatchListCard";
 import eyeballIcon from "../../assets/watchListEyeballIcon.png"
-function WatchList({setWatchListArray, setIsWatchedMP2C, setToggleEyeballRefresh, toggleEyeballRefresh, deleteWLDataFromDB, BASE_URL_BACK, sessionToken, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2, setMovieID}){
+function WatchList({setWatchListArray, cookies, isLoggedIn, setIsWatchedMP2C, setToggleEyeballRefresh, toggleEyeballRefresh, deleteWLDataFromDB, BASE_URL_BACK, watchListArray, poster_prefixURL, broken_path, setMovie, setTogglePage2, setMovieID}){
 
     // ! Watchlist logic to add cards stored in MovieContainer.js
 
@@ -24,14 +24,14 @@ function WatchList({setWatchListArray, setIsWatchedMP2C, setToggleEyeballRefresh
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [windowDimensions, toggleShowWatchList]);
   
-    useEffect(()=>{                                                           //load WL from backend on user log in
-      if(sessionToken === null) return setWatchListArray([]);
+    useEffect(()=>{                                                 //load WL from backend on user log in                           
+      if(isLoggedIn === false) return setWatchListArray([]);
       const dataToSend = {
-        token: sessionToken
+        token: cookies.get('session') 
       }
       retrieveWLFromDB(dataToSend, `${BASE_URL_BACK}/watchlists/retrieveWL`)
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[sessionToken])
+    },[isLoggedIn])
 
     function retrieveWLFromDB(dataToSend, fetchURL){
       const headers = {
@@ -62,7 +62,9 @@ function WatchList({setWatchListArray, setIsWatchedMP2C, setToggleEyeballRefresh
     }
     
     const watchListItem = watchListArray.map((watchListCardObj, index) => 
-        <WatchListCard key={index} 
+        <WatchListCard 
+            key={index} 
+            cookies={cookies}
             watchListCardObj={watchListCardObj} 
             poster_prefixURL={poster_prefixURL} 
             broken_path={broken_path}
@@ -70,7 +72,6 @@ function WatchList({setWatchListArray, setIsWatchedMP2C, setToggleEyeballRefresh
             setTogglePage2={setTogglePage2} 
             setMovieID={setMovieID}
             deleteWLDataFromDB={deleteWLDataFromDB}
-            sessionToken={sessionToken}
             BASE_URL_BACK={BASE_URL_BACK}
             setIsWatchedMP2C={setIsWatchedMP2C}
         />

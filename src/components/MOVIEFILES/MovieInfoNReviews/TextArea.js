@@ -4,11 +4,11 @@ import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import sanitizeHtml from 'sanitize-html';
 
-function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, readMoreDetails, displayReadMore, reviewsArrayBE, setReviewsArrayBE, BASE_URL_BACK}){
+function TextArea({movie, isLoggedIn, cookies, readMoreArrayBE, setReadMoreArrayBE, readMoreDetails, displayReadMore, reviewsArrayBE, setReviewsArrayBE, BASE_URL_BACK}){
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
     function handleSubmit(){
-        if(sessionToken === null) return;
+        if(isLoggedIn === false) return;
         const textToSave = sanitizeHtml(draftToHtml(convertToRaw(editorState.getCurrentContent())))
         submitReviewOrResponse(textToSave)
     }
@@ -16,7 +16,7 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
     function submitReviewOrResponse(textToSave){
         if (displayReadMore){
             const dataToSend = {
-                token: sessionToken,
+                token: cookies.get('session'),
                 comment: textToSave,
                 movie_id: movie.id,
                 movie_name: movie.title,
@@ -26,7 +26,7 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
 
         }else{
             const dataToSend = {
-                token: sessionToken,
+                token: cookies.get('session'),
                 comment: textToSave,
                 movie_id: movie.id,
                 movie_name: movie.title,
@@ -59,7 +59,7 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
                 editorClassName="demo-editor"
                 onEditorStateChange={(e)=> setEditorState(e)}
             />
-            <button className="reviewFormSubmitButton" onClick={handleSubmit}>{sessionToken === null? "Log in to Post" : "Submit"}</button>
+            <button className="reviewFormSubmitButton" onClick={handleSubmit}>{isLoggedIn === false? "Log in to Post" : "Submit"}</button>
         </>
     )
 }

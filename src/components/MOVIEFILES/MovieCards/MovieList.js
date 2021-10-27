@@ -5,7 +5,7 @@ import arrowIcon from "../../../assets/arrowIcon.png"
 import loadingOrange from "../../../assets/loadingOrange.gif"
 import PagesToLoadOptions from "./PagesToLoadOptions";
 
-function MovieList({apiKey, sessionToken, setIsWatchedMP2C, onLogOut, setOnLogOut, toggleEyeballRefresh, handleWatchListAddClick, genreTitle, setGenreTitle, yearTitle, setYearTitle, apiPrefixURL, pagesToLoad, previousPage, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
+function MovieList({apiKey, isLoggedIn, setIsWatchedMP2C, onLogOut, setOnLogOut, toggleEyeballRefresh, handleWatchListAddClick, genreTitle, setGenreTitle, yearTitle, setYearTitle, apiPrefixURL, pagesToLoad, previousPage, currentPageCounter,setCurrentPageCounter, setPagesToLoad, moviesData, poster_prefixURL, totalPagesCount, waitForLoad, setPageNumber, pageNumber,setIsLoadMoreMovies, isLoadMoreMovies, broken_path, setWatchListArray, watchListArray, setMovie, setTogglePage2, setGenresList, noResultsFound, searchSuffix}){
     
     const cardContainerMinHeight = 744
     const [toggleMovieCardModal, setToggleMovieCardModal] = useState(false)
@@ -34,10 +34,10 @@ function MovieList({apiKey, sessionToken, setIsWatchedMP2C, onLogOut, setOnLogOu
             handleWatchListAddClick={handleWatchListAddClick}
             watchListArray={watchListArray}
             moviesData={moviesData}
-            sessionToken={sessionToken}
             toggleEyeballRefresh={toggleEyeballRefresh}
             setIsWatchedMP2C={setIsWatchedMP2C}
             onLogOut={onLogOut} setOnLogOut={setOnLogOut}
+            isLoggedIn={isLoggedIn}
         />
     )
 

@@ -15,7 +15,7 @@ import BlankPoster from "../../assets/blankposter.jpg"
 // Trailer : [movie]
 // Crackle : [movie]
 
-function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_URL_BACK, onLogOut, setOnLogOut}){
+function MovieContainer({ isLoggedIn, cookies, BASE_URL_BACK, onLogOut, setOnLogOut}){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [genresList, setGenresList] = useState([])
@@ -95,12 +95,12 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
     },[isLoadMoreMovies, yearOrGenreSuffix, searchSuffix, pagesToLoad])
 
     function handleWatchListAddClick(movie, isWatched){
-        if(sessionToken === null) return;                               // only valid users can send requests to server
+        if(isLoggedIn === false) return;                               // only valid users can send requests to server
         const {title, poster_path, release_date, id, vote_average} = movie
 
         if(!isWatched){                                                 // not yet added to WL so add to WL
             const dataToSend = {
-                token: sessionToken,
+                token: cookies.get('session'),
                 movie_id: id,
                 movie_name: title,
                 movie_backdrop: poster_path,
@@ -121,7 +121,7 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
             }
         }else{                                                          // already added in WL so remove from WL
             const dataToSend = {
-                token: sessionToken,
+                token: cookies.get('session'),
                 movie_id: id
             }
             deleteWLDataFromDB(dataToSend, `${BASE_URL_BACK}/watchlist_cards/deleteWLC`)
@@ -186,6 +186,7 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
 
             {togglePage2? null :
                 <MovieList
+                    isLoggedIn={isLoggedIn}
                     apiKey={apiKey}
                     apiPrefixURL={apiPrefixURL}
                     broken_path={broken_path}
@@ -207,7 +208,6 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
                     genreTitle={genreTitle} setGenreTitle={setGenreTitle}
                     yearTitle={yearTitle} setYearTitle={setYearTitle}
                     handleWatchListAddClick={handleWatchListAddClick}
-                    sessionToken={sessionToken}
                     toggleEyeballRefresh={toggleEyeballRefresh}
                     setIsWatchedMP2C={setIsWatchedMP2C}
                     onLogOut={onLogOut} setOnLogOut={setOnLogOut}
@@ -216,6 +216,8 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
 
             {togglePage2? 
                 <MoviePage2Container
+                    cookies={cookies}
+                    isLoggedIn={isLoggedIn}
                     apiKey={apiKey}
                     apiPrefixURL={apiPrefixURL}
                     broken_path={broken_path}
@@ -224,9 +226,6 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
                     togglePage2={togglePage2}
                     handleWatchListAddClick={handleWatchListAddClick}
                     isWatchedMP2C={isWatchedMP2C} setIsWatchedMP2C={setIsWatchedMP2C}
-                    sessionToken={sessionToken}
-                    sessionUsername={sessionUsername}
-                    sessionProfilePic={sessionProfilePic}
                     BASE_URL_BACK={BASE_URL_BACK}
                 />
             : null}
@@ -250,6 +249,8 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
             />
 
             <WatchList 
+                cookies={cookies}
+                isLoggedIn={isLoggedIn}
                 broken_path={broken_path}
                 poster_prefixURL={poster_prefixURL}
                 setMovie={setMovie}
@@ -257,7 +258,6 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
                 setTogglePage2={setTogglePage2}
                 setWatchListArray={setWatchListArray}
                 watchListArray={watchListArray}
-                sessionToken={sessionToken}
                 BASE_URL_BACK={BASE_URL_BACK}
                 deleteWLDataFromDB={deleteWLDataFromDB}
                 toggleEyeballRefresh={toggleEyeballRefresh} setToggleEyeballRefresh={setToggleEyeballRefresh}

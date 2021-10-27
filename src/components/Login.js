@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import Cookies from 'universal-cookie';
 import loginBG from "../assets/loginBG.png"
 import X from "../assets/X.png"
 import eyeballIcon from "../assets/eyeballicon.png"
 import eyeballClosedIcon from "../assets/eyeballClosedicon.png"
-import { compareDocumentPosition } from "domutils";
 
 function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, sessionToken, setSessionToken, setSessionUsername}){
     
@@ -14,6 +14,26 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
     const [toggleRegister, setToggleRegister] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
+
+    useEffect(() => {
+        if (document.cookie === undefined || new Cookies().get('session') === undefined) return;
+        const token = new Cookies().get('session')
+        const headers = {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({token: token})
+        }
+        
+        fetch(`${BASE_URL_BACK}/sessions/token_login`, headers)
+        .then(resp=>resp.json())
+        .then(message =>{
+            if(message.errors === undefined){
+                handleSuccessLogin(message)
+            }else{
+                handleFailLogin(message)
+            }
+        })
+      },[])
 
     function handleOnLoginSubmit(e){
         e.preventDefault()
@@ -26,7 +46,7 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
                 setConfirmPassword("")                                          //reset password fields
             }
         }else{
-            sendUserDataToDB(formData, `${BASE_URL_BACK}/users/login`)               // default action for login
+            sendUserDataToDB(formData, `${BASE_URL_BACK}/sessions/login`)               // default action for login
         }
     }
 
@@ -43,33 +63,42 @@ function Login({toggleLoginContainer, BASE_URL_BACK, setToggleLoginContainer, se
         .then(resp => resp.json())
         .then(message => {
             if(message.errors === undefined){
-                setSessionToken(message.token)
-                setErrorMessage("")
-                setShowErrorMessage(false)
-                setToggleLoginContainer(false)
-                setSessionUsername(formData.username)
-                setFormData(resetFormData)
-                setConfirmPassword("")
+                new Cookies().set('session', message.token, { path: '/', maxAge: 2592000, domain:'localhost'})
+                handleSuccessLogin(message)
             }else{
-                switch (message.errors) {
-                    case "user_exist": 
-                        setErrorMessage("Error: User Already Exist")
-                        setShowErrorMessage(true)
-                        break;
-                    case "wrong_pwd": 
-                        setErrorMessage("Wrong Password")
-                        setShowErrorMessage(true)
-                        break;
-                    case "no_user":
-                        setErrorMessage("User doesn't exist")
-                        setShowErrorMessage(true)
-                        break;
-                    default: //(Successful login/register)
-                        console.log("uncaught error")
-                }
+                handleFailLogin(message)
             }
-
         })
+    }
+
+    function handleSuccessLogin(message){
+        setSessionUsername(message.username)
+        setSessionToken(message.token)
+        setErrorMessage("")
+        setShowErrorMessage(false)
+        setToggleLoginContainer(false)
+        setFormData(resetFormData)
+        setConfirmPassword("")
+    }
+
+    function handleFailLogin(message){
+        switch (message.errors) {
+            case "user_exist": 
+                setErrorMessage("Error: User Already Exist")
+                setShowErrorMessage(true)
+                break;
+            case "wrong_pwd": 
+                setErrorMessage("Wrong Password")
+                setShowErrorMessage(true)
+                break;
+            case "no_user":
+                setErrorMessage("User doesn't exist")
+                setShowErrorMessage(true)
+                new Cookies().remove('session')
+                break;
+            default: //(Successful login/register)
+                console.log("uncaught error")
+        }
     }
     
     function handleOnChange(e){

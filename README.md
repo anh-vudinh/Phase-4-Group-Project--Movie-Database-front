@@ -47,6 +47,13 @@ ___
 "scripts":{"start":}, this will stop your db.json from running the next time you run npm start. db.json has already served it's purpose. You will no longer need it after the crackle table is populated
 ________________________________________________
 
+vu- 10/26
+- reworked login to use Cookies and auto login users with valid and non expired token, back end also has it's own expiration timer on the tokens to force a relog
+
+vu- 10/25
+- fixed endpoints to work with rails
+- fixed everything front end that broke because of the switch (crackles disabled temp until a crackle DB is created on backend)
+
 vu- 10/16
 - cleaned up logic and split what frontend and backend does for a smoother experience
 - front end no longer sends each element from the array 1 at a time to ruby backend

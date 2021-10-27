@@ -21,7 +21,7 @@ function YoutubeIcon({movie, setMovieArray, showExtraMovieContainer, setExtraMov
             .then(resp => resp.json())
             .then(dataArray => {
                 if(dataArray.pageInfo !== undefined){ 
-                    if(dataArray.pageInfo.totalResults > 0){                                        // successful fetch and movie found
+                    if(dataArray.pageInfo.totalResults > 0 && dataArray.pageInfo.resultsPerPage > 0){                                        // successful fetch and movie found
                         const ytTitle = dataArray.items[0].snippet.title.toLowerCase()
                         const indexofYTTitle = ytTitle.indexOf("(")
                         const sliceYearYTTitle = indexofYTTitle === -1? ytTitle : ytTitle.slice(0,indexofYTTitle)

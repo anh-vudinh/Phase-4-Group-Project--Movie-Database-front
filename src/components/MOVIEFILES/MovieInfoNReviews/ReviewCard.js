@@ -19,7 +19,7 @@ function ReviewCard({avatar_path, review, author, rating, updated_at, parseSanit
                 </div>
                 <div className="ReviewContentContainer">
                     <div className="ReviewContent">
-                        <p>{parseSanitizeHTML(content.substr(0,maxReviewContentLength))} {content.length < maxReviewContentLength? "" : "....."}</p>
+                        <>{parseSanitizeHTML(content.substr(0,maxReviewContentLength))} {content.length < maxReviewContentLength? "" : "....."}</>
                     </div>
                     <div className="readMoreBtnContainer">
                     {source === "EmptyCard"? null :<button className="readMoreBtn" onClick={()=> handleReadMoreClick(review, source)}>Read More</button>}

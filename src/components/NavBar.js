@@ -1,8 +1,9 @@
 import React from "react";
+import Cookies from 'universal-cookie';
 import { NavLink } from "react-router-dom"
 import blankAvatar from "../assets/blankAvatar.png"
 
-function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, setSessionToken}){
+function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, setSessionToken, setOnLogOut}){
 
     function handleNavLoginClick(){
         setToggleLoginContainer(true)
@@ -15,6 +16,8 @@ function NavBar({setToggleLoginContainer, sessionUsername, setSessionUsername, s
     function handleNavLogoutClick(){
         setSessionUsername("")
         setSessionToken(null)
+        new Cookies().remove('session')
+        setOnLogOut(0)
     }
 
     return(

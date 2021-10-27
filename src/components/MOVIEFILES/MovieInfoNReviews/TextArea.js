@@ -45,7 +45,6 @@ function TextArea({movie, sessionToken, readMoreArrayBE, setReadMoreArrayBE, rea
         fetch(`${BASE_URL_BACK}${fetchURL}`, headers)
         .then(resp=> resp.json())
         .then(data=> {
-            console.log(data)
             displayReadMore? 
             setReadMoreArrayBE([...readMoreArrayBE, data]) 
             : setReviewsArrayBE([...reviewsArrayBE, data])

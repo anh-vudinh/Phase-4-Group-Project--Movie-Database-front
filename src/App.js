@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Switch, Route } from "react-router-dom";
 import './App.css';
 import NavBar from './components/NavBar';
@@ -13,6 +13,7 @@ function App() {
   const [sessionToken, setSessionToken] = useState(null)
   const [sessionUsername, setSessionUsername] = useState("")
   const [sessionProfilePic, setSessionProfilePic] = useState(null)
+  const [onLogOut, setOnLogOut] = useState(1)                                     // used to reset the eyeballs on moviecards to "not watched" after logout
 
   return (
     <div className="webpageContainer"> 
@@ -21,6 +22,7 @@ function App() {
         setSessionToken={setSessionToken}
         sessionUsername={sessionUsername} setSessionUsername={setSessionUsername}
         setToggleLoginContainer={setToggleLoginContainer}
+        setOnLogOut={setOnLogOut}
       />
       
       <Switch>
@@ -30,6 +32,7 @@ function App() {
             sessionUsername={sessionUsername}
             sessionProfilePic={sessionProfilePic}
             BASE_URL_BACK={BASE_URL_BACK}
+            onLogOut={onLogOut} setOnLogOut={setOnLogOut}
           />
         </Route>
 

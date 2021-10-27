@@ -15,7 +15,7 @@ import BlankPoster from "../../assets/blankposter.jpg"
 // Trailer : [movie]
 // Crackle : [movie]
 
-function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_URL_BACK}){
+function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_URL_BACK, onLogOut, setOnLogOut}){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [genresList, setGenresList] = useState([])
@@ -124,7 +124,7 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
                 token: sessionToken,
                 movie_id: id
             }
-            deleteWLDataFromDB(dataToSend, `${BASE_URL_BACK}watchlist_cards/deleteWLC`)
+            deleteWLDataFromDB(dataToSend, `${BASE_URL_BACK}/watchlist_cards/deleteWLC`)
         }
     }
 
@@ -210,6 +210,7 @@ function MovieContainer({sessionToken, sessionUsername, sessionProfilePic, BASE_
                     sessionToken={sessionToken}
                     toggleEyeballRefresh={toggleEyeballRefresh}
                     setIsWatchedMP2C={setIsWatchedMP2C}
+                    onLogOut={onLogOut} setOnLogOut={setOnLogOut}
                 />
             }
 

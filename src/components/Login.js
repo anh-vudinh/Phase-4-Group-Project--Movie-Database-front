@@ -74,11 +74,16 @@ function Login({toggleLoginContainer, cookies, BASE_URL_BACK, setToggleLoginCont
                 setShowErrorMessage(true)
                 break;
             case "wrong_pwd": 
-                setErrorMessage("Wrong Password")
+                setErrorMessage("Error: Wrong Password")
                 setShowErrorMessage(true)
                 break;
             case "no_user":
-                setErrorMessage("User doesn't exist")
+                setErrorMessage("Error: User doesn't exist")
+                setShowErrorMessage(true)
+                cookies.remove('session')
+                break;
+            case "token expired requires user to login":
+                setErrorMessage("Error: Login again, session expired")
                 setShowErrorMessage(true)
                 cookies.remove('session')
                 break;

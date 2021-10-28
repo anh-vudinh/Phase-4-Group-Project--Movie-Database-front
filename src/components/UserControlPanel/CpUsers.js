@@ -5,7 +5,6 @@ function CpUsers({BASE_URL_BACK, selectedUser, setSelectedUser}) {
     
     const [usersArray, setUsersArray] = useState([])
    
-
     useEffect(()=> {
         fetch(`${BASE_URL_BACK}/cpanels`)
         .then(resp => resp.json())
@@ -15,17 +14,23 @@ function CpUsers({BASE_URL_BACK, selectedUser, setSelectedUser}) {
 
     const userList = usersArray.map((user,index) => 
     
-       <CpUserItem key={index} user={user} selectedUser={selectedUser} handleUserClick={handleUserClick}/>
-    
+        <CpUserItem 
+            key={index} 
+            user={user} 
+            selectedUser={selectedUser} 
+            handleUserClick={handleUserClick}
+        />
     )
+
     function handleUserClick(user){
         setSelectedUser(user)
-
     }
+
     return (
-        
-           <div className="userContainer">{userList}</div>
-          
+        <div className="userContainer">
+            <div className="userColumnTitle"><p>Users</p></div>
+            {userList}
+        </div>
     )
     
 }

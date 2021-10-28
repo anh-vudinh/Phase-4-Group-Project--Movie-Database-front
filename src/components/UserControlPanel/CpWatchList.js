@@ -7,6 +7,7 @@ function CpWatchList({selectedUser, BASE_URL_BACK, selectedWL, setSelectedWL}) {
     const [watchlistsArray, setWatchlistArray] = useState([])
     
     useEffect(()=> {
+
         if (selectedUser === "") return;
         const dataToSend={username:selectedUser.username}
         const headers = {
@@ -17,9 +18,7 @@ function CpWatchList({selectedUser, BASE_URL_BACK, selectedWL, setSelectedWL}) {
         fetch(`${BASE_URL_BACK}/watchlists/cpWL`,headers)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             setWatchlistArray(data)}
-    
         )
 
     }, [selectedUser])
@@ -28,20 +27,24 @@ function CpWatchList({selectedUser, BASE_URL_BACK, selectedWL, setSelectedWL}) {
     const watchlistList = watchlistsArray.map((watchlist,index) => 
     
         <CpWatchListItem 
-            key={index} 
+            key={index}
+            index={index}
             username={selectedUser.username} 
             watchlist={watchlist} 
             selectedWL={selectedWL} 
-            handleWatchListClick={handleWatchListClick}/>
- 
+            handleWatchListClick={handleWatchListClick}
+        />
     )
 
     function handleWatchListClick(watchlist){
       setSelectedWL(watchlist)
     }
+
     return (
-        
-        <div className="userWatchListContainer">{watchlistList}</div>
+        <div className="userWatchListContainer">
+            <div className="userWatchlistsColumnTitle"><p>Watchlists</p></div>
+            {watchlistList}
+        </div>
           
     )
 

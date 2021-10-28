@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import parse from "html-react-parser"
-import sanitizeHtml from 'sanitize-html';
+import parseDateTime from "../../functions/parseDateTime";
+import parseSanitizeHTML from "../../functions/parseSanitizeHTML";
 import ReviewReadMore from "./ReviewReadMore";
 import ReviewCard from "./ReviewCard";
 
@@ -65,18 +65,6 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, isLoggedIn, cookie
             handleReadMoreClick={handleReadMoreClick}
         />
     )
-
-    function parseDateTime(dateTime){
-        const options = {
-            year: 'numeric', month: 'numeric', day: 'numeric',
-            hour: 'numeric', minute: 'numeric'
-          };
-        return new Intl.DateTimeFormat('en-US', options).format(new Date(dateTime)).replace(",", " - ")
-    }
-
-    function parseSanitizeHTML(string){
-        return parse(sanitizeHtml(string))
-    }
 
     function handleReadMoreClick(review, source){
         if(source === "TMDB"){

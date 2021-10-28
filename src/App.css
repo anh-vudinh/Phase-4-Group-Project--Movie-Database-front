@@ -14,15 +14,113 @@
 }
 
 .ControlPanelContainer{
-  position: absolute;
-  top: 200px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  top: 80px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(194, 177, 177);
+  overflow: scroll;
 }
+
+.userContainer,
+.userWatchListContainer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 18%;
+  height: 100%;
+  background-color: rgb(198, 228, 201);
+  margin-right: 5px;
+}
+
+.userMoviesContainer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 34%;
+  height: 100%;
+  background-color: rgb(198, 228, 201);
+  margin-right: 5px;
+}
+
+.searchMoviesContainer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 30%;
+  height: 100%;
+  background-color: rgb(198, 228, 201);
+}
+
+.userColumnTitle,
+.userWatchlistsColumnTitle,
+.userMoviesColumnTitle,
+.searchMoviesColumnTitle{
+  display: flex;
+  height: 50px;
+  background-color: lawngreen;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.userColumnTitle p,
+.userWatchlistsColumnTitle p,
+.userMoviesColumnTitle p ,
+.searchMoviesColumnTitle p{
+  font-size: 24px;
+}
+
+.movieItem{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
+}
+
+.movieItemImg{
+  position: relative;
+  display: flex;
+  width: 100px;
+  background-color: khaki;
+  overflow: hidden;
+}
+
+.movieItemCB{
+  position: relative;
+  display: flex;
+  width: 20px;
+  background-color: khaki;
+  overflow: hidden;
+}
+
+.movieItemText{
+  position: relative;
+  display: flex;
+  width: 60%;
+  background-color: hotpink;
+  text-align: center;
+  align-items: center;
+}
+
+
 .userItem{
   background-color: transparent;
+  font-size: 18px;
+  margin-bottom: 3px;
 }
+
 .UIselected{
-  background-color: red;
+  background-color: rgb(216, 170, 170);
 }
+
 #root{
   height: 100%;
   width: 100%;

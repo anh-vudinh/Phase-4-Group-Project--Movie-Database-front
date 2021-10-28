@@ -47,8 +47,6 @@ function App() {
         BASE_URL_BACK={BASE_URL_BACK}
       />
 
-      
-
       <Login
         cookies={cookies}
         BASE_URL_BACK={BASE_URL_BACK}

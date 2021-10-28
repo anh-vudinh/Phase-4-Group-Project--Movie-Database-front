@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
 import CpMovieItem from "./CpMovieItem";
 
-function CpMovies({BASE_URL_BACK, poster_prefixURL, selectedWL, selectedMoviesArray, setSelectedMoviesArray}) {
+function CpMovies({BASE_URL_BACK, moviesArray, setMoviesArray, poster_prefixURL, selectedWL, selectedMoviesArray, setSelectedMoviesArray}) {
    
-    const [moviesArray, setMoviesArray] = useState([])
-    
     useEffect(()=> {
         if (selectedWL === "") return;
         const dataToSend={watchlist_id:selectedWL.id}
@@ -16,7 +14,6 @@ function CpMovies({BASE_URL_BACK, poster_prefixURL, selectedWL, selectedMoviesAr
         fetch(`${BASE_URL_BACK}/watchlists/cpWLmovies`,headers)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             setMoviesArray(data)}
         )
 

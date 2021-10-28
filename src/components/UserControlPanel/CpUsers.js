@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from "react";
 import CpUserItem from "./CpUserItem"; 
 
-function CpUsers({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpForm}) {
+function CpUsers({BASE_URL_BACK, setWatchlistsArray, setMoviesArray, usersArray, setUsersArray, formType, setFormType, selectedUser, setSelectedUser, setToggleCpForm}) {
     
-    const [usersArray, setUsersArray] = useState([])
-   
     useEffect(()=> {
         fetch(`${BASE_URL_BACK}/cpanels`)
         .then(resp => resp.json())
         .then(data => setUsersArray(data))
-
     }, [])
 
     const userList = usersArray.map((user,index) => 
@@ -26,7 +23,8 @@ function CpUsers({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpForm}
         setSelectedUser(user)
     }
     function handleUserAdd(){
-       setToggleCpForm(true)
+        setFormType(["User","add"])
+        setToggleCpForm(true)
     }
 
     function handleUserDelete(){
@@ -43,9 +41,11 @@ function CpUsers({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpForm}
         .then(resp => resp.json())
         .then(data => {
             setUsersArray(usersArray.filter(user => user.id !== selectedUser.id))
+            setWatchlistsArray([])
+            setMoviesArray([])
         })
-
     }
+
     return (
         <div className="userContainer">
             <div className="userColumnTitle"><p>Users</p></div>
@@ -53,8 +53,7 @@ function CpUsers({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpForm}
             <button onClick={handleUserAdd} >Add</button>
             <button onClick={handleUserDelete}>Delete</button>
         </div>
-    )
-    
+    )  
 }
 
 

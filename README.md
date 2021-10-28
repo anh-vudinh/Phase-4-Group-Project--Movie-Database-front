@@ -47,6 +47,13 @@ ___
 "scripts":{"start":}, this will stop your db.json from running the next time you run npm start. db.json has already served it's purpose. You will no longer need it after the crackle table is populated
 ________________________________________________
 
+vu- 10/28
+- added add and delete buttons for watchlist with full functionality front and backend
+- added logic to toggle form on and off and what fields to show
+- when adding user or watchlist, need addtions will now populate without a refresh(task: make it only populate after a successful message is returned. Right now it just assumes it was a successful add, currently possible that it can try and push errors into the array)
+- when deleting user, watchlistarray and moviesarray will be cleared
+- when deleting watchlist, moviesarray will be cleared
+
 vu- 10/27
 - removed sessionToken as a useState, replaced by isLoggedIn:boolean and cookies variable
 - brought cookies package import to App.js and passed it down as props instead of having each component needing it import the package

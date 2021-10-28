@@ -2,12 +2,9 @@ import React,{useEffect, useState} from "react";
 import CpWatchListItem from "./CpWatchListItem"
 
 
-function CpWatchList({selectedUser, BASE_URL_BACK, selectedWL, setSelectedWL}) {
+function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlistsArray, formType, setFormType, BASE_URL_BACK, selectedWL, setSelectedWL, setToggleCpForm}) {
    
-    const [watchlistsArray, setWatchlistArray] = useState([])
-    
     useEffect(()=> {
-
         if (selectedUser === "") return;
         const dataToSend={username:selectedUser.username}
         const headers = {
@@ -18,9 +15,8 @@ function CpWatchList({selectedUser, BASE_URL_BACK, selectedWL, setSelectedWL}) {
         fetch(`${BASE_URL_BACK}/watchlists/cpWL`,headers)
         .then(resp => resp.json())
         .then(data => {
-            setWatchlistArray(data)}
+            setWatchlistsArray(data)}
         )
-
     }, [selectedUser])
 
 
@@ -37,18 +33,39 @@ function CpWatchList({selectedUser, BASE_URL_BACK, selectedWL, setSelectedWL}) {
     )
 
     function handleWatchListClick(watchlist){
-      setSelectedWL(watchlist)
+        setSelectedWL(watchlist)
+    }
+
+    function handleWLAdd(){
+        setFormType(["WL","add"])
+        setToggleCpForm(true)
+    }
+ 
+     function handleWLDelete(){
+        if (setSelectedWL === "" ) return;
+        sendToDB(`/watchlists/${selectedWL.id}`)
+    }
+     
+    function sendToDB(fetchURL){
+        const headers = {
+            method: "DELETE"
+        }
+        fetch(`${BASE_URL_BACK}${fetchURL}`,headers)
+        .then(resp => resp.json())
+        .then(data => {
+            setWatchlistsArray(watchlistsArray.filter(watchlist => watchlist.id !== selectedWL.id))
+            setMoviesArray([])
+        })
     }
 
     return (
         <div className="userWatchListContainer">
             <div className="userWatchlistsColumnTitle"><p>Watchlists</p></div>
             {watchlistList}
+            <button onClick={handleWLAdd} >Add</button>
+            <button onClick={handleWLDelete}>Delete</button>
         </div>
-          
     )
-
-    
 }
 
 

@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect} from "react";
 import CpWatchListItem from "./CpWatchListItem"
 
 
@@ -17,6 +17,7 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
         .then(data => {
             setWatchlistsArray(data)}
         )
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedUser])
 
 

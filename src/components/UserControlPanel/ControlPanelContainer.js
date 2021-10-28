@@ -4,7 +4,7 @@ import CpSearch from "./CpSearch";
 import CpUsers from "./CpUsers";
 import CpWatchList from "./CpWatchList";
 import CpForm from "./CpForm";
-
+import CpProfile from "./CpProfile";
 
 function ControlPanelContaioner({BASE_URL_BACK}) {
 
@@ -14,13 +14,17 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
      const poster_prefixURL = "https://www.themoviedb.org/t/p/w100_and_h100_face"
      const [formData, setFormData] = useState({username:"",password:"",useremail:"",wlname:""})
      const [toggleCpForm, setToggleCpForm] = useState(false)
+     const [isFilteredView, setIsFilteredView] = useState(false)
+     const [toggleCpUserProfile, setToggleCpUserProfile] = useState(false)
      const [formType, setFormType] = useState(["",""])
      const [usersArray, setUsersArray] = useState([])
+     const [filteredUsersArray, setFilteredUsersArray] = useState([])
      const [watchlistsArray, setWatchlistsArray] = useState([])
      const [moviesArray, setMoviesArray] = useState([])
 
      useEffect(()=>{
           setToggleCpForm(false)
+          // eslint-disable-next-line react-hooks/exhaustive-deps
      },[selectedUser,selectedWL])
 
      return (
@@ -34,6 +38,9 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
                     usersArray={usersArray} setUsersArray={setUsersArray}
                     setMoviesArray={setMoviesArray}
                     setWatchlistsArray={setWatchlistsArray}
+                    filteredUsersArray={filteredUsersArray} setFilteredUsersArray={setFilteredUsersArray}
+                    isFilteredView={isFilteredView} setIsFilteredView={setIsFilteredView}
+                    toggleCpUserProfile={toggleCpUserProfile} setToggleCpUserProfile={setToggleCpUserProfile}
                />
 
                <CpWatchList 
@@ -66,10 +73,21 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
                          setToggleCpForm={setToggleCpForm}
                          selectedUser={selectedUser}
                          usersArray={usersArray} setUsersArray={setUsersArray}
+                         filteredUsersArray={filteredUsersArray} setFilteredUsersArray={setFilteredUsersArray}
                          watchlistsArray={watchlistsArray} setWatchlistsArray={setWatchlistsArray}
+                         isFilteredView={isFilteredView}
                     />
                     :
                     null
+               }
+
+               {toggleCpUserProfile?
+                    <CpProfile
+                         selectedUser={selectedUser} setSelectedUser={setSelectedUser}
+                         setToggleCpUserProfile={setToggleCpUserProfile}
+                         BASE_URL_BACK={BASE_URL_BACK}
+                    />
+               : null
                }
           </div>
      )

@@ -12,11 +12,12 @@ function CpWatchListItem({index, watchlist , handleWatchListClick, selectedWL, u
         else {
             setIsSelected(false)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [selectedWL])  
   
     return (
         <div className={isSelected? "userItem UIselected":"userItem"}  onClick={()=> handleWatchListClick(watchlist)} >
-            {`${username} WL#${index}`}
+            {`#${index+1}: ${watchlist.wlname}`}
         </div>
     )
     

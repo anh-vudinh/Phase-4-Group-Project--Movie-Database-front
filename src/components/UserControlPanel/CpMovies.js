@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import CpMovieItem from "./CpMovieItem";
 
 function CpMovies({BASE_URL_BACK, moviesArray, setMoviesArray, poster_prefixURL, selectedWL, selectedMoviesArray, setSelectedMoviesArray}) {
@@ -16,7 +16,7 @@ function CpMovies({BASE_URL_BACK, moviesArray, setMoviesArray, poster_prefixURL,
         .then(data => {
             setMoviesArray(data)}
         )
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedWL])
 
 

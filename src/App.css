@@ -20,7 +20,7 @@
   flex-wrap: nowrap;
   top: 80px;
   width: 100%;
-  height: 100%;
+  height: 1000px;
   background-color: rgb(194, 177, 177);
   overflow: scroll;
 }
@@ -107,9 +107,9 @@
   width: 60%;
   background-color: hotpink;
   text-align: center;
+  justify-content: center;
   align-items: center;
 }
-
 
 .userItem{
   background-color: transparent;
@@ -119,6 +119,125 @@
 
 .UIselected{
   background-color: rgb(216, 170, 170);
+}
+
+.CpProfileUnderlay{
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+}
+
+.CpProfileContainer{
+  position: sticky;
+  display: flex;
+  background-color: cornsilk;
+  height: 750px;
+  width: 600px;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.CpProfileNameContainer{
+  margin-top: 10px;
+  font-size: 28px;
+}
+
+
+.CpProfileImageContainer{
+  position: relative;
+  height: 250px;
+  width: 250px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.CpProfileImage{
+  position: relative;
+  min-height: 250px;
+  min-width: 250px;
+}
+
+.CpProfileForm{
+  margin-top: 30px;
+  width: 300px;
+}
+
+.CpProfileFormSecA{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-bottom: 3px;
+}
+
+.CpProfileFormSecA input{
+  height: 25px;
+  width: 100%;
+}
+
+.CpProfileFormSecA label{
+  font-size: 20px;
+  margin: 5px 0 5px 0;
+}
+
+.CpShowPassword{
+  position: absolute;
+  height: 22px;
+  right: 145px;
+  top: 460px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.CpProfileFormSecB {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 15px 0;
+}
+
+.CpProfileFormSecB input{
+  width: 30px;
+}
+
+.CpProfileFormSecB label{
+  font-size: 14px;
+  font-weight: 500;
+  margin: 5px 0 5px 0;
+}
+
+.CpProfileFormSecC{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.CpProfileFormSecC label{
+  color: red;
+  margin-right: 10px;
+}
+
+.CpProfileFormSubmitContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.CpProfileFormSubmitContainer input{
+  width: 200px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  background: rgb(65, 161, 0);
+  color: whitesmoke;
+  border-radius: 10px;
+  font-size: 18px;
 }
 
 #root{

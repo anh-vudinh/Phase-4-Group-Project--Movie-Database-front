@@ -53,6 +53,8 @@ vu- 10/28
 - when adding user or watchlist, need addtions will now populate without a refresh(task: make it only populate after a successful message is returned. Right now it just assumes it was a successful add, currently possible that it can try and push errors into the array)
 - when deleting user, watchlistarray and moviesarray will be cleared
 - when deleting watchlist, moviesarray will be cleared
+- added profile edit form
+
 
 vu- 10/27
 - removed sessionToken as a useState, replaced by isLoggedIn:boolean and cookies variable

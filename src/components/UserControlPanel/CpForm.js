@@ -1,6 +1,6 @@
 import React from "react";
 
-function CpForm({BASE_URL_BACK, usersArray, setUsersArray, watchlistsArray, setWatchlistsArray, selectedUser, setToggleCpForm, formData, setFormData, formType, setFormType}) {
+function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filteredUsersArray, setFilteredUsersArray, watchlistsArray, setWatchlistsArray, selectedUser, setToggleCpForm, formData, setFormData, formType, setFormType}) {
     
     function handleFormSubmit(e){
         e.preventDefault()
@@ -38,9 +38,11 @@ function CpForm({BASE_URL_BACK, usersArray, setUsersArray, watchlistsArray, setW
         fetch(`${BASE_URL_BACK}${fetchURL}`,headers)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             switch (formType[0]){
                 case 'User':
+                    if (isFilteredView){
+                        setFilteredUsersArray([...filteredUsersArray, data])
+                    }
                     setUsersArray([...usersArray, data])
                     break;
                 case 'WL':
@@ -51,7 +53,7 @@ function CpForm({BASE_URL_BACK, usersArray, setUsersArray, watchlistsArray, setW
             }
 
             setFormType(["",""])
-            setFormData({username:"",password:"",useremail:"",wlname:""})
+            setFormData({username:"", password:"", useremail:"", wlname:""})
             setToggleCpForm(false)
         })
     }
@@ -70,11 +72,11 @@ function CpForm({BASE_URL_BACK, usersArray, setUsersArray, watchlistsArray, setW
                         }
                         <div>
                             <label>User email</label>
-                            <input type="text" value={formData.useremail} name="useremail" onChange={handleOnChange}/>            
+                            <input type="email" value={formData.useremail} name="useremail" onChange={handleOnChange}/>            
                         </div>
                         <div>
                             <label>Password</label>
-                            <input type="text" value={formData.password} name="password" onChange={handleOnChange}/>            
+                            <input type="password" value={formData.password} name="password" onChange={handleOnChange}/>            
                         </div>
                     </>
                 : null

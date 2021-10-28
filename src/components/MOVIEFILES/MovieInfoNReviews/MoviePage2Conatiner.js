@@ -1,11 +1,12 @@
 import React, {useState} from "react";
+import TextArea from './TextArea';
 import Cast from "./Cast"
 import Review from "./Review";
 import MovieExtraInfo from "./MovieExtraInfo"
-import TextArea from './TextArea';
 import BlankAvatarM from "../../../assets/blankAvatarM.png"
 import BlankAvatarF from "../../../assets/blankAvatarF.png"
 import BlankAvatar from "../../../assets/blankAvatar.png"
+
 
 function MoviePage2Container({movie, isLoggedIn, cookies, BASE_URL_BACK, isWatchedMP2C, setIsWatchedMP2C, poster_prefixURL, broken_path, apiKey, apiPrefixURL, handleWatchListAddClick}){
 

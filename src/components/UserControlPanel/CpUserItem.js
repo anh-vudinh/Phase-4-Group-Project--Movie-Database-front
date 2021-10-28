@@ -6,20 +6,21 @@ function CpUserItem({user , handleUserClick, selectedUser}) {
     const [isSelected, setIsSelected] = useState(false)
 
     useEffect(() => {
-        if (user.username === selectedUser.username ){
+        if (user.username === selectedUser.username){
             setIsSelected(true)
         }
         else {
             setIsSelected(false)
         }
-     }, [selectedUser])  
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedUser])  
   
     
     return (
         <div className={isSelected? "userItem UIselected":"userItem"}  onClick={()=> handleUserClick(user)} >
-        {user.username}
+            {user.username}
         </div>
-        )
+    )
     
 }
 

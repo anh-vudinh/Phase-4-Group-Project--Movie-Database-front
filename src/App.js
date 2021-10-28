@@ -28,7 +28,7 @@ function App() {
         isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
       />
       
-      {/* <Switch>
+      <Switch>
         <Route exact path="/">
           <MovieContainer
             cookies={cookies}
@@ -41,11 +41,15 @@ function App() {
         <Route path="/tvShows">
           <TVContainer/>
         </Route>
-      </Switch> */}
 
-      <ControlPanelContaier
-        BASE_URL_BACK={BASE_URL_BACK}
-      />
+        <Route path="/controlPanel">
+          <ControlPanelContaier
+            BASE_URL_BACK={BASE_URL_BACK}
+          />
+        </Route>
+      </Switch>
+
+
 
       <Login
         cookies={cookies}

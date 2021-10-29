@@ -1,4 +1,5 @@
 import React from "react";
+import X from "../../assets/X.png"
 
 function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filteredUsersArray, setFilteredUsersArray, watchlistsArray, setWatchlistsArray, selectedUser, setToggleCpForm, formData, setFormData, formType, setFormType}) {
     
@@ -27,6 +28,11 @@ function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filte
 
     function handleOnChange(e){
         setFormData({...formData, [e.target.name]:e.target.value})
+    }
+
+    function handleFormClose(){
+        setToggleCpForm(false)
+        setFormData({username:"",password:"",useremail:"",wlname:""})
     }
 
     function sendToDB(dataToSend,fetchURL){
@@ -58,43 +64,50 @@ function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filte
         })
     }
 
+
+
     return(
-        <div className="CpFormContainer">
-            <form onSubmit={handleFormSubmit}>
-                {formType[0] === "User"?
-                    <>
-                        {formType[1] === "add"?
-                            <div>
-                                <label>Username</label>
-                                <input type="text" value={formData.username} name="username" onChange={handleOnChange}/>            
+        <div className="CpFormUnderlay">
+            <div className="CpFormContainer">
+                <div className="CpFormTitle"><p>{`Add ${formType[0]}`}</p></div>
+                <form className="CpForm" onSubmit={handleFormSubmit}>
+                    {formType[0] === "User"?
+                        <>
+                            {formType[1] === "add"?
+                                <div className="CpFormSecA">
+                                    <label>Username</label>
+                                    <input type="text" value={formData.username} name="username" onChange={handleOnChange}/>            
+                                </div>
+                            : null
+                            }
+                            <div className="CpFormSecA">
+                                <label>Email</label>
+                                <input type="email" value={formData.useremail} name="useremail" onChange={handleOnChange}/>            
                             </div>
-                        : null
-                        }
-                        <div>
-                            <label>User email</label>
-                            <input type="email" value={formData.useremail} name="useremail" onChange={handleOnChange}/>            
-                        </div>
-                        <div>
-                            <label>Password</label>
-                            <input type="password" value={formData.password} name="password" onChange={handleOnChange}/>            
-                        </div>
-                    </>
-                : null
-                }
+                            <div className="CpFormSecA">
+                                <label>Password</label>
+                                <input type="password" value={formData.password} name="password" onChange={handleOnChange}/>            
+                            </div>
+                        </>
+                    : null
+                    }
 
-                {formType[0] === "WL"?
-                    <div>
-                        <label>Watchlist Name</label>
-                        <input type="text" value={formData.wlname} name="wlname" onChange={handleOnChange}/>            
+                    {formType[0] === "WL"?
+                        <div className="CpFormSecA">
+                            <label>Watchlist Name</label>
+                            <input type="text" value={formData.wlname} name="wlname" onChange={handleOnChange}/>            
+                        </div>
+                    : null
+                    }
+
+                    <div class="CpFormSubmitContainer">
+                        <input type="submit"/>
                     </div>
-                : null
-                }
-
-                <div>
-                    <input type="submit"/>
-                </div>
-            </form>
+                </form>
+                <img className="CpFormLogXIcon" src={X} alt="xicon" onClick={handleFormClose}/>
+            </div>
         </div>
+        
     )
 }
 

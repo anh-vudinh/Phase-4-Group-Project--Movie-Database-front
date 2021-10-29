@@ -5,8 +5,12 @@ function CpMovieItem({movie,handleMovieClick, poster_prefixURL}) {
     
     const {movie_backdrop, movie_name, movie_year} = movie
   
+    function handleCheckBoxClick(e){
+        handleMovieClick(movie, e.target.checked)
+    }
+
     return (
-        <div className="movieItem" onClick={()=> handleMovieClick(movie)} >
+        <div className="movieItem">
             <div className="movieItemImg">
                 <img src={`${poster_prefixURL}${movie_backdrop}`} alt="movie poster"/>
             </div>
@@ -14,7 +18,7 @@ function CpMovieItem({movie,handleMovieClick, poster_prefixURL}) {
                 <p>{`${movie_name} (${parseDate(movie_year).slice(-4)})`}</p>
             </div>
             <div className="movieItemCB">
-                <input type="checkbox" value={movie}/>
+                <input type="checkbox" onChange={handleCheckBoxClick}/>
             </div>
         </div>
     )

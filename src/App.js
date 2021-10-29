@@ -41,12 +41,14 @@ function App() {
         <Route path="/tvShows">
           <TVContainer/>
         </Route>
+        {isLoggedIn?
+          <Route path="/controlPanel">
+            <ControlPanelContaier
+              BASE_URL_BACK={BASE_URL_BACK}
+            />
+          </Route>
+        :null}
 
-        <Route path="/controlPanel">
-          <ControlPanelContaier
-            BASE_URL_BACK={BASE_URL_BACK}
-          />
-        </Route>
       </Switch>
 
 

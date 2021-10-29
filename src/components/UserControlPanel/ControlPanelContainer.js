@@ -19,6 +19,7 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
      const [formType, setFormType] = useState(["",""])
      const [usersArray, setUsersArray] = useState([])
      const [filteredUsersArray, setFilteredUsersArray] = useState([])
+     const [filteredSearchArray,setFilteredSearchArray] = useState([])
      const [watchlistsArray, setWatchlistsArray] = useState([])
      const [moviesArray, setMoviesArray] = useState([])
 
@@ -28,67 +29,72 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
      },[selectedUser,selectedWL])
 
      return (
-          <div className="ControlPanelContainer" >
-               <CpUsers 
-                    BASE_URL_BACK={BASE_URL_BACK} 
-                    selectedUser={selectedUser} 
-                    setSelectedUser={setSelectedUser}
-                    setToggleCpForm ={setToggleCpForm}
-                    formType={formType} setFormType={setFormType}
-                    usersArray={usersArray} setUsersArray={setUsersArray}
-                    setMoviesArray={setMoviesArray}
-                    setWatchlistsArray={setWatchlistsArray}
-                    filteredUsersArray={filteredUsersArray} setFilteredUsersArray={setFilteredUsersArray}
-                    isFilteredView={isFilteredView} setIsFilteredView={setIsFilteredView}
-                    toggleCpUserProfile={toggleCpUserProfile} setToggleCpUserProfile={setToggleCpUserProfile}
-               />
-
-               <CpWatchList 
-                    selectedUser={selectedUser} 
-                    BASE_URL_BACK={BASE_URL_BACK}  
-                    selectedWL={selectedWL} 
-                    setSelectedWL={setSelectedWL}
-                    setToggleCpForm ={setToggleCpForm}
-                    formType={formType} setFormType={setFormType}
-                    watchlistsArray={watchlistsArray} setWatchlistsArray={setWatchlistsArray}
-                    setMoviesArray={setMoviesArray}
-               />
-
-               <CpMovies
-                    selectedMoviesArray={selectedMoviesArray}
-                    setSelectedMoviesArray={setSelectedMoviesArray}
-                    selectedWL={selectedWL} 
-                    BASE_URL_BACK={BASE_URL_BACK}
-                    poster_prefixURL={poster_prefixURL}
-                    moviesArray={moviesArray} setMoviesArray={setMoviesArray}
-               />
-
-               <CpSearch/>
-               {toggleCpForm?
-                    <CpForm
-                         formData={formData}
-                         setFormData={setFormData}
-                         BASE_URL_BACK={BASE_URL_BACK}
+          <div className="ControlPanelUnderlay">
+               <div className="ControlPanelContainer" >
+                    <CpUsers 
+                         BASE_URL_BACK={BASE_URL_BACK} 
+                         selectedUser={selectedUser} 
+                         setSelectedUser={setSelectedUser}
+                         setToggleCpForm ={setToggleCpForm}
                          formType={formType} setFormType={setFormType}
-                         setToggleCpForm={setToggleCpForm}
-                         selectedUser={selectedUser}
                          usersArray={usersArray} setUsersArray={setUsersArray}
+                         setMoviesArray={setMoviesArray}
+                         setWatchlistsArray={setWatchlistsArray}
                          filteredUsersArray={filteredUsersArray} setFilteredUsersArray={setFilteredUsersArray}
-                         watchlistsArray={watchlistsArray} setWatchlistsArray={setWatchlistsArray}
-                         isFilteredView={isFilteredView}
+                         isFilteredView={isFilteredView} setIsFilteredView={setIsFilteredView}
+                         toggleCpUserProfile={toggleCpUserProfile} setToggleCpUserProfile={setToggleCpUserProfile}
                     />
-                    :
-                    null
-               }
 
-               {toggleCpUserProfile?
-                    <CpProfile
-                         selectedUser={selectedUser} setSelectedUser={setSelectedUser}
-                         setToggleCpUserProfile={setToggleCpUserProfile}
-                         BASE_URL_BACK={BASE_URL_BACK}
+                    <CpWatchList 
+                         selectedUser={selectedUser} 
+                         BASE_URL_BACK={BASE_URL_BACK}  
+                         selectedWL={selectedWL} 
+                         setSelectedWL={setSelectedWL}
+                         setToggleCpForm ={setToggleCpForm}
+                         formType={formType} setFormType={setFormType}
+                         watchlistsArray={watchlistsArray} setWatchlistsArray={setWatchlistsArray}
+                         setMoviesArray={setMoviesArray}
                     />
-               : null
-               }
+
+                    <CpMovies
+                         selectedMoviesArray={selectedMoviesArray}
+                         setSelectedMoviesArray={setSelectedMoviesArray}
+                         selectedWL={selectedWL} 
+                         BASE_URL_BACK={BASE_URL_BACK}
+                         poster_prefixURL={poster_prefixURL}
+                         moviesArray={moviesArray} setMoviesArray={setMoviesArray}
+                    />
+
+                    <CpSearch
+                         filteredSearchArray={filteredSearchArray} setFilteredSearchArray={setFilteredSearchArray}
+                    />
+                    
+                    {toggleCpForm?
+                         <CpForm
+                              formData={formData}
+                              setFormData={setFormData}
+                              BASE_URL_BACK={BASE_URL_BACK}
+                              formType={formType} setFormType={setFormType}
+                              setToggleCpForm={setToggleCpForm}
+                              selectedUser={selectedUser}
+                              usersArray={usersArray} setUsersArray={setUsersArray}
+                              filteredUsersArray={filteredUsersArray} setFilteredUsersArray={setFilteredUsersArray}
+                              watchlistsArray={watchlistsArray} setWatchlistsArray={setWatchlistsArray}
+                              isFilteredView={isFilteredView}
+                         />
+                         :
+                         null
+                    }
+
+                    {toggleCpUserProfile?
+                         <CpProfile
+                              selectedUser={selectedUser} setSelectedUser={setSelectedUser}
+                              setToggleCpUserProfile={setToggleCpUserProfile}
+                              BASE_URL_BACK={BASE_URL_BACK}
+                         />
+                    : null
+                    }
+               </div>
           </div>
      )
     

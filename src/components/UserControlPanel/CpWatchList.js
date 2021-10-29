@@ -61,8 +61,12 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
 
     return (
         <div className="userWatchListContainer">
-            <div className="userWatchlistsColumnTitle"><p>Watchlists</p></div>
-            {watchlistList}
+            <div className="userWatchlistsColumnTitle">
+                <p>Watchlists</p>
+            </div>
+            <div className="userWatchlistItemsContainer">
+                {watchlistList}
+            </div>
             <button onClick={handleWLAdd} >Add</button>
             <button onClick={handleWLDelete}>Delete</button>
         </div>

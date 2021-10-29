@@ -26,7 +26,7 @@ function NavBar({setToggleLoginContainer, sessionUsername, isLoggedIn, cookies, 
                 <nav className="navLinks">
                     <NavLink exact to="/">Movies</NavLink>
                     <NavLink to="/tvShows">Tv Shows</NavLink>
-                    <NavLink to="/controlPanel">Control Panel</NavLink>
+                    {isLoggedIn? <NavLink to="/controlPanel">Control Panel</NavLink> : null}
                 </nav>
                 {isLoggedIn?
                     <div className="navLogContainer">

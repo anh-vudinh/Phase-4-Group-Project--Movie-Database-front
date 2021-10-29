@@ -68,28 +68,10 @@ function Login({toggleLoginContainer, cookies, BASE_URL_BACK, setToggleLoginCont
     }
 
     function handleFailLogin(message){
-        switch (message.errors) {
-            case "user_exist": 
-                setErrorMessage("Error: User Already Exist")
-                setShowErrorMessage(true)
-                break;
-            case "wrong_pwd": 
-                setErrorMessage("Error: Wrong Password")
-                setShowErrorMessage(true)
-                break;
-            case "no_user":
-                setErrorMessage("Error: User doesn't exist")
-                setShowErrorMessage(true)
-                cookies.remove('session')
-                break;
-            case "token expired requires user to login":
-                setErrorMessage("Error: Login again, session expired")
-                setShowErrorMessage(true)
-                cookies.remove('session')
-                break;
-            default:
-                console.log("uncaught error")
-        }
+        setErrorMessage(message.errors)
+        setShowErrorMessage(true)
+        cookies.remove('session')
+        setToggleLoginContainer(true)
     }
     
     function handleOnChange(e){

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import TextArea from "./TextArea";
 
 function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, isLoggedIn, cookies, displayReadMore, readMoreDetails, BASE_URL_BACK, setDisplayReadMore, avatarPrefix, blankAvatar}){
-    const{author_details, content, updated_at, author} = readMoreDetails
+    const {author_details, content, updated_at, author, source} = readMoreDetails
     const [toggleTextBox, setToggleTextBox] = useState(false)
     const [readMoreArrayBE, setReadMoreArrayBE] = useState([])
     
@@ -23,7 +23,7 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, isLoggedIn, co
         <div className="readMoreResponsesOG" key={index}>
             <div className="readMoreResponsesOGProfile">
                 <div className="readMoreResponsesOGPicture">
-                    <img alt="author" src={response.avatar_path === null ? blankAvatar : `${avatarPrefix}${response.avatar_path}` }/>
+                    <img alt="author" src={response.avatar_path === null ? blankAvatar : `${response.avatar_path}` }/>
                 </div>
                 <div className="readMoreResponsesOGName">
                     {response.author}
@@ -52,7 +52,7 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, isLoggedIn, co
             </div>
             <div className="rMResponseProfile">
                 <div className="rMResponsePicture">
-                    <img alt="author" src={response.avatar_path === null ? blankAvatar : `${avatarPrefix}${response.avatar_path}` }/>
+                    <img alt="author" src={response.avatar_path === null ? blankAvatar : `${response.avatar_path}` }/>
                 </div>
                 <div className="rMResponseName">
                     {response.author}
@@ -70,7 +70,7 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, isLoggedIn, co
                 <div className="threadStarter">
                     <div className="tSProfile">
                         <div className="tSPicture">
-                            <img alt="author" src={author_details.avatar_path === null ? blankAvatar : author_details.avatar_path.includes("http") ? author_details.avatar_path.slice(1)  : `${avatarPrefix}${author_details.avatar_path}` }/>
+                            <img alt="author" src={author_details.avatar_path === null ? blankAvatar : author_details.avatar_path.includes("/http") ? author_details.avatar_path.slice(1) : `${source ==="TMDB"? avatarPrefix : ""}${author_details.avatar_path}` }/>
                         </div>
                         <div className="tSName">
                             {author}

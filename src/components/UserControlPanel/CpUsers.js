@@ -82,9 +82,13 @@ function CpUsers({BASE_URL_BACK, toggleCpUserProfile, setToggleCpUserProfile, is
 
     return (
         <div className="userContainer">
-            <div className="userColumnTitle"><p>Users</p></div>
+            <div className="userColumnTitle">
+                <p>Users</p>
+            </div>
             <input className="cpUserSearch" placeholder="Username" name="username" value={searchedUsers.username} onChange={handleUserSearchOnChange}/>
-            {searchedUsers.username === ""? userList : filteredUserList}
+            <div className="userItemsContainer">
+                {searchedUsers.username === ""? userList : filteredUserList}
+            </div>
             <button onClick={handleUserAdd}>Add</button>
             <button onClick={handleUserUpdate}>Update</button>
             <button onClick={handleUserDelete}>Delete</button>

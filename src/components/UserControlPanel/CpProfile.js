@@ -9,7 +9,7 @@ function CpProfile({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpUse
     const formDataDefault = {
         password:"",
         useremail:"",
-        avatar_path:"",
+        avatar_path:null,
         session_duration:1,
         account_active:true
     }
@@ -57,7 +57,7 @@ function CpProfile({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpUse
                     <p>{selectedUser.username}</p>
                 </div>
                 <div className="CpProfileImageContainer">
-                    <img className="CpProfileImage" src={formData.avatar_path === ""? selectedUser.avatar_path === null? BlankAvatar : selectedUser.avatar_path : formData.avatar_path} alt="profile"/>
+                    <img className="CpProfileImage" src={formData.avatar_path === null? selectedUser.avatar_path === null? BlankAvatar : selectedUser.avatar_path : formData.avatar_path} alt="profile"/>
                 </div>
                 <form className="CpProfileForm" onSubmit={handleFormSubmit}>
                     <div className="CpProfileFormSecA">

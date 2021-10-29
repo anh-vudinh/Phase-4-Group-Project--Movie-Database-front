@@ -51,7 +51,7 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, isLoggedIn, cookie
         <ReviewCard
             key={index}
             source={"BE"}
-            avatarPrefix={avatarPrefix}
+            avatarPrefix={""}
             blankAvatar={blankAvatar}
             maxReviewContentLength={maxReviewContentLength}
             review={review}
@@ -68,7 +68,7 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, isLoggedIn, cookie
 
     function handleReadMoreClick(review, source){
         if(source === "TMDB"){
-            setReadMoreDetails(review)
+            setReadMoreDetails({...review, source: source})
         }else{
             const {id, author, updated_at, rating, content, avatar_path} = review
             const convertReview = {
@@ -81,9 +81,14 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, isLoggedIn, cookie
                 },
                 updated_at: updated_at
             }
-            setReadMoreDetails(convertReview)
+            setReadMoreDetails({...convertReview, source: source})
         }
         setDisplayReadMore(true)
+        window.scrollTo({
+            left: 0,
+            top: 620,
+            behavior: "smooth",
+          })
     }
 
     return(
@@ -128,7 +133,6 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, isLoggedIn, cookie
                     parseSanitizeHTML={parseSanitizeHTML}
                     cookies={cookies}
                     isLoggedIn={isLoggedIn}
-                    
                 /> 
             : null}
         </>

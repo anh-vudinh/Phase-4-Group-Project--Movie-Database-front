@@ -77,10 +77,12 @@ function Search({setmovieCateogry, genreTitle, setGenreTitle, yearTitle, setYear
 
     return(
         <div className="SearchBar">
-            <ul className="searchBarCategories">{categoryButtons}</ul>
+            <ul className="searchBarCategories">
+                {categoryButtons}
+            </ul>
             <form className="searchBarForm" onSubmit={(e) => handleSubmit(e)}>  
-            <input type="text" placeholder=" Movie Name" value={searchInput} onChange={(e) => setSearchInput(e.target.value)}/>
-            <button>Search</button>   
+                <input type="text" placeholder=" Movie Name" value={searchInput} onChange={(e) => setSearchInput(e.target.value)}/>
+                <button>Search</button>   
             </form>     
         </div>
     )

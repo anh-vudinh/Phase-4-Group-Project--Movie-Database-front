@@ -6,8 +6,8 @@ import eyeballClosedIcon from "../assets/eyeballClosedicon.png"
 
 function Login({toggleLoginContainer, cookies, setSessionProfilePic, BASE_URL_BACK, setToggleLoginContainer, setSessionUsername, setIsLoggedIn}){
     
-    const resetFormData = {username:"", password:""}
-    const [formData, setFormData] = useState({username:"", password:"", useremail:""})
+    const resetFormData = {username:"", password:"", useremail:""}
+    const [formData, setFormData] = useState(resetFormData)
     const [errorMessage,setErrorMessage] = useState("")
     const [showErrorMessage, setShowErrorMessage] = useState(false)
     const [toggleRegister, setToggleRegister] = useState(false)

@@ -132,8 +132,14 @@
 
 .userItem{
   background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userItem p{
+  margin: 0 3px 3px 3px;
   font-size: 18px;
-  margin-bottom: 3px;
 }
 
 .UIselected{
@@ -143,7 +149,6 @@
 .CpProfileUnderlay{
   position: absolute;
   display: flex;
-  height: 100%;
   width: 100%;
   background-color: transparent;
   justify-content: center;

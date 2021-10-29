@@ -7,11 +7,11 @@ import BlankAvatar from "../../assets/blankAvatar.png"
 function CpProfile({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpUserProfile}) {
 
     const formDataDefault = {
-        password:"",
-        useremail:"",
-        avatar_path:null,
-        session_duration:1,
-        account_active:true
+        useremail: "",
+        password: "",
+        avatar_path: null,
+        session_duration: selectedUser.session_duration,
+        account_active: selectedUser.account_active
     }
 
     const [formData, setFormData] = useState(formDataDefault)
@@ -20,14 +20,21 @@ function CpProfile({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpUse
 
     function handleOnChange(e){
         if(e.target.name === "account_active") {
-            return setFormData({...formData, [e.target.name]:!e.target.checked})
+            return setFormData({...formData, [e.target.name]: e.target.checked})
         }
         setFormData({...formData, [e.target.name]:e.target.value})
     }
 
     function handleFormSubmit(e){
         e.preventDefault()
-        sendToDB(formData,`/users/${selectedUser.id}`)
+        const dataToSend = {
+            useremail: formData.useremail === ""? selectedUser.useremail : formData.useremail,
+            password: formData.password,
+            avatar_path: formData.avatar_path === null? selectedUser.avatar_path : formData.avatar_path,
+            session_duration: formData.session_duration,
+            account_active: formData.account_active
+        }
+        sendToDB(dataToSend,`/users/${selectedUser.id}`)
     }
 
     function handleFormClose(){
@@ -47,6 +54,7 @@ function CpProfile({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpUse
         .then(data => {
             setSelectedUser({...selectedUser, ...data})
             setFormData({...formData, ...data})
+            setToggleCpUserProfile(false)
         })
     }
 
@@ -79,8 +87,8 @@ function CpProfile({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpUse
                         <input type="submit"/>
                     </div>
                     <div className="CpProfileFormSecC">
-                        <label>Disable Account</label>
-                        <input type="checkbox" value={formData.account_active} name="account_active" onChange={handleOnChange}/>            
+                        <label>Account Active</label>
+                        <input type="checkbox" checked={formData.account_active} name="account_active" onChange={handleOnChange}/>            
                     </div>
                 </form>
                 <img className="usLogXIcon" src={X} alt="xicon" onClick={handleFormClose}/>

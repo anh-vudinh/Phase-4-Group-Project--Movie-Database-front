@@ -3,7 +3,9 @@ import React, {useEffect, useState} from "react";
 
 function CpWatchListItem({index, watchlist , handleWatchListClick, selectedWL, username}) {
     
+    const {wlname, is_default} = watchlist
     const [isSelected, setIsSelected] = useState(false)
+    
 
     useEffect(() => {
         if (watchlist.id === selectedWL.id ){
@@ -17,7 +19,8 @@ function CpWatchListItem({index, watchlist , handleWatchListClick, selectedWL, u
   
     return (
         <div className={isSelected? "userItem UIselected":"userItem"}  onClick={()=> handleWatchListClick(watchlist)} >
-            {`#${index+1}: ${watchlist.wlname}`}
+            <p>{`#${index+1}: ${wlname}`}</p>
+            <p>{`${is_default? "*" : ""}`}</p>        
         </div>
     )
     

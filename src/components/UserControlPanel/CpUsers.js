@@ -8,7 +8,9 @@ function CpUsers({BASE_URL_BACK, toggleCpUserProfile, setToggleCpUserProfile, is
     useEffect(()=> {
         fetch(`${BASE_URL_BACK}/cpanels`)
         .then(resp => resp.json())
-        .then(data => setUsersArray(data))
+        .then(data => {
+            setUsersArray(data)
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

@@ -41,6 +41,12 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
         setFormType(["WL","add"])
         setToggleCpForm(true)
     }
+
+    function handleWLUpdate(){
+        if(selectedWL === "") return;
+        setFormType(["WL","update"])
+        setToggleCpForm(true)
+    }
  
      function handleWLDelete(){
         if (setSelectedWL === "" ) return;
@@ -68,6 +74,7 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
                 {watchlistList}
             </div>
             <button onClick={handleWLAdd} >Add</button>
+            <button onClick={handleWLUpdate}>Update</button>
             <button onClick={handleWLDelete}>Delete</button>
         </div>
     )

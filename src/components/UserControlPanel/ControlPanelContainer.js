@@ -12,7 +12,14 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
      const [selectedWL, setSelectedWL] = useState("")
      const [selectedMoviesArray, setSelectedMoviesArray] = useState([])
      const poster_prefixURL = "https://www.themoviedb.org/t/p/w100_and_h100_face"
-     const [formData, setFormData] = useState({username:"",password:"",useremail:"",wlname:""})
+     const defaultFormData = {
+          username:"",
+          password:"",
+          useremail:"",
+          wlname:"",
+          is_default:false
+     }
+     const [formData, setFormData] = useState(defaultFormData)
      const [toggleCpForm, setToggleCpForm] = useState(false)
      const [isFilteredView, setIsFilteredView] = useState(false)
      const [toggleCpUserProfile, setToggleCpUserProfile] = useState(false)
@@ -81,6 +88,8 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
                               filteredUsersArray={filteredUsersArray} setFilteredUsersArray={setFilteredUsersArray}
                               watchlistsArray={watchlistsArray} setWatchlistsArray={setWatchlistsArray}
                               isFilteredView={isFilteredView}
+                              defaultFormData={defaultFormData}
+                              selectedWL={selectedWL}
                          />
                          :
                          null

@@ -1,7 +1,7 @@
 import React from "react";
 import X from "../../assets/X.png"
 
-function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filteredUsersArray, setFilteredUsersArray, watchlistsArray, setWatchlistsArray, selectedUser, setToggleCpForm, formData, setFormData, formType, setFormType}) {
+function CpForm({BASE_URL_BACK, isFilteredView, selectedWL, defaultFormData, usersArray, setUsersArray, filteredUsersArray, setFilteredUsersArray, watchlistsArray, setWatchlistsArray, selectedUser, setToggleCpForm, formData, setFormData, formType, setFormType}) {
     
     function handleFormSubmit(e){
         e.preventDefault()
@@ -10,7 +10,11 @@ function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filte
                 handleUserAdd()
                 break;
             case 'WL':
-                handleWLAdd()
+                if (formType[1] === "add"){
+                    handleWLAdd()
+                }else if(formType[1] === "update"){
+                    handleWLUpdate()
+                }
                 break;
             default:
                 console.log("uncaught case")
@@ -22,17 +26,43 @@ function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filte
     }
 
     function handleWLAdd(){
-        const dataToSend = {user_id: selectedUser.id, wlname: formData.wlname}
+        const dataToSend = {
+            user_id: selectedUser.id, 
+            wlname: formData.wlname
+        }
         sendToDB(dataToSend,'/watchlists')
     }
 
+    function handleWLUpdate(){
+        const dataToSend = {
+            user_id: selectedUser.id, 
+            wlname: formData.wlname === ""? selectedWL.wlname : formData.wlname,
+            is_default: formData.is_default
+        }
+        const headers = {
+            method: "PATCH",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(dataToSend)
+        }
+        fetch(`${BASE_URL_BACK}/watchlists/${selectedWL.id}`,headers)
+        .then(resp => resp.json())
+        .then(data => {
+            setWatchlistsArray(data)
+            setFormData(defaultFormData)
+            setToggleCpForm(false)
+        })
+    }
+
     function handleOnChange(e){
+        if(e.target.name === "is_default"){
+            return setFormData({...formData, [e.target.name]:e.target.checked})
+        }
         setFormData({...formData, [e.target.name]:e.target.value})
     }
 
     function handleFormClose(){
         setToggleCpForm(false)
-        setFormData({username:"",password:"",useremail:"",wlname:""})
+        setFormData(defaultFormData)
     }
 
     function sendToDB(dataToSend,fetchURL){
@@ -59,7 +89,7 @@ function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filte
             }
 
             setFormType(["",""])
-            setFormData({username:"", password:"", useremail:"", wlname:""})
+            setFormData(defaultFormData)
             setToggleCpForm(false)
         })
     }
@@ -69,7 +99,7 @@ function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filte
     return(
         <div className="CpFormUnderlay">
             <div className="CpFormContainer">
-                <div className="CpFormTitle"><p>{`Add ${formType[0]}`}</p></div>
+                <div className="CpFormTitle"><p>{`${formType[1].charAt(0).toUpperCase()}${formType[1].slice(1)} ${formType[0]}`}</p></div>
                 <form className="CpForm" onSubmit={handleFormSubmit}>
                     {formType[0] === "User"?
                         <>
@@ -93,10 +123,20 @@ function CpForm({BASE_URL_BACK, isFilteredView, usersArray, setUsersArray, filte
                     }
 
                     {formType[0] === "WL"?
-                        <div className="CpFormSecA">
-                            <label>Watchlist Name</label>
-                            <input type="text" value={formData.wlname} name="wlname" onChange={handleOnChange}/>            
-                        </div>
+                        <>
+                            <div className="CpFormSecA">
+                                <label>Watchlist Name</label>
+                                <input type="text" value={formData.wlname} name="wlname" onChange={handleOnChange}/>            
+                            </div>
+                            {formType[1] === "update"?
+                                <div className="CpFormSecA">
+                                    <label>Set default</label>
+                                    <input type="checkbox" value={formData.is_default} name="is_default" onChange={handleOnChange}/>            
+                                </div>
+                            : null
+                            }
+
+                        </>
                     : null
                     }
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import youtubelogo from "../../../assets/youtubelogo.png"
 
-function YoutubeIcon({movie, setMovieArray, showExtraMovieContainer, setExtraMovieWarning}){
+function YoutubeIcon({movie, setMovieArray, showExtraMovieContainer, setShowExtraMovieContainer, setExtraMovieWarning}){
 
     const {title, release_date} = movie
     const [toggleShowYTBtn, setToggleShowYTBtn] = useState(false)
@@ -16,6 +16,9 @@ function YoutubeIcon({movie, setMovieArray, showExtraMovieContainer, setExtraMov
     const regex = /[^a-z0-9]/gi
 
     useEffect(()=>{                                         // this useEffect takes the first YT API Key and tries to perform a search on YT Free Movies channel
+        setShowExtraMovieContainer(false)                                   // reset extramoviecontainer to hidden, master controller
+        setExtraMovieWarning(false)                                         // reset warning to false, master controller
+
         if(movie.id !== undefined){                         // if a positive match is returned a YT Btn will be toggled to show to replace the trailer with a full movie to watch
             fetch(`${youtubeSearchURL}?part=snippet&channelId=${freeMoviesChannelID}&maxResults=1&q=${title.replaceAll(" ","%20").toLowerCase()}+${release_date.slice(0,4)}&type=video&videoType=movie&key=${currentAPIKey}`)
             .then(resp => resp.json())

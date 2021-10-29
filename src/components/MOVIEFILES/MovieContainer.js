@@ -15,7 +15,7 @@ import BlankPoster from "../../assets/blankposter.jpg"
 // Trailer : [movie]
 // Crackle : [movie]
 
-function MovieContainer({ isLoggedIn, cookies, BASE_URL_BACK, onLogOut, setOnLogOut}){
+function MovieContainer({ isLoggedIn, cookies, BASE_URL_BACK, onLogOut, setOnLogOut, sessionUsername}){
     const [movie, setMovie]= useState([])
     const [moviesData, setMoviesData] = useState([])
     const [genresList, setGenresList] = useState([])
@@ -227,6 +227,7 @@ function MovieContainer({ isLoggedIn, cookies, BASE_URL_BACK, onLogOut, setOnLog
                     handleWatchListAddClick={handleWatchListAddClick}
                     isWatchedMP2C={isWatchedMP2C} setIsWatchedMP2C={setIsWatchedMP2C}
                     BASE_URL_BACK={BASE_URL_BACK}
+                    sessionUsername={sessionUsername}
                 />
             : null}
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import TextArea from "./TextArea";
 
-function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, isLoggedIn, cookies, displayReadMore, readMoreDetails, BASE_URL_BACK, setDisplayReadMore, avatarPrefix, blankAvatar}){
+function ReviewReadMore({movie, parseDateTime, sessionUsername, parseSanitizeHTML, isLoggedIn, cookies, displayReadMore, readMoreDetails, BASE_URL_BACK, setDisplayReadMore, avatarPrefix, blankAvatar}){
     const {author_details, content, updated_at, author, source} = readMoreDetails
     const [toggleTextBox, setToggleTextBox] = useState(false)
     const [readMoreArrayBE, setReadMoreArrayBE] = useState([])
@@ -43,7 +43,7 @@ function ReviewReadMore({movie, parseDateTime, parseSanitizeHTML, isLoggedIn, co
 
         <div className="readMoreResponses" key={index}>
             <div className="rMResponseBubble">
-                <div className="rMResponseText">
+                <div className={response.author === sessionUsername? "rMResponseText yellowBG" : "rMResponseText"}>
                     {parseSanitizeHTML(response.content)}
                 </div>
                 <div className="rMResponseDateTime">

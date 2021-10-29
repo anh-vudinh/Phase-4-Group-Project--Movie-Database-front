@@ -2201,6 +2201,10 @@
   box-shadow: 0 0 10px rgba(15, 15, 15, 0.8);
 }
 
+.yellowBG{
+  background-color: rgb(248, 242, 210);
+}
+
 .rMResponseProfile{
   display: flex;
   flex-direction: column;

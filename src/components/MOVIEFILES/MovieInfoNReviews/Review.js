@@ -4,7 +4,7 @@ import parseSanitizeHTML from "../../functions/parseSanitizeHTML";
 import ReviewReadMore from "./ReviewReadMore";
 import ReviewCard from "./ReviewCard";
 
-function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, isLoggedIn, cookies, setReviewsArrayBE, BASE_URL_BACK, blankAvatar, displayReadMore, setDisplayReadMore}){
+function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, sessionUsername, isLoggedIn, cookies, setReviewsArrayBE, BASE_URL_BACK, blankAvatar, displayReadMore, setDisplayReadMore}){
 
     const [reviewsArray, setReviewsArray] = useState([])
     const [readMoreDetails, setReadMoreDetails] =  useState([])
@@ -133,6 +133,7 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, isLoggedIn, cookie
                     parseSanitizeHTML={parseSanitizeHTML}
                     cookies={cookies}
                     isLoggedIn={isLoggedIn}
+                    sessionUsername={sessionUsername}
                 /> 
             : null}
         </>

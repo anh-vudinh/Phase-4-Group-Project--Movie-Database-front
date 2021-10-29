@@ -28,7 +28,7 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
             index={index}
             username={selectedUser.username} 
             watchlist={watchlist} 
-            selectedWL={selectedWL} 
+            selectedWL={selectedWL}
             handleWatchListClick={handleWatchListClick}
         />
     )

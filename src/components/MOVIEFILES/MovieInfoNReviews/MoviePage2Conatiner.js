@@ -8,7 +8,7 @@ import BlankAvatarF from "../../../assets/blankAvatarF.png"
 import BlankAvatar from "../../../assets/blankAvatar.png"
 
 
-function MoviePage2Container({movie, isLoggedIn, cookies, BASE_URL_BACK, isWatchedMP2C, setIsWatchedMP2C, poster_prefixURL, broken_path, apiKey, apiPrefixURL, handleWatchListAddClick}){
+function MoviePage2Container({movie, isLoggedIn, sessionUsername, cookies, BASE_URL_BACK, isWatchedMP2C, setIsWatchedMP2C, poster_prefixURL, broken_path, apiKey, apiPrefixURL, handleWatchListAddClick}){
 
     const [displayReadMore, setDisplayReadMore] = useState(false)
     const [reviewsArrayBE, setReviewsArrayBE] = useState([])
@@ -44,6 +44,7 @@ function MoviePage2Container({movie, isLoggedIn, cookies, BASE_URL_BACK, isWatch
                 reviewsArrayBE={reviewsArrayBE} setReviewsArrayBE={setReviewsArrayBE}
                 cookies={cookies}
                 isLoggedIn={isLoggedIn}
+                sessionUsername={sessionUsername}
             />
 
             <div className="textAreaContainer">

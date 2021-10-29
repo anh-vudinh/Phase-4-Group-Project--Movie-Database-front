@@ -36,6 +36,7 @@ function App() {
             isLoggedIn={isLoggedIn}
             BASE_URL_BACK={BASE_URL_BACK}
             onLogOut={onLogOut} setOnLogOut={setOnLogOut}
+            sessionUsername={sessionUsername}
           />
         </Route>
 

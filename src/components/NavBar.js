@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 import blankAvatar from "../assets/blankAvatar.png"
 
-function NavBar({setToggleLoginContainer, sessionUsername, isLoggedIn, cookies, setIsLoggedIn, setSessionUsername, setOnLogOut}){
+function NavBar({setToggleLoginContainer, sessionProfilePic, setSessionProfilePic, sessionUsername, isLoggedIn, cookies, setIsLoggedIn, setSessionUsername, setOnLogOut}){
 
     function handleNavLoginClick(){
         setToggleLoginContainer(true)
@@ -14,6 +14,7 @@ function NavBar({setToggleLoginContainer, sessionUsername, isLoggedIn, cookies, 
 
     function handleNavLogoutClick(){
         setSessionUsername("")
+        setSessionProfilePic(null)
         cookies.remove('session')
         setOnLogOut(0)
         setIsLoggedIn(false)
@@ -39,7 +40,7 @@ function NavBar({setToggleLoginContainer, sessionUsername, isLoggedIn, cookies, 
                             </div>
                         </div>
                         <div className="navProfileIcon" onClick={handleNavProfileClick}>
-                            <img src={blankAvatar} alt="blankAvatar"/>
+                            <img src={sessionProfilePic === null? blankAvatar : sessionProfilePic} alt="profilepic"/>
                         </div>
                     </div>
                     :

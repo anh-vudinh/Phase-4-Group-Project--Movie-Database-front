@@ -62,27 +62,27 @@ function WatchList({setWatchListArray, cookies, isLoggedIn, setIsWatchedMP2C, se
     }
     
     const watchListItem = watchListArray.map((watchListCardObj, index) => 
-        <WatchListCard 
-            key={index} 
-            cookies={cookies}
-            watchListCardObj={watchListCardObj} 
-            poster_prefixURL={poster_prefixURL} 
-            broken_path={broken_path}
-            setMovie={setMovie} 
-            setTogglePage2={setTogglePage2} 
-            setMovieID={setMovieID}
-            deleteWLDataFromDB={deleteWLDataFromDB}
-            BASE_URL_BACK={BASE_URL_BACK}
-            setIsWatchedMP2C={setIsWatchedMP2C}
-        />
+      <WatchListCard 
+          key={index} 
+          cookies={cookies}
+          watchListCardObj={watchListCardObj} 
+          poster_prefixURL={poster_prefixURL} 
+          broken_path={broken_path}
+          setMovie={setMovie} 
+          setTogglePage2={setTogglePage2} 
+          setMovieID={setMovieID}
+          deleteWLDataFromDB={deleteWLDataFromDB}
+          BASE_URL_BACK={BASE_URL_BACK}
+          setIsWatchedMP2C={setIsWatchedMP2C}
+      />
     )
 
     function handleOnClickToggleWatchlist(e){
-        setToggleShowWatchList(!toggleShowWatchList)
+      setToggleShowWatchList(!toggleShowWatchList)
     }
 
     function handleOnDragEndWLIcon(e){
-        setWatchListPos([e.pageX-(e.target.scrollWidth/2), e.pageY-(e.target.scrollHeight/2)])
+      setWatchListPos([e.pageX-(e.target.scrollWidth/2), e.pageY-(e.target.scrollHeight/2)])
     }
 
     return(

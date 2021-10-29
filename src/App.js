@@ -26,6 +26,7 @@ function App() {
         setOnLogOut={setOnLogOut}
         cookies={cookies}
         isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
+        sessionProfilePic={sessionProfilePic} setSessionProfilePic={setSessionProfilePic}
       />
       
       <Switch>
@@ -59,6 +60,7 @@ function App() {
         setSessionUsername={setSessionUsername}
         toggleLoginContainer={toggleLoginContainer} setToggleLoginContainer={setToggleLoginContainer}
         setIsLoggedIn={setIsLoggedIn}
+        setSessionProfilePic={setSessionProfilePic}
       />
     </div>
   );

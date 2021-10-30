@@ -171,7 +171,6 @@
   font-size: 28px;
 }
 
-
 .CpProfileImageContainer{
   position: relative;
   height: 250px;
@@ -212,9 +211,9 @@
   position: absolute;
   height: 22px;
   right: 145px;
-  top: 460px;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
+  top: 458px;
+  -webkit-filter: contrast(30%);
+  filter: contrast(30%);
 }
 
 .CpProfileFormSecB {
@@ -359,6 +358,11 @@
 
 .CpFormSecA label{
   margin-bottom: 5px;
+}
+
+.cpDefaultWLText{
+  font-size: 10px;
+  color: red;
 }
 
 .CpFormSubmitContainer{
@@ -668,8 +672,8 @@
   height: 20px;
   transform: translate(100px, 335px);
   z-index: 1;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
+  -webkit-filter: contrast(30%);
+  filter: contrast(30%);
 }
 
 .showPasswordRegister{
@@ -677,8 +681,8 @@
   height: 20px;
   transform: translate(100px, 418px);
   z-index: 1;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
+  -webkit-filter: contrast(30%);
+  filter: contrast(30%);
 }
 
 .usLogXIcon {

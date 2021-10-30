@@ -3,7 +3,7 @@ import CpWatchListItem from "./CpWatchListItem"
 
 
 function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlistsArray, formType, setFormType, BASE_URL_BACK, selectedWL, setSelectedWL, setToggleCpForm}) {
-   
+
     useEffect(()=> {
         if (selectedUser === "") return;
         const dataToSend={username:selectedUser.username}
@@ -24,9 +24,8 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
     const watchlistList = watchlistsArray.map((watchlist,index) => 
     
         <CpWatchListItem 
-            key={index}
+            key={watchlist.id}
             index={index}
-            username={selectedUser.username} 
             watchlist={watchlist} 
             selectedWL={selectedWL}
             handleWatchListClick={handleWatchListClick}
@@ -47,13 +46,13 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
         setFormType(["WL","update"])
         setToggleCpForm(true)
     }
- 
-     function handleWLDelete(){
+
+    function handleWLDelete(){
         if (setSelectedWL === "" ) return;
-        sendToDB(`/watchlists/${selectedWL.id}`)
+        deleteFromDB(`/watchlists/${selectedWL.id}`)
     }
-     
-    function sendToDB(fetchURL){
+
+    function deleteFromDB(fetchURL){
         const headers = {
             method: "DELETE"
         }
@@ -79,6 +78,5 @@ function CpWatchList({selectedUser, setMoviesArray, watchlistsArray, setWatchlis
         </div>
     )
 }
-
 
 export default CpWatchList;

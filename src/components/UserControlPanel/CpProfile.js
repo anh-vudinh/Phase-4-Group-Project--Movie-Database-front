@@ -72,7 +72,7 @@ function CpProfile({BASE_URL_BACK, selectedUser, setSelectedUser, setToggleCpUse
                         <input type="url" value={formData.avatar_path} name="avatar_path" placeholder={selectedUser.avatar_path === null ? "Image URL" : selectedUser.avatar_path} onChange={handleOnChange}/>            
                     </div>
                     <div className="CpProfileFormSecA">
-                        <label>Password</label>
+                        <label>New Password</label>
                         <input type={showPassword? "text" : "password"} value={formData.password} name="password" onChange={handleOnChange}/>            
                     </div>
                     <div className="CpProfileFormSecA">

@@ -16,6 +16,7 @@ function CpSearch({filteredSearchArray, setFilteredSearchArray}) {
         if(searchedMovie.moviename === "") return;
         const timeout = setTimeout(fetchSearchedMovie, 700);
         return ()=> clearTimeout(timeout)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[searchedMovie])
 
     function fetchSearchedMovie(){

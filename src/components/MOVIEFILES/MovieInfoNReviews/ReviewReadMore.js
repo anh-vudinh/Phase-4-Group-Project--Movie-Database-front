@@ -5,7 +5,7 @@ function ReviewReadMore({movie, parseDateTime, sessionUsername, parseSanitizeHTM
     const {author_details, content, updated_at, author, source} = readMoreDetails
     const [toggleTextBox, setToggleTextBox] = useState(false)
     const [readMoreArrayBE, setReadMoreArrayBE] = useState([])
-    
+
     useEffect(()=>{
         fetch(`${BASE_URL_BACK}/responses/${readMoreDetails.id}`)
         .then(resp => resp.json())
@@ -16,14 +16,14 @@ function ReviewReadMore({movie, parseDateTime, sessionUsername, parseSanitizeHTM
     },[])
 
 
-    const readMoreResponses = readMoreArrayBE.map((response, index) => 
+    const readMoreResponses = readMoreArrayBE.map((response, index) =>
 
-        response.author === author?
+        response.username === author_details.username?
 
-        <div className="readMoreResponsesOG" key={index}>
+        <div className="readMoreResponsesOG" key={response.id}>
             <div className="readMoreResponsesOGProfile">
                 <div className="readMoreResponsesOGPicture">
-                    <img alt="author" src={response.avatar_path === null ? blankAvatar : `${response.avatar_path}` }/>
+                    <img alt="author" src={response.avatar_path === null ? blankAvatar : `${response.avatar_path}`}/>
                 </div>
                 <div className="readMoreResponsesOGName">
                     {response.author}
@@ -41,9 +41,9 @@ function ReviewReadMore({movie, parseDateTime, sessionUsername, parseSanitizeHTM
 
         :
 
-        <div className="readMoreResponses" key={index}>
+        <div className="readMoreResponses" key={response.id}>
             <div className="rMResponseBubble">
-                <div className={response.author === sessionUsername? "rMResponseText yellowBG" : "rMResponseText"}>
+                <div className={response.username === sessionUsername? "rMResponseText yellowBG" : "rMResponseText"}>
                     {parseSanitizeHTML(response.content)}
                 </div>
                 <div className="rMResponseDateTime">
@@ -102,7 +102,8 @@ function ReviewReadMore({movie, parseDateTime, sessionUsername, parseSanitizeHTM
                                     cookies={cookies}
                                     isLoggedIn={isLoggedIn}
                                 /> 
-                            : <p>Leave a reply!</p>}
+                            : <p>Leave a reply!</p>
+                            }
                         </div>
                     </div>
                 </div>

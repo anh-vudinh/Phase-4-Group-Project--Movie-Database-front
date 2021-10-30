@@ -12,14 +12,6 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
      const [selectedWL, setSelectedWL] = useState("")
      const [selectedMoviesArray, setSelectedMoviesArray] = useState([])
      const poster_prefixURL = "https://www.themoviedb.org/t/p/w100_and_h100_face"
-     const defaultFormData = {
-          username:"",
-          password:"",
-          useremail:"",
-          wlname:"",
-          is_default:false
-     }
-     const [formData, setFormData] = useState(defaultFormData)
      const [toggleCpForm, setToggleCpForm] = useState(false)
      const [isFilteredView, setIsFilteredView] = useState(false)
      const [toggleCpUserProfile, setToggleCpUserProfile] = useState(false)
@@ -32,8 +24,11 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
 
      useEffect(()=>{
           setToggleCpForm(false)
+          setSelectedWL("")
+          setWatchlistsArray([])
+          setMoviesArray([])
           // eslint-disable-next-line react-hooks/exhaustive-deps
-     },[selectedUser,selectedWL])
+     },[selectedUser])
 
      return (
           <div className="ControlPanelUnderlay">
@@ -78,8 +73,6 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
                     
                     {toggleCpForm?
                          <CpForm
-                              formData={formData}
-                              setFormData={setFormData}
                               BASE_URL_BACK={BASE_URL_BACK}
                               formType={formType} setFormType={setFormType}
                               setToggleCpForm={setToggleCpForm}
@@ -88,7 +81,6 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
                               filteredUsersArray={filteredUsersArray} setFilteredUsersArray={setFilteredUsersArray}
                               watchlistsArray={watchlistsArray} setWatchlistsArray={setWatchlistsArray}
                               isFilteredView={isFilteredView}
-                              defaultFormData={defaultFormData}
                               selectedWL={selectedWL}
                          />
                          :
@@ -106,7 +98,6 @@ function ControlPanelContaioner({BASE_URL_BACK}) {
                </div>
           </div>
      )
-    
 }
 
 

@@ -69,26 +69,28 @@ function Review({movie, apiKey, apiPrefixURL, reviewsArrayBE, sessionUsername, i
     function handleReadMoreClick(review, source){
         if(source === "TMDB"){
             setReadMoreDetails({...review, source: source})
-        }else{
-            const {id, author, updated_at, rating, content, avatar_path} = review
+        } else {
+            const {id, author, updated_at, rating, content, avatar_path, username} = review
             const convertReview = {
                 id: id,
                 author: author,
                 content: content,
-                author_details:{
+                author_details: {
                     avatar_path: avatar_path,
                     rating: rating,
+                    username: username
                 },
                 updated_at: updated_at
             }
             setReadMoreDetails({...convertReview, source: source})
         }
+
         setDisplayReadMore(true)
         window.scrollTo({
             left: 0,
             top: 620,
             behavior: "smooth",
-          })
+        })
     }
 
     return(
